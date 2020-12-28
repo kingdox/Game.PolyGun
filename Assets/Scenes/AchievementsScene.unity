@@ -905,6 +905,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb3258fc55174ebfa032ee456a57c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txt_title: {fileID: 0}
+  txt_value: {fileID: 0}
+  rect_bar_last: {fileID: 0}
+  obj_bar_last: {fileID: 0}
+  obj_bar_actual: {fileID: 0}
 --- !u!1 &882742948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,6 +2171,10 @@ PrefabInstance:
     - target: {fileID: 8798078039559827295, guid: e78a6bd01a87f4a0ca81a0d478b22275, type: 3}
       propertyPath: m_Name
       value: TextValBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8798078039917685360, guid: e78a6bd01a87f4a0ca81a0d478b22275, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e78a6bd01a87f4a0ca81a0d478b22275, type: 3}

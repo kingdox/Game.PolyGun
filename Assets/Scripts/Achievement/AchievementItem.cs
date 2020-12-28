@@ -42,6 +42,9 @@ public class AchievementItem : MonoBehaviour
     /// <param name="newItem"></param>
     public void SetItem(TextValBarItem newItem) => item = newItem;
 
+    /// <summary>
+    /// Se encarga de pintar el Item con los valores que posee de <see cref="TextValBarItem"/>
+    /// </summary>
     public void DrawItem()
     {
         txt_title.text = item.title;
@@ -75,12 +78,14 @@ public class AchievementItem : MonoBehaviour
 
 /// <summary>
 /// Modelo de los items de los logros
+/// <para>Dependencia con <seealso cref="Limit"/></para>
 /// </summary>
 public struct TextValBarItem
 {
     public string title;
     public int value;
     public Limit limit;
+    //public (int, int, int) limits;
 }
 
 
@@ -108,7 +113,7 @@ public struct Limit{
     /// </summary>
     public Limit(float[] limits) => this = new Limit(limits[0], limits[1], limits[2]);
     /// <summary>
-    /// Devuelve el Limit
+    /// Devuelve el Limit en un arreglo
     /// </summary>
     public float[] ToArray() => new float[] { bronze, silver, gold };
     /// <summary>
