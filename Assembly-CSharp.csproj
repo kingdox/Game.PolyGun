@@ -63,6 +63,7 @@
     <Compile Include="Assets/Scripts/_Shareds/Navigator.cs" />
     <Compile Include="Assets/Scripts/Achievement/AchievementManager.cs" />
     <Compile Include="Assets/Scripts/Achievement/AchievementItem.cs" />
+    <Compile Include="Assets/Scripts/Achievement/Data_Achievement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
