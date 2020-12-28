@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2749F4DA-7B65-D655-A46B-4961D1D35E21}</ProjectGuid>
+    <ProjectGuid>{E08799A2-2E5B-8B10-7062-164E47F9A975}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,6 +60,8 @@
     <Compile Include="Assets/Scripts/XavScripts/Data.cs" />
     <Compile Include="Assets/Scripts/XavScripts/SfxItem.cs" />
     <Compile Include="Assets/Scripts/XavScripts/Translator.cs" />
+    <Compile Include="Assets/Scripts/_Shareds/Navigator.cs" />
+    <Compile Include="Assets/Scripts/Achievement/AchievementManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

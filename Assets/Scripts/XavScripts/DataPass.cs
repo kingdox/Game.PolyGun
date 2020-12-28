@@ -130,14 +130,43 @@ public class DataStorage
 [System.Serializable]
 public struct SavedData
 {
-    public int actualmoney;
-    public float recordMetersReached;
-    public int recordMonstersKilled;
-    public int lastMoneySpent;
-    public float lastMetersReached;
-    public int lastMonstersKilled;
+    //Logros TODO
 
-    //Extra
+    //Totals de cantidad general
+    [Header("Totals")]
+    public int total_kills;
+    public int total_timeInGame;
+    public int total_dragObjs;
+    public int total_healed;
+    public int total_timeInLimits;
+
+    [Space]
+    //TODO
+    public int total_waves;
+    public int total_boss;
+    public int total_deaths;
+    public int total_creations;
+
+
+
+
+
+    //Records (de una partida unica
+    [Header("Records")]
+    public int record_kills;
+    public int record_timeInGame;
+    public int record_dragObjs;
+    public int record_healed;
+    public int record_timeInLimits;
+
+
+
+
+
+    //Curiosidades (mostradas pero no logros?
+
+
+    //Extra Debug ?
     [Space(10)]
     [Header("Debug Area")]
     public int debug_savedTimes;

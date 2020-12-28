@@ -22,7 +22,7 @@ public class Data
 /// <summary>
 /// Herramientas para facilitar codigo
 /// <para>Aquí se poseerán funciones unicamente "static"</para>
-/// <see cref="XavHelpTo"/> Ultima Actualización => 23 dic 2020
+/// <see cref="XavHelpTo"/> Ultima Actualización => 28 dic 2020
 /// </summary>
 public struct XavHelpTo
 {
@@ -46,6 +46,15 @@ public struct XavHelpTo
     /// <para>Dependencia con <seealso cref="GameObject"/> </para>
     /// </summary>
     public static void ObjOnOff(GameObject obj, bool condition) => obj.SetActive(condition);
+
+    /// <summary>
+    /// Activa unicamente el objeto indicado del arreglo
+    /// <para>Por defecto el indice es el primero del arreglo</para>
+    /// <para>Dependencia con <seealso cref="ObjOnOff(GameObject, bool)"/> </para>
+    /// </summary>
+    public static void ActiveThisObject(GameObject[] arr, int index = 0){ for (int x = 0; x < arr.Length; x++) ObjOnOff(arr[x], x == index);}
+
+
 
     /// <summary>
     /// Te permite ir hacia adelante o hacia atrás en un arreglo sin salirte de los limites
@@ -236,5 +245,6 @@ public enum ColorType{r,g,b,a}
 /// </summary>
 public enum Scenes
 {
+    AchievementsScene, // Maneja el mostradod e los datos guardados
     GameScene
 }
