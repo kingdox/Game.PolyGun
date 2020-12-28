@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
-namespace Achievement
+namespace Achievements
 {
     #region class AchievementData
     /// <summary>
@@ -14,12 +14,11 @@ namespace Achievement
     {
         //Currificación START 
         // 1 => Reporto los ingredientes de la receta
-        private delegate AchievementModel Recipe(string title, Limit limit);
+        private delegate Achievement Recipe(string title, Limit limit);
         // 2 => Declaro la preparación de la receta
-        private readonly static Recipe achieve = (string title, Limit limit) => new AchievementModel(title, new Limit(limit));
+        private readonly static Recipe achieve = (string title, Limit limit) => new Achievement(title, new Limit(limit));
         //CURRY END
-
-        private static readonly AchievementModel[] achievements;
+        private static readonly Achievement[] achievements;
 
         /// <summary>
         /// Constructor, Crea los achievements
@@ -27,33 +26,30 @@ namespace Achievement
         /// </summary>
         static AchievementData()
         {
-            achievements = new AchievementModel[]
+            achievements = new Achievement[]
             {
-            achieve("Robot eliminados en una partida",new Limit(10,50,100)),
-            achieve("Robot eliminados en total",new Limit(100,250,500)),
-
+                achieve("Robot eliminados en una partida",new Limit(10,50,100)),
+                achieve("Robot eliminados en total",new Limit(100,250,500)),
 
             };
-
-            Debug.Log(achievements[0].title);
         }
 
         /// <summary>
         /// Tomas los achievements del juego
         /// </summary>
-        public AchievementModel[] _GetAllAchievements() => achievements;
+        public Achievement[] _GetAllAchievements() => achievements;
     }
     #endregion
-    #region AchievementModel
+    #region Achievement
     /// <summary>
     /// Modelo de los logros
     /// <para>Dependencia con <seealso cref="Limit"/></para>
     /// </summary>
-    public struct AchievementModel
+    public struct Achievement
     {
         public string title;
         public Limit limit;
-        public AchievementModel(string title, Limit limit)
+        public Achievement(string title, Limit limit)
         {
             this.title = title;
             this.limit = limit;

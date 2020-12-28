@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿#region Imports
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-
-
+using Achievements;
+#endregion
+#region Environment
 /// <summary>
 /// Representa los datos basicos del enviroment
 /// </summary>
@@ -16,9 +17,12 @@ public class Data
 
     public readonly string savedPath = "saved.txt";
     public readonly string version = "v0.0";
+
+    //Data extra;
+    public readonly AchievementData achievement = new AchievementData();
 }
-
-
+#endregion
+#region Tools
 /// <summary>
 /// Herramientas para facilitar codigo
 /// <para>Aquí se poseerán funciones unicamente "static"</para>
@@ -233,7 +237,8 @@ public struct XavHelpTo
     //    }
     //}
 }
-
+#endregion
+#region Enums
 /// <summary>
 /// Identificador de los colores
 /// </summary>
@@ -248,3 +253,4 @@ public enum Scenes
     AchievementsScene, // Maneja el mostradod e los datos guardados
     GameScene
 }
+#endregion

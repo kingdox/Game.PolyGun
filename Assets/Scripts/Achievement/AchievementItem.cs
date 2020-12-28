@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Achievement;
+using Achievements;
 #endregion
 
 public class AchievementItem : MonoBehaviour
