@@ -23,55 +23,50 @@ public class AchievementItem : MonoBehaviour
     public Text txt_title;
     public Text txt_value;
 
-    public RectTransform rect_bar_last;
-    public GameObject obj_bar_last;
-    public GameObject obj_bar_actual;
+    [Space]
+    public Image img_bar_last;
+    [Space]
+    public Image img_bar_actual;
+    public RectTransform rect_bar_actual;
 
 
     #endregion
     #region Events
-    private void Awake()
-    {
-        
-    }
     #endregion
     #region Methods
 
     /// <summary>
     /// Se asigna los datos del modelo de los valores del item
     /// </summary>
-    public void SetItem(TextValBarItem newItem) => item = newItem;
+    public void SetItem(TextValBarItem newItem) {
+        item = newItem;
+        DrawItem();
+    }
 
     /// <summary>
     /// Se encarga de pintar el Item con los valores que posee de <see cref="TextValBarItem"/>
     /// </summary>
-    public void DrawItem()
+    private void DrawItem()
     {
         txt_title.text = item.title;
         txt_value.text = item.value.ToString() + ( item.value > item.limit.gold ? "" : " / " + item.limit.gold.ToString());
 
-        float _limitValue = GetActualLimit(); 
+        float[] _limits = item.limit.ToArray();
+        int _limitIndex = XavHelpTo.KnowFirstMajorIndex(item.value, item.limit.ToArray());
+        //ajustamos el progreso de la barra
 
-        rect_bar_last.anchorMax =
-            new Vector2(
-                XavHelpTo.KnowPercentOfMax(item.value, _limitValue) / 100,
-                rect_bar_last.anchorMax.y)
-            ;
-    }
+        if (_limitIndex != -1){
 
-    /// <summary>
-    /// Devuelve el limite actual basado en los valores dados
-    /// </summary>
-    private float GetActualLimit()
-    {
-        //Recorro los limites del item
-        foreach (float limitval in item.limit.ToArray())
-        {
-            //si el limite es mayor que el valorguarda y retorna
-            if (item.value <= limitval) return limitval;
+            rect_bar_actual.anchorMax = new Vector2(XavHelpTo.KnowPercentOfMax(item.value, _limits[_limitIndex]) / 100, 1);
+
         }
-        //En caso de no encontrar retorna el item.value, pues ya ha superado las metas
-        return item.value;
+        else
+        {
+            //Si supera los limites
+            img_bar_last.color = XavHelpTo.SetColorParam(img_bar_last.color, (int)ColorType.RGB, 0);
+            img_bar_actual.color = colorSteps[_limitIndex];
+            rect_bar_actual.anchorMax = new Vector2(1, 1);
+        }
     }
     #endregion
 }

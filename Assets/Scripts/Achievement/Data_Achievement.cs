@@ -5,6 +5,17 @@ using UnityEngine;
 #endregion
 namespace Achievements
 {
+    #region AchievementIndex
+    public enum AchievementIndex
+    {
+        TOTAL_KILLS_ROBOT,
+        TOTAL_COLLECT_OBJ,
+        TOTAL_HEAL,
+        TOTAL_BOUNDSLIFE,
+
+        RECORD_KILLS_ROBOT
+    }
+    #endregion
     #region class AchievementData
     /// <summary>
     /// Contenedor de la información de los logros
@@ -28,9 +39,14 @@ namespace Achievements
         {
             achievements = new Achievement[]
             {
-                achieve("Robot eliminados en una partida",new Limit(10,50,100)),
                 achieve("Robot eliminados en total",new Limit(100,250,500)),
+                //achieve("Tiempo total jugando",new Limit(100,250,500)),
+                achieve("Objetos recogidos del suelo en total",new Limit(250,500,1000)),
+                achieve("Cantidad total de Curaciones", new Limit(50,100,500)),
+                achieve("Tiempo total al borde de morir", new Limit(50,100,500)),
 
+                //
+                achieve("Robot eliminados en una partida",new Limit(10,50,100)),
             };
         }
 
@@ -59,13 +75,23 @@ namespace Achievements
     #region TextValBarItem
     /// <summary>
     /// Modelo de los items de los logros
-    /// <para>Dependencia con <seealso cref="Limit"/></para>
+    /// <para>Dependencia con <seealso cref="Limit"/>, <seealso cref="TextValBarItem"/></para>
     /// </summary>
     public struct TextValBarItem
     {
         public string title;
-        public int value;
         public Limit limit;
+        public float value;
+
+        /// <summary>
+        /// Asigna el titulo el limite y el valor que posee el player sobre ese logro
+        /// </summary>
+        public TextValBarItem(string title, Limit limit, float value)
+        {
+            this.title = title;
+            this.limit = limit;
+            this.value = value;
+        }
         //public (int, int, int) limits;
     }
     #endregion

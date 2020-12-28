@@ -15,10 +15,11 @@ public class Data
     [HideInInspector]
     public static Data data = new Data();
 
-    public readonly string savedPath = "saved.txt";
-    public readonly string version = "v0.0";
+    public readonly string savedPath = "saved1.txt";
+    public readonly string version = "v0.0.1";
 
     //Data extra;
+    [Header("Datos de AchievementData")]
     public readonly AchievementData achievement = new AchievementData();
 }
 #endregion
@@ -58,7 +59,17 @@ public struct XavHelpTo
     /// </summary>
     public static void ActiveThisObject(GameObject[] arr, int index = 0){ for (int x = 0; x < arr.Length; x++) ObjOnOff(arr[x], x == index);}
 
-
+    /// <summary>
+    /// Busca cual es el valor del arreglo que supera al indicado
+    /// </summary>
+    /// <returns>Devuelve el indice del superado</returns>
+    public static int KnowFirstMajorIndex(float val, float[] arr)
+    {
+        int index = -1;
+        for (int x = 0; x < arr.Length; x++) if (val <= arr[x]) index = x;
+        //si index es -1 entonces ha sobrepasado el limite 
+        return index;
+    }
 
     /// <summary>
     /// Te permite ir hacia adelante o hacia atrás en un arreglo sin salirte de los limites
@@ -108,11 +119,7 @@ public struct XavHelpTo
     /// <summary>
     /// Basado en el porcentaje
     /// //obtienes el porcentaje de curacion basado en tu max
-    /// 
     /// </summary>
-    /// <param name="percent"></param>
-    /// <param name="max"></param>
-    /// <returns></returns>
     public static float KnowQtyOfPercent(float percent, float max) => (max / 100) * percent;
 
     /// <summary>
@@ -142,20 +149,13 @@ public struct XavHelpTo
         {
             if (i == -1)
             {
-                for (int x = 0; x < 3; x++)
-                {
-                    _c[x] = val;
-                }
-
+                for (int x = 0; x < 3; x++) _c[x] = val;
             }
             else {
                 Debug.LogError($"Indice errado ?, favor usar un enum de parametros de color o usarlo bien :(");
             }
         }
-        else
-        {
-            _c[i] = val;
-        }
+        else _c[i] = val;
 
         Color newColor = new Color(_c[0], _c[1], _c[2], _c[3]);
         return newColor;
@@ -179,6 +179,24 @@ public struct XavHelpTo
         }
     }
 
+    /// <summary>
+    /// Actualizamos el arreglo para que posea el mismo tamaño que el nuevo,
+    /// estos cambios pueden eliminar o añadir huecos, los nuevos iniciarán en 0
+    /// </summary>
+    public static float[] UpdateLengthArray(float[] oldArr, int newLength)
+    {
+        //TODO el cerebro no me dio de noche, reparalo o ejorelo
+        //List<float> list = new List<float>(oldArr.Length); //new List<float>(newLength);
+        //list.RemoveRange(list.Capacity - );
+
+        //colocamos el nuevo tamaño
+        float[] newArr = new float[newLength];
+        for (int i = 0; i < newLength; i++){
+            if (oldArr.Length > i) newArr[i] = oldArr[i];
+            else newArr[i] = 0;
+        }
+        return newArr;
+    }
     /// <summary>
     /// Obtienes el valor del rango dado 
     /// </summary>
@@ -242,7 +260,13 @@ public struct XavHelpTo
 /// <summary>
 /// Identificador de los colores
 /// </summary>
-public enum ColorType{r,g,b,a}
+public enum ColorType{
+    r,
+    g,
+    b,
+    a,
+    RGB = -1
+}
 
 /// <summary>
 /// Enumerador de los nombres de las escenas de este proyecto

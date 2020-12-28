@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.UI;
 #endregion
-#region ### CLASS
+#region ### DataPass
+/// <summary>
+/// Encargado de ser la conexión de los datos guardados con las escenas
+/// Este podrá cargar el ultimo archivo o guardar un archivo con sus datos
+/// <para>Dependencias: <seealso cref="Data"/>, <seealso cref="SavedData"/>, <seealso cref="DataStorage"/></para>
+/// </summary>
 public class DataPass : MonoBehaviour
 {
     #region ####### VARIABLES
@@ -99,25 +103,25 @@ public class DataPass : MonoBehaviour
     //Esto es solo para DEBUGs
     private void OnDisable()
     {
-        Debug.Log("Guardado");
+        Debug.Log("Guardando, Poder debugger :P");
         SaveLoadFile(true);
     }
 
     #endregion
 }
 #endregion
-
 #region DataStorage y SavedData
+/// <summary>
+/// Encargado de hacer que, con un constructor se agreguen los nuevos valores
+/// <para>Dependencias => <seealso cref="SavedData"/></para>
+/// </summary>
 [System.Serializable]
 public class DataStorage
 {
     //aquí se vuelve a colocar los datos puestos debajo...
     public SavedData savedData = new SavedData();
     //Con esto podremos guardar los datos de datapass a DataStorage
-    public DataStorage(SavedData saved)
-    {
-        savedData = saved;
-    }
+    public DataStorage(SavedData saved) => savedData = saved;
 }
 
 /// <summary>
@@ -131,36 +135,35 @@ public class DataStorage
 public struct SavedData
 {
     //Logros TODO
-
-    //Totals de cantidad general
-    [Header("Totals")]
-    public int total_kills;
-    public int total_timeInGame;
-    public int total_dragObjs;
-    public int total_healed;
-    public int total_timeInLimits;
-
-    [Space]
-    //TODO
-    public int total_waves;
-    public int total_boss;
-    public int total_deaths;
-    public int total_creations;
+    //HACK con un enum se manejará, hay que crear un updater
+    //del array en caso de quedar distinto o cmabios
+    public float[] achievements;
 
 
+    //public int total_kills;
+    ////public int total_timeInGame;
+    //public int total_dragObjs;
+    //public int total_healed;
+    //public int total_timeInLimits;
 
-
-
-    //Records (de una partida unica
-    [Header("Records")]
-    public int record_kills;
-    public int record_timeInGame;
-    public int record_dragObjs;
-    public int record_healed;
-    public int record_timeInLimits;
+    //[Space]
+    ////TODO
+    ////public int total_waves;
+    ////public int total_boss;
+    ////public int total_deaths;
+    ////public int total_creations;
 
 
 
+
+
+    ////Records (de una partida unica
+    //[Header("Records")]
+    //public int record_kills;
+    ////public int record_timeInGame;
+    ////public int record_dragObjs;
+    ////public int record_healed;
+    ////public int record_timeInLimits;
 
 
     //Curiosidades (mostradas pero no logros?
