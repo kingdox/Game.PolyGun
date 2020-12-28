@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class AchievementManager : MonoBehaviour
 {
-   
+
+
+
+    //TODO poder controlar las pantallas..
+    //crearse un manager de playercontroller standalone ??
+
+
+
 }
 /*
  TODO

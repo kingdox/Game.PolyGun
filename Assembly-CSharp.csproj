@@ -62,6 +62,7 @@
     <Compile Include="Assets/Scripts/XavScripts/Translator.cs" />
     <Compile Include="Assets/Scripts/_Shareds/Navigator.cs" />
     <Compile Include="Assets/Scripts/Achievement/AchievementManager.cs" />
+    <Compile Include="Assets/Scripts/Achievement/AchievementItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
