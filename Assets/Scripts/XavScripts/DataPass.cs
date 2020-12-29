@@ -16,14 +16,15 @@ public class DataPass : MonoBehaviour
     #region ####### VARIABLES
 
     [HideInInspector]
-    public static DataPass _;//Singleton....
+    private static DataPass _;//Singleton....
+
+    [HideInInspector]
+    public bool isReady = false;
 
     [Header("Saved Data")]
     [SerializeField]
     private SavedData savedData = new SavedData();
 
-    [Header("DataPass info")]
-    public bool isReady = false;
 
     #endregion
     #region ###### EVENTS
@@ -98,7 +99,10 @@ public class DataPass : MonoBehaviour
     /// <param name="newSavedData"></param>
     public static void SetData(SavedData newSavedData) => _.savedData = newSavedData;
 
-
+    /// <summary>
+    /// Preguntamos si <seealso cref="DataPass"/> está listo
+    /// </summary>
+    public static bool IsReady() => _.isReady;
 
     //Esto es solo para DEBUGs
     private void OnDisable()
@@ -164,10 +168,6 @@ public struct SavedData
     ////public int record_dragObjs;
     ////public int record_healed;
     ////public int record_timeInLimits;
-
-
-    //Curiosidades (mostradas pero no logros?
-
 
     //Extra Debug ?
     [Space(10)]

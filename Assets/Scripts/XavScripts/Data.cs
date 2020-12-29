@@ -27,10 +27,15 @@ public class Data
 /// <summary>
 /// Herramientas para facilitar codigo
 /// <para>Aquí se poseerán funciones unicamente "static"</para>
-/// <see cref="XavHelpTo"/> Ultima Actualización => 28 dic 2020
+/// <see cref="XavHelpTo"/> Ultima Actualización => 29 dic 2020
 /// </summary>
 public struct XavHelpTo
 {
+    public static float GetWidthOfObj(float w) => KnowQtyOfPercent(w, Screen.width);
+    /// <summary>
+    /// Devuelve el alto del objeto
+    /// </summary>
+    public static float GetHeightOfObj(float h) => KnowQtyOfPercent(h, Screen.height);
 
     /// <summary>
     /// sacas el alto de una camara o la camara activa por defecto
@@ -61,14 +66,15 @@ public struct XavHelpTo
 
     /// <summary>
     /// Busca cual es el valor del arreglo que supera al indicado
+    /// <para>Retorna -1 si no encuentra alguno mayor que el mostrado</para>
     /// </summary>
     /// <returns>Devuelve el indice del superado</returns>
     public static int KnowFirstMajorIndex(float val, float[] arr)
     {
-        int index = -1;
-        for (int x = 0; x < arr.Length; x++) if (val <= arr[x]) index = x;
+        for (int x = 0; x < arr.Length; x++) if (val < arr[x]) return x;
+
         //si index es -1 entonces ha sobrepasado el limite 
-        return index;
+        return -1;
     }
 
     /// <summary>
@@ -117,17 +123,13 @@ public struct XavHelpTo
     public static float KnowPercentOfMax(float count, float max) => count / max * 100;
 
     /// <summary>
-    /// Basado en el porcentaje
-    /// //obtienes el porcentaje de curacion basado en tu max
+    /// Basado en el porcentaje obtienes el valor mediante un maximo establecido
     /// </summary>
     public static float KnowQtyOfPercent(float percent, float max) => (max / 100) * percent;
 
     /// <summary>
     /// Detecta si el indice está dentro del arreglo
     /// </summary>
-    /// <param name="i"></param>
-    /// <param name="length"></param>
-    /// <returns></returns>
     public static bool IsOnBoundsArr(int i, int length) => i == Mathf.Clamp(i, 0, length - 1);
 
     /// <summary>
@@ -183,18 +185,36 @@ public struct XavHelpTo
     /// Actualizamos el arreglo para que posea el mismo tamaño que el nuevo,
     /// estos cambios pueden eliminar o añadir huecos, los nuevos iniciarán en 0
     /// </summary>
-    public static float[] UpdateLengthArray(float[] oldArr, int newLength)
-    {
-        //TODO el cerebro no me dio de noche, reparalo o ejorelo
-        //List<float> list = new List<float>(oldArr.Length); //new List<float>(newLength);
-        //list.RemoveRange(list.Capacity - );
+    public static float[] UpdateLengthArray(float[] oldArr, int newLength){
 
-        //colocamos el nuevo tamaño
-        float[] newArr = new float[newLength];
-        for (int i = 0; i < newLength; i++){
-            if (oldArr.Length > i) newArr[i] = oldArr[i];
-            else newArr[i] = 0;
+        //Si es igual no se hace nada
+        if (oldArr.Length == newLength) return oldArr;
+
+
+        //revisamos quién es mas grande
+        bool condition = oldArr.Length > newLength;
+
+        float[] newArr = new float[ condition
+            ? (oldArr.Length - newLength)
+            : (newLength)
+        ];
+
+
+        //si hay menos datos llenamos el nuevo arreglo
+        //Puede que perdamos algunos valores
+        if (condition){
+            for (int z = 0; z < newArr.Length; z++) newArr[z] = oldArr[z];
         }
+        else{
+            for (int z = 0; z < newArr.Length; z++)
+            {
+                newArr[z] = z < oldArr.Length - 1
+                    ? oldArr[z]
+                    : 0
+                ;
+            }
+        }
+
         return newArr;
     }
     /// <summary>

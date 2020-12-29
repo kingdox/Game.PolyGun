@@ -5,18 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using Achievements;
 #endregion
-
 public class AchievementItem : MonoBehaviour
 {
     #region Variables
     //Los colores para cada etapa en orden
-    private readonly Color[] colorSteps =
-    {
-        new Color(1,1,1),
-        new Color(1,1,1),
-        new Color(1,1,1),
-    };
+   
     private TextValBarItem item;
+
 
     [Header("Settings")]
 
@@ -48,24 +43,25 @@ public class AchievementItem : MonoBehaviour
     /// </summary>
     private void DrawItem()
     {
-        txt_title.text = item.title;
-        txt_value.text = item.value.ToString() + ( item.value > item.limit.gold ? "" : " / " + item.limit.gold.ToString());
-
         float[] _limits = item.limit.ToArray();
-        int _limitIndex = XavHelpTo.KnowFirstMajorIndex(item.value, item.limit.ToArray());
-        //ajustamos el progreso de la barra
+        int _limitIndex = XavHelpTo.KnowFirstMajorIndex(item.value, _limits);
+        img_bar_last.color = Color.black;
+        txt_title.text = $" {item.title} ";
+        txt_value.text = " " + item.value.ToString() + (item.value > item.limit.gold ? "" : " / " + item.limit[_limitIndex].ToString()) +" ";
+        //txt_value.text = $" {item.value} { (item.value > item.limit.gold ? "" : "/ " + item.limit[_limitIndex].ToString()) } ");
 
+        //ajustamos el progreso de la barra
         if (_limitIndex != -1){
 
-            rect_bar_actual.anchorMax = new Vector2(XavHelpTo.KnowPercentOfMax(item.value, _limits[_limitIndex]) / 100, 1);
-
+            rect_bar_actual.anchorMax = new Vector2(XavHelpTo.KnowPercentOfMax(item.value, _limits[_limitIndex]) / 100, rect_bar_actual.anchorMax.y);
+            img_bar_actual.color = AchievementData.colorSteps[_limitIndex];
         }
         else
         {
             //Si supera los limites
-            img_bar_last.color = XavHelpTo.SetColorParam(img_bar_last.color, (int)ColorType.RGB, 0);
-            img_bar_actual.color = colorSteps[_limitIndex];
-            rect_bar_actual.anchorMax = new Vector2(1, 1);
+            img_bar_last.color = XavHelpTo.SetColorParam(img_bar_last.color, (int)ColorType.RGB, 1);
+            img_bar_actual.color = AchievementData.colorSteps[2];
+            rect_bar_actual.anchorMax = new Vector2(1, rect_bar_actual.anchorMax.y);
         }
     }
     #endregion

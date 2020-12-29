@@ -8,12 +8,14 @@ namespace Achievements
     #region AchievementIndex
     public enum AchievementIndex
     {
-        TOTAL_KILLS_ROBOT,
-        TOTAL_COLLECT_OBJ,
-        TOTAL_HEAL,
-        TOTAL_BOUNDSLIFE,
+        // TODO aqui hay algo no optimo
+        //Estos valores representan el ordenamiento de los datos guardados ?
+        TOTAL_KILLS_ROBOT = 0,
+        TOTAL_COLLECT_OBJ = 1,
+        TOTAL_HEAL = 2,
+        TOTAL_BOUNDSLIFE = 3,
 
-        RECORD_KILLS_ROBOT
+        RECORD_KILLS_ROBOT = 4
     }
     #endregion
     #region class AchievementData
@@ -23,6 +25,12 @@ namespace Achievements
     /// </summary>
     public class AchievementData
     {
+        public static readonly Color[] colorSteps =
+        {
+            new Color(0.8f, 0.5f, 0.2f),
+            new Color(0.75f, 0.75f, 0.75f),
+            new Color(0.83f, 0.68f, 0.21f),
+        };
         //Currificación START 
         // 1 => Reporto los ingredientes de la receta
         private delegate Achievement Recipe(string title, Limit limit);
@@ -41,12 +49,16 @@ namespace Achievements
             {
                 achieve("Robot eliminados en total",new Limit(100,250,500)),
                 //achieve("Tiempo total jugando",new Limit(100,250,500)),
-                achieve("Objetos recogidos del suelo en total",new Limit(250,500,1000)),
+                achieve("Objetos recogidos en total",new Limit(250,500,1000)),
                 achieve("Cantidad total de Curaciones", new Limit(50,100,500)),
                 achieve("Tiempo total al borde de morir", new Limit(50,100,500)),
 
                 //
                 achieve("Robot eliminados en una partida",new Limit(10,50,100)),
+
+                //Pagina 2
+                achieve("Testeo bien perrón",new Limit(2,5,10)),
+
             };
         }
 
@@ -54,6 +66,14 @@ namespace Achievements
         /// Tomas los achievements del juego
         /// </summary>
         public Achievement[] _GetAllAchievements() => achievements;
+    }
+    #endregion
+    #region AchievementPages
+    [System.Serializable]
+    public struct AchievementPages
+    {
+        //tambien podias hacer un matrix, pero esto es mas facil en inspector...
+        public AchievementItem[] items;
     }
     #endregion
     #region Achievement
