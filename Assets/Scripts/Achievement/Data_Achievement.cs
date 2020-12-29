@@ -31,12 +31,20 @@ namespace Achievements
             new Color(0.75f, 0.75f, 0.75f),
             new Color(0.83f, 0.68f, 0.21f),
         };
-        //Currificación START 
+
+        //Currificación Achievement 
         // 1 => Reporto los ingredientes de la receta
-        private delegate Achievement Recipe(string title, Limit limit);
+        private delegate Achievement AchievementRecipe(string title, Limit limit);
         // 2 => Declaro la preparación de la receta
-        private readonly static Recipe achieve = (string title, Limit limit) => new Achievement(title, new Limit(limit));
+        private readonly static AchievementRecipe achieve = (string title, Limit limit) => new Achievement(title, new Limit(limit));
         //CURRY END
+
+        //Currificación Limit
+        private delegate Limit LimitRecipe(float bronze, float silver, float gold);
+        private readonly static LimitRecipe limit = (float bronze, float silver, float gold) => new Limit(bronze, silver, gold);
+        //CURRY END
+        
+
         private static readonly Achievement[] achievements;
 
         /// <summary>
@@ -47,17 +55,25 @@ namespace Achievements
         {
             achievements = new Achievement[]
             {
-                achieve("Robot eliminados en total",new Limit(100,250,500)),
+                //Pagina 1
+                achieve("Robot eliminados en total", limit(5,250,500)),
                 //achieve("Tiempo total jugando",new Limit(100,250,500)),
-                achieve("Objetos recogidos en total",new Limit(250,500,1000)),
-                achieve("Cantidad total de Curaciones", new Limit(50,100,500)),
-                achieve("Tiempo total al borde de morir", new Limit(50,100,500)),
-
-                //
-                achieve("Robot eliminados en una partida",new Limit(10,50,100)),
+                achieve("Objetos recogidos en total", limit(250,500,1000)),
+                achieve("Cantidad total de Curaciones", limit(50,100,500)),
+                achieve("Tiempo total al borde de morir", limit(50,100,500)),
+                achieve("Robot eliminados en una partida", limit(10,50,100)),
 
                 //Pagina 2
-                achieve("Testeo bien perrón",new Limit(2,5,10)),
+                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("Testeo bien perrón", limit(2,5,10)),
+
+                //Pagina 3
+                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("Testeo bien perrón", limit(2,5,10)),
+
 
             };
         }

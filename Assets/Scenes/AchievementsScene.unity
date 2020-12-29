@@ -553,10 +553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rect_container: {fileID: 1094966779}
   countOfItems: 0
   spacing: {x: 0, y: 0}
-  objWidth: 0
-  objHeight: 0
+  objSize: {x: 0, y: 0}
   childSize: {x: 0, y: 0}
 --- !u!114 &269045696
 MonoBehaviour:
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 1200, y: 100}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 5
@@ -1404,6 +1404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 877681503}
+  - component: {fileID: 877681505}
   - component: {fileID: 877681504}
   m_Layer: 0
   m_Name: Content
@@ -1445,7 +1446,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 877681502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rect_container: {fileID: 1094966779}
+  countOfItems: 0
+  spacing: {x: 0, y: 0}
+  objSize: {x: 0, y: 0}
+  childSize: {x: 0, y: 0}
+--- !u!114 &877681505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877681502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -1453,15 +1471,13 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 20
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
-  m_ReverseArrangement: 0
+  m_ChildAlignment: 3
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 1200, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 5
 --- !u!1 &882742948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,6 +2613,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1859725849}
+  - component: {fileID: 1859725851}
   - component: {fileID: 1859725850}
   m_Layer: 0
   m_Name: Content
@@ -2638,7 +2655,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1859725848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rect_container: {fileID: 1094966779}
+  countOfItems: 0
+  spacing: {x: 0, y: 0}
+  objSize: {x: 0, y: 0}
+  childSize: {x: 0, y: 0}
+--- !u!114 &1859725851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859725848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -2646,15 +2680,13 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 20
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
-  m_ReverseArrangement: 0
+  m_ChildAlignment: 3
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 1200, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 2
+  m_ConstraintCount: 5
 --- !u!224 &1885700832 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4826756332884867034, guid: c4bbba371150b47bb807211362275c81, type: 3}

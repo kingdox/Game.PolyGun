@@ -16,7 +16,7 @@ public class Data
     public static Data data = new Data();
 
     public readonly string savedPath = "saved1.txt";
-    public readonly string version = "v0.0.1";
+    public readonly string version = "v0.0.3";
 
     //Data extra;
     [Header("Datos de AchievementData")]
@@ -31,11 +31,23 @@ public class Data
 /// </summary>
 public struct XavHelpTo
 {
-    public static float GetWidthOfObj(float w) => KnowQtyOfPercent(w, Screen.width);
     /// <summary>
-    /// Devuelve el alto del objeto
+    /// Devuelve el ancho del porcentaje para conocerlo basado en la pantalla
+    /// <para>Usa <seealso cref="KnowPercentOfMax(float, float)"/></para>
     /// </summary>
-    public static float GetHeightOfObj(float h) => KnowQtyOfPercent(h, Screen.height);
+    public static float GetWidthOf(float w) => KnowQtyOfPercent(w, Screen.width);
+
+    /// <summary>
+    /// Devuelve el ancho del porcentaje para conocerlo basado en la pantalla
+    /// <para>Usa <seealso cref="KnowPercentOfMax(float, float)"/></para>
+    /// </summary>
+    public static float GetHeightOf(float h) => KnowQtyOfPercent(h, Screen.height);
+
+    /// <summary>
+    /// Devuelve el ancho y alto del vector de porcentaje basado enla pantalla
+    /// <para>Usa <seealso cref="GetWidthOf(float)"/> y <seealso cref="GetHeightOf(float)"/></para>
+    /// </summary>
+    public static Vector2 GetSizeOf(Vector2 s) => new Vector2(GetWidthOf(s.x), GetHeightOf(s.y));
 
     /// <summary>
     /// sacas el alto de una camara o la camara activa por defecto
@@ -92,6 +104,7 @@ public struct XavHelpTo
         return i;
     }
 
+    #region ChangeSceneTo //-> Cambias de escena a la que quieras
     /// <summary>
     /// Cambiamos a la escena indicada en numerico
     /// </summary>
@@ -107,31 +120,49 @@ public struct XavHelpTo
     /// </summary>
     /// <param name="name"></param>
     //public static void ChangeSceneTo(dynamic n) => SceneManager.LoadScene(n);
+    #endregion
 
+    #region ActiveScene //-> Devuelve al escena activa
     /// <summary>
     /// Devuelve el nombre de la escena activa
     /// <para>Dependencia con <seealso cref="Scenes"/> </para>
     /// </summary>
     public static Scenes ActiveScene() => (Scenes)SceneManager.GetActiveScene().buildIndex;
+    #endregion
 
+    #region KnowPercentOfMax //-> Saca el porcentaje del valor y el valor maximo
     /// <summary>
     ///  Saca el porcentaje de la cantidad y el maximo en caso de tener
     /// </summary>
-    /// <param name="count"></param>
-    /// <param name="Max"></param>
     /// <returns>El porcentaje de count sobre el max</returns>
     public static float KnowPercentOfMax(float count, float max) => count / max * 100;
+    /// <summary>
+    ///  Saca el porcentaje de la cantidad y el maximo en caso de tener
+    /// </summary>
+    /// <returns>El porcentaje de count sobre el max</returns>
+    public static Vector2 KnowPercentOfMax(Vector2 count, Vector2 max) => count / max * 100;
+    #endregion
 
+    #region KnowQtyOfPercent //-> Saca el valor mediante el porcentaje y el valor maximo 
     /// <summary>
     /// Basado en el porcentaje obtienes el valor mediante un maximo establecido
     /// </summary>
     public static float KnowQtyOfPercent(float percent, float max) => (max / 100) * percent;
 
     /// <summary>
+    /// Basado en el porcentaje obtienes el valor mediante un maximo establecido
+    /// </summary>
+    public static Vector2 KnowQtyOfPercent(Vector2 percent, Vector2 max) => (max / 100) * percent;
+    #endregion
+
+    #region IsOnBoundsArr //-> Revisa si el indice está dentro del arreglo
+    /// <summary>
     /// Detecta si el indice está dentro del arreglo
     /// </summary>
     public static bool IsOnBoundsArr(int i, int length) => i == Mathf.Clamp(i, 0, length - 1);
+    #endregion
 
+    #region SetColorParam //-> Asigna un valor a un parametro del Color
     /// <summary>
     /// Buscamos el parametro del <see cref="Color"/> que vas a cambiar
     /// <para>  el parametro debe estar entre los rangos de los parametros de color</para>
@@ -162,7 +193,7 @@ public struct XavHelpTo
         Color newColor = new Color(_c[0], _c[1], _c[2], _c[3]);
         return newColor;
     }
-
+    #endregion
 
     /// <summary>
     /// Dependiendo de la condición determinamos si iniciar o apagar la animación
