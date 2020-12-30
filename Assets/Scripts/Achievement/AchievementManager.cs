@@ -2,23 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI ;
 using Achievements;
 #endregion
 #region class AchievementManager
 public class AchievementManager : MonoBehaviour
 {
     #region Variables
+    private bool init = false;
     private readonly Achievement[] achievements = Data.data.achievement._GetAllAchievements();
+
+
+
     [Header("Settings")]
-    //Donde poseeremos en orden los items de logros
-    //public AchievementItem[] items;
+    [Space]
+    public AchievementItem[] items;
+    public int index = 0;
+    private int indexlimit = 0;
 
     [Space]
-    public AchievementPages[] pages;
-
-    private bool init = false;
-
-    private int itemsAssigned = 0;
+    [Header("Navigator Buttons")]
+    public Button btn_L;
+    public Button btn_R;
 
     #endregion
     #region Events
@@ -40,9 +45,9 @@ public class AchievementManager : MonoBehaviour
     private void Init(){
         Debug.Log("Loading....");
         init = true;
-        itemsAssigned = 0;
+        indexlimit = GetLimitIndex();
         CheckAchievementSaved();
-        for (int i = 0; i < pages.Length; i++) AssignAchievementItem(i);
+        AssignAchievementItem();
     }
     /// <summary>
     /// Revisamos el estado de los logros y si su dimension ha cammbiado
@@ -64,21 +69,15 @@ public class AchievementManager : MonoBehaviour
     /// Asignamos a cada item de achievement sus datos,
     /// en caso de encontrar problemas lo desactiva (suponiendo que no fuese exacto)
     /// </summary>
-    private void AssignAchievementItem(int pageIndex)
+    private void AssignAchievementItem()
     {
-        //actualizamos el tamaño del arreglo con el estado actual
-        float[] _savedAchievement = DataPass.GetSavedData().achievements;
-
-        AchievementItem[] items = pages[pageIndex].items;
+        int count = index;
 
         //Recorremos los items del UI y pintamos tantos como podamos del achievement
         for (int x = 0; x < items.Length; x++)
         {
-
-            int itemIndex = itemsAssigned + x;
-
             //si existe el item no sale de los limites de los achievements
-            bool condition = XavHelpTo.IsOnBoundsArr(itemIndex, achievements.Length);
+            bool condition = XavHelpTo.IsOnBoundsArr(count, achievements.Length);
 
             //muestra o esconde en caso de formar parte o no
             XavHelpTo.ObjOnOff(items[x].gameObject, condition);
@@ -88,20 +87,45 @@ public class AchievementManager : MonoBehaviour
 
                 //Se asigna los datos del titulo, el limite y el valor guardado
                 items[x].SetItem(new TextValBarItem(
-                    achievements[itemIndex].title,
-                    achievements[itemIndex].limit,
-                    _savedAchievement[itemIndex]
+                    achievements[count].title,
+                    achievements[count].limit,
+                    DataPass.GetSavedData().achievements[x]
                 ));
-
             }
-
-            
+            count++;
         }
-
-        itemsAssigned += items.Length;
     }
 
 
+    /// <summary>
+    /// Nos moveremos hacia adelante o hacia atras
+    /// al hacerlo cargará los nuevos achivements
+    /// </summary>
+    /// <param name="goForward"></param>
+    public void MoveTo( bool goForward){
+
+        int distance = goForward ? items.Length : -items.Length;
+        //el resultado
+        int _newIndex = index + distance;
+
+        //si no se ha salido asignamos el nuevo index
+        if (XavHelpTo.IsOnBoundsArr(_newIndex, achievements.Length)) index = _newIndex;
+        else index = _newIndex < 0 ? indexlimit : 0;
+
+        AssignAchievementItem();
+    }
+
+
+    /// <summary>
+    /// Conocemos el limite del index que contenga la misma distancia sin perder
+    /// el ritmo de los bloques
+    /// </summary>
+    private int GetLimitIndex(){
+        int newIndex = 0;
+        int distance = items.Length;
+        while (achievements.Length > newIndex) newIndex = distance + newIndex;
+        return newIndex - distance;
+    }
 
     #endregion
 }

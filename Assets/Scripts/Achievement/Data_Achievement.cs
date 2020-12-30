@@ -46,19 +46,18 @@ namespace Achievements
             achievements = new Achievement[]
             {
                 //Pagina 1
-                achieve("Robot eliminados en total", limit(5,250,500)),
-                //achieve("Tiempo total jugando",new Limit(100,250,500)),
-                achieve("Objetos recogidos en total", limit(250,500,1000)),
-                achieve("Cantidad total de Curaciones", limit(50,100,500)),
-                achieve("Tiempo total al borde de morir", limit(50,100,500)),
-                achieve("Robot eliminados en una partida", limit(10,50,100)),
+                achieve("Robot eliminados", limit(30,100,300)),
+                achieve("Jefes eliminados", limit(5,25,50)),
+                achieve("Oleada de enemigos", limit(3,15,30)),
+                achieve("Objetos recogidos en partida", limit(50,100,300)),
+                achieve("Curaciónes en una partida", limit(30,120,300)),
 
                 //Pagina 2
-                achieve("Testeo bien perrón", limit(2,5,10)),
-                achieve("Testeo bien perrón", limit(2,5,10)),
-                achieve("Testeo bien perrón", limit(2,5,10)),
-                achieve("Testeo bien perrón", limit(2,5,10)),
-                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("Tiempo al borde de morir", limit(5,20,60)),
+                achieve("", limit(2,5,10)),
+                achieve("", limit(2,5,10)),
+                achieve("", limit(2,5,10)),
+                achieve("", limit(2,5,10)),
 
                 //Pagina 3
                 achieve("Testeo bien perrón", limit(2,5,10)),
@@ -72,14 +71,6 @@ namespace Achievements
         /// Tomas los achievements del juego
         /// </summary>
         public Achievement[] _GetAllAchievements() => achievements;
-    }
-    #endregion
-    #region AchievementPages
-    [System.Serializable]
-    public struct AchievementPages
-    {
-        //tambien podias hacer un matrix, pero esto es mas facil en inspector...
-        public AchievementItem[] items;
     }
     #endregion
     #region Achievement

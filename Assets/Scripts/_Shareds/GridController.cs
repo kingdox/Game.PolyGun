@@ -90,7 +90,8 @@ namespace Grid
         /// </summary>
         public void Refresh(){
             grid.cellSize = childSize;
-            grid.spacing = spacing;
+            //grid.spacing = spacing;
+
             //grid.padding = padding;
             //grid.startAxis = axis;
             //grid.constraintCount = countOfItems;
@@ -98,19 +99,6 @@ namespace Grid
 
 
         #endregion
-
-        /* 
-         * Dependiendo de lo bien que vaya el script puede que se generalice
-         * Aquí manejaremos el componente de verticalLayoutGroup
-         * para que a nivel externo podamos ajustarlo por porcentajes 
-         * en vez de manualmente en el inspecctor
-         * 
-         * Este script tiene como ideal de que si alguien externo lo llama
-         * para modificarlo puede cambiar sus valores y así ajustará el item
-         * lo mejor posible
-         * 
-         * el vertical es mas un contenedor.... que apila verticalmente
-        */
 
     }
 
