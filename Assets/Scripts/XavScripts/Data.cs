@@ -18,9 +18,17 @@ public class Data
     public readonly string savedPath = "saved1.txt";
     public readonly string version = "v0.0.3";
 
+
+    //Data()
+    //{
+    //}
     //Data extra;
     [Header("Datos de AchievementData")]
-    public readonly AchievementData achievement = new AchievementData();
+    private readonly AchievementData achievement = new AchievementData();
+
+    public Achievement[] GetAchievements () => achievement._GetAllAchievements();
+
+
 }
 #endregion
 #region Tools

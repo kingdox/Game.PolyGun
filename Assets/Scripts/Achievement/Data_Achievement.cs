@@ -52,16 +52,16 @@ namespace Achievements
                 achieve("Objetos recogidos en partida", limit(50,100,300)),
                 achieve("Curaciónes en una partida", limit(30,120,300)),
 
-                //Pagina 2
+                //Pagina 2 //TODO balancear los limites
                 achieve("Tiempo al borde de morir", limit(5,20,60)),
-                achieve("", limit(2,5,10)),
-                achieve("", limit(2,5,10)),
-                achieve("", limit(2,5,10)),
+                achieve("Metros recorridos en partida", limit(2,5,10)),
+                achieve("Creaciones en una partida", limit(2,5,10)),
+                achieve("Robots aliados con vida", limit(2,5,10)),
                 achieve("", limit(2,5,10)),
 
+
                 //Pagina 3
-                achieve("Testeo bien perrón", limit(2,5,10)),
-                achieve("Testeo bien perrón", limit(2,5,10)),
+                achieve("", limit(2,5,10)),
 
 
             };
@@ -71,6 +71,7 @@ namespace Achievements
         /// Tomas los achievements del juego
         /// </summary>
         public Achievement[] _GetAllAchievements() => achievements;
+
     }
     #endregion
     #region Achievement

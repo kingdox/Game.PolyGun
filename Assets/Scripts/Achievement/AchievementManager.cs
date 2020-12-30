@@ -10,7 +10,8 @@ public class AchievementManager : MonoBehaviour
 {
     #region Variables
     private bool init = false;
-    private readonly Achievement[] achievements = Data.data.achievement._GetAllAchievements();
+    //private readonly Achievement[] achievements = Data.data.achievement._GetAllAchievements();
+    private readonly Achievement[] achievements = Data.data.GetAchievements();
 
 
 
@@ -62,6 +63,7 @@ public class AchievementManager : MonoBehaviour
             //Se recomienda limpiar los datos en caso de que haysa hecho muchos cambios...
             _saved.achievements = XavHelpTo.UpdateLengthArray(_saved.achievements, achievements.Length);
             DataPass.SetData(_saved);
+            DataPass.SaveLoadFile(true);
         }
     }
 
@@ -89,9 +91,11 @@ public class AchievementManager : MonoBehaviour
                 items[x].SetItem(new TextValBarItem(
                     achievements[count].title,
                     achievements[count].limit,
-                    DataPass.GetSavedData().achievements[x]
+                    DataPass.GetSavedData().achievements[count]
                 ));
             }
+
+
             count++;
         }
     }

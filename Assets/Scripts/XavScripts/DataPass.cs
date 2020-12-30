@@ -138,36 +138,7 @@ public class DataStorage
 [System.Serializable]
 public struct SavedData
 {
-    //Logros TODO
-    //HACK con un enum se manejará, hay que crear un updater
-    //del array en caso de quedar distinto o cmabios
     public float[] achievements;
-
-
-    //public int total_kills;
-    ////public int total_timeInGame;
-    //public int total_dragObjs;
-    //public int total_healed;
-    //public int total_timeInLimits;
-
-    //[Space]
-    ////TODO
-    ////public int total_waves;
-    ////public int total_boss;
-    ////public int total_deaths;
-    ////public int total_creations;
-
-
-
-
-
-    ////Records (de una partida unica
-    //[Header("Records")]
-    //public int record_kills;
-    ////public int record_timeInGame;
-    ////public int record_dragObjs;
-    ////public int record_healed;
-    ////public int record_timeInLimits;
 
     //Extra Debug ?
     [Space(10)]
