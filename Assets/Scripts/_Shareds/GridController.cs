@@ -19,7 +19,7 @@ namespace Grid
         [Header("Container")]
         //el contenedor del rect que modifique a este, luego podría ser un array TODO...
         //actualmente solo soporta 1 nivel de escala de contenedor
-        public RectTransform rect_container;
+        public RectTransform[] rect_containers;
 
 
         [Header("Settings")]
@@ -73,37 +73,31 @@ namespace Grid
         /// </summary>
         public void LoadGrid(){
 
-            //TODO esto en un array nos permitiría tener esto para multiple nivel
 
             countOfItems = transform.childCount;
 
             //Tenemos el valor maximo
-            Vector2 _screen = new Vector2(Screen.width, Screen.height);
+            Vector2 _screenSize = new Vector2(Screen.width, Screen.height);
+
+            ///Recorremos los rect padres de este
+            for (int x = 0; x < rect_containers.Length; x++){
+                //Donde el primero inicia con los valores de _screenSize
+                _screenSize = KnowSizeOfRect(rect_containers[x], _screenSize);
+            }
+            //En caso de haber o no, se obtendrá el resultado de los parents
+            Vector2 _objSize = KnowSizeOfRect(rect, _screenSize);
+
+            //Debug.Log($"Contenedores : {rect_containers.Length}, Tamaño : {_objSize} Sobre {_screenSize}");
+            childSize = new Vector2(_objSize.x , _objSize.y / countOfItems);
+        }
 
 
-
-            // TODO tomamos el tamaño del objeto en porcentaje
-            Vector2 _containerSize = anchorSizeOf(rectAnchorOf(rect_container));
-            //Sacamos el valor del contenedor con respecto a la pantalla
-            Vector2 _cont_val = XavHelpTo.KnowQtyOfPercent(_containerSize, _screen);
-
-
-            //----
-            //TODO tomamos el tamaño del container en porcentaje
-            Vector2 _objSize = anchorSizeOf(rectAnchorOf(rect));
-            //HACK este es el verdadero tamaño maximo basado en el del contenedor
-            Vector2 _obj_val = XavHelpTo.KnowQtyOfPercent(_objSize, _cont_val);
-
-            //---
-
-            //HACK podrías hacer un for y al terminar guardar los ultimos valores...
-
-            Debug.Log($"Container : {_containerSize}, Obj : {_objSize}, TEST RESULT {_obj_val}");
-
-            //objSize = XavHelpTo.GetSizeOf(_objSize);
-
-            childSize = new Vector2( _obj_val.x ,_obj_val.y / countOfItems);
-            //axis = grid.startAxis;
+        /// <summary>
+        /// Nos permitirá conocer el tamaño del objeto basado en el contenedor
+        /// </summary>
+        private Vector2 KnowSizeOfRect(RectTransform rt, Vector2 size){
+            //Devolvemos el tamaño real del rect basado en el tamaño existente
+            return XavHelpTo.KnowQtyOfPercent(size, anchorSizeOf(rectAnchorOf(rt)));
         }
 
         /// <summary>
