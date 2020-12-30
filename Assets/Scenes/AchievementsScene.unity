@@ -553,7 +553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect_container: {fileID: 1094966779}
+  rect_containers:
+  - {fileID: 1094966779}
   countOfItems: 0
   spacing: {x: 0, y: 0}
   objSize: {x: 0, y: 0}
@@ -1449,7 +1450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect_container: {fileID: 1094966779}
+  rect_containers: []
   countOfItems: 0
   spacing: {x: 0, y: 0}
   objSize: {x: 0, y: 0}
@@ -2658,7 +2659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect_container: {fileID: 1094966779}
+  rect_containers: []
   countOfItems: 0
   spacing: {x: 0, y: 0}
   objSize: {x: 0, y: 0}
