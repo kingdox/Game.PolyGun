@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
-//[RequireComponent<VerticalLayoutGroup>]
 namespace Grid
 {
     public class GridController : MonoBehaviour
@@ -16,36 +15,22 @@ namespace Grid
         // nuestro rect para ajustarnos a él
         private RectTransform rect;
 
-        [Header("Container")]
-        //el contenedor del rect que modifique a este, luego podría ser un array TODO...
-        //actualmente solo soporta 1 nivel de escala de contenedor
-        public RectTransform[] rect_containers;
-
-
         [Header("Settings")]
+        public RectTransform[] rect_containers;
+        [Space]
+        public bool initLoaded = true;
+
+
         //Conocimiento para saber el tamaño esperado
-        public int countOfItems = 0;
-        public Vector2 spacing = new Vector2(0,0);
-        //public RectOffset padding = new RectOffset(0,0,0,0);
-        //public GridLayoutGroup.Axis axis;
-
-        //Extra
-        //con estos sabremos cuanto miden
-        [Space]
-        [Header("Tamano de el objeto")]
-        
-        public Vector2 objSize = new Vector2(0, 0);
-
-        [Space]
-        [Header("Tamaño de hijos")]
-        public Vector2 childSize = new Vector2(0, 0);
+        private int countOfItems = 0;
+        private Vector2 spacing = new Vector2(0,0);
+        private Vector2 childSize = new Vector2(0, 0);
 
 
         //CURRY AnchorSizeRecipe
         private delegate Vector2 AnchorSizeRecipe(RectAnchor anch);
         private readonly static AnchorSizeRecipe anchorSizeOf = (RectAnchor anch) => (anch.max - anch.min) * 100;
         //END CURRY
-
         //CURRY RectAnchorRecipe
         private delegate RectAnchor RectAnchorRecipe(RectTransform r);
         private readonly static RectAnchorRecipe rectAnchorOf = (RectTransform r) => new RectAnchor(r.anchorMin, r.anchorMax);
@@ -59,11 +44,11 @@ namespace Grid
             grid = GetComponent<GridLayoutGroup>();
             rect = GetComponent<RectTransform>();
 
-            LoadGrid();
+            //Si se quisiera iniciar cargando al grid
+            if (initLoaded) LoadGrid();
         }
-        private void Start()
-        {
-            Refresh();
+        private void Start(){
+            if (initLoaded) Refresh();
         }
         #endregion
         #region Methods

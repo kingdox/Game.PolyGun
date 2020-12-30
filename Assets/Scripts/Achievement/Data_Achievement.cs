@@ -5,19 +5,6 @@ using UnityEngine;
 #endregion
 namespace Achievements
 {
-    #region AchievementIndex
-    public enum AchievementIndex
-    {
-        // TODO aqui hay algo no optimo
-        //Estos valores representan el ordenamiento de los datos guardados ?
-        TOTAL_KILLS_ROBOT = 0,
-        TOTAL_COLLECT_OBJ = 1,
-        TOTAL_HEAL = 2,
-        TOTAL_BOUNDSLIFE = 3,
-
-        RECORD_KILLS_ROBOT = 4
-    }
-    #endregion
     #region class AchievementData
     /// <summary>
     /// Contenedor de la información de los logros
@@ -25,6 +12,9 @@ namespace Achievements
     /// </summary>
     public class AchievementData
     {
+        //Pose las posiciones los logros, esta debe ir acorde a la cantidad
+        //y no salirse de los limites
+
         public static readonly Color[] colorSteps =
         {
             new Color(0.8f, 0.5f, 0.2f),

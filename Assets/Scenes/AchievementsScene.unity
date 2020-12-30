@@ -555,10 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rect_containers:
   - {fileID: 1094966779}
-  countOfItems: 0
-  spacing: {x: 0, y: 0}
-  objSize: {x: 0, y: 0}
-  childSize: {x: 0, y: 0}
+  initLoaded: 1
 --- !u!114 &269045696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1450,11 +1447,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect_containers: []
-  countOfItems: 0
-  spacing: {x: 0, y: 0}
-  objSize: {x: 0, y: 0}
-  childSize: {x: 0, y: 0}
+  rect_containers:
+  - {fileID: 1094966779}
+  initLoaded: 1
 --- !u!114 &877681505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2659,11 +2654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dbbddebfed141bdb89f36f76ce6e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rect_containers: []
-  countOfItems: 0
-  spacing: {x: 0, y: 0}
-  objSize: {x: 0, y: 0}
-  childSize: {x: 0, y: 0}
+  rect_containers:
+  - {fileID: 1094966779}
+  initLoaded: 1
 --- !u!114 &1859725851
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -86,14 +86,11 @@ public class AchievementManager : MonoBehaviour
             //Si está dentro de los limites entonces hace el pintado
             if (condition){
 
-                //Se busca en el enumerador el indice correspondiente al valor guardado
-                AchievementIndex achievementIndex = (AchievementIndex)itemIndex;
-
                 //Se asigna los datos del titulo, el limite y el valor guardado
                 items[x].SetItem(new TextValBarItem(
                     achievements[itemIndex].title,
                     achievements[itemIndex].limit,
-                    _savedAchievement[ (int)achievementIndex]
+                    _savedAchievement[itemIndex]
                 ));
 
             }
