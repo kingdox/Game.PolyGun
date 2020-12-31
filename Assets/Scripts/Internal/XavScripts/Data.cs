@@ -81,26 +81,4 @@ public enum ColorType
 }
 
 
-/// <summary>
-/// Modelo de las clases tipo "Manager"
-/// </summary>
-public interface IManager
-{
-    //event Event D;
 
-    /// <summary>
-    /// Colocamos los ajustes luego de que todo esté listo
-    /// </summary>
-    void Init();
-
-    //bool I { get; }
-
-    /// <summary>
-    /// Cambiamos a la escena
-    /// </summary>
-    void GoToScene(string name);
-    /// <summary>
-    /// Cambiamos a la escena
-    /// </summary>
-    void GoToScene(Scenes scene);
-}

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{305EF565-A048-4EEB-C0DF-68383C5FC548}</ProjectGuid>
+    <ProjectGuid>{E08799A2-2E5B-8B10-7062-164E47F9A975}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,18 +58,19 @@
     <Compile Include="Assets/Scripts/Components/Navigator.cs" />
     <Compile Include="Assets/Scripts/Internal/System/ControlSystem.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementManager.cs" />
+    <Compile Include="Assets/Scripts/Internal/Data/KeyData.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/MusicSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/DataPass.cs" />
+    <Compile Include="Assets/Scripts/Internal/System/ManagerSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/Data.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/XavLib.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/SfxItem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/AchievementData.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/Translator.cs" />
     <Compile Include="Assets/Scripts/Components/GridController.cs" />
-    <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
-    <Compile Include="Assets/Scripts/Internal/Data/KeyData.cs" />
-    <Compile Include="Assets/Scripts/Internal/XavScripts/XavLib.cs" />
     <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
-    <Compile Include="Assets/Scripts/Internal/System/ManagerSystem.cs" />
+    <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
+    <Compile Include="Assets/Scripts/MonoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

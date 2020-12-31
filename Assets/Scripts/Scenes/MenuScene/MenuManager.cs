@@ -6,17 +6,10 @@ using UnityEngine.UI;
 using XavLib;
 using Environment;
 #endregion
-public class MenuManager : MonoBehaviour , IManager
+public class MenuManager : MonoManager
 {
     #region Variables
-    private bool init = false;
-
-
-    //public bool I() { return false; }
-    //bool IManager.I { get => false;  }
-
-    //[Header("Settings")]
-    [Header("Navigator Buttons")]
+    [Header("MenuManager")]
     public Button[] buttons;
 
     //poseerán este ordenamiento
@@ -30,26 +23,23 @@ public class MenuManager : MonoBehaviour , IManager
 
     #endregion
     #region Events
-    private void Awake(){
-        init = false;
-
-    }
     private void Update()
     {
-        //TODO esto cambiarlo en el "ManagerSystem"
-        if (!init && DataPass.IsReady()) Init();
+        if (ManagerReady) Init();
     }
 
-    public void Init(){
-        init = true;
-        ButtonAdjust(!DataPass.GetSavedData().isIntroCompleted);
-    }
-    public void GoToScene(string name) => XavHelpTo.ChangeSceneTo(name);
-    public void GoToScene(Scenes scene) => XavHelpTo.ChangeSceneTo(scene.ToString());
     #endregion
     #region Methods
+    public void Init(){
+        Debug.Log("Esto cargará solo 1 vez");
+        ButtonAdjust(!DataPass.GetSavedData().isIntroCompleted);
+    }
 
+    
+    //void ClickAction()
+    //{
 
+    //}
 
     /// <summary>
     /// Ajustará qué botones podrán ser interactuables y cuales no,
@@ -60,7 +50,7 @@ public class MenuManager : MonoBehaviour , IManager
 
         for (int x = 0; x < buttons.Length; x++){
 
-            buttons[x].interactable = init;
+            buttons[x].interactable = true;
 
             if (adjust){
                 //si encuentra que forma parte de los adjust

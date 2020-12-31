@@ -1549,6 +1549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isReady: 0
   savedData:
+    isIntroCompleted: 0
     achievements: []
     debug_savedTimes: 0
 --- !u!4 &1601971129
@@ -2173,7 +2174,7 @@ PrefabInstance:
       objectReference: {fileID: 1579035114}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: AchievementManager, Assembly-CSharp
+      value: MonoManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

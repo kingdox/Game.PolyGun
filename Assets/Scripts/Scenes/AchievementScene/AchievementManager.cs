@@ -8,11 +8,9 @@ using XavLib;
 using Environment;
 #endregion
 #region class AchievementManager
-public class AchievementManager : MonoBehaviour, IManager
+public class AchievementManager : MonoManager
 {
     #region Variables
-    private bool init = false;
-    //private readonly Achievement[] achievements = Data.data.achievement._GetAllAchievements();
     private readonly Achievement[] achievements = Data.data.GetAchievements();
 
 
@@ -29,27 +27,23 @@ public class AchievementManager : MonoBehaviour, IManager
 
     #endregion
     #region Events
-    private void Awake(){
-        init = false;
-    }
     private void Update(){
 
         //Inicializamos Los valores
-        if (!init && DataPass.IsReady()) Init();
-
+        if (ManagerReady) Init();
         CheckControl();
 
     }
+    void OnClicked(){
+        Debug.Log("Hola");
+    }
+    #endregion
+    #region Methods
     public void Init(){
-        init = true;
         indexlimit = GetLimitIndex();
         CheckAchievementSaved();
         AssignAchievementItem();
     }
-    public void GoToScene(string name) => XavHelpTo.ChangeSceneTo(name);
-    public void GoToScene(Scenes scene) => XavHelpTo.ChangeSceneTo(scene.ToString());
-    #endregion
-    #region Methods
     /// <summary>
     /// Revisa los controles y dependiendo del presionado hará algo
     /// </summary>

@@ -112,11 +112,11 @@ public class DataPass : MonoBehaviour
     public static bool IsReady() => _.isReady;
 
     //Esto es solo para DEBUGs
-    //private void OnDisable()
-    //{
-    //    Debug.Log("Guardando, Poder debugger :P");
-    //    SaveLoadFile(true);
-    //}
+    private void OnApplicationPause()
+    {
+        Debug.Log("Guardando, Poder debugger :P");
+        SaveLoadFile(true);
+    }
 
     #endregion
 }
