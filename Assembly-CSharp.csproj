@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E08799A2-2E5B-8B10-7062-164E47F9A975}</ProjectGuid>
+    <ProjectGuid>{305EF565-A048-4EEB-C0DF-68383C5FC548}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -55,17 +55,21 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/Scripts/_Shareds/Navigator.cs" />
-    <Compile Include="Assets/Scripts/Achievement/AchievementManager.cs" />
-    <Compile Include="Assets/Scripts/XavScripts/MusicSystem.cs" />
-    <Compile Include="Assets/Scripts/XavScripts/DataPass.cs" />
-    <Compile Include="Assets/Scripts/XavScripts/Data.cs" />
-    <Compile Include="Assets/Scripts/XavScripts/SfxItem.cs" />
-    <Compile Include="Assets/Scripts/Achievement/Data_Achievement.cs" />
-    <Compile Include="Assets/Scripts/XavScripts/Translator.cs" />
-    <Compile Include="Assets/Scripts/_Shareds/GridController.cs" />
-    <Compile Include="Assets/Scripts/Achievement/AchievementItem.cs" />
-    <Compile Include="Assets/Scripts/KeyController.cs" />
+    <Compile Include="Assets/Scripts/Components/Navigator.cs" />
+    <Compile Include="Assets/Scripts/Internal/System/ControlSystem.cs" />
+    <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementManager.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/MusicSystem.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/DataPass.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/Data.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/SfxItem.cs" />
+    <Compile Include="Assets/Scripts/Internal/Data/AchievementData.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/Translator.cs" />
+    <Compile Include="Assets/Scripts/Components/GridController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
+    <Compile Include="Assets/Scripts/Internal/Data/KeyData.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/XavLib.cs" />
+    <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
+    <Compile Include="Assets/Scripts/Internal/System/ManagerSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

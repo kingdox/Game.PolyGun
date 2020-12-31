@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Environment;
 #endregion
 #region ### DataPass
 /// <summary>
@@ -45,6 +46,12 @@ public class DataPass : MonoBehaviour
     private void Start() => DataInit();
     #endregion
     #region ####### METHODS
+
+
+    private void Singleton( )
+    {
+
+    }
 
     /// <summary>
     /// Revisamos si existen datos guardados, de no existir los crea
@@ -105,11 +112,11 @@ public class DataPass : MonoBehaviour
     public static bool IsReady() => _.isReady;
 
     //Esto es solo para DEBUGs
-    private void OnDisable()
-    {
-        Debug.Log("Guardando, Poder debugger :P");
-        SaveLoadFile(true);
-    }
+    //private void OnDisable()
+    //{
+    //    Debug.Log("Guardando, Poder debugger :P");
+    //    SaveLoadFile(true);
+    //}
 
     #endregion
 }
@@ -138,6 +145,7 @@ public class DataStorage
 [System.Serializable]
 public struct SavedData
 {
+    public bool isIntroCompleted;
     public float[] achievements;
 
     //Extra Debug ?

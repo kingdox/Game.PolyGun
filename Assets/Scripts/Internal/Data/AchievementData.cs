@@ -57,11 +57,11 @@ namespace Achievements
                 achieve("Metros recorridos en partida", limit(2,5,10)),
                 achieve("Creaciones en una partida", limit(2,5,10)),
                 achieve("Robots aliados con vida", limit(2,5,10)),
-                achieve("", limit(2,5,10)),
-
+                achieve("*Lector recurrente*", limit(2,5,20)),
 
                 //Pagina 3
                 achieve("", limit(2,5,10)),
+                achieve("*Lector recurrente*", limit(2,5,20)),
 
 
             };

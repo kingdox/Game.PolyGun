@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI ;
 using Achievements;
+using XavLib;
+using Environment;
 #endregion
 #region class AchievementManager
-public class AchievementManager : MonoBehaviour
+public class AchievementManager : MonoBehaviour, IManager
 {
     #region Variables
     private bool init = false;
     //private readonly Achievement[] achievements = Data.data.achievement._GetAllAchievements();
     private readonly Achievement[] achievements = Data.data.GetAchievements();
-
 
 
     [Header("Settings")]
@@ -36,20 +37,33 @@ public class AchievementManager : MonoBehaviour
         //Inicializamos Los valores
         if (!init && DataPass.IsReady()) Init();
 
-    }
-    #endregion
-    #region Methods
+        CheckControl();
 
-    /// <summary>
-    /// Inicializamos el achievementManager con los datos de datapass
-    /// </summary>
-    private void Init(){
-        Debug.Log("Loading....");
+    }
+    public void Init(){
         init = true;
         indexlimit = GetLimitIndex();
         CheckAchievementSaved();
         AssignAchievementItem();
     }
+    public void GoToScene(string name) => XavHelpTo.ChangeSceneTo(name);
+    public void GoToScene(Scenes scene) => XavHelpTo.ChangeSceneTo(scene.ToString());
+    #endregion
+    #region Methods
+    /// <summary>
+    /// Revisa los controles y dependiendo del presionado hará algo
+    /// </summary>
+    private void CheckControl()
+    {
+        btn_L.interactable = index != 0;
+        btn_R.interactable = index != indexlimit;
+        //Salir
+        if (ControlSystem.KeyDown(KeyPlayer.OK_FIRE) || ControlSystem.KeyDown(KeyPlayer.BACK)) GoToScene(Scenes.MenuScene);
+        //Navegación
+        if (btn_R.interactable && ControlSystem.KeyDown(KeyPlayer.RIGHT)) MoveTo(true);
+        else if (btn_L.interactable && ControlSystem.KeyDown(KeyPlayer.LEFT)) MoveTo(false);
+    }
+    
     /// <summary>
     /// Revisamos el estado de los logros y si su dimension ha cammbiado
     /// </summary>
@@ -115,7 +129,6 @@ public class AchievementManager : MonoBehaviour
         //si no se ha salido asignamos el nuevo index
         if (XavHelpTo.IsOnBoundsArr(_newIndex, achievements.Length)) index = _newIndex;
         else index = _newIndex < 0 ? indexlimit : 0;
-
         AssignAchievementItem();
     }
 

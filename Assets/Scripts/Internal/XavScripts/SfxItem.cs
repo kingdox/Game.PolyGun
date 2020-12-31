@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using XavLib;
 //[System.Serializable]
 public class SfxItem : MonoBehaviour
 {
@@ -26,13 +26,7 @@ public class SfxItem : MonoBehaviour
         if (!source.isPlaying)
         {
             int _newClipIndex = XavHelpTo.GetDifferentInt(clips.Length, lastClipIndex);
-            //XavHelpTo.ZeroMax(clips.Length); // Random.Range(0, clips.Length);
-            //Siempre que no se repita  y que haya mas de 1 clip se hará reroll
-            //while (lastClipIndex == _newClipIndex && clips.Length > 1 )
-            //{
-            //    _newClipIndex = Random.Range(0, clips.Length);
-            //}
-
+           
             //Reproduce uno de los sonidos
             source.clip = clips[_newClipIndex];
             source.Play();

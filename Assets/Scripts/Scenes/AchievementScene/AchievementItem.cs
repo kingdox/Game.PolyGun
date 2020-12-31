@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Achievements;
+using XavLib;
 #endregion
 public class AchievementItem : MonoBehaviour
 {
@@ -27,6 +28,15 @@ public class AchievementItem : MonoBehaviour
 
     #endregion
     #region Events
+    private void Update()
+    {
+
+        //if (KeyController.)
+        //{
+
+        //}
+
+    }
     #endregion
     #region Methods
 
