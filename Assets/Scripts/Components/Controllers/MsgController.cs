@@ -21,13 +21,18 @@ public class MsgController : MonoBehaviour
     
     public Text txt_msg;
     public float font_default = 40;
+    public bool useInitialText = true;
 
+    [Space]
     public float waitTime = 0.20f;
     public float timeVariance = 0.1f;
     #endregion
     #region Events
     private void Awake(){
 
+        if (useInitialText){
+            _textoEjemplo = txt_msg.text;
+        }
         _chars = _textoEjemplo.ToCharArray();
         _longitud = _chars.Length + 1;
 

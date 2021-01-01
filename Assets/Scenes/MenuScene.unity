@@ -1651,11 +1651,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e15c10cb7cce413abcc6217140860f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textoEjemplo: "Fue hace mucho tiempo....\nComo pudimos llegar a esto..?\nno tuvo
-    que terminar as\xED...."
+  _textoEjemplo: 
   _chars: 
   txt_msg: {fileID: 1986995270}
   font_default: 40
+  useInitialText: 1
   waitTime: 0.1
   timeVariance: 0.05
 --- !u!1 &1716329284
@@ -1923,19 +1923,22 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Fue hace mucho tiempo....
+  m_Text: '( Texto que se crea a medida que pasa el tiempo char por char)...
+
+    Fue
+    hace mucho tiempo....
 
     Espero que esto sirva xD
 
-    por la logica
-    pienso que es izi'
+    por la logica pienso
+    que es izi'
 --- !u!222 &1986995271
 CanvasRenderer:
   m_ObjectHideFlags: 0
