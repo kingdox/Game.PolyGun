@@ -23,24 +23,11 @@ public class MenuManager : MonoManager
 
     #endregion
     #region Events
-    private void Update()
-    {
-        if (ManagerReady) Init();
-    }
-
-    #endregion
-    #region Methods
-    public void Init(){
-        Debug.Log("Esto cargará solo 1 vez");
+    public override void Init(){
         ButtonAdjust(!DataPass.GetSavedData().isIntroCompleted);
     }
-
-    
-    //void ClickAction()
-    //{
-
-    //}
-
+    #endregion
+    #region Methods
     /// <summary>
     /// Ajustará qué botones podrán ser interactuables y cuales no,
     /// dependiendo del estado de si el tutorial fue terminado o no.

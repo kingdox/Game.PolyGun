@@ -29,21 +29,16 @@ public class AchievementManager : MonoManager
     #region Events
     private void Update(){
 
-        //Inicializamos Los valores
-        if (ManagerReady) Init();
+        //Revisa los controles
         CheckControl();
-
     }
-    void OnClicked(){
-        Debug.Log("Hola");
-    }
-    #endregion
-    #region Methods
-    public void Init(){
+    public override void Init(){
         indexlimit = GetLimitIndex();
         CheckAchievementSaved();
         AssignAchievementItem();
     }
+    #endregion
+    #region Methods
     /// <summary>
     /// Revisa los controles y dependiendo del presionado hará algo
     /// </summary>
