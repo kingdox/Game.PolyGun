@@ -9,45 +9,49 @@ using XavLib;
 //using UnityEngine.Analytics;
 //using UnityEngine.Events;
 #endregion
+/// <summary>
+/// Abstract de los Manager
+/// <para>Heredan <seealso cref="MonoBehaviour"/></para>
+/// </summary>
 public abstract class MonoManager : MonoBehaviour, IManager
 {
     #region Variables
     [Header("MonoManager")]
     private readonly float waitTime = 0.01f;
-    private bool _init = false;
     #endregion
     #region Events
     //Todo permitir usar más de 1 awake
-    public void Awake() => StartCoroutine(CheckIniter());
+    public void Awake() => Begin();
     public abstract void Init();
     #endregion
     #region Methods
+    public void Begin() => StartCoroutine(CheckIniter());
     public IEnumerator CheckIniter(){
-        _init = false;
         yield return new WaitForSeconds(waitTime);
-        if (!_init)
-        {
-            if (DataPass.IsReady())
-            {
-                _init = true;
-                Init();
-            }
-            StartCoroutine(CheckIniter());
-        }
+        //si DataPass esta listo dispara Init, sino vuelve a esperar...
+        if (DataPass.IsReady()) Init();
+        else StartCoroutine(CheckIniter());
     }
     public void GoToScene(string name) => XavHelpTo.ChangeSceneTo(name);
     public void GoToScene(Scenes scene) => XavHelpTo.ChangeSceneTo(scene.ToString());
     #endregion
-
 }
 /// <summary>
-/// Enumerador de las clases tipo <seealso cref="MonoManager"/>
+/// Interface de las clases tipo <seealso cref="MonoManager"/>
 /// </summary>
 public interface IManager{
 
     /// <summary>
-    /// Revisamos cada <see cref="waitTime"/> para inicializar con <see cref="MonoManager_Initer"/>
-    /// <para>Si no puede inicializar entonces cagamos de nuevo <see cref="CheckIniter"/></para>
+    /// Iniciador del detector para iniciar
+    /// <para>
+    /// Si se modifica el awake sin asignar <see cref="Begin"/> entonces el disparador <see cref="Init"/> no podrá iniciar
+    /// </para>
+    /// </summary>
+    void Begin();
+
+    /// <summary>
+    /// Revisamos cada <see cref="waitTime"/>  si <seealso cref="DataPass.IsReady()"/>
+    /// <para>Cuando esta listo disparamos el evento <see cref="Init"/></para>
     /// </summary>
     IEnumerator CheckIniter();
 
