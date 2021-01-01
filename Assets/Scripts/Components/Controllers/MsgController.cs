@@ -7,48 +7,65 @@ using UnityEngine.UI;
 public class MsgController : MonoBehaviour
 {
     #region var
+    private float fontSizeMax;
 
-    [Header("Provisional")]
-    //Esto sera sutituido por arreglos de strings...
-    [TextArea(3,6)]
-    public string _textoEjemplo = "Fue hace mucho tiempo....";
-    public char[] _chars;
-    private int _longitud = 0;
-    private int _index = 0;
-    [Space]
 
     [Header("Settings")]
-    
     public Text txt_msg;
-    public float font_default = 40;
     public bool useInitialText = true;
 
     [Space]
+    public string text;
+
+    [Space]
+    [Header("Time")]
+    public float delayTime = 0;
     public float waitTime = 0.20f;
     public float timeVariance = 0.1f;
     #endregion
     #region Events
+    //TODO esto NO se ejecutará en Awake
+    //habrá un receptor que, al ingresar datos en el string por codigo
+    //podrás hacer el seteo
     private void Awake(){
 
         if (useInitialText){
-            _textoEjemplo = txt_msg.text;
+            text = txt_msg.text;
         }
-        _chars = _textoEjemplo.ToCharArray();
-        _longitud = _chars.Length + 1;
 
-        StartCoroutine(SetText());
+        fontSizeMax = txt_msg.fontSize;
+
+
+        FitText();
+
+        //StartCoroutine(SetText());
+
+    }
+
+    private void Update()
+    {
     }
     #endregion
     #region Methods
 
-    IEnumerator SetText(){
+    public void FitText(){
+        float newFontSize = ((Screen.height < Screen.width ? Screen.height : Screen.width) / 100) * (fontSizeMax / 10);
+        newFontSize = newFontSize > fontSizeMax ? fontSizeMax : newFontSize;
+        txt_msg.fontSize = (int)newFontSize;
+    }
+
+    public void LoadText(string s) => StartCoroutine(SetText(0,s));
+
+    private IEnumerator SetText(int index = 0, string s = null){
+
+        //asignamos el string en caso de haber entrante...
+        if (s != null) s = text;
 
         yield return new WaitForSeconds(Random.Range(waitTime-timeVariance,waitTime+timeVariance));
-        if (_index != _longitud)
+        if (index != s.Length + 1)
         {
-            txt_msg.text = new string(_textoEjemplo.ToCharArray(0, _index));
-            _index++;
-            StartCoroutine(SetText());
+            txt_msg.text = new string(s.ToCharArray(0, index++));
+            StartCoroutine(SetText(index, s));
         }
     }
 
@@ -58,24 +75,3 @@ public class MsgController : MonoBehaviour
 
     #endregion
 }
-/*TODO
-Componente enfocado a mostrar y esconder cadenas de string cada cierto tiempo
-
-Este componente mostrará texto basado en un arreglo y esta puede ser
-secuencial o aleatorio
-
-
-TODO -> Se plantea usar para: MenuManager,
-
-    */
-/*
-
-    El Texto irá renderizando caracter por caracter, como si fuesen tipo chats
-    Nosotros veremos como se va escribiendo...
- 
-
-
-    Tener una fuente estandar
-        Cuanta fuente se le debe añadir por cada pixel de pantalla basado en la estandar?
-        Esto se refresca solo cuando las dimensiones de la pantalla cambian....
- */

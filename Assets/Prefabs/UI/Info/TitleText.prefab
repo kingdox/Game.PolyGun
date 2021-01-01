@@ -140,6 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6141465729727827565}
+  - component: {fileID: 6095884742337186854}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -167,3 +168,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6095884742337186854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6062926564271868727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e15c10cb7cce413abcc6217140860f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textoEjemplo: Fue hace mucho tiempo....
+  _chars: 
+  txt_msg: {fileID: 3261715021006430153}
+  font_default: 100
+  useInitialText: 1
+  waitTime: 0.1
+  timeVariance: 0

@@ -23,6 +23,14 @@ namespace Environment
         public readonly string savedPath = "saved1.txt";
         public readonly string version = "v0.0.4";
 
+        /*
+         Opciones Scene posibles actualmente
+            Traduccion español / inglés
+            Velocidad de los textos (low,normal,speed)
+            Musica(No, Bajo, Medio, Alto)
+            Sfx(No, Bajo, Medio, Alto)
+
+         */
 
         //Extra
 
