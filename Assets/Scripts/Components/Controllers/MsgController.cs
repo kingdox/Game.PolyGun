@@ -15,7 +15,7 @@ public class MsgController : MonoBehaviour
     public bool useInitialText = true;
 
     [Space]
-    public string text;
+    public string text = null;
 
     [Space]
     [Header("Time")]
@@ -29,22 +29,13 @@ public class MsgController : MonoBehaviour
     //podrás hacer el seteo
     private void Awake(){
 
-        if (useInitialText){
-            text = txt_msg.text;
-        }
+        if (useInitialText) text = txt_msg.text;
 
         fontSizeMax = txt_msg.fontSize;
 
-
-        FitText();
-
-        //StartCoroutine(SetText());
-
+        LoadText(text);
     }
 
-    private void Update()
-    {
-    }
     #endregion
     #region Methods
 

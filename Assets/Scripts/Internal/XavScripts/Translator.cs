@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Translate;
 
 /// <summary>
 /// Poseedor de las traducciones
@@ -11,7 +11,12 @@ public class Translator
 {
     [HideInInspector]
     public static Translator _ = new Translator();
-    private enum Idioms { es, en}
+
+
+    /// <summary>
+    /// Idioma actual, por defecto es español
+    /// </summary>
+    public static Idiom idiom = Idiom.es;
 
     /// <summary>
     /// Valores en español con los textos
@@ -35,8 +40,3 @@ public class Translator
 
 
 }
-
-/// <summary>
-/// Contenedor de las llaves de los translate comunes
-/// </summary>
-public enum TKey{}

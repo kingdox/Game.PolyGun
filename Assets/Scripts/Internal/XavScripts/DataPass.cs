@@ -149,6 +149,7 @@ public class DataStorage
 public struct SavedData
 {
     public bool isIntroCompleted;
+    public int idiom;
     public float[] achievements;
 
     //Extra Debug ?
