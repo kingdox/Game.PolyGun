@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Key;
 using Environment;
 
@@ -20,67 +21,49 @@ public class ControlSystem : MonoBehaviour
     #region Events
     private void Awake(){
         //Singleton corroboration
-        if (_ == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            _ = this;
-        }
-        else if (_ != this)
-        {
-            Destroy(gameObject);
-        }
+        if (_ == null){ DontDestroyOnLoad(gameObject); _ = this;}
+        else if (_ != this) Destroy(gameObject);
         canInput = true;
     }
-    private void Start()
-    {
-        LoadCodes();
-    }
-
+    private void Start() => LoadCodes();
     #endregion
     #region Methods
-
     /// <summary>
-    /// Devolvemos si la tecla fue presionada o no
-    /// Esta tecla detecta cuando en este frame ha sido presionado
+    /// Comprobamos si la tecla esta siendo presionada
     /// </summary>
-    public static bool KeyDown(int i) => Input.GetKeyDown(_.codes[i]);
+    public static bool KeyPress(KeyPlayer kp) => Input.GetKey(_.codes[(int)kp]);
+    public static bool KeyPress(int i) => Input.GetKey(_.codes[i]);
     /// <summary>
     /// Devolvemos si la tecla fue presionada o no
     /// Esta tecla detecta cuando en este frame ha sido presionado
     /// </summary>
     public static bool KeyDown(KeyPlayer kp) => Input.GetKeyDown(_.codes[(int)kp]);
-
+    public static bool KeyDown(int i) => Input.GetKeyDown(_.codes[i]);
+    public static bool KeyDown(params int[] ks){
+        foreach (int k in ks) if (KeyDown(k)) return true;
+        return false;
+    }
+    public static bool KeyDown(params KeyPlayer[] kps){
+        foreach (KeyPlayer kp in kps) if (KeyDown(kp)) return true;
+        return false;   
+    }
 
     /// <summary>
-    /// Comprobamos si la tecla esta siendo presionada
+    /// Presiona el boton si existe interacción
     /// </summary>
-    public static bool KeyPress(int i) => Input.GetKey(_.codes[i]);
+    public static void ButtonDown(Button b, params KeyPlayer[] k){if (IsDown(b, k)) Cast(b);}
     /// <summary>
-    /// Comprobamos si la tecla esta siendo presionada
+    /// Selecciona el boton si existe interacción
     /// </summary>
-    public static bool KeyPress(KeyPlayer kp) => Input.GetKey(_.codes[(int)kp]);
-
+    public static void ButtonSelect(Button b, params KeyPlayer[] k) { if (IsDown(b, k)) b.Select(); }
     /// <summary>
-    /// Busca la tecla basado en lo presionado
+    /// Presionas el botón
     /// </summary>
-    //private Key.Key SearchKey(KeyCode code){
-
-    //    int index = -1;
-
-    //    foreach (var k in keys)
-    //    {
-    //        if (k.Contains(code))
-    //        {
-    //            index = (int)k.keyPlayer;
-    //        }
-    //    }
-
-    //    return keys[index];
-    //}
-
-    //poseeremos un arreglo con los codes de cada key y veremos si alguno
-    //fue tocado, de ser así los enviamos para investigar quien fue y como comportarlo
-
+    public static void Cast(Button b) { b.Select(); b.onClick.Invoke(); }
+    /// <summary>
+    /// Revisa si el boton fue tocado
+    /// </summary>
+    public static bool IsDown(Button b, KeyPlayer[] k) => KeyDown(k) && b.interactable;
     /// <summary>
     /// Cargamos los Codes basado en los datos que poseemos del keys
     /// </summary>

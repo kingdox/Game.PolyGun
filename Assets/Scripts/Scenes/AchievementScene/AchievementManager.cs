@@ -24,6 +24,8 @@ public class AchievementManager : MonoManager
     [Header("Navigator Buttons")]
     public Button btn_L;
     public Button btn_R;
+    public Button btn_BACK;
+
 
     #endregion
     #region Events
@@ -46,13 +48,16 @@ public class AchievementManager : MonoManager
     {
         btn_L.interactable = index != 0;
         btn_R.interactable = index != indexlimit;
-        //Salir
-        if (ControlSystem.KeyDown(KeyPlayer.OK_FIRE) || ControlSystem.KeyDown(KeyPlayer.BACK)) GoToScene(Scenes.MenuScene);
-        //Navegación
-        if (btn_R.interactable && ControlSystem.KeyDown(KeyPlayer.RIGHT)) MoveTo(true);
-        else if (btn_L.interactable && ControlSystem.KeyDown(KeyPlayer.LEFT)) MoveTo(false);
+
+
+        //Navigation
+        ControlSystem.ButtonSelect(btn_BACK, KeyPlayer.DOWN);
+
+        ControlSystem.ButtonDown(btn_BACK, KeyPlayer.BACK);
+        ControlSystem.ButtonDown(btn_R, KeyPlayer.RIGHT);
+        ControlSystem.ButtonDown(btn_L, KeyPlayer.LEFT);
     }
-    
+
     /// <summary>
     /// Revisamos el estado de los logros y si su dimension ha cammbiado
     /// </summary>

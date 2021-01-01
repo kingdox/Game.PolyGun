@@ -46,12 +46,8 @@ public class DataPass : MonoBehaviour
     private void Start() => DataInit();
     #endregion
     #region ####### METHODS
-
-
-    private void Singleton( )
-    {
-
-    }
+    //public int value;
+    //public static void Singleton(this bool s)//{//}
 
     /// <summary>
     /// Revisamos si existen datos guardados, de no existir los crea
@@ -114,8 +110,8 @@ public class DataPass : MonoBehaviour
     //Esto es solo para DEBUGs
     private void OnApplicationPause()
     {
-        Debug.Log("Guardando, Poder debugger :P");
-        SaveLoadFile(true);
+        //Debug.Log("Guardando, Poder debugger :P");
+        //SaveLoadFile(true);
     }
 
     #endregion

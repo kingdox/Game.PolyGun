@@ -7,6 +7,12 @@ using XavLib;
 #endregion
 namespace Grid
 {
+    /// <summary>
+    /// Maneja un grupo de objetos en el UI, permitiendo
+    /// Organizarlos de manera responsiva a el contenedor
+    /// <para>___1/ene/2021__</para>
+    /// <para>Este Componente sigue en desarrollo</para>
+    /// </summary>
     public class GridController : MonoBehaviour
     {
         #region Var
@@ -28,14 +34,14 @@ namespace Grid
         private Vector2 childSize = new Vector2(0, 0);
 
 
-        //CURRY AnchorSizeRecipe
+        //START AnchorSizeRecipe
         private delegate Vector2 AnchorSizeRecipe(RectAnchor anch);
         private readonly static AnchorSizeRecipe anchorSizeOf = (RectAnchor anch) => (anch.max - anch.min) * 100;
-        //END CURRY
-        //CURRY RectAnchorRecipe
+        //END 
+        //START RectAnchorRecipe
         private delegate RectAnchor RectAnchorRecipe(RectTransform r);
         private readonly static RectAnchorRecipe rectAnchorOf = (RectTransform r) => new RectAnchor(r.anchorMin, r.anchorMax);
-        //END CURRY
+        //END
 
         #endregion
         #region Events
@@ -61,29 +67,31 @@ namespace Grid
 
 
             countOfItems = transform.childCount;
+            spacing = Vector2.one * grid.spacing * (countOfItems - 1) / countOfItems;
 
-            //Tenemos el valor maximo
-            Vector2 _screenSize = new Vector2(Screen.width, Screen.height);
 
-            ///Recorremos los rect padres de este
-            for (int x = 0; x < rect_containers.Length; x++){
-                //Donde el primero inicia con los valores de _screenSize
-                _screenSize = KnowSizeOfRect(rect_containers[x], _screenSize);
-            }
-            //En caso de haber o no, se obtendrá el resultado de los parents
-            Vector2 _objSize = KnowSizeOfRect(rect, _screenSize);
+            Vector2 _objSize = GetChildSize();
 
             //Debug.Log($"Contenedores : {rect_containers.Length}, Tamaño : {_objSize} Sobre {_screenSize}");
-            childSize = new Vector2(_objSize.x , _objSize.y / countOfItems);
+            childSize = new Vector2(_objSize.x , _objSize.y / countOfItems) - spacing;
         }
 
 
         /// <summary>
-        /// Nos permitirá conocer el tamaño del objeto basado en el contenedor
+        /// Bajo el tamaño
         /// </summary>
-        private Vector2 KnowSizeOfRect(RectTransform rt, Vector2 size){
-            //Devolvemos el tamaño real del rect basado en el tamaño existente
-            return XavHelpTo.KnowQtyOfPercent(size, anchorSizeOf(rectAnchorOf(rt)));
+        /// <returns>El tamaño de los hijos basado en los tamaños de los contenedores</returns>
+        public Vector2 GetChildSize(){
+            Vector2 _screenSize = new Vector2(Screen.width, Screen.height);
+
+            ///Recorremos los rect padres de este
+            for (int x = 0; x < rect_containers.Length; x++)
+            {
+                //Donde el primero inicia con los valores de _screenSize
+                _screenSize = XavHelpTo.KnowQtyOfPercent(_screenSize, anchorSizeOf(rectAnchorOf(rect_containers[x])));
+            }
+
+            return XavHelpTo.KnowQtyOfPercent(_screenSize, anchorSizeOf(rectAnchorOf(rect)));
         }
 
         /// <summary>
@@ -91,6 +99,8 @@ namespace Grid
         /// </summary>
         public void Refresh(){
             grid.cellSize = childSize;
+
+            //TODO poner un bool publico para ver si refresca los colocados o no...?
             //grid.spacing = spacing;
 
             //grid.padding = padding;
