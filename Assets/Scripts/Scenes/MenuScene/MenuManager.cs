@@ -24,7 +24,6 @@ public class MenuManager : MonoManager
     #endregion
     #region Events
     public override void Init(){
-        Debug.Log("Menu Manager !");
         ButtonAdjust(!DataPass.GetSavedData().isIntroCompleted);
     }
     #endregion
