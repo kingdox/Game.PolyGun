@@ -70,13 +70,21 @@ public class AchievementItem : MonoBehaviour
         if (_limitIndex != -1){
 
             toMax = XavHelpTo.KnowPercentOfMax(item.value, _limits[_limitIndex]) / 100;
-            img_bar_actual.color = AchievementData.colorSteps[_limitIndex];
+
+            if (item.value == 0){
+                img_bar_last.color = Color.white;
+                img_bar_actual.color = Color.black;
+            }
+            else{
+                img_bar_last.color = Color.black;
+                img_bar_actual.color = AchievementData.colorSteps[_limitIndex];
+            }
         }
         else
         {
             //Si supera los limites
-            img_bar_last.color = AchievementData.colorSteps[1];//XavHelpTo.SetColorParam(img_bar_last.color, (int)ColorType.RGB, AchievementData.colorSteps[2]);
-            img_bar_actual.color = AchievementData.colorSteps[2];
+            img_bar_last.color = Color.black; //AchievementData.colorSteps[2];//XavHelpTo.SetColorParam(img_bar_last.color, (int)ColorType.RGB, AchievementData.colorSteps[2]);
+            img_bar_actual.color = Color.red; //AchievementData.colorSteps[2];
             toMax = 1;
         }
 

@@ -744,6 +744,7 @@ MonoBehaviour:
   savedData:
     isIntroCompleted: 0
     idiom: 0
+    textSpeed: 0
     achievements: []
     debug_savedTimes: 0
 --- !u!4 &648787397
@@ -1678,9 +1679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txt_msg: {fileID: 1986995270}
   key: -1
-  delayTime: 0
-  waitTime: 0.1
-  timeVariance: 0.05
+  wantInit: 0
 --- !u!1 &1716329284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,15 +1952,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '( Texto que se crea a medida que pasa el tiempo char por char)...
+  m_Text: '"Donde estoy?, Como siempre..........
 
-    Fue
-    hace mucho tiempo....
-
-    Espero que esto sirva xD
-
-    por la logica pienso
-    que es izi'
+    Oscuro...... Muy Oscuro..........'
 --- !u!222 &1986995271
 CanvasRenderer:
   m_ObjectHideFlags: 0

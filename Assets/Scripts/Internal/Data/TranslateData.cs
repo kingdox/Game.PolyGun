@@ -23,7 +23,10 @@ namespace Translate
                 //P1
                 "Robots eliminados","Jefes eliminados","Oleada de enemigos","Objetos recogidos","Curaciónes en una partida",
                 //P2
-                "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*"
+                "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*",
+
+                //Messages
+                /*1*/"Donde estoy?,\n Como siempre.......... \nOscuro...... \nMuy Oscuro..........",
         };
         private static readonly string[] en =
         {
@@ -36,7 +39,12 @@ namespace Translate
                 //P1 TODO
                 "Robots eliminados","Jefes eliminados","Oleada de enemigos","Objetos recogidos","Curaciónes en una partida",
                 //P2 TODO
-                "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*"
+                "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*",
+
+                //Messages
+                /*1*/"Donde estoy?,\n Como siempre.......... \nOscuro...... \nMuy Oscuro..........",
+
+
         };
 
         private static readonly Language[] languages;
@@ -60,7 +68,7 @@ namespace Translate
     /// <para>usa <seealso cref="Idiom"/> para definir el idioma </para>
     /// </summary>
     public struct Language{
-        private readonly Idiom idiom;
+        private readonly Idiom idiom;// por si requiere uso posterior...
         private readonly string[] values;
         public Language(Idiom idiom, string[] values){
             this.idiom = idiom;
@@ -105,5 +113,9 @@ namespace Translate
         ACHIEVE_CREATIONS_GAME,
         ACHIEVE_ROBOTS_ALIVE,
         ACHIEVE_ESPECIAL_READ,
+
+
+        //Messages (Mensajes del cyborg...)
+        MSG_CYBORG_WHERE,
     }
 }

@@ -56,35 +56,36 @@ public class MsgController : MonoInit
     /// <summary>
     /// Nos permitirá cargar un texto distinto al <see cref="text"/>
     /// </summary>
-    public void LoadText(string s) {
+    public void LoadText(string s, float textSpeed = -1) {
 
         //asignamos el nuevo texto
         savedText = s;
         //Limpiamos el campo
         txt_msg.text = "";
 
+        float speed = textSpeed != -1 ? textSpeed : Data.data.textSpeed[DataPass.GetSavedData().textSpeed];
+
         //Corremos el nuevo texto
-        StartCoroutine(SetText(0, s));
+        StartCoroutine(SetText(speed, 0, s));
     }
 
     /// <summary>
     /// Cargamos una llave y la guardamos, 
     /// <para>si es <see cref="TKey.No"/> limpia el texto</para>
     /// </summary>
-    public void LoadKey(TKey k = TKey.No) {
+    public void LoadKey(TKey k = TKey.No , float textSpeed = -1) {
 
         key = k;
         //si no se asigno llave 
         if (k == TKey.No)LoadText("");
-        else LoadText(Data.Translated().Value(k));
+        else LoadText(Data.Translated().Value(k), textSpeed);
     }
 
-    private IEnumerator SetText(int index = 0, string s = null){
+    private IEnumerator SetText(float speed, int index = 0, string s = null){
 
-        int speed = DataPass.GetSavedData().textSpeed;
 
         //esperamos el tiempo
-        yield return new WaitForSeconds(Data.data.textSpeed[speed]);
+        yield return new WaitForSeconds(speed);
 
 
         //Seguirá cargando siempre que el texto guardado sea el mismo que el que corre
@@ -98,7 +99,7 @@ public class MsgController : MonoInit
                 else
                 {
                     txt_msg.text = new string(s.ToCharArray(0, index++));
-                    StartCoroutine(SetText(index, s));
+                    StartCoroutine(SetText(speed,index, s));
                 }
             }
         }

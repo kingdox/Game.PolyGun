@@ -10,14 +10,6 @@ using Translate;
 public class MenuManager : MonoManager
 {
     #region Variables
-    [Header("MenuManager")]
-    public Button[] btns_Menu;
-    [Space]
-    public MsgController msg_Message;
-
-    /// <summary>
-    /// Ordenamiento de los botones de menú
-    /// </summary>
     private enum Menu{
         Play,
         Intro,
@@ -26,12 +18,19 @@ public class MenuManager : MonoManager
         Exit
     }
 
+    private readonly TKey[] keys_Msg ={
+        TKey.MSG_CYBORG_WHERE
+    };
+    [Header("MenuManager")]
+    public Button[] btns_Menu;
+    public MsgController msg_Message;
 
     #endregion
     #region Events
     public override void Init(){
         SavedData saved = DataPass.GetSavedData();
         ButtonAdjust(!saved.isIntroCompleted);
+        LoadMessage();
     }
     #endregion
     #region Methods
@@ -57,7 +56,31 @@ public class MenuManager : MonoManager
         }
     }
 
+
+
+    /// <summary>
+    /// Cargas el mensaje especificado
+    /// </summary>
+    private void LoadMessage(){
+        msg_Message.LoadKey(keys_Msg[0],.075f);
+
+    }
+
+
+    //TODO, hay que hacer un efecto de mostrar
+    //y desaparecer  el texto cambiandole el alpha
+
+
+
+    /// <summary>
+    /// Aquí cargaremos cada cierto tiempo un mensaje
+    /// </summary>
+    IEnumerator MessageLoader(){
+        yield return new WaitForSeconds(0);
+        //Cargas cada uno del arreglo
+        LoadMessage();
+    }
     #endregion
 }
 
-
+//Podríamos emitir un boolcuando terminamos de cargar el texto? en un updater?
