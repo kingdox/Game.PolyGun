@@ -166,6 +166,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1934820012}
     m_Modifications:
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: key
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -319,6 +323,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 165797628}
     m_Modifications:
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: key
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -509,6 +517,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 651191507}
     m_Modifications:
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: useInitialText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: key
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -727,6 +743,7 @@ MonoBehaviour:
   isReady: 0
   savedData:
     isIntroCompleted: 0
+    idiom: 0
     achievements: []
     debug_savedTimes: 0
 --- !u!4 &648787397
@@ -786,6 +803,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1071889617}
     m_Modifications:
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: key
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -939,6 +960,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1896478601}
     m_Modifications:
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: key
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1613,7 +1638,7 @@ GameObject:
   - component: {fileID: 1687211829}
   - component: {fileID: 1687211830}
   m_Layer: 0
-  m_Name: MessageComponent
+  m_Name: Message
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1651,11 +1676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e15c10cb7cce413abcc6217140860f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textoEjemplo: 
-  _chars: 
   txt_msg: {fileID: 1986995270}
-  font_default: 40
-  useInitialText: 1
+  key: -1
+  delayTime: 0
   waitTime: 0.1
   timeVariance: 0.05
 --- !u!1 &1716329284
@@ -1669,7 +1692,7 @@ GameObject:
   - component: {fileID: 1716329285}
   - component: {fileID: 1716329287}
   m_Layer: 0
-  m_Name: Message
+  m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2021,12 +2044,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae38c8ee59678490885b17f4f0bd2438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
+  btns_Menu:
   - {fileID: 1860718876}
   - {fileID: 759968005}
   - {fileID: 317062164}
   - {fileID: 296499259}
   - {fileID: 645884816}
+  msg_Message: {fileID: 1687211830}
 --- !u!1 &2116997876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,6 +2210,10 @@ PrefabInstance:
     - target: {fileID: 6062926564271868727, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
       propertyPath: m_Name
       value: TitleText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6095884742337186854, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
+      propertyPath: key
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6141465729727827565, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
       propertyPath: m_LocalPosition.x

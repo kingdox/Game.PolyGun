@@ -5,15 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using XavLib;
 using Environment;
+using Translate;
 #endregion
 public class MenuManager : MonoManager
 {
     #region Variables
     [Header("MenuManager")]
-    public Button[] buttons;
+    public Button[] btns_Menu;
+    [Space]
+    public MsgController msg_Message;
 
-    //poseerán este ordenamiento
-    enum ButtonMenu{
+    /// <summary>
+    /// Ordenamiento de los botones de menú
+    /// </summary>
+    private enum Menu{
         Play,
         Intro,
         Achieve,
@@ -21,34 +26,36 @@ public class MenuManager : MonoManager
         Exit
     }
 
+
     #endregion
     #region Events
     public override void Init(){
-        ButtonAdjust(!DataPass.GetSavedData().isIntroCompleted);
+        SavedData saved = DataPass.GetSavedData();
+        ButtonAdjust(!saved.isIntroCompleted);
     }
     #endregion
     #region Methods
+
     /// <summary>
     /// Ajustará qué botones podrán ser interactuables y cuales no,
     /// dependiendo del estado de si el tutorial fue terminado o no.
     /// </summary>
     private void ButtonAdjust(bool adjust = false){
-        ButtonMenu[] buttonsMenu = { ButtonMenu.Play, ButtonMenu.Achieve, ButtonMenu.Opt};
+        Menu[] buttonsMenu = { Menu.Play, Menu.Achieve, Menu.Opt};
 
-        for (int x = 0; x < buttons.Length; x++){
+        for (int x = 0; x < btns_Menu.Length; x++){
 
-            buttons[x].interactable = true;
+            btns_Menu[x].interactable = true;
 
             if (adjust){
                 //si encuentra que forma parte de los adjust
-                foreach (ButtonMenu btn in buttonsMenu)
+                foreach (Menu btn in buttonsMenu)
                 {
-                    if ((ButtonMenu)x == btn) buttons[x].interactable = false;
+                    if ((Menu)x == btn) btns_Menu[x].interactable = false;
                 }
             }
         }
     }
-    
 
     #endregion
 }

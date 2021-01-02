@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using Achievements;
 using Key;
 using Environment;
+using Translate;
 #endregion
 
 namespace Environment
@@ -29,10 +30,13 @@ namespace Environment
             Velocidad de los textos (low,normal,speed)
             Musica(No, Bajo, Medio, Alto)
             Sfx(No, Bajo, Medio, Alto)
-
+            Controles(clasico, alternativo)
          */
 
+
         //Extra
+        [Header("Datos de TranslateData")]
+        private readonly TranslateData translate = new TranslateData();
 
         [Header("Datos de AchievementData")]
         private readonly AchievementData achievement = new AchievementData();
@@ -42,6 +46,13 @@ namespace Environment
 
         public Achievement[] GetAchievements () => achievement._GetAllAchievements();
         public Key.Key[] GetKeys() => keyData._GetAllKeys();
+
+        /// <summary>
+        /// Obtenemos el <see cref="Language"/> guardado en <see cref="DataPass"/>
+        /// <para>También se puede especificar el <see cref="Idiom"/> que queremos buscar</para>
+        /// </summary>
+        public static Language Translated(Idiom idiom) => data.translate.Get(idiom);
+        public static Language Translated(int i = -1) => Translated((Idiom)(i != -1 ? i : DataPass.GetSavedData().idiom));
 
     }
     #endregion
