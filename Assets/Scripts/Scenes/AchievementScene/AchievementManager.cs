@@ -30,9 +30,10 @@ public class AchievementManager : MonoManager
     #endregion
     #region Events
     private void Update(){
-
-        //Revisa los controles
-        CheckControl();
+        if (Inited){
+            //Revisa los controles
+            CheckControl();
+        }
     }
     public override void Init(){
         indexlimit = GetLimitIndex();
@@ -94,10 +95,10 @@ public class AchievementManager : MonoManager
 
             //Si está dentro de los limites entonces hace el pintado
             if (condition){
-
+                //Debug.Log($"{x}: {achievements[count].key} => {DataPass.GetSavedData().achievements[count]} , de {achievements[count].limit}");
                 //Se asigna los datos del titulo, el limite y el valor guardado
                 items[x].SetItem(new TextValBarItem(
-                    achievements[count].title,
+                    achievements[count].key,
                     achievements[count].limit,
                     DataPass.GetSavedData().achievements[count]
                 ));

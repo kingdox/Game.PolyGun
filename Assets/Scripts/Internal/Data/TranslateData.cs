@@ -14,13 +14,29 @@ namespace Translate
 
         private static readonly string[] es =
         {
+            // IDIOM
             "Español",
-                "Jugar","Introducción","Logros","Opciones","Salir","Retroceder"
+                // BUTTONS
+                "Jugar","Introducción","Logros","Opciones","Salir","Retroceder",
+
+                //Achievements
+                //P1
+                "Robots eliminados","Jefes eliminados","Oleada de enemigos","Objetos recogidos","Curaciónes en una partida",
+                //P2
+                "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*"
         };
         private static readonly string[] en =
         {
+            // IDIOM
             "English",
+                // BUTTONS
                 "Play","Introduction","Achievements","Options","Exit","Back",
+
+                //Achievements //TODO falta traducir
+                //P1 TODO
+                "Robots eliminados","Jefes eliminados","Oleada de enemigos","Objetos recogidos","Curaciónes en una partida",
+                //P2 TODO
+                "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*"
         };
 
         private static readonly Language[] languages;
@@ -64,8 +80,10 @@ namespace Translate
     /// </summary>
     public enum TKey {
         No = -1, // en caso de que tengamos que declarar que no hay
+
         // IDIOM
         _IDIOM,
+
         // BUTTONS
         _0_PLAY,
         _1_INTRODUCTION,
@@ -74,5 +92,18 @@ namespace Translate
         _4_EXIT,
         _5_BACK,
 
+        //Achievements
+        // P1
+        ACHIEVE_KILLS_ROBOT,
+        ACHIEVE_KILLS_BOSS,
+        ACHIEVE_WAVES_ENEMIES,
+        ACHIEVE_OBJECTS_COLLECTED,
+        ACHIEVE_HEALS_GAME,
+        // P2
+        ACHIEVE_TIME_DEATHLIMIT,
+        ACHIEVE_METTERS_GAME,
+        ACHIEVE_CREATIONS_GAME,
+        ACHIEVE_ROBOTS_ALIVE,
+        ACHIEVE_ESPECIAL_READ,
     }
 }

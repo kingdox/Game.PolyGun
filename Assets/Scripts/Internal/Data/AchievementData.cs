@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Translate;
+using XavLib;
 #endregion
 namespace Achievements
 {
@@ -17,21 +19,21 @@ namespace Achievements
 
         public static readonly Color[] colorSteps =
         {
-            new Color(0.8f, 0.5f, 0.2f),
-            new Color(0.75f, 0.75f, 0.75f),
-            new Color(0.83f, 0.68f, 0.21f),
+            new Color(0.8f, 0.5f, 0.2f), // broncze
+            new Color(0.75f, 0.75f, 0.75f), // silver
+            new Color(0.83f, 0.68f, 0.21f), // gold fachero
         };
 
-        //Currificación Achievement 
+        //START Achievement 
         // 1 => Reporto los ingredientes de la receta
-        private delegate Achievement AchievementRecipe(string title, Limit limit);
+        private delegate Achievement AchievementRecipe(TKey key, Limit limit);
         // 2 => Declaro la preparación de la receta
-        private readonly static AchievementRecipe achieve = (string title, Limit limit) => new Achievement(title, new Limit(limit));
+        private readonly static AchievementRecipe achieve = (TKey key, Limit limit) => new Achievement(key, new Limit(limit));
         //CURRY END
 
-        //Currificación Limit
-        private delegate Limit LimitRecipe(float bronze, float silver, float gold);
-        private readonly static LimitRecipe limit = (float bronze, float silver, float gold) => new Limit(bronze, silver, gold);
+        //START Limit
+        private delegate Limit LimitRecipe(params float[] limits);
+        private readonly static LimitRecipe limit = (float[] limits) => new Limit(limits);
         //CURRY END
         
 
@@ -43,26 +45,22 @@ namespace Achievements
         /// </summary>
         static AchievementData()
         {
+            //TODO balancear los limites de cada uno
             achievements = new Achievement[]
             {
                 //Pagina 1
-                achieve("Robot eliminados", limit(30,100,300)),
-                achieve("Jefes eliminados", limit(5,25,50)),
-                achieve("Oleada de enemigos", limit(3,15,30)),
-                achieve("Objetos recogidos en partida", limit(50,100,300)),
-                achieve("Curaciónes en una partida", limit(30,120,300)),
+                achieve(TKey.ACHIEVE_KILLS_ROBOT, limit(30,100,300)),
+                achieve(TKey.ACHIEVE_KILLS_BOSS, limit(5,25,50)),
+                achieve(TKey.ACHIEVE_WAVES_ENEMIES, limit(3,15,30)),
+                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED, limit(50,100,300)),
+                achieve(TKey.ACHIEVE_HEALS_GAME, limit(30,120,300)),
 
-                //Pagina 2 //TODO balancear los limites
-                achieve("Tiempo al borde de morir", limit(5,20,60)),
-                achieve("Metros recorridos en partida", limit(2,5,10)),
-                achieve("Creaciones en una partida", limit(2,5,10)),
-                achieve("Robots aliados con vida", limit(2,5,10)),
-                achieve("*Lector recurrente*", limit(2,5,20)),
-
-                //Pagina 3
-                achieve("", limit(2,5,10)),
-                achieve("*Lector recurrente*", limit(2,5,20)),
-
+                //Pagina 2 
+                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT, limit(5,20,60)),
+                achieve(TKey.ACHIEVE_METTERS_GAME, limit(2,5,10)),
+                achieve(TKey.ACHIEVE_CREATIONS_GAME, limit(2,5,10)),
+                achieve(TKey.ACHIEVE_ROBOTS_ALIVE, limit(2,5,10)),
+                achieve(TKey.ACHIEVE_ESPECIAL_READ, limit(2,5,20)),
 
             };
         }
@@ -77,15 +75,15 @@ namespace Achievements
     #region Achievement
     /// <summary>
     /// Modelo de los logros
-    /// <para>Dependencia con <seealso cref="Limit"/></para>
+    /// <para>Dependencia con <seealso cref="Limit"/> y <seealso cref="TKey"/></para>
     /// </summary>
     public struct Achievement
     {
-        public string title;
+        public TKey key;
         public Limit limit;
-        public Achievement(string title, Limit limit)
+        public Achievement(TKey key, Limit limit)
         {
-            this.title = title;
+            this.key = key;
             this.limit = limit;
         }
     }
@@ -93,24 +91,32 @@ namespace Achievements
     #region TextValBarItem
     /// <summary>
     /// Modelo de los items de los logros
-    /// <para>Dependencia con <seealso cref="Limit"/>, <seealso cref="TextValBarItem"/></para>
+    /// <para>Dependencia con <seealso cref="Limit"/>, <seealso cref="TKey"/></para>
     /// </summary>
     public struct TextValBarItem
     {
-        public string title;
+        public TKey key;
         public Limit limit;
         public float value;
 
         /// <summary>
+        /// Muestra el limite alcanzado basado en los valores proporcionados
+        /// </summary>
+        public int LimitReached => XavHelpTo.KnowFirstMajorIndex(value, limit.ToArray());
+
+        public string TextValue => $" {value} {ShowLimiters} ";
+
+        private string ShowLimiters => value > limit.gold ? "" : "/ " + limit[LimitReached];
+
+        /// <summary>
         /// Asigna el titulo el limite y el valor que posee el player sobre ese logro
         /// </summary>
-        public TextValBarItem(string title, Limit limit, float value)
+        public TextValBarItem(TKey key, Limit limit, float value)
         {
-            this.title = title;
+            this.key = key;
             this.limit = limit;
             this.value = value;
         }
-        //public (int, int, int) limits;
     }
     #endregion
     #region Limit

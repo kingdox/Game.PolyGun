@@ -121,3 +121,12 @@ namespace Key
     }
     #endregion
 }
+
+
+
+
+/*
+ Controles alternativos
+    - Los de PS4
+    - moverse => WASD, atack => SPACE, almacenamiento => flechas izq, abajo, derecha
+*/

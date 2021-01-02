@@ -32,7 +32,11 @@ namespace Environment
             Sfx(No, Bajo, Medio, Alto)
             Controles(clasico, alternativo)
          */
+        //TODO esto va en opciones.... ?
+        //la cadencia de cada letra puesta
+        public readonly float[] textSpeed = { 0, .005f, .015f, .025f };
 
+        //
 
         //Extra
         [Header("Datos de TranslateData")]

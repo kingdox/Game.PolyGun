@@ -11,7 +11,9 @@ using UnityEngine;
 public abstract class MonoInit : MonoBehaviour, IInit
 {
     #region Var
+    [Header("MonoInit")]
     private readonly float waitTime = 0.01f;
+    public static bool Inited = false;
     #endregion
     #region Event
     public void Awake() => Begin();
@@ -22,7 +24,7 @@ public abstract class MonoInit : MonoBehaviour, IInit
     public IEnumerator CheckIniter(){
         yield return new WaitForSeconds(waitTime);
         //si DataPass esta listo dispara Init, sino vuelve a esperar...
-        if (DataPass.IsReady()) Init();
+        if (DataPass.IsReady()) { Init(); Inited = true; }
         else StartCoroutine(CheckIniter());
     }
     #endregion
@@ -39,9 +41,10 @@ public interface IInit
     void Begin();
     /// <summary>
     /// <para>__</para>
-    /// Evento para Inicializar las cosas de manager al ver que esta listo
+    /// Evento para Inicializar las cosas al ver que <see cref="DataPass.isReady"/>
     /// <para>Escribir así: =></para>
     /// <para>"public override void Init(){...}"</para>
+    /// <para>Se requiere que <see cref="Begin()"/> sea iniciado previamente en el Awake()</para>
     /// </summary>
     void Init();
     /// <summary>

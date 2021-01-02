@@ -148,8 +148,17 @@ public class DataStorage
 [System.Serializable]
 public struct SavedData
 {
+    //tutorial completado?
     public bool isIntroCompleted;
+
+
+    // index del enum de Idiom
     public int idiom;
+    // velocidad de los textos
+    public int textSpeed;
+
+
+    // Arreglo ordenado de los valores de cada logro correspondiente
     public float[] achievements;
 
     //Extra Debug ?

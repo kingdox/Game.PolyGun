@@ -10,49 +10,97 @@ public class MsgController : MonoInit
 {
     #region var
 
+    
+    //Datos guardados para pintar
+    private string savedText = null;
+
 
     [Header("Settings")]
+    //a donde haremos el renderizado
     public Text txt_msg;
+    //a donde buscaremos para traducir en caso de existir
     public TKey key = TKey.No;
-    [Space]
-    private string text = null;
+    //si quiere cargarse al iniciar
+    public bool wantInit = true;
 
-    [Space]
-    [Header("Time")]
-    public float delayTime = 0;
-    public float waitTime = 0.20f;
-    //public float timeVariance = 0.1f;
     #endregion
     #region Events
-    //Guardamos los textos y lueego los limpiamos
-    //TODO estudiar esto del hecho de tener que usar New
      new void Awake() {
-        if (key.Equals(TKey.No)) text = txt_msg.text;
+
+        savedText = key.Equals(TKey.No)
+            // en caso de no tener key guardamos el texto internamente
+            ? txt_msg.text
+            // en caso de haber key guardamos internamente la llave como string
+            : key.ToString() // aquí cualquier texto valía
+        ;
+        //Limpiamos el texto
         txt_msg.text = "";
+        //Iniciamos a revisar si DataPass.IsReady
         Begin();
-    } 
+    }
+    //Si ya esta listo DataPass...
     public override void Init(){
-        if (!key.Equals(TKey.No)) text = Data.Translated().Value(key);
-        LoadText(text);
+
+        //si puede iniciar
+        if (wantInit){   
+
+            //Si posee llave buscamos la traducción de la llave
+            if (!key.Equals(TKey.No) ) savedText = Data.Translated().Value(key);
+
+            //Cargamos los datos del texto guardado
+            LoadText(savedText);
+        }
     }
     #endregion
     #region Methods
     /// <summary>
     /// Nos permitirá cargar un texto distinto al <see cref="text"/>
     /// </summary>
-    /// <param name="s"></param>
-    public void LoadText(string s) => StartCoroutine(SetText(0,s));
+    public void LoadText(string s) {
 
+        //asignamos el nuevo texto
+        savedText = s;
+        //Limpiamos el campo
+        txt_msg.text = "";
+
+        //Corremos el nuevo texto
+        StartCoroutine(SetText(0, s));
+    }
+
+    /// <summary>
+    /// Cargamos una llave y la guardamos, 
+    /// <para>si es <see cref="TKey.No"/> limpia el texto</para>
+    /// </summary>
+    public void LoadKey(TKey k = TKey.No) {
+
+        key = k;
+        //si no se asigno llave 
+        if (k == TKey.No)LoadText("");
+        else LoadText(Data.Translated().Value(k));
+    }
 
     private IEnumerator SetText(int index = 0, string s = null){
 
-        bool condition = s != null;
-        //asignamos el string en caso de haber entrante...
-        yield return new WaitForSeconds(condition ? waitTime : 0);//Random.Range(waitTime-timeVariance,waitTime+timeVariance)
-        if (condition) s = text;
-        if (index != s.Length + 1){
-            txt_msg.text = new string(s.ToCharArray(0, index++));
-            StartCoroutine(SetText(index, s));
+        int speed = DataPass.GetSavedData().textSpeed;
+
+        //esperamos el tiempo
+        yield return new WaitForSeconds(Data.data.textSpeed[speed]);
+
+
+        //Seguirá cargando siempre que el texto guardado sea el mismo que el que corre
+        if (savedText == s)
+        {
+            if (index != s.Length + 1){
+
+                if (speed == 0){
+                    txt_msg.text = s;
+                }
+                else
+                {
+                    txt_msg.text = new string(s.ToCharArray(0, index++));
+                    StartCoroutine(SetText(index, s));
+                }
+            }
         }
     }
     #endregion

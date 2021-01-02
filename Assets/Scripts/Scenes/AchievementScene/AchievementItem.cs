@@ -15,9 +15,8 @@ public class AchievementItem : MonoBehaviour
 
 
     [Header("Settings")]
-
-    public Text txt_title;
-    public Text txt_value;
+    public MsgController msg_title;
+    public MsgController msg_value;
 
     [Space]
     public Image img_bar_last;
@@ -28,15 +27,7 @@ public class AchievementItem : MonoBehaviour
 
     #endregion
     #region Events
-    private void Update()
-    {
 
-        //if (KeyController.)
-        //{
-
-        //}
-
-    }
     #endregion
     #region Methods
 
@@ -54,11 +45,14 @@ public class AchievementItem : MonoBehaviour
     private void DrawItem()
     {
         float[] _limits = item.limit.ToArray();
-        int _limitIndex = XavHelpTo.KnowFirstMajorIndex(item.value, _limits);
+        int _limitIndex = item.LimitReached;
         img_bar_last.color = Color.black;
-        txt_title.text = $" {item.title} ";
-        txt_value.text = " " + item.value.ToString() + (item.value > item.limit.gold ? "" : " / " + item.limit[_limitIndex].ToString()) +" ";
-        //txt_value.text = $" {item.value} { (item.value > item.limit.gold ? "" : "/ " + item.limit[_limitIndex].ToString()) } ");
+
+        Debug.Log($"{item.key}: {item.TextValue}");
+        //Cargamos la llave
+        msg_title.LoadKey(item.key);
+        //Cargamos el valor
+        msg_value.LoadText(item.TextValue);
 
         //ajustamos el progreso de la barra
         if (_limitIndex != -1){
@@ -76,3 +70,9 @@ public class AchievementItem : MonoBehaviour
     }
     #endregion
 }
+
+
+
+
+//Todo, Con una corutina hacer que cargue cada cierto tiempo la barra hasta que alcance el maximo
+// int max, int each

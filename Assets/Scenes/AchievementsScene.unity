@@ -836,7 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6141465729727827565, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6141465729727827565, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1562,6 +1562,7 @@ MonoBehaviour:
   isReady: 0
   savedData:
     isIntroCompleted: 0
+    idiom: 0
     achievements: []
     debug_savedTimes: 0
 --- !u!4 &1601971129
@@ -2080,6 +2081,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 101742442}
     m_Modifications:
+    - target: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+      propertyPath: key
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
