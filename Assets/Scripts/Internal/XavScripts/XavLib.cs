@@ -297,6 +297,11 @@ namespace XavLib
             return ints;
         }
 
+        /// <summary>
+        /// Asignas el valor a positivo en caso de ser negativo
+        /// </summary>
+        public static float GetPositive(float f) => f < 0 ? f * -1 : f;
+
     }
     #endregion
 
