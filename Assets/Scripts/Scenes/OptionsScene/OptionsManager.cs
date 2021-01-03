@@ -38,6 +38,26 @@ public class OptionsManager : MonoManager
     public override void Init(){}
     #endregion
     #region Methods
+
+    private void CheckControls()
+    {
+        
+        //button.Select()
+    }
+
+    //Cargamos el mensaje basado en el sitio donde se encuentra
+    //el focus de los botones, si pertenece a alguno muestra, sino no hace nada
+    private void LoadMsg(){
+
+        for (int x = 0; x < opt_items.Length; x++)
+        {
+            if (opt_items[x].IsFocus()){
+                msgIndex = x;
+            }
+        }
+
+    }
+
     /// <summary>
     /// Actualizamos los textos de la pantalla al idioma correspondiente
     /// </summary>

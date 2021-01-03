@@ -12,12 +12,35 @@ public class OptionsItem : MonoBehaviour{
     public Button btn_Right;
     [Space]
     public MsgController msg;
+
+    public bool amIFocused = false;
     #endregion
     #region Events
-
+    private void Start()
+    {
+        amIFocused = false;
+    }
     #endregion
     #region Methods
 
+    /// <summary>
+    /// Enfocas al boton correspondiente
+    /// </summary>
+    /// <param name="i"></param>
+    public void FocusButton(int i){
+        //Seleccionamos
+        switch (i){
+            case 0:
+                btn_Left.Select();
+                break;
+            case 1:
+                btn_Center.Select();
+                break;
+            case 2:
+                btn_Right.Select();
+                break;
+        }
+    }
 
     /// <summary>
     /// Refrescamos el <see cref="MsgController"/> hijo
@@ -29,7 +52,10 @@ public class OptionsItem : MonoBehaviour{
     /// </summary>
     public bool IsFocus(){
         Button[] _bts = { btn_Left, btn_Center, btn_Right };
-        foreach (Button b in _bts) if (b.IsActive()) return true;
+        foreach (Button b in _bts) if (false) return true;
+        //TODO
+        //_bts[0]
+        //btn_Center.interactable
         return false;
     }   
     #endregion
