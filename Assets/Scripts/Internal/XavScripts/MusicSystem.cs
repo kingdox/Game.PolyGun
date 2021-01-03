@@ -85,7 +85,7 @@ public class MusicSystem : MonoBehaviour
     public static void CheckMusic(bool bypass = false){
         if (CanSound())
         {
-            Scenes _activeScene = XavHelpTo.ActiveScene();
+            Scenes _activeScene = XavHelpTo.Know.ActiveScene();
             MusicPath key = MusicPath.No;
 
 

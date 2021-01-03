@@ -27,7 +27,7 @@ public class Navigator : MonoBehaviour
     {
         //se coloca en la pagina 0 antes que nada
         indexActual = 0;
-        XavHelpTo.ActiveThisObject(pages);
+        XavHelpTo.Change.ActiveObjectsExcept(pages);
         NavButtonsChecker();
     }
     #endregion
@@ -36,8 +36,8 @@ public class Navigator : MonoBehaviour
     /// Revisamos si vamos hacia adelante o no
     /// </summary>
     public void _NavigateTo(bool goForward) {
-        indexActual = XavHelpTo.TravelArr(goForward, pages.Length, indexActual);
-        XavHelpTo.ActiveThisObject(pages, indexActual);
+        indexActual = XavHelpTo.Know.NextIndex(goForward, pages.Length, indexActual);
+        XavHelpTo.Change.ActiveObjectsExcept(pages, indexActual);
         //Detectamos los limites
         NavButtonsChecker();
     }

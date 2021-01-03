@@ -88,10 +88,10 @@ namespace Grid
             for (int x = 0; x < rect_containers.Length; x++)
             {
                 //Donde el primero inicia con los valores de _screenSize
-                _screenSize = XavHelpTo.KnowQtyOfPercent(_screenSize, anchorSizeOf(rectAnchorOf(rect_containers[x])));
+                _screenSize = XavHelpTo.Get.QtyOf(_screenSize, anchorSizeOf(rectAnchorOf(rect_containers[x])));
             }
 
-            return XavHelpTo.KnowQtyOfPercent(_screenSize, anchorSizeOf(rectAnchorOf(rect)));
+            return XavHelpTo.Get.QtyOf(_screenSize, anchorSizeOf(rectAnchorOf(rect)));
         }
 
         /// <summary>

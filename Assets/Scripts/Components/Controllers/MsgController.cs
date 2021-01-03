@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Translate;
 using Environment;
+using XavLib;
 #endregion
 public class MsgController : MonoInit
 {
@@ -104,6 +105,28 @@ public class MsgController : MonoInit
             }
         }
     }
+
+
+
+
+    /// <summary>
+    /// Transformas las propiedades del color del texto(RGBA)
+    /// <para>
+    /// donde el parametro a cambiar a medida que pasa el tiempo
+    /// </para>
+    /// TODO NO usado aun
+    /// </summary>
+    public void TextColor(int param, float reachValue, float timeScale){
+
+        Color _col = txt_msg.color;
+        _col[0] = 0;
+
+        XavHelpTo.Set.UnitInTime(_col[param], reachValue, timeScale);
+
+    }
+
+
+
     #endregion
 }
 

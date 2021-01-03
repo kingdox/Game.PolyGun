@@ -69,7 +69,8 @@ namespace Environment
     {
         AchievementsScene, // Donde están los logros
         MenuScene, //el menu principal apra acceder a los demás sitios
-        GameScene
+        OptionsScene, // las opciones de juego para modificarle al jugador
+        GameScene,
     }
     /// <summary>
     /// Son las llaves que posee el jugador en este proyecto

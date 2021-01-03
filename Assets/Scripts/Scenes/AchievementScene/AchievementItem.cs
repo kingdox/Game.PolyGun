@@ -69,7 +69,7 @@ public class AchievementItem : MonoBehaviour
         //ajustamos el progreso de la barra
         if (_limitIndex != -1){
 
-            toMax = XavHelpTo.KnowPercentOfMax(item.value, _limits[_limitIndex]) / 100;
+            toMax = XavHelpTo.Get.PercentOf(item.value, _limits[_limitIndex]) / 100;
 
             if (item.value == 0){
                 img_bar_last.color = Color.white;
@@ -96,27 +96,18 @@ public class AchievementItem : MonoBehaviour
     /// <summary>
     /// Pintaremos la barra de manera de que se vea como está cargando,
     /// se cargará basandose de una variable "Max" con la que podrá ver
-    ///
-    /// Al llamarlo la primera vez este debe de estar en  el tamaño 0 % y se irá estirando con un IEnumerator...
-    /// En casode que se cambie y este siga cargando, solo se dirigirá a el sitio donde le corresponde
     /// </summary>
-    ///
     private void DrawBar(){
 
         float _rectX = rect_bar_actual.anchorMax.x;
         //evitamos renderizar
         if (toMax == _rectX) return;
 
-        //la barra debería moverse más rapido si está más lejos... sacarle un porcentaje de la diferencia?
-        float _difference = XavHelpTo.GetPositive(toMax - _rectX);
+        float _scale = 2;
 
-        float scale = 2; //TODO HARDCODED
-
-        float _stepToMax = Mathf.MoveTowards(_rectX, toMax, Time.deltaTime * _difference * scale);
-
-        _stepToMax =   Mathf.Clamp(_stepToMax, 0, 1);
-
-        rect_bar_actual.anchorMax = new Vector2( _stepToMax ,rect_bar_actual.anchorMax.y);
+        rect_bar_actual.anchorMax = new Vector2(
+            XavHelpTo.Set.UnitInTime(_rectX, toMax,_scale)
+            , rect_bar_actual.anchorMax.y);
 
     }
 

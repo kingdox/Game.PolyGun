@@ -102,7 +102,7 @@ namespace Achievements
         /// <summary>
         /// Muestra el limite alcanzado basado en los valores proporcionados
         /// </summary>
-        public int LimitReached => XavHelpTo.KnowFirstMajorIndex(value, limit.ToArray());
+        public int LimitReached => XavHelpTo.Know.FirstMajor(value, limit.ToArray());
 
         public string TextValue => $" {value} {ShowLimiters} ";
 

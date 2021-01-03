@@ -25,8 +25,9 @@ namespace Translate
                 //P2
                 "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*",
 
-                //Messages
+                //Messages TODO
                 /*1*/"Donde estoy?,\n Como siempre.......... \nOscuro...... \nMuy Oscuro..........",
+                /*2*/"DESCONOCIDOOOO000000"
         };
         private static readonly string[] en =
         {
@@ -41,8 +42,9 @@ namespace Translate
                 //P2 TODO
                 "Tiempo al borde de morir","Metros recorridos en partida","Creaciones en una partida","Robots aliados con vida","*Lector*",
 
-                //Messages
+                //Messages TODO
                 /*1*/"Donde estoy?,\n Como siempre.......... \nOscuro...... \nMuy Oscuro..........",
+                /*2*/"DESCONOCIDOOOO000000",
 
 
         };
@@ -117,5 +119,7 @@ namespace Translate
 
         //Messages (Mensajes del cyborg...)
         MSG_CYBORG_WHERE,
+        MSG_CYBORG_UNKNOW,
+
     }
 }

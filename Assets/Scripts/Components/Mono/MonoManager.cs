@@ -16,8 +16,8 @@ using XavLib;
 public abstract class MonoManager : MonoInit, IManager
 {
     #region Methods
-    public void GoToScene(string name) => XavHelpTo.ChangeSceneTo(name);
-    public void GoToScene(Scenes scene) => XavHelpTo.ChangeSceneTo(scene.ToString());
+    public void GoToScene(string name) => XavHelpTo.Change.SceneTo(name);
+    public void GoToScene(Scenes scene) => XavHelpTo.Change.SceneTo(scene.ToString());
     #endregion
 }
 /// <summary>

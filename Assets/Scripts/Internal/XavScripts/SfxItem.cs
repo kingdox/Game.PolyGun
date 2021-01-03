@@ -25,7 +25,7 @@ public class SfxItem : MonoBehaviour
         //Si no está tocando la rola
         if (!source.isPlaying)
         {
-            int _newClipIndex = XavHelpTo.GetDifferentInt(clips.Length, lastClipIndex);
+            int _newClipIndex = XavHelpTo.Know.DifferentIndex(clips.Length, lastClipIndex);
            
             //Reproduce uno de los sonidos
             source.clip = clips[_newClipIndex];

@@ -19,7 +19,8 @@ public class MenuManager : MonoManager
     }
 
     private readonly TKey[] keys_Msg ={
-        TKey.MSG_CYBORG_WHERE
+        TKey.MSG_CYBORG_WHERE,
+        TKey.MSG_CYBORG_UNKNOW
     };
     [Header("MenuManager")]
     public Button[] btns_Menu;
@@ -27,6 +28,12 @@ public class MenuManager : MonoManager
 
     #endregion
     #region Events
+    private void Update(){
+
+        if (Inited){
+
+        }
+    }
     public override void Init(){
         SavedData saved = DataPass.GetSavedData();
         ButtonAdjust(!saved.isIntroCompleted);
@@ -59,27 +66,33 @@ public class MenuManager : MonoManager
 
 
     /// <summary>
-    /// Cargas el mensaje especificado
+    ///Carga algún mensaje del indice
+    ///<para>si index es -1 entonces tomará aleatoriamente alguno</para>
     /// </summary>
-    private void LoadMessage(){
-        msg_Message.LoadKey(keys_Msg[0],.075f);
+    private void LoadMessage(int index=-1){
+
+        index = index != -1 ? index : XavHelpTo.Know.DifferentIndex(keys_Msg.Length, index);
+        
+        msg_Message.LoadKey(keys_Msg[index],.075f);
+        StartCoroutine(MessageWait());
 
     }
-
-
-    //TODO, hay que hacer un efecto de mostrar
-    //y desaparecer  el texto cambiandole el alpha
-
 
 
     /// <summary>
     /// Aquí cargaremos cada cierto tiempo un mensaje
     /// </summary>
-    IEnumerator MessageLoader(){
-        yield return new WaitForSeconds(0);
+    IEnumerator MessageWait(float waitTime = 4){
+        yield return new WaitForSeconds(waitTime);
         //Cargas cada uno del arreglo
         LoadMessage();
     }
+
+
+    /// <summary>
+    /// Te saca de la aplicación
+    /// </summary>
+    public void ExitApp() => Application.Quit();
     #endregion
 }
 
