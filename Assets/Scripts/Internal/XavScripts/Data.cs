@@ -24,14 +24,7 @@ namespace Environment
         public readonly string savedPath = "saved1.txt";
         public readonly string version = "v0.0.4";
 
-        /*
-         Opciones Scene posibles actualmente
-            Traduccion español / inglés
-            Velocidad de los textos (low,normal,speed)
-            Musica(No, Bajo, Medio, Alto)
-            Sfx(No, Bajo, Medio, Alto)
-            Controles(clasico, alternativo)
-         */
+       
         //TODO esto va en opciones.... ?
         //la cadencia de cada letra puesta
         public readonly float[] textSpeed = { 0, .005f, .015f, .025f };

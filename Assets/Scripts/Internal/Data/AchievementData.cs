@@ -62,6 +62,8 @@ namespace Achievements
                 achieve(TKey.ACHIEVE_ROBOTS_ALIVE, limit(2,5,10)),
                 achieve(TKey.ACHIEVE_ESPECIAL_READ, limit(2,5,20)),
 
+                //Logro especial ideas
+                //tramposo => has usado ctrl + Q para abrirlo...
             };
         }
 
