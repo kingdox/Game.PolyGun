@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2551034596894552361}
   - component: {fileID: 2551034596894552364}
-  - component: {fileID: 4851846747321978022}
   - component: {fileID: 2521425181127983034}
   m_Layer: 0
   m_Name: ButtonOpt
@@ -47,21 +46,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2551034596894552360}
   m_CullTransparentMesh: 0
---- !u!114 &4851846747321978022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2551034596894552360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e15c10cb7cce413abcc6217140860f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  txt_msg: {fileID: 0}
-  key: 0
-  wantInit: 1
 --- !u!114 &2521425181127983034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +706,7 @@ PrefabInstance:
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_Navigation.m_SelectOnLeft
       value: 
-      objectReference: {fileID: 3708754193045231183}
+      objectReference: {fileID: 7602733240216518350}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4bbba371150b47bb807211362275c81, type: 3}
 --- !u!224 &3708754193045231176 stripped

@@ -1,42 +1,39 @@
-﻿using System.Collections;
+﻿#region IMports
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-
-public class OptionsItem : MonoBehaviour
-{
-
-
+#endregion
+public class OptionsItem : MonoBehaviour{
+    #region var
     [Header("Settings")]
     public Button btn_Left;
     public Button btn_Center;
     public Button btn_Right;
+    [Space]
+    public MsgController msg;
+    #endregion
+    #region Events
+
+    #endregion
+    #region Methods
 
 
+    /// <summary>
+    /// Refrescamos el <see cref="MsgController"/> hijo
+    /// </summary>
+    public void RefreshText() => msg.LoadKey(msg.key);
 
-    /*
-        Opciones Scene posibles actualmente
-           Traduccion español / ingléso
-           Velocidad de los textos (low,normal,speed)
-           Musica(No, Bajo, Medio, Alto)
-           Sfx(No,Si)
-           Controles(clasico, alternativo)
-        */
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// Revisa si entre sus botones alguno está teniendo foco 
+    /// </summary>
+    public bool IsFocus(){
+        Button[] _bts = { btn_Left, btn_Center, btn_Right };
+        foreach (Button b in _bts) if (b.IsActive()) return true;
+        return false;
+    }   
+    #endregion
 }
-
 /*
  TODO
 

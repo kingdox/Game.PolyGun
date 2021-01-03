@@ -18,6 +18,8 @@ namespace Translate
             "Español",
                 // BUTTONS
                 "Jugar","Introducción","Logros","Opciones","Salir","Retroceder",
+                "Idioma","Velocidad","Musica","Sonido","Controles",
+
 
                 //Achievements
                 //P1
@@ -27,14 +29,23 @@ namespace Translate
 
                 //Messages TODO
                 /*1*/"Donde estoy?,\n Como siempre.......... \nOscuro...... \nMuy Oscuro..........",
-                /*2*/"DESCONOCIDOOOO000000"
+                /*2*/"DESCONOCIDOOOO000000",
+
+                //Messages Opt TODO
+                /*1*/"Idioma que estará el juego",
+                /*2*/"Velocidad de los textos mostrandose",
+                /*3*/"Volumen que sonará la musica",
+                /*4*/"Habrá sonidos o no?",
+                /*5*/"Controles con los cuales el jugador usará",
+                /*6*/"Botón para retroceder",
         };
         private static readonly string[] en =
         {
-            // IDIOM
+            // IDIOM TODO
             "English",
                 // BUTTONS
                 "Play","Introduction","Achievements","Options","Exit","Back",
+                "Idioma","Velocidad","Musica","Sonido","Controles",
 
                 //Achievements //TODO falta traducir
                 //P1 TODO
@@ -46,6 +57,13 @@ namespace Translate
                 /*1*/"Donde estoy?,\n Como siempre.......... \nOscuro...... \nMuy Oscuro..........",
                 /*2*/"DESCONOCIDOOOO000000",
 
+                //Messages Opt TODO
+                /*1*/"Idioma que estará el juego",
+                /*2*/"Velocidad de los textos mostrandose",
+                /*3*/"Volumen que sonará la musica",
+                /*4*/"Habrá sonidos o no?",
+                /*5*/"Controles con los cuales el jugador usará",
+                /*6*/"Botón para retroceder",
 
         };
 
@@ -101,6 +119,11 @@ namespace Translate
         _3_OPTIONS,
         _4_EXIT,
         _5_BACK,
+        _6_LANGUAGE,
+        _7_TEXTSPEED,
+        _8_MUSIC,
+        _9_SOUND,
+        _10_CONTROLS,
 
         //Achievements
         // P1
@@ -121,5 +144,12 @@ namespace Translate
         MSG_CYBORG_WHERE,
         MSG_CYBORG_UNKNOW,
 
+        //Messages Opt (Mensajes de las opciones
+        MSG_OPT_LANGUAGE,
+        MSG_OPT_TEXTSPEED,
+        MSG_OPT_MUSIC,
+        MSG_OPT_SOUND,
+        MSG_OPT_CONTROLS,
+        MSG_OPT_BACK,
     }
 }
