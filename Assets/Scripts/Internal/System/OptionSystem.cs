@@ -81,16 +81,8 @@ public class OptionSystem : MonoBehaviour
     /// </summary>
     public void ControlCheck()
     {
-        /*
-            TODO
-            Hay que localizar el foco, saber donde está, si es de los itemsOpt o BACK
-            saber que tecla tocó y, en caso de , ver qué hacer
-            las verticales cambiarás tu msg index, -1 es BACK tambien, no puedes bajar más de back
-         
-         */
+      
         KeyPlayer key = ControlSystem.KnowKey(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
-
-        //bool onBounds = XavHelpTo.Know.IsOnBounds((int)lastOpt, opt_items.Length);
 
         //botones a detectar
         switch (key)
@@ -114,7 +106,6 @@ public class OptionSystem : MonoBehaviour
                 }
                 break;
             default:
-                Debug.Log("Otra tecla...");
                 break;
         }
 
@@ -123,31 +114,38 @@ public class OptionSystem : MonoBehaviour
     /// <summary>
     /// Dependiendo de la opción y la condicioón
     /// se ejecutará una acción o otra de la lista de opciones
+    /// TODO
     /// </summary>
     public static void Actions(Options option,bool condition, bool fromOpt = false){
 
         Debug.Log($"Option . =>  {option} : {condition}");
-        switch (option)
+        if (option.Equals(Options.BACK))
+        {   
+            if (fromOpt) OpenClose(false);
+        }
+        else
         {
-            case Options.LANGUAGE:
+            SavedData saved = DataPass.GetSavedData();
 
-                break;
-            case Options.TEXTSPEED:
+            switch (option)
+            {
+                case Options.LANGUAGE:
 
-                break;
-            case Options.MUSIC:
+                    saved.idiom = XavHelpTo.Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
+                    break;
+                case Options.TEXTSPEED:
 
-                break;
-            case Options.SOUND:
+                    break;
+                case Options.MUSIC:
 
-                break;
-            case Options.CONTROLS:
-                break;
-            case Options.BACK:
-                if (fromOpt){
-                    OpenClose(false);
-                }
-                break;
+                    break;
+                case Options.SOUND:
+
+                    break;
+                case Options.CONTROLS:
+
+                    break;
+            }
         }
     }
 

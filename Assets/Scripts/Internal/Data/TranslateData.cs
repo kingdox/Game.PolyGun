@@ -82,6 +82,7 @@ namespace Translate
         /// </summary>
         public Language Get(Idiom i) => Get((int)i);
         public Language Get(int i) => languages[i];
+        public int GetLangLength() => languages.Length;
     }
     /// <summary>
     /// Contenedor del idioma correspondiente y sus valores traducidos a ese idioma

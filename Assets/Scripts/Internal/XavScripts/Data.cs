@@ -50,6 +50,7 @@ namespace Environment
         /// </summary>
         public static Language Translated(Idiom idiom) => data.translate.Get(idiom);
         public static Language Translated(int i = -1) => Translated((Idiom)(i != -1 ? i : DataPass.GetSavedData().idiom));
+        public static int GetLangLength() => data.translate.GetLangLength();
 
     }
     #endregion
