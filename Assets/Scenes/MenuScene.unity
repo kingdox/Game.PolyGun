@@ -1784,6 +1784,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1896401448}
     m_Modifications:
+    - target: {fileID: 2521425181127983034, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
+      propertyPath: opt
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
       value: ButtonOpt
@@ -2340,6 +2344,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1368952215}
     m_Modifications:
+    - target: {fileID: 2521425181127983034, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
+      propertyPath: opt
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
       value: ButtonOpt
@@ -2589,6 +2597,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1042265038}
     m_Modifications:
+    - target: {fileID: 2521425181127983034, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
+      propertyPath: opt
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
       value: ButtonOpt
@@ -2774,7 +2786,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1815221333809228597, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
   m_PrefabInstance: {fileID: 1959272454}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1959272456}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e15c10cb7cce413abcc6217140860f2, type: 3}
@@ -2830,6 +2842,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 155145902}
     m_Modifications:
+    - target: {fileID: 2521425181127983034, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
+      propertyPath: opt
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
       value: ButtonOpt
@@ -3227,7 +3243,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1636049504308503908, guid: 74043dac375f0499e9c2b6b0672cc45c, type: 3}
       propertyPath: opt_items.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1636049504308503908, guid: 74043dac375f0499e9c2b6b0672cc45c, type: 3}
       propertyPath: msg_title
@@ -3244,7 +3260,7 @@ PrefabInstance:
     - target: {fileID: 1636049504308503908, guid: 74043dac375f0499e9c2b6b0672cc45c, type: 3}
       propertyPath: opt_items.Array.data[5]
       value: 
-      objectReference: {fileID: 696015526}
+      objectReference: {fileID: 1959272457}
     - target: {fileID: 1636049504308503908, guid: 74043dac375f0499e9c2b6b0672cc45c, type: 3}
       propertyPath: opt_items.Array.data[6]
       value: 
@@ -3524,14 +3540,14 @@ PrefabInstance:
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 185858909}
+      objectReference: {fileID: 1959272457}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: OptionSystem, Assembly-CSharp
+      value: OptionsItem, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenClose
+      value: SendButtonAction
       objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3567,7 +3583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
@@ -3576,6 +3592,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8719767904591779514, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
   m_PrefabInstance: {fileID: 1959272454}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1959272456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8719767904591779515, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+  m_PrefabInstance: {fileID: 1959272454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1959272457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959272456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e6fcc4c807b4046bdaf8cccb09fd48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  msg: {fileID: 1473366842}
+  opt: 5
+  btn: {fileID: 1959272458}
+--- !u!114 &1959272458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
+  m_PrefabInstance: {fileID: 1959272454}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959272456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2068121423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3668,7 +3715,7 @@ MonoBehaviour:
   - {fileID: 296499259}
   - {fileID: 645884816}
   msg_Message: {fileID: 121235171}
-  isMsgLoading: 0
+  waitToLoad: 0
 --- !u!1 &2116997876
 GameObject:
   m_ObjectHideFlags: 0

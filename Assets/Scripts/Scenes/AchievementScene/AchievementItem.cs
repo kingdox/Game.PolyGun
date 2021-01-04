@@ -33,6 +33,8 @@ public class AchievementItem : MonoBehaviour
     private void Awake(){
         //Iniciamos en 0% el ancho de la barra
         rect_bar_actual.anchorMax = new Vector2(0, rect_bar_actual.anchorMax.y);
+        img_bar_last.color = Color.white;
+        //rect_bar_actual.anchorMax = new Vector2(0, rect_bar_actual.anchorMax.y);
         toMax = 0;
     }
     private void Update(){

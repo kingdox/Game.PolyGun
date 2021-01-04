@@ -50,6 +50,17 @@ public class ControlSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="kps"></param>
+    /// <returns></returns>
+    public static KeyPlayer KnowKey(params KeyPlayer[] kps)
+    {
+        foreach (KeyPlayer kp in kps) if (KeyDown(kp)) return kp;
+        return KeyPlayer.NO;
+    }
+
+    /// <summary>
     /// Presiona el boton si existe interacción
     /// </summary>
     public static void ButtonDown(Button b, params KeyPlayer[] k){if (IsDown(b, k)) Cast(b);}

@@ -70,6 +70,8 @@ namespace Environment
     /// </summary>
     public enum KeyPlayer
     {
+        NO = -1,
+
         BACK,
         OK_FIRE,
 

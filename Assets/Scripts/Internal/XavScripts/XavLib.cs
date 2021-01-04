@@ -251,6 +251,8 @@ namespace XavLib
             /// Detecta si el indice está dentro del arreglo
             /// </summary>
             public static bool IsOnBounds(int i, int length) => i == Mathf.Clamp(i, 0, length - 1);
+            public static bool IsOnBounds(int i, int length, bool direction) => i == Mathf.Clamp(i + (direction ? 1 : -1) , 0, length - 1);
+
             /// <summary>
             /// Retorna un valor distinto al ultimo suponiendo que la dimension es mayor a 1
             /// </summary>
