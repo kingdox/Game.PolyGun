@@ -5,9 +5,10 @@ using UnityEngine;
 using Translate;
 #endregion
 /// TODO ver como implementarlo, como prefab?
-public class OptionsManager : MonoManager
+public class OptionSystem : MonoBehaviour
 {
     #region var
+    public static OptionSystem _ = null;
     //orden con las traducciones
     private readonly TKey[] messages = {
         TKey.MSG_OPT_LANGUAGE,
@@ -25,24 +26,40 @@ public class OptionsManager : MonoManager
     private int msgIndex = 0;
 
 
-    [Header("Options Manager")]
-
+    [Header("Options Settings")]
+    public GameObject obj_screen_last;
+    public GameObject obj_screen_option;
+    [Space]
     public MsgController msg_title;
     public MsgController msg_description;
     public OptionsItem[] opt_items;
+
     public MsgController msg_back;
 
+    //Con esto podemos ver si ha sido abierto o no ?
+    public static bool isOpened = false;
 
     #endregion
     #region Events
-    public override void Init(){}
+    private void Awake(){
+        _ = gameObject.GetComponent<OptionSystem>();
+    }
     #endregion
     #region Methods
 
-    private void CheckControls()
-    {
-        
-        //button.Select()
+    /// <summary>
+    /// Revisamos si va a ser abierto la ventana o no,
+    /// 
+    /// </summary>
+    /// <param name="toOpen"></param>
+    public static void OpenClose(bool toOpen){
+        _.obj_screen_option.SetActive(toOpen);
+        _.obj_screen_last.SetActive(!toOpen);
+        if (toOpen){
+            _.RefreshAll();
+        }
+     
+        isOpened = toOpen;
     }
 
     //Cargamos el mensaje basado en el sitio donde se encuentra
@@ -61,7 +78,7 @@ public class OptionsManager : MonoManager
     /// <summary>
     /// Actualizamos los textos de la pantalla al idioma correspondiente
     /// </summary>
-    private void RefreshAll(){
+    public void RefreshAll(){
         foreach (OptionsItem opt in opt_items) opt.RefreshText();
         msg_description.LoadKey(msg_description.key);
         msg_title.LoadKey(msg_description.key);
@@ -69,3 +86,4 @@ public class OptionsManager : MonoManager
     }
     #endregion
 }
+//TODO mejorar este script

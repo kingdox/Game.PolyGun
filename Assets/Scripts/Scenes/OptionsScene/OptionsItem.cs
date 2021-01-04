@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 #endregion
 public class OptionsItem : MonoBehaviour{
+
+    //private static EventSystem eventSystem;
+
     #region var
     [Header("Settings")]
     public Button btn_Left;
@@ -16,9 +20,21 @@ public class OptionsItem : MonoBehaviour{
     public bool amIFocused = false;
     #endregion
     #region Events
+    private void Awake(){
+
+        //esto inicializará el eventSystem, problemas si cambio de escena?
+        //if (!eventSystem){
+        //    eventSystem = EventSystem.current;
+        //}
+    }
     private void Start()
     {
         amIFocused = false;
+    }
+
+    private void Update(){
+
+        
     }
     #endregion
     #region Methods
@@ -51,12 +67,20 @@ public class OptionsItem : MonoBehaviour{
     /// Revisa si entre sus botones alguno está teniendo foco 
     /// </summary>
     public bool IsFocus(){
-        Button[] _bts = { btn_Left, btn_Center, btn_Right };
-        foreach (Button b in _bts) if (false) return true;
-        //TODO
-        //_bts[0]
-        //btn_Center.interactable
         return false;
+        //foreach (Button btn in collection)
+        //{
+
+        //}
+
+
+
+        ////Event.current
+        //Button[] _bts = { btn_Left, btn_Center, btn_Right };
+        //foreach (Button b in _bts) if (false) return true;
+        ////TODO
+        ////_bts[0]
+        ////btn_Center.interactable
     }   
     #endregion
 }

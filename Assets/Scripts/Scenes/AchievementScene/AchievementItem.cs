@@ -60,7 +60,7 @@ public class AchievementItem : MonoBehaviour
         int _limitIndex = item.LimitReached;
         img_bar_last.color = Color.black;
 
-        Debug.Log($"{item.key}: {item.TextValue}");
+        //Debug.Log($"{item.key}: {item.TextValue}");
         //Cargamos la llave
         msg_title.LoadKey(item.key);
         //Cargamos el valor

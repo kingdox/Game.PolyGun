@@ -25,22 +25,40 @@ public class MenuManager : MonoManager
     [Header("MenuManager")]
     public Button[] btns_Menu;
     public MsgController msg_Message;
+    //[Space]
+    public bool waitToLoad = false;
 
     #endregion
     #region Events
     private void Update(){
 
-        if (Inited){
-
+        if (!waitToLoad && MsgMessageReady())
+        {
+            Debug.Log("Cargando mensaje");
+            StartCoroutine(MessageWait());
         }
     }
     public override void Init(){
         SavedData saved = DataPass.GetSavedData();
         ButtonAdjust(!saved.isIntroCompleted);
-        LoadMessage();
+        Debug.Log("Inited");
     }
     #endregion
     #region Methods
+
+    /// <summary>
+    ///  Revisamos si en las opciones estan cerradas y si el mensaje ya ha terminado
+    ///  TODO revisar si esto lo reutilizamos para los demas msg
+    /// </summary>
+    private bool MsgMessageReady() => !OptionSystem.isOpened && msg_Message.IsFinished();
+
+    /// <summary>
+    /// Limpia el mensaje actual y abre las opciones
+    /// </summary>
+    public void OpenOptions(){
+        msg_Message.LoadKey(TKey.No, 0);
+        OptionSystem.OpenClose(true);
+    }
 
     /// <summary>
     /// Ajustará qué botones podrán ser interactuables y cuales no,
@@ -64,29 +82,32 @@ public class MenuManager : MonoManager
     }
 
 
+    /// <summary>
+    /// Aquí cargaremos cada cierto tiempo un mensaje
+    /// </summary>
+    IEnumerator MessageWait(float waitTime = 4){
+        waitToLoad = true;
+
+        yield return new WaitForSeconds(waitTime);
+
+        //si estas en menu, no se ha cargado mensaje y el que estaba ya ha terminado
+        if (MsgMessageReady()) LoadMessage();
+
+        waitToLoad = false;
+
+    }
 
     /// <summary>
     ///Carga algún mensaje del indice
     ///<para>si index es -1 entonces tomará aleatoriamente alguno</para>
     /// </summary>
     private void LoadMessage(int index=-1){
-
         index = index != -1 ? index : XavHelpTo.Know.DifferentIndex(keys_Msg.Length, index);
-        
-        msg_Message.LoadKey(keys_Msg[index],.075f);
-        StartCoroutine(MessageWait());
-
+        msg_Message.LoadKey(keys_Msg[index], .075f);
     }
 
 
-    /// <summary>
-    /// Aquí cargaremos cada cierto tiempo un mensaje
-    /// </summary>
-    IEnumerator MessageWait(float waitTime = 4){
-        yield return new WaitForSeconds(waitTime);
-        //Cargas cada uno del arreglo
-        LoadMessage();
-    }
+    
 
 
     /// <summary>

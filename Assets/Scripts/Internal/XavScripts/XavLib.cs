@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Environment;
 //using System;
+using UnityEngine.EventSystems;
+
 namespace XavLib
 {
     /// <summary>
@@ -236,7 +238,10 @@ namespace XavLib
             /// <para>Dependencia con <seealso cref="Scenes"/> </para>
             /// </summary>
             public static Scenes ActiveScene() => (Scenes)SceneManager.GetActiveScene().buildIndex;
-
+            /// <summary>
+            /// Revisa si el objeto está seleccionado
+            /// </summary>
+            public bool IsFocus(GameObject obj) => obj.Equals(EventSystem.current.currentSelectedGameObject);
             /// <summary>
             /// Conoces el siguiente indice basado en la longitud del arreglo
             /// <para>Se le puede definir un inicio en caso de haber</para>

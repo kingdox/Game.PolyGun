@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Key;
 using Environment;
-
+using UnityEngine.EventSystems;
+#endregion
 public class ControlSystem : MonoBehaviour
 {
     #region var
@@ -79,7 +80,6 @@ public class ControlSystem : MonoBehaviour
             foreach (KeyCode code in keys[x].keyCodes)codes[c++] = code; 
         }
     }
-
+    
     #endregion
 }
-#endregion

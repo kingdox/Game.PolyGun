@@ -26,9 +26,9 @@ namespace Achievements
 
         //START Achievement 
         // 1 => Reporto los ingredientes de la receta
-        private delegate Achievement AchievementRecipe(TKey key, Limit limit);
+        private delegate Achievement AchievementRecipe(TKey key, params float[] limits);
         // 2 => Declaro la preparación de la receta
-        private readonly static AchievementRecipe achieve = (TKey key, Limit limit) => new Achievement(key, new Limit(limit));
+        private readonly static AchievementRecipe achieve = (TKey key, float[] limits) => new Achievement(key, new Limit(limit(limits)));
         //CURRY END
 
         //START Limit
@@ -49,18 +49,18 @@ namespace Achievements
             achievements = new Achievement[]
             {
                 //Pagina 1
-                achieve(TKey.ACHIEVE_KILLS_ROBOT, limit(30,100,300)),
-                achieve(TKey.ACHIEVE_KILLS_BOSS, limit(5,25,50)),
-                achieve(TKey.ACHIEVE_WAVES_ENEMIES, limit(3,15,30)),
-                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED, limit(50,100,300)),
-                achieve(TKey.ACHIEVE_HEALS_GAME, limit(30,120,300)),
+                achieve(TKey.ACHIEVE_KILLS_ROBOT, 30,100,300),
+                achieve(TKey.ACHIEVE_KILLS_BOSS, 5,25,50),
+                achieve(TKey.ACHIEVE_WAVES_ENEMIES, 3,15,30),
+                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED, 50,100,300),
+                achieve(TKey.ACHIEVE_HEALS_GAME, 30,120,300),
 
                 //Pagina 2 
-                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT, limit(5,20,60)),
-                achieve(TKey.ACHIEVE_METTERS_GAME, limit(2,5,10)),
-                achieve(TKey.ACHIEVE_CREATIONS_GAME, limit(2,5,10)),
-                achieve(TKey.ACHIEVE_ROBOTS_ALIVE, limit(2,5,10)),
-                achieve(TKey.ACHIEVE_ESPECIAL_READ, limit(2,5,20)),
+                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT, 5,20,60),
+                achieve(TKey.ACHIEVE_METTERS_GAME, 2,5,10),
+                achieve(TKey.ACHIEVE_CREATIONS_GAME, 2,5,10),
+                achieve(TKey.ACHIEVE_ROBOTS_ALIVE, 2,5,10),
+                achieve(TKey.ACHIEVE_ESPECIAL_READ, 2,5,20),
 
                 //Logro especial ideas
                 //tramposo => has usado ctrl + Q para abrirlo...

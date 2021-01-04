@@ -14,20 +14,22 @@ public class MsgController : MonoInit
     
     //Datos guardados para pintar
     private string savedText = null;
-
+    // Permite correr o no la ejecución de los textos
+    //private bool keepLoading = true;
 
     [Header("Settings")]
     //a donde haremos el renderizado
     public Text txt_msg;
     //a donde buscaremos para traducir en caso de existir
     public TKey key = TKey.No;
-    //si quiere cargarse al iniciar
+    //si quiere cargarse
     public bool wantInit = true;
+
 
     #endregion
     #region Events
      new void Awake() {
-
+        //keepLoading = true;
         savedText = key.Equals(TKey.No)
             // en caso de no tener key guardamos el texto internamente
             ? txt_msg.text
@@ -54,33 +56,13 @@ public class MsgController : MonoInit
     }
     #endregion
     #region Methods
-    /// <summary>
-    /// Nos permitirá cargar un texto distinto al <see cref="text"/>
-    /// </summary>
-    public void LoadText(string s, float textSpeed = -1) {
-
-        //asignamos el nuevo texto
-        savedText = s;
-        //Limpiamos el campo
-        txt_msg.text = "";
-
-        float speed = textSpeed != -1 ? textSpeed : Data.data.textSpeed[DataPass.GetSavedData().textSpeed];
-
-        //Corremos el nuevo texto
-        StartCoroutine(SetText(speed, 0, s));
-    }
 
     /// <summary>
-    /// Cargamos una llave y la guardamos, 
-    /// <para>si es <see cref="TKey.No"/> limpia el texto</para>
+    /// Nos informa si ha terminado de cargar el texto
     /// </summary>
-    public void LoadKey(TKey k = TKey.No , float textSpeed = -1) {
+    public bool IsFinished() => txt_msg.text == savedText;
 
-        key = k;
-        //si no se asigno llave 
-        if (k == TKey.No)LoadText("");
-        else LoadText(Data.Translated().Value(k), textSpeed);
-    }
+
 
     private IEnumerator SetText(float speed, int index = 0, string s = null){
 
@@ -92,48 +74,55 @@ public class MsgController : MonoInit
         //Seguirá cargando siempre que el texto guardado sea el mismo que el que corre
         if (savedText == s)
         {
+            //Si todiavía falta por recorrer
             if (index != s.Length + 1){
 
+                //si la velocidad es 0 para cargar al instante
                 if (speed == 0){
                     txt_msg.text = s;
                 }
                 else
                 {
-                    txt_msg.text = new string(s.ToCharArray(0, index++));
-                    StartCoroutine(SetText(speed,index, s));
+                    //Si todavía puede seguir cargandolo
+                    //if (keepLoading){
+                        txt_msg.text = new string(s.ToCharArray(0, index++));
+                        StartCoroutine(SetText(speed,index, s));
+                    //}
                 }
             }
         }
     }
 
 
-
-
     /// <summary>
-    /// Transformas las propiedades del color del texto(RGBA)
-    /// <para>
-    /// donde el parametro a cambiar a medida que pasa el tiempo
-    /// </para>
-    /// TODO NO usado aun
+    /// Nos permitirá cargar un texto distinto al <see cref="text"/>
     /// </summary>
-    public void TextColor(int param, float reachValue, float timeScale){
+    public void LoadText(string s, float textSpeed = -1)
+    {
 
-        Color _col = txt_msg.color;
-        _col[0] = 0;
+        //asignamos el nuevo texto
+        savedText = s;
+        //Limpiamos el campo
+        txt_msg.text = "";
 
-        XavHelpTo.Set.UnitInTime(_col[param], reachValue, timeScale);
+        float speed = textSpeed != -1 ? textSpeed : Data.data.textSpeed[DataPass.GetSavedData().textSpeed];
 
+        //Corremos el nuevo texto
+        StartCoroutine(SetText(speed, 0, s));
     }
+    /// <summary>
+    /// Cargamos una llave y la guardamos, 
+    /// <para>si es <see cref="TKey.No"/> limpia el texto</para>
+    /// </summary>
+    public void LoadKey(TKey k = TKey.No, float textSpeed = -1)
+    {
 
+        key = k;
+        //si no se asigno llave 
+        if (k == TKey.No) LoadText("", textSpeed);
+        else LoadText(Data.Translated().Value(k), textSpeed);
+    }
 
 
     #endregion
 }
-
-/*
-   public void FitText(){
-        float newFontSize = ((Screen.height < Screen.width ? Screen.height : Screen.width) / 100) * (fontSizeMax / 10);
-        newFontSize = newFontSize > fontSizeMax ? fontSizeMax : newFontSize;
-        txt_msg.fontSize = (int)newFontSize;
-    }
- */
