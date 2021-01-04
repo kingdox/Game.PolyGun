@@ -147,7 +147,6 @@ public class OptionSystem : MonoBehaviour
 
                     saved.idiom = XavHelpTo.Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
                     //Todo
-                    _.RefreshAll();
                     break;
                 case Options.TEXTSPEED:
 
@@ -164,6 +163,8 @@ public class OptionSystem : MonoBehaviour
             }
             //Seteamos los datos
             DataPass.SetData(saved);
+            _.RefreshAll();
+
         }
     }
 
