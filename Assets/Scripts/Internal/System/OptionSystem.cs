@@ -25,6 +25,7 @@ public class OptionSystem : MonoBehaviour
     private readonly float[] sfxVolume = { 0, 70 };
     private readonly string[] controls = { "clasic", "alternative" };//ps4?
 
+    private bool existChanges = false;
 
 
     //podemos ver si ha sido abierto o no
@@ -48,13 +49,12 @@ public class OptionSystem : MonoBehaviour
     #region Events
     private void Awake(){
 
-        //Singleton corroboration
-        if (_ == null){
-            DontDestroyOnLoad(gameObject);
             _ = this;
-        }else if (_ != this) Destroy(gameObject);
+        //Singleton corroboration
+        //if (_ == null){
+        //}else if (_ != this) Destroy(gameObject);
 
-
+        existChanges = false;
         lastOpt = Options.LANGUAGE;
     }
     private void Update()
@@ -71,6 +71,7 @@ public class OptionSystem : MonoBehaviour
     public static void OpenClose(bool toOpen){
         _.obj_screen_option.SetActive(toOpen);
         _.obj_screen_last.SetActive(!toOpen);
+        lastOpt = Options.LANGUAGE;
         if (toOpen) _.RefreshAll();
         isOpened = toOpen;
     }
@@ -120,18 +121,33 @@ public class OptionSystem : MonoBehaviour
 
         Debug.Log($"Option . =>  {option} : {condition}");
         if (option.Equals(Options.BACK))
-        {   
-            if (fromOpt) OpenClose(false);
-        }
-        else
         {
+            if (fromOpt) {
+                if (_.existChanges){
+                    _.existChanges = false;
+                    //Guardamos los cambios
+                    Debug.Log("Guardano.....");
+                    DataPass.SaveLoadFile(true);
+                }
+
+                OpenClose(false);
+
+
+            }
+            
+        }
+        else{
+            //tomamos los guardados
             SavedData saved = DataPass.GetSavedData();
+            _.existChanges = true;
 
             switch (option)
             {
                 case Options.LANGUAGE:
 
                     saved.idiom = XavHelpTo.Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
+                    //Todo
+                    _.RefreshAll();
                     break;
                 case Options.TEXTSPEED:
 
@@ -146,6 +162,8 @@ public class OptionSystem : MonoBehaviour
 
                     break;
             }
+            //Seteamos los datos
+            DataPass.SetData(saved);
         }
     }
 
@@ -156,7 +174,6 @@ public class OptionSystem : MonoBehaviour
     /// Actualizamos los textos de la pantalla al idioma correspondiente
     /// </summary>
     public void RefreshAll(){
-        lastOpt = Options.LANGUAGE;
         foreach (OptionsItem opt in opt_items) opt.RefreshText();
         msg_description.LoadKey(msg_description.key);
         msg_title.LoadKey(msg_description.key);

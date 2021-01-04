@@ -45,7 +45,7 @@ namespace Translate
             "English",
                 // BUTTONS
                 "Play","Introduction","Achievements","Options","Exit","Back",
-                "Idioma","Velocidad","Musica","Sonido","Controles",
+                "Idiom","Text Speed","Music","Sounds","Controls",
 
                 //Achievements //TODO falta traducir
                 //P1 TODO

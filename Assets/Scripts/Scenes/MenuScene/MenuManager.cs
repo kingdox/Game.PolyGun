@@ -27,15 +27,20 @@ public class MenuManager : MonoManager
     public MsgController msg_Message;
     //[Space]
     public bool waitToLoad = false;
-
+    //
+    public bool wantRefresh;
     #endregion
     #region Events
     private void Update(){
 
-        if (!waitToLoad && MsgMessageReady())
+        if (!waitToLoad && MessageReady(msg_Message))
         {
             Debug.Log("Cargando mensaje");
             StartCoroutine(MessageWait());
+        }
+        if (!OptionSystem.isOpened && wantRefresh){
+            wantRefresh = false;
+            RefreshAll();
         }
     }
     public override void Init(){
@@ -48,9 +53,8 @@ public class MenuManager : MonoManager
 
     /// <summary>
     ///  Revisamos si en las opciones estan cerradas y si el mensaje ya ha terminado
-    ///  TODO revisar si esto lo reutilizamos para los demas msg
     /// </summary>
-    private bool MsgMessageReady() => !OptionSystem.isOpened && msg_Message.IsFinished();
+    private bool MessageReady(MsgController msg) => !OptionSystem.isOpened && msg.IsFinished();
 
     /// <summary>
     /// Limpia el mensaje actual y abre las opciones
@@ -58,6 +62,7 @@ public class MenuManager : MonoManager
     public void OpenOptions(){
         msg_Message.LoadKey(TKey.No, 0);
         OptionSystem.OpenClose(true);
+        wantRefresh = true;
     }
 
     /// <summary>
@@ -91,7 +96,7 @@ public class MenuManager : MonoManager
         yield return new WaitForSeconds(waitTime);
 
         //si estas en menu, no se ha cargado mensaje y el que estaba ya ha terminado
-        if (MsgMessageReady()) LoadMessage();
+        if (MessageReady(msg_Message)) LoadMessage();
 
         waitToLoad = false;
 
@@ -107,6 +112,18 @@ public class MenuManager : MonoManager
     }
 
 
+    /// <summary>
+    /// Refresca los textos en pantalla
+    /// </summary>
+    private void RefreshAll() {
+
+        foreach (Button btn in btns_Menu)
+        {
+            MsgController msg = btn.GetComponent<MsgController>();
+            msg.LoadKey(msg.key);
+        }
+
+    }
     
 
 
