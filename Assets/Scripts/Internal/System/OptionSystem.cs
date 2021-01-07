@@ -6,12 +6,19 @@ using Translate;
 using Environment;
 using XavLib;
 #endregion
-/// TODO ver como implementarlo, como prefab?
+
+/// <summary>
+/// Clase utilizada para el manejo del sistema de opciones en la pantalla
+/// de opciones, siendo siempre hija de alguna escena puesto que aparece
+/// en más de un sitio, esta hecha como un prefab
+/// </summary>
 public class OptionSystem : MonoBehaviour
 {
     #region var
     public static OptionSystem _ = null;
-    //orden con las traducciones
+
+
+    //orden con las traducciones TODO al cargarlas se debe usar el metodo string para añadir el valor actual
     private readonly TKey[] messages = {
         TKey.MSG_OPT_LANGUAGE,
         TKey.MSG_OPT_TEXTSPEED,
@@ -20,10 +27,6 @@ public class OptionSystem : MonoBehaviour
         TKey.MSG_OPT_CONTROLS,
         TKey.MSG_OPT_BACK,
     };
-    private readonly Idiom[]  idioms = { Idiom.es, Idiom.en };
-    private readonly float[] musicVolume = { 0, 30, 50, 70 };
-    private readonly float[] sfxVolume = { 0, 70 };
-    private readonly string[] controls = { "clasic", "alternative" };//ps4?
 
     private bool existChanges = false;
 
@@ -43,16 +46,11 @@ public class OptionSystem : MonoBehaviour
 
     [Header("IndexActual")]
     private static Options lastOpt = Options.LANGUAGE;
-
-
     #endregion
     #region Events
-    private void Awake(){
-
-            _ = this;
-        //Singleton corroboration
-        //if (_ == null){
-        //}else if (_ != this) Destroy(gameObject);
+    private void Awake() {
+        //Singleton 
+        _ = this;
 
         existChanges = false;
         lastOpt = Options.LANGUAGE;
@@ -63,26 +61,24 @@ public class OptionSystem : MonoBehaviour
     }
     #endregion
     #region Methods
-
     /// <summary>
     /// Revisamos si va a ser abierto la ventana o no,
     /// </summary>
     /// <param name="toOpen"></param>
-    public static void OpenClose(bool toOpen){
+    public static void OpenClose(bool toOpen) {
         _.obj_screen_option.SetActive(toOpen);
         _.obj_screen_last.SetActive(!toOpen);
         lastOpt = Options.LANGUAGE;
         if (toOpen) _.RefreshAll();
         isOpened = toOpen;
     }
-
     /// <summary>
     /// Checkeamos el teclado y, dependiendo de la posición que se encuentre
     /// el jugador podrá hacer una accion o otra
     /// </summary>
     public void ControlCheck()
     {
-      
+
         KeyPlayer key = ControlSystem.KnowKey(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
 
         //botones a detectar
@@ -98,12 +94,11 @@ public class OptionSystem : MonoBehaviour
             case KeyPlayer.DOWN:
 
                 //si estas en los limites
-                if(
-                    !lastOpt.Equals(Options.LANGUAGE) && key.Equals(KeyPlayer.UP)
-                    || !lastOpt.Equals(Options.BACK) && key.Equals(KeyPlayer.DOWN)
-                ){
+                if (KeyMoveAvailable(key))
+                {
                     lastOpt += key.Equals(KeyPlayer.DOWN) ? 1 : -1;
                     opt_items[(int)lastOpt].FocusCenterButton();
+                    LoadMsg();
                 }
                 break;
             default:
@@ -113,30 +108,31 @@ public class OptionSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// Revisa si es disponible mover el key
+    /// </summary>
+    private bool KeyMoveAvailable(KeyPlayer key) => !lastOpt.Equals(Options.LANGUAGE) && key.Equals(KeyPlayer.UP) || !lastOpt.Equals(Options.BACK) && key.Equals(KeyPlayer.DOWN);
+
+    /// <summary>
     /// Dependiendo de la opción y la condicioón
     /// se ejecutará una acción o otra de la lista de opciones
-    /// TODO
     /// </summary>
-    public static void Actions(Options option,bool condition, bool fromOpt = false){
+    public static void Actions(Options option, bool condition, bool fromOpt = false) {
 
-        Debug.Log($"Option . =>  {option} : {condition}");
+       // Debug.Log($"Option . =>  {option} : {condition}");
         if (option.Equals(Options.BACK))
         {
             if (fromOpt) {
-                if (_.existChanges){
+                if (_.existChanges) {
                     _.existChanges = false;
                     //Guardamos los cambios
-                    Debug.Log("Guardano.....");
+                   // Debug.Log("Guardano.....");
                     DataPass.SaveLoadFile(true);
                 }
 
                 OpenClose(false);
-
-
             }
-            
         }
-        else{
+        else {
             //tomamos los guardados
             SavedData saved = DataPass.GetSavedData();
             _.existChanges = true;
@@ -144,44 +140,68 @@ public class OptionSystem : MonoBehaviour
             switch (option)
             {
                 case Options.LANGUAGE:
-
                     saved.idiom = XavHelpTo.Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
-                    //Todo
                     break;
                 case Options.TEXTSPEED:
+                    saved.textSpeed = XavHelpTo.Know.NextIndex(condition, Data.data.textSpeed.Length, saved.textSpeed);
 
                     break;
                 case Options.MUSIC:
+                    saved.musicVolume = XavHelpTo.Know.NextIndex(condition, Data.data.musicVolume.Length, saved.musicVolume);
 
                     break;
                 case Options.SOUND:
+                    saved.sfxVolume = XavHelpTo.Know.NextIndex(condition, Data.data.sfxVolume.Length, saved.sfxVolume);
 
                     break;
                 case Options.CONTROLS:
-
+                    saved.control = XavHelpTo.Know.NextIndex(condition, Data.data.controls, saved.control);
                     break;
             }
-            //Seteamos los datos
+
+
             DataPass.SetData(saved);
-            _.RefreshAll();
+
+            //si eres language cambiado refrescamos los textos en las pantallas
+            if (OptionEqual(option, Options.LANGUAGE, Options.TEXTSPEED)) {
+                //Seteamos los datos
+                _.RefreshAll();
+            }
 
         }
     }
 
 
-    
+
 
     /// <summary>
     /// Actualizamos los textos de la pantalla al idioma correspondiente
     /// </summary>
-    public void RefreshAll(){
+    public void RefreshAll() {
         foreach (OptionsItem opt in opt_items) opt.RefreshText();
-        msg_description.LoadKey(msg_description.key);
+
+        LoadMsg();
+
         msg_title.LoadKey(msg_description.key);
     }
 
 
+    /// <summary>
+    /// Carga el mensaje correspondiente al boton y el valor actual
+    /// </summary>
+    private void LoadMsg(){
+        string msg = Data.Translated().Value(messages[(int)lastOpt]) + "<color=green>HOLA</color>";
+        msg_description.LoadText(msg);
 
+    }
+
+    /// <summary>
+    /// De la lista proporcionada revisa si el seleccionado forma parte
+    /// </summary>
+    private static bool OptionEqual(Options opt, params Options[] opts){
+        foreach (Options o in opts) if (opt.Equals(o)) return true;
+        return false;
+    }
   
     #endregion
 }
@@ -194,4 +214,3 @@ public enum Options{
     CONTROLS,
     BACK
 }
-//TODO Options aparecerá como un global

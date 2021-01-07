@@ -127,7 +127,7 @@ namespace Translate
         _10_CONTROLS,
 
         //Achievements
-        // P1
+        // P1 TODO
         ACHIEVE_KILLS_ROBOT,
         ACHIEVE_KILLS_BOSS,
         ACHIEVE_WAVES_ENEMIES,

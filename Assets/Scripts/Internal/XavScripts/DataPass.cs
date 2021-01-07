@@ -56,7 +56,7 @@ public class DataPass : MonoBehaviour
     {
         isReady = false;
         string path = Application.persistentDataPath + Data.data.savedPath;
-        Debug.Log($"El archivo Existe?? {File.Exists(path)}, Ruta: {path}");
+        //Debug.Log($"El archivo Existe?? {File.Exists(path)}, Ruta: {path}");
 
         SaveLoadFile(!File.Exists(path));
         isReady = true;
@@ -82,7 +82,7 @@ public class DataPass : MonoBehaviour
             _formatter.Serialize(_stream, _dataStorage);
             _stream.Close();
 
-            Debug.Log($"Archivo {Data.data.savedPath} Guardado {GetSavedData().debug_savedTimes} veces !");
+           // Debug.Log($"Archivo {Data.data.savedPath} Guardado {GetSavedData().debug_savedTimes} veces !");
         }
         else
         {
@@ -135,7 +135,7 @@ public class DataStorage
     //aquí se vuelve a colocar los datos puestos debajo...
     public SavedData savedData = new SavedData();
     //Con esto podremos guardar los datos de datapass a DataStorage
-    public DataStorage(SavedData saved) => savedData = saved;
+    public DataStorage(SavedData savedData) => this.savedData = savedData;
 }
 
 /// <summary>
@@ -154,9 +154,18 @@ public struct SavedData
 
     // index del enum de Idiom
     public int idiom;
-    // velocidad de los textos
+
+    // (index) velocidad de los textos
     public int textSpeed;
 
+    // (index)porcentaje de volumen de la musica
+    public int musicVolume;
+
+    // (index) cantida de sonido que tendrá
+    public int sfxVolume;
+
+    // (index)tipo de control que usa el personaje
+    public int control; 
 
     // Arreglo ordenado de los valores de cada logro correspondiente
     public float[] achievements;

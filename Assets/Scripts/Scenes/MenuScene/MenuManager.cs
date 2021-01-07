@@ -35,7 +35,7 @@ public class MenuManager : MonoManager
 
         if (!waitToLoad && MessageReady(msg_Message))
         {
-            Debug.Log("Cargando mensaje");
+            //Debug.Log("Cargando mensaje");
             StartCoroutine(MessageWait());
         }
         if (!OptionSystem.isOpened && wantRefresh){
@@ -46,7 +46,7 @@ public class MenuManager : MonoManager
     public override void Init(){
         SavedData saved = DataPass.GetSavedData();
         ButtonAdjust(!saved.isIntroCompleted);
-        Debug.Log("Inited");
+        //Debug.Log("Inited");
     }
     #endregion
     #region Methods

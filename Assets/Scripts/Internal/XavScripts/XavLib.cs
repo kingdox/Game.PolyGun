@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Environment;
-//using System;
 using UnityEngine.EventSystems;
 
 namespace XavLib
@@ -11,7 +10,7 @@ namespace XavLib
     /// <summary>
     /// Herramientas para facilitar codigo
     /// <para>Aquí se poseerán funciones unicamente "static"</para>
-    /// <see cref="XavHelpTo"/> Ultima Actualización => 3 ene 2021
+    /// <see cref="XavHelpTo"/> Ultima Actualización => 6 ene 2021
     /// </summary>
     public struct XavHelpTo
     {
@@ -54,27 +53,24 @@ namespace XavLib
             public static float ScreenWidthUnit(float camHeight) => camHeight * (Screen.width / Screen.height);
 
 
-            #region KnowPercentOfMax //-> Saca el porcentaje del valor y el valor maximo
             /// <summary>
             ///  Saca el porcentaje de la cantidad y el maximo en caso de tener
             /// </summary>
             /// <returns>El porcentaje de count sobre el max</returns>
             public static float PercentOf(float count, float max) => count / max * 100;
             public static Vector2 PercentOf(Vector2 count, Vector2 max) => count / max * 100;
-            #endregion
-            #region KnowQtyOfPercent //-> Saca el valor mediante el porcentaje y el valor maximo 
             /// <summary>
             /// Basado en el porcentaje obtienes el valor mediante un maximo establecido
             /// </summary>
             public static float QtyOf(float percent, float max) => (max / 100) * percent;
             public static Vector2 QtyOf(Vector2 percent, Vector2 max) => (max / 100) * percent;
-            #endregion
             /// <summary>
             /// Obtienes el valor del rango dado 
             /// </summary>
             /// <param name="range"></param>
             public static float Range(float[] range) => Random.Range(range[0], range[1]);
             public static int Range(int[] range) => Random.Range(range[0], range[1]);
+            public static string Range(params string[] range) => range[Random.Range(0, range.Length)];
 
             /// <summary>
             /// Tomas el valor entre el 0 y el maximo
@@ -82,6 +78,7 @@ namespace XavLib
             /// <returns></returns>
             public static int ZeroMax(int max) => Random.Range(0, max);
 
+            
         }
         #endregion
         #region Set
@@ -90,6 +87,15 @@ namespace XavLib
         /// </summary>
         public struct Set
         {
+            /// <summary>
+            /// Añade un string a un arreglo de strings.
+            /// </summary>
+            public static string[] Push(string value ,params string[] values){
+                string[] newArr = new string[values.Length + 1];
+                for (int x = 0; x < newArr.Length; x++) newArr[x] = (x == newArr.Length - 1) ? value : values[x];
+                return newArr;  
+            }
+
             /// <summary>
             /// Asignas el valor a positivo en caso de ser negativo
             /// </summary>
@@ -101,14 +107,10 @@ namespace XavLib
             public static float InUnitBounds(float v) => Mathf.Clamp(v, 0, 1);
 
             /// <summary>
-            /// Llenamos un arreglo con la condición
-            /// </summary>
-            //public static bool[] Bools(int lenght, bool condition = false)
-            //{
-            //    bool[] bools = new bool[lenght];
-            //    for (int x = 0; x < lenght; x++) bools[x] = condition;
-            //    return bools;
-            //}
+            /// Une los caracteres de un arreglo de caracteres , puediendo añadir indices de inicio y fin
+            /// <para>se puede implementar un texto inicial</para>
+            /// </summ int start = 0, int end = -1, string startText = "") {for (int x = start; x < (end.Equals(-1) ? text.Length : end + 1); x++) startText += text[x];return startText; }
+            public static string Join(string text, int start = 0, int end = -1, string startText = "") { for (int x = start; x < (end.Equals(-1) ? text.Length : end + 1); x++) startText += text[x]; return startText; }
 
             /// <summary>
             /// Buscamos el parametro del <see cref="Color"/> que vas a cambiar
@@ -129,7 +131,7 @@ namespace XavLib
                     }
                     else
                     {
-                        Debug.LogError($"Indice errado ?, favor usar un enum de parametros de color o usarlo bien :(");
+                        Debug.LogError($"<color=red>Indice errado ?</color>, favor usar un enum de parametros de color o usarlo bien :(");
                     }
                 }
                 else c[i] = val;
@@ -220,7 +222,7 @@ namespace XavLib
         #endregion
         #region Know
         /// <summary>
-        /// Herramienta que devuelve valores booleanas o de indexación
+        /// Herramienta que devuelve valores booleanas o de indexación (hay excepciones..)
         /// </summary>
         public struct Know
         {
@@ -252,13 +254,9 @@ namespace XavLib
             /// </summary>
             public static bool IsOnBounds(int i, int length) => i == Mathf.Clamp(i, 0, length - 1);
             public static bool IsOnBounds(int i, int length, bool direction) => i == Mathf.Clamp(i + (direction ? 1 : -1) , 0, length - 1);
-
             /// <summary>
             /// Retorna un valor distinto al ultimo suponiendo que la dimension es mayor a 1
             /// </summary>
-            /// <param name="lastInt"></param>
-            /// <param name="max"></param>
-            /// <returns></returns>
             public static int DifferentIndex(int max, int lastInt = -1)
             {
                 int _newInt = lastInt;
@@ -270,8 +268,92 @@ namespace XavLib
 
                 return _newInt;
             }
+            /// <summary>
+            /// Detecta si de un arreglo con valores, si uno de estos es igual al mostrado
+            /// </summary>
+            public static bool IsEqualOf(int value ,params int[] ints) {foreach (int val in ints) if (value.Equals(val)) return true; return false;}
+            public static bool IsEqualOf(string value, params string[] strings) { foreach (string val in strings) if (value.Equals(val)) return true; return false; }
+            public static bool IsEqualOf(char value, params char[] chars) { foreach (char val in chars) if (value.Equals(val)) return true; return false; }
+
+            /// <summary>
+            /// Detecta el primer caracter de los buscados en el arreglo
+            /// <para>Podemos tener un indice inicial</para>
+            /// <para>Devuelve -1 si no encuentra</para>
+            /// <para>Dependencia con <see cref="IsEqualOf(char, char[])"/> para hacer más de una busqueda</para>
+            /// </summary>
+            public static int IndexOf( char[] chars, int startIndex, params char[] finder){for (int x = startIndex; x < chars.Length; x++) if (Know.IsEqualOf(chars[x], finder)) return x; return -1;}
+            public static int IndexOf(string text, int startIndex, params char[] finder) { for (int x = startIndex; x < text.Length; x++) if (Know.IsEqualOf(text[x], finder)) return x; return -1; }
+
+
+            /// <summary>
+            /// Devolvemos en un arreglo los 4 puntos para tomar una etiqueta. 
+            /// <para>Estas etiqutas SOLO manejan 1 nivel de profundidad</para>
+            /// </summary>
+            public static int[] IndexsOfTag(string text, int index_Start = -1){
+                if (index_Start.Equals(-1)) index_Start = Know.IndexOf(text,0,'<');
+                //creamos el espacio
+                int[] tagIndex = { index_Start, -1,-1,-1 };
+                int tagNameLength;
+
+                //'>', si encuentra un '=' se tendrá que hacer un reajuste luego...
+                tagIndex[1] = Know.IndexOf(text, index_Start, '=', '>');
+
+                tagNameLength = Set.Join(text, index_Start, tagIndex[1] - 1).Length;
+
+                if (text[tagIndex[1]].Equals('='))
+                {
+                    // '>'
+                    tagIndex[1] = Know.IndexOf(text, tagIndex[1], '>');
+
+                }
+                // '<'
+                tagIndex[2] = Know.IndexOf(text, tagIndex[1], '<');
+
+                // '>'
+                tagIndex[3] = tagIndex[2] + tagNameLength + 1;
+
+                return tagIndex;
+            }
+
         }
         #endregion
+        #region Debug
+        /// <summary>
+        /// Herramienta para facilitar a xavier su progreso.
+        ///  Tambien está para visualizar cosas mejor
+        /// </summary>
+        public struct Look
+        {
+            /// <summary>
+            /// Obtenemos el vlaor con el color que queramos
+            /// </summary>
+            public static string ColorPrint(string value, string color="red") => $"<color={color}>{value}</color>";
+            public static string ColorPrint(char value, string color = "red") => $"<color={color}>{value}</color>";
+
+            /// <summary>
+            /// Pintamos un mensaje con color
+            /// </summary>
+            public static void WithColor(string value,string color="green") => Debug.Log($"<color={color}>{value}</color>");
+            public static void WithColor(char value, string color = "green") => Debug.Log($"<color={color}>{value}</color>");
+
+            /// <summary>
+            /// Indicador decorativo de que andas debugeando eso
+            /// </summary>
+            public static string Debugging() => ColorPrint("DEBUG: ", RandomColor());
+
+            public static void Print(string s ) => Debug.Log($"{Debugging()} {s}");
+            /// <summary>
+            /// Selector aleatorio de color, pretenden para debug, no para manejos de otras cosas..
+            /// </summary>
+            public static string RandomColor() => Get.Range("green", "red", "pink", "white", "orange","yellow");
+
+            /// <summary>
+            /// Leemos en consola un arreglo de strings
+            /// </summary>
+            public static void Array(params string[] strings) { foreach (string s in strings) Debug.Log($"{Debugging()} {s}");}
+        }
+        #endregion
+
     }
 }
 #region Committed

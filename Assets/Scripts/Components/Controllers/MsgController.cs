@@ -14,6 +14,10 @@ public class MsgController : MonoInit
     
     //Datos guardados para pintar
     private string savedText = null;
+
+    //Dato guardado de la etiqueta actual
+    private string actualTagValue = null;
+
     // Permite correr o no la ejecución de los textos
     //private bool keepLoading = true;
 
@@ -29,6 +33,8 @@ public class MsgController : MonoInit
     #endregion
     #region Events
      new void Awake() {
+
+
         //keepLoading = true;
         savedText = key.Equals(TKey.No)
             // en caso de no tener key guardamos el texto internamente
@@ -75,19 +81,23 @@ public class MsgController : MonoInit
         if (savedText == s)
         {
             //Si todiavía falta por recorrer
-            if (index != s.Length + 1){
-
+            if (index != s.Length){
                 //si la velocidad es 0 para cargar al instante
                 if (speed == 0){
                     txt_msg.text = s;
                 }
                 else
                 {
+                    //si encuentra alguna etiqueta de inicio
+                    if (s[index].Equals('<')){
+                        TagDetector(speed,index,s);
+                    }
                     //Si todavía puede seguir cargandolo
-                    //if (keepLoading){
-                        txt_msg.text = new string(s.ToCharArray(0, index++));
+                    else
+                    {
+                        txt_msg.text = new string(s.ToCharArray(0, ++index));
                         StartCoroutine(SetText(speed,index, s));
-                    //}
+                    }
                 }
             }
         }
@@ -99,7 +109,6 @@ public class MsgController : MonoInit
     /// </summary>
     public void LoadText(string s, float textSpeed = -1)
     {
-
         //asignamos el nuevo texto
         savedText = s;
         //Limpiamos el campo
@@ -116,13 +125,84 @@ public class MsgController : MonoInit
     /// </summary>
     public void LoadKey(TKey k = TKey.No, float textSpeed = -1)
     {
-
         key = k;
         //si no se asigno llave 
         if (k == TKey.No) LoadText("", textSpeed);
         else LoadText(Data.Translated().Value(k), textSpeed);
     }
+    /// <summary>
+    /// Si encuentra el inicio de alguna etiqueta, la detecta completamente
+    /// y pretende pintar
+    /// el indexActual se encuentra en un '>'
+    /// </summary>
+    public void TagDetector(float speed, int index_Start, string text) {
 
+        //Obtenemos los punteros que nos muestran la etiqueta
+        //y, indirectamente el texto contenido
+        int[] tagIndex = XavHelpTo.Know.IndexsOfTag(text, index_Start);
 
+        // 2. extraemos las partes: tag1 | valor | tag2
+        string[] tagParts = new string[] {
+            //start
+            XavHelpTo.Set.Join(text, tagIndex[0], tagIndex[1]),
+            //Val
+            XavHelpTo.Set.Join(text, tagIndex[1] + 1, tagIndex[2] - 1),
+            //end
+            XavHelpTo.Set.Join(text, tagIndex[2], tagIndex[3])
+        };
+
+        //Leo
+        //XavHelpTo.Look.Array(tagParts);
+
+        //Colocamos el valor del tag a revisar
+        //actualTagValue = tagParts[1];
+
+        //TODO problemas con text, contiene TODO el texto
+        //debería picarse desde el inicio y el final
+        string[] textParts = new string[] {
+            XavHelpTo.Set.Join(text, 0, tagIndex[0]),
+            XavHelpTo.Set.Join(text, tagIndex[3])
+        };
+
+        StartCoroutine(SetTag(speed, textParts, tagParts));
+    }
+    /// <summary>
+    /// Carga las propiedades de la etiqueta, tras terminar
+    /// redirige a setText para continuar...
+    /// </summary>
+    private IEnumerator SetTag(float speed,string[] textParts, string[] parts, int index=0){
+
+        yield return new WaitForSeconds(1);
+
+        //formula: TODO continuar con el tag
+        // (valores anteriores) + [parte0] + [parte1[0-index]] + [parte2]
+        // index++
+
+        // corroboramos si seguimos con el mismo texto
+        if ((textParts[0] + textParts[1]).ToString() == savedText){
+
+            if (index != parts[1].Length){
+                Debug.Log($"index {index} , l {parts[1].Length}");
+
+                //si la velocidad es 0 para cargar al instante
+                if (speed == 0){
+
+                    txt_msg.text = textParts[0] + textParts[1];
+                }
+                else{
+
+                    string joined = (parts[0] + XavHelpTo.Set.Join(parts[1], 0, index) + parts[2]);
+                    txt_msg.text = textParts[0] + joined;
+                    //Debug.Log(parts[1] + " => " + joined + " => " + text);
+                    //XavHelpTo.Look.Print(joined);
+
+                    //TODO, problema, se esta cargando infinitamente...
+                    StartCoroutine(SetTag(speed, textParts, parts, ++index));
+
+                }
+            }
+        }
+
+    }
     #endregion
 }
