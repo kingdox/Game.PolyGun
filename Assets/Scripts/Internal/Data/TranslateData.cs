@@ -58,12 +58,12 @@ namespace Translate
                 /*2*/"DESCONOCIDOOOO000000",
 
                 //Messages Opt TODO
-                /*1*/"Idioma que estará el juego",
-                /*2*/"Velocidad de los textos mostrandose",
-                /*3*/"Volumen que sonará la musica",
-                /*4*/"Habrá sonidos o no?",
-                /*5*/"Controles con los cuales el jugador usará",
-                /*6*/"Botón para retroceder",
+                /*1*/"Language that the game will be",
+                /*2*/"Speed of texts showing",
+                /*3*/"Volume that the music will sound",
+                /*4*/"Will there be sounds or not?",
+                /*5*/"Controls the player will use",
+                /*6*/"Back button",
 
         };
 

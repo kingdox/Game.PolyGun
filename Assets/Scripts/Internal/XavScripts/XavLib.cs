@@ -111,6 +111,14 @@ namespace XavLib
             /// <para>se puede implementar un texto inicial</para>
             /// </summ int start = 0, int end = -1, string startText = "") {for (int x = start; x < (end.Equals(-1) ? text.Length : end + 1); x++) startText += text[x];return startText; }
             public static string Join(string text, int start = 0, int end = -1, string startText = "") { for (int x = start; x < (end.Equals(-1) ? text.Length : end + 1); x++) startText += text[x]; return startText; }
+            public static string Join(string[] texts, string startText = "") { for (int x = 0; x < texts.Length ; x++) startText += texts[x]; return startText; }
+
+
+            /// <summary>
+            /// Añadimos un color a nuestro texto
+            /// <para>| red | green | white | blue | pink |</para>
+            /// </summary>
+            public static string ColorTag(string value, string color = "red") => $"<color={color}>{value}</color>";
 
             /// <summary>
             /// Buscamos el parametro del <see cref="Color"/> que vas a cambiar

@@ -5,6 +5,7 @@ using UnityEngine;
 using Translate;
 using Environment;
 using XavLib;
+using Options;
 #endregion
 
 /// <summary>
@@ -16,23 +17,12 @@ public class OptionSystem : MonoBehaviour
 {
     #region var
     public static OptionSystem _ = null;
-
-
-    //orden con las traducciones TODO al cargarlas se debe usar el metodo string para añadir el valor actual
-    private readonly TKey[] messages = {
-        TKey.MSG_OPT_LANGUAGE,
-        TKey.MSG_OPT_TEXTSPEED,
-        TKey.MSG_OPT_MUSIC,
-        TKey.MSG_OPT_SOUND,
-        TKey.MSG_OPT_CONTROLS,
-        TKey.MSG_OPT_BACK,
-    };
-
+   
     private bool existChanges = false;
-
-
     //podemos ver si ha sido abierto o no
     public static bool isOpened = false;
+
+
 
     [Header("Options Settings")]
     public GameObject obj_screen_last;
@@ -45,7 +35,7 @@ public class OptionSystem : MonoBehaviour
     [Space]
 
     [Header("IndexActual")]
-    private static Options lastOpt = Options.LANGUAGE;
+    private static Option lastOpt = Option.LANGUAGE;
     #endregion
     #region Events
     private void Awake() {
@@ -53,7 +43,7 @@ public class OptionSystem : MonoBehaviour
         _ = this;
 
         existChanges = false;
-        lastOpt = Options.LANGUAGE;
+        lastOpt = Option.LANGUAGE;
     }
     private void Update()
     {
@@ -68,7 +58,7 @@ public class OptionSystem : MonoBehaviour
     public static void OpenClose(bool toOpen) {
         _.obj_screen_option.SetActive(toOpen);
         _.obj_screen_last.SetActive(!toOpen);
-        lastOpt = Options.LANGUAGE;
+        lastOpt = Option.LANGUAGE;
         if (toOpen) _.RefreshAll();
         isOpened = toOpen;
     }
@@ -110,16 +100,16 @@ public class OptionSystem : MonoBehaviour
     /// <summary>
     /// Revisa si es disponible mover el key
     /// </summary>
-    private bool KeyMoveAvailable(KeyPlayer key) => !lastOpt.Equals(Options.LANGUAGE) && key.Equals(KeyPlayer.UP) || !lastOpt.Equals(Options.BACK) && key.Equals(KeyPlayer.DOWN);
+    private bool KeyMoveAvailable(KeyPlayer key) => !lastOpt.Equals(Option.LANGUAGE) && key.Equals(KeyPlayer.UP) || !lastOpt.Equals(Option.BACK) && key.Equals(KeyPlayer.DOWN);
 
     /// <summary>
     /// Dependiendo de la opción y la condicioón
     /// se ejecutará una acción o otra de la lista de opciones
     /// </summary>
-    public static void Actions(Options option, bool condition, bool fromOpt = false) {
+    public static void Actions(Option option, bool condition, bool fromOpt = false) {
 
        // Debug.Log($"Option . =>  {option} : {condition}");
-        if (option.Equals(Options.BACK))
+        if (option.Equals(Option.BACK))
         {
             if (fromOpt) {
                 if (_.existChanges) {
@@ -139,23 +129,22 @@ public class OptionSystem : MonoBehaviour
 
             switch (option)
             {
-                case Options.LANGUAGE:
+                case Option.LANGUAGE:
                     saved.idiom = XavHelpTo.Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
                     break;
-                case Options.TEXTSPEED:
-                    saved.textSpeed = XavHelpTo.Know.NextIndex(condition, Data.data.textSpeed.Length, saved.textSpeed);
+                case Option.TEXTSPEED:
+                    saved.textSpeed = XavHelpTo.Know.NextIndex(condition, OptionData.textSpeed.Length, saved.textSpeed);
+                    break;
+                case Option.MUSIC:
+                    saved.musicVolume = XavHelpTo.Know.NextIndex(condition, OptionData.musicVolume.Length, saved.musicVolume);
 
                     break;
-                case Options.MUSIC:
-                    saved.musicVolume = XavHelpTo.Know.NextIndex(condition, Data.data.musicVolume.Length, saved.musicVolume);
+                case Option.SOUND:
+                    saved.sfxVolume = XavHelpTo.Know.NextIndex(condition, OptionData.sfxVolume.Length, saved.sfxVolume);
 
                     break;
-                case Options.SOUND:
-                    saved.sfxVolume = XavHelpTo.Know.NextIndex(condition, Data.data.sfxVolume.Length, saved.sfxVolume);
-
-                    break;
-                case Options.CONTROLS:
-                    saved.control = XavHelpTo.Know.NextIndex(condition, Data.data.controls, saved.control);
+                case Option.CONTROLS:
+                    saved.control = XavHelpTo.Know.NextIndex(condition, OptionData.controls, saved.control);
                     break;
             }
 
@@ -163,7 +152,7 @@ public class OptionSystem : MonoBehaviour
             DataPass.SetData(saved);
 
             //si eres language cambiado refrescamos los textos en las pantallas
-            if (OptionEqual(option, Options.LANGUAGE, Options.TEXTSPEED)) {
+            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED)) {
                 //Seteamos los datos
                 _.RefreshAll();
             }
@@ -185,32 +174,51 @@ public class OptionSystem : MonoBehaviour
         msg_title.LoadKey(msg_description.key);
     }
 
-
+    //XavHelpTo.Set.ColorTag(extraValue)
     /// <summary>
     /// Carga el mensaje correspondiente al boton y el valor actual
     /// </summary>
     private void LoadMsg(){
-        string msg = Data.Translated().Value(messages[(int)lastOpt]) + "<color=green>HOLA</color>";
+        string msg = OptionData.GetMsgOfOpt(lastOpt)  + GetActualValue();
         msg_description.LoadText(msg);
+    }
 
+    /// <summary>
+    /// Dependiendo del mesnaje actual, buscarr
+    /// </summary>
+    private string GetActualValue(){
+        string val = "";
+        SavedData saved = DataPass.GetSavedData();
+        //arreglo de los datos guardados con la info
+            /*
+            TKey.MSG_OPT_LANGUAGE,
+        TKey.MSG_OPT_TEXTSPEED,
+        TKey.MSG_OPT_MUSIC,
+        TKey.MSG_OPT_SOUND,
+        TKey.MSG_OPT_CONTROLS,
+        TKey.MSG_OPT_BACK,
+            */
+            //en orden, poseemos los datos guardados
+        int[] indexSavedArray = {
+            saved.idiom,
+            saved.textSpeed,
+            saved.musicVolume,
+            saved.sfxVolume,
+            saved.control,
+        };
+
+
+
+        return val;
     }
 
     /// <summary>
     /// De la lista proporcionada revisa si el seleccionado forma parte
     /// </summary>
-    private static bool OptionEqual(Options opt, params Options[] opts){
-        foreach (Options o in opts) if (opt.Equals(o)) return true;
+    private static bool OptionEqual(Option opt, params Option[] opts){
+        foreach (Option o in opts) if (opt.Equals(o)) return true;
         return false;
     }
   
     #endregion
-}
-//Opciones que hay en el menú de opciones
-public enum Options{
-    LANGUAGE,
-    TEXTSPEED,
-    MUSIC,
-    SOUND,
-    CONTROLS,
-    BACK
 }

@@ -25,12 +25,7 @@ namespace Environment
         public readonly string version = "v0.0.4";
 
        
-        //[OPTIONS]
-        public readonly float[] textSpeed = { 0, .005f, .015f, .025f };
-        public readonly float[] musicVolume = { 0, 30, 50, 70 };
-        public readonly float[] sfxVolume = { 0, 70 };
-        public readonly int controls = 1;// longitud de cantidad de controlesps4?
-        //
+       
 
         //Extra
         [Header("Datos de TranslateData")]

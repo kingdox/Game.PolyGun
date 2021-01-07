@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Options;
 #endregion
 public class OptionsItem : MonoBehaviour{
 
     #region var
     public MsgController msg;
-    public Options opt;
+    public Option opt;
     public Button btn;
     #endregion
     #region Events
