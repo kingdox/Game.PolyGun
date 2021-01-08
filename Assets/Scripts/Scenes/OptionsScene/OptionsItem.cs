@@ -24,7 +24,6 @@ public class OptionsItem : MonoBehaviour{
     /// Refrescamos el <see cref="MsgController"/> hijo
     /// </summary>
     public void RefreshText() => msg.LoadKey(msg.key);
-
     /// <summary>
     /// Hacemos foco del botón principal
     /// </summary>

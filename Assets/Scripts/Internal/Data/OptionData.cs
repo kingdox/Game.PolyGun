@@ -28,23 +28,63 @@ namespace Options
             TKey.MSG_OPT_CONTROLS,
             TKey.MSG_OPT_BACK,
         };
-
-        //TODO revisar como hacer el manejo de distintos valores
-        // usar keys? o mostrar
-        //private static readonly TKey[] optVal = {
-        //    TKey._IDIOM // valor de 
-        //}
+        private static readonly TKey[] msg_Idiom = {
+            TKey._IDIOM,
+            TKey._IDIOM,
+        };
+        private static readonly TKey[] msg_textSpeed = {
+            TKey.MSG_OPT_TEXTSPEED_INSTANT,
+            TKey.MSG_OPT_TEXTSPEED_FAST,
+            TKey.MSG_OPT_TEXTSPEED_NORMAL,
+            TKey.MSG_OPT_TEXTSPEED_SLOW,
+        };
+        private static readonly TKey[] msg_musicVolume = {
+            TKey.MSG_OPT_MUSIC_NO,
+            TKey.MSG_OPT_MUSIC_LOW,
+            TKey.MSG_OPT_MUSIC_NORMAL,
+            TKey.MSG_OPT_MUSIC_HIGH
+        };
+        private static readonly TKey[] msg_sfxVolume = {
+            TKey.MSG_OPT_SOUND_NO,
+            TKey.MSG_OPT_SOUND_YES,
+        };
+        private static readonly TKey[] msg_controls = {
+            TKey.MSG_OPT_CONTROLS_NORMAL,
+            //TKey.MSG_OPT_CONTROLS_INVERT,
+        };
         #endregion
             #region METHODS
-
-
-
-
-
             /// <summary>
-            /// Mediante la opcion, consigues la llave para sacar la traducción
-            /// del mensaje
+            /// Dependiendo de la opcion, manejaremos busqueda en una o otra
             /// </summary>
+        public static string GetValueMsg(Option opt){
+
+            SavedData saved = DataPass.GetSavedData();
+
+            TKey[][] indexMatrix = {
+                msg_Idiom,
+                msg_textSpeed,
+                msg_musicVolume,
+                msg_sfxVolume,
+                msg_controls
+            };
+            int[] indexValue = {
+                saved.idiom,
+                saved.textSpeed,
+                saved.musicVolume,
+                saved.sfxVolume,
+                saved.control
+            };
+
+            return opt.Equals(Option.BACK) ? ""
+                : Data.Translated().Value(
+                    indexMatrix[(int)opt][indexValue[(int)opt]]
+            );
+        }
+        /// <summary>
+        /// Mediante la opcion, consigues la llave para sacar la traducción
+        /// del mensaje
+        /// </summary>
         public static string GetMsgOfOpt(Option opt) => Data.Translated().Value(msgOpt[(int)opt]);
         #endregion
     }

@@ -16,6 +16,9 @@ public class MsgController : MonoInit
     //Datos guardados para pintar
     private string savedText = null;
 
+    //Se revisa el numero de carga actual
+    private int loadNumber = 0;
+
     //Dato guardado de la etiqueta actual
     //private string actualTagValue = null;
 
@@ -71,34 +74,41 @@ public class MsgController : MonoInit
 
 
 
-    private IEnumerator SetText(float speed, int index = 0, string s = null){
+    private IEnumerator SetText(
+        float speed,
+        int number,
+        int index = 0,
+        string s = null
+    ){
 
 
         //esperamos el tiempo
         yield return new WaitForSeconds(speed);
 
-
-        //Seguirá cargando siempre que el texto guardado sea el mismo que el que corre
-        if (savedText == s)
+        if (loadNumber.Equals(number)) 
         {
-            //Si todiavía falta por recorrer
-            if (index < s.Length){
-                //si la velocidad es 0 para cargar al instante
-                if (speed == 0){
-                    txt_msg.text = s;
-                }
-                else
-                {
-                    //si encuentra alguna etiqueta de inicio
-                    if (s[index].Equals('<')){
-                        //XavHelpTo.Look.Print($"Tag encontrado en index{index}");
-                        TagDetector(speed,index,s);
+            //Seguirá cargando siempre que el texto guardado sea el mismo que el que corre
+            if (savedText == s)
+            {
+                //Si todiavía falta por recorrer
+                if (index < s.Length){
+                    //si la velocidad es 0 para cargar al instante
+                    if (speed == 0){
+                        txt_msg.text = s;
                     }
-                    //Si todavía puede seguir cargandolo
                     else
                     {
-                        txt_msg.text = new string(s.ToCharArray(0, ++index));
-                        StartCoroutine(SetText(speed,index, s));
+                        //si encuentra alguna etiqueta de inicio
+                        if (s[index].Equals('<')){
+                            //XavHelpTo.Look.Print($"Tag encontrado en index{index}");
+                            TagDetector(speed,number,index,s);
+                        }
+                        //Si todavía puede seguir cargandolo
+                        else
+                        {
+                            txt_msg.text = new string(s.ToCharArray(0, ++index));
+                            StartCoroutine(SetText(speed,number, index, s));
+                        }
                     }
                 }
             }
@@ -118,8 +128,11 @@ public class MsgController : MonoInit
 
         float speed = textSpeed != -1 ? textSpeed : OptionData.textSpeed[DataPass.GetSavedData().textSpeed];
 
+        //Añadimos la carga
+        loadNumber++;
+
         //Corremos el nuevo texto
-        StartCoroutine(SetText(speed, 0, s));
+        StartCoroutine(SetText(speed,loadNumber, 0, s));
     }
     /// <summary>
     /// Cargamos una llave y la guardamos, 
@@ -137,7 +150,7 @@ public class MsgController : MonoInit
     /// y pretende pintar
     /// el indexActual se encuentra en un '>'
     /// </summary>
-    public void TagDetector(float speed, int index_Start, string text) {
+    public void TagDetector(float speed,int number, int index_Start, string text) {
 
         //Obtenemos los punteros que nos muestran la etiqueta
         //y, indirectamente el texto contenido
@@ -160,7 +173,7 @@ public class MsgController : MonoInit
         };
 
 
-        StartCoroutine(SetTag(speed, textParts, tagParts,text));
+        StartCoroutine(SetTag(speed,number, textParts, tagParts,text));
     }
     /// <summary>
     /// Carga las propiedades de la etiqueta, tras terminar
@@ -168,6 +181,7 @@ public class MsgController : MonoInit
     /// </summary>
     private IEnumerator SetTag(
         float speed, // valocidad del wait...
+        int number,
         string[] textParts, // parte de inicio del tag, resto del tag
         string[] tagParts,
         string actualText,
@@ -176,29 +190,33 @@ public class MsgController : MonoInit
 
         yield return new WaitForSeconds(speed);
 
-        //protección con el guardado
-        if (actualText.Equals(savedText)){
-
-            //si es menor al limite
-            if (index < tagParts[1].Length)
+        if (loadNumber.Equals(number))
+        {
+            //protección con el guardado
+            if (actualText.Equals(savedText))
             {
 
-                //si la velocidad es 0 para cargar al instante
-                if (speed == 0) txt_msg.text = actualText;
+                //si es menor al limite
+                if (index < tagParts[1].Length)
+                {
+
+                    //si la velocidad es 0 para cargar al instante
+                    if (speed == 0) txt_msg.text = actualText;
+                    else
+                    {
+                        //unimos poco a poco cada caracter del texto
+                        txt_msg.text = textParts[0] + (tagParts[0] + XavHelpTo.Set.Join(tagParts[1], 0, index) + tagParts[2]);
+                        StartCoroutine(SetTag(speed, number, textParts, tagParts, actualText, ++index));
+                    }
+                }
+                //regresamos....
                 else
                 {
-                    //unimos poco a poco cada caracter del texto
-                    txt_msg.text = textParts[0] + (tagParts[0] + XavHelpTo.Set.Join(tagParts[1], 0, index) + tagParts[2]);
-                    StartCoroutine(SetTag(speed, textParts, tagParts, actualText, ++index));
+                    //TODO por aquí hay un error de longitudes, revisar
+                    Debug.Log($"{actualText.Length}, {textParts[0].Length}, {XavHelpTo.Set.Join(tagParts).Length}");
+                    int newIndex = textParts[0].Length + XavHelpTo.Set.Join(tagParts).Length;
+                    StartCoroutine(SetText(speed, number, newIndex - 1, actualText));
                 }
-            }
-            //regresamos....
-            else
-            {
-                //TODO por aquí hay un error de longitudes, revisar
-                Debug.Log($"{actualText.Length}, {textParts[0].Length}, {XavHelpTo.Set.Join(tagParts).Length}");
-                int newIndex = textParts[0].Length + XavHelpTo.Set.Join(tagParts).Length;
-                StartCoroutine(SetText(speed, newIndex -1, actualText));
             }
         }
     }

@@ -187,27 +187,9 @@ public class OptionSystem : MonoBehaviour
     /// Dependiendo del mesnaje actual, buscarr
     /// </summary>
     private string GetActualValue(){
-        string val = "";
-        SavedData saved = DataPass.GetSavedData();
-        //arreglo de los datos guardados con la info
-            /*
-            TKey.MSG_OPT_LANGUAGE,
-        TKey.MSG_OPT_TEXTSPEED,
-        TKey.MSG_OPT_MUSIC,
-        TKey.MSG_OPT_SOUND,
-        TKey.MSG_OPT_CONTROLS,
-        TKey.MSG_OPT_BACK,
-            */
-            //en orden, poseemos los datos guardados
-        int[] indexSavedArray = {
-            saved.idiom,
-            saved.textSpeed,
-            saved.musicVolume,
-            saved.sfxVolume,
-            saved.control,
-        };
-
-
+        string val = OptionData.GetValueMsg(lastOpt); ;
+        Debug.Log(val);
+        //Ponemos aquí que cambie aleatoriamente de color...
 
         return val;
     }
