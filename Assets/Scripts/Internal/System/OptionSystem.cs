@@ -206,7 +206,7 @@ public class OptionSystem : MonoBehaviour
     /// Carga el mensaje correspondiente al boton y el valor actual
     /// </summary>
     private void LoadMsg(){
-        string msg = OptionData.GetMsgOfOpt(lastOpt)  + GetActualValue();
+        string msg = $"{OptionData.GetMsgOfOpt(lastOpt)} {GetActualValue()}";// ";
         msg_description.LoadText(msg);
     }
 
@@ -217,6 +217,7 @@ public class OptionSystem : MonoBehaviour
         string val = OptionData.GetValueMsg(lastOpt); ;
         //Debug.Log(val);
         //Ponemos aquí que cambie aleatoriamente de color...
+        val = XavHelpTo.Set.ColorTag(val);
 
         return val;
     }

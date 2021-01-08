@@ -10,7 +10,7 @@ using Translate;
 public class MenuManager : MonoManager
 {
     #region Variables
-    private enum Menu{
+    private enum Menu {
         Play,
         Intro,
         Achieve,
@@ -29,27 +29,72 @@ public class MenuManager : MonoManager
     public bool waitToLoad = false;
     //
     public bool wantRefresh;
+    public int focusIndex = 0;
+
     #endregion
     #region Events
-    private void Update(){
+    private void Start()
+    {
+        focusIndex = 0;
+    }
+    private void Update() {
 
-        if (!waitToLoad && MessageReady(msg_Message))
+
+        if (!OptionSystem.isOpened)
         {
-            //Debug.Log("Cargando mensaje");
-            StartCoroutine(MessageWait());
+            if (!waitToLoad && msg_Message.IsFinished())
+            {
+                StartCoroutine(MessageWait());
+            }
+            if (wantRefresh)
+            {
+                wantRefresh = false;
+                RefreshAll();
+            }
+
+            if (Input.anyKeyDown) ControlCheck();
+
         }
-        if (!OptionSystem.isOpened && wantRefresh){
-            wantRefresh = false;
-            RefreshAll();
-        }
+
+
     }
     public override void Init(){
         SavedData saved = DataPass.GetSavedData();
         ButtonAdjust(!saved.isIntroCompleted);
-        //Debug.Log("Inited");
     }
     #endregion
     #region Methods
+
+    private void ControlCheck()
+    {
+        //si eres mouse para afuera
+        if (Input.GetKeyDown(KeyCode.Mouse0)) return;
+        KeyPlayer key = ControlSystem.KnowKeyHold(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
+        switch (key)
+        {
+            case KeyPlayer.LEFT:
+            case KeyPlayer.RIGHT:
+                //TODO
+                btns_Menu[focusIndex].Select();
+                //focusIndex
+                //    _
+                break;
+
+            case KeyPlayer.UP:
+            case KeyPlayer.DOWN:
+                //comproacion si no es el primero ni el ultimo
+                if (!(focusIndex.Equals(0) || focusIndex.Equals(btns_Menu.Length-1)))  {
+
+                    focusIndex += key.Equals(KeyPlayer.DOWN) ? 1 : -1;
+                }
+                btns_Menu[focusIndex].Select();
+                break;
+
+            default:
+                break;
+        }
+
+    }
 
     /// <summary>
     ///  Revisamos si en las opciones estan cerradas y si el mensaje ya ha terminado

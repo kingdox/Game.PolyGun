@@ -83,7 +83,7 @@ public class MsgController : MonoInit
 
 
         //esperamos el tiempo
-        yield return new WaitForSeconds(speed);
+        yield return new WaitForSeconds(speed);//speed
 
         if (loadNumber.Equals(number)) 
         {
@@ -173,7 +173,14 @@ public class MsgController : MonoInit
         };
 
 
-        StartCoroutine(SetTag(speed,number, textParts, tagParts,text));
+        StartCoroutine(SetTag(
+            speed,
+            number,
+            textParts,
+            tagParts,
+            text,
+            tagIndex[3]
+        ));
     }
     /// <summary>
     /// Carga las propiedades de la etiqueta, tras terminar
@@ -185,9 +192,10 @@ public class MsgController : MonoInit
         string[] textParts, // parte de inicio del tag, resto del tag
         string[] tagParts,
         string actualText,
+        int endTagIndex,
         int index=0
     ){
-
+        //speed
         yield return new WaitForSeconds(speed);
 
         if (loadNumber.Equals(number))
@@ -206,16 +214,27 @@ public class MsgController : MonoInit
                     {
                         //unimos poco a poco cada caracter del texto
                         txt_msg.text = textParts[0] + (tagParts[0] + XavHelpTo.Set.Join(tagParts[1], 0, index) + tagParts[2]);
-                        StartCoroutine(SetTag(speed, number, textParts, tagParts, actualText, ++index));
+                        StartCoroutine(SetTag(
+                            speed,
+                            number,
+                            textParts,
+                            tagParts,
+                            actualText,
+                            endTagIndex,
+                            ++index
+                        ));
                     }
                 }
                 //regresamos....
                 else
                 {
                     //TODO por aquí hay un error de longitudes, revisar
-                    Debug.Log($"{actualText.Length}, {textParts[0].Length}, {XavHelpTo.Set.Join(tagParts).Length}");
-                    int newIndex = textParts[0].Length + XavHelpTo.Set.Join(tagParts).Length;
-                    StartCoroutine(SetText(speed, number, newIndex - 1, actualText));
+                    //Debug.Log($"{actualText.Length}, {textParts[0].Length}, {XavHelpTo.Set.Join(tagParts).Length}");
+                    int newIndex = endTagIndex ;//textParts[0].Length + XavHelpTo.Set.Join(tagParts).Length;
+
+                    Debug.Log($" textParts[0] {textParts[0]} | endTagIndex: {endTagIndex} | {actualText[endTagIndex]}");
+
+                    StartCoroutine(SetText(speed, number, newIndex, actualText));
                 }
             }
         }
