@@ -46,7 +46,7 @@
 #region Messages, de Opciones
 
                     //Messages Opt (Mensajes de las opciones
-                    "MSG_OPT_LANGUAGE",
+                    "ESMSG_OPT_LANGUAGE",
                     "MSG_OPT_TEXTSPEED",
                     "MSG_OPT_MUSIC",
                     "MSG_OPT_SOUND",

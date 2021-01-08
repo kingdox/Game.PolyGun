@@ -47,8 +47,19 @@ public class OptionSystem : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.anyKeyDown && isOpened) ControlCheck();
+        //UpdateLastOption();
+
+        if (isOpened)
+        {
+            if (Input.anyKeyDown) ControlCheck();
+
+            if (Input.anyKey) _.opt_items[(int)lastOpt].FocusCenterButton();
+        }
     }
+    //private void LateUpdate()
+    //{
+        
+    //}
     #endregion
     #region Methods
     /// <summary>
@@ -68,8 +79,10 @@ public class OptionSystem : MonoBehaviour
     /// </summary>
     public void ControlCheck()
     {
+        //si eres mouse para afuera
+        if (Input.GetKeyDown(KeyCode.Mouse0)) return;   
 
-        KeyPlayer key = ControlSystem.KnowKey(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
+        KeyPlayer key = ControlSystem.KnowKeyHold(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
 
         //botones a detectar
         switch (key)
@@ -87,9 +100,9 @@ public class OptionSystem : MonoBehaviour
                 if (KeyMoveAvailable(key))
                 {
                     lastOpt += key.Equals(KeyPlayer.DOWN) ? 1 : -1;
-                    opt_items[(int)lastOpt].FocusCenterButton();
                     LoadMsg();
                 }
+                opt_items[(int)lastOpt].FocusCenterButton();
                 break;
             default:
                 break;
@@ -107,6 +120,13 @@ public class OptionSystem : MonoBehaviour
     /// se ejecutará una acción o otra de la lista de opciones
     /// </summary>
     public static void Actions(Option option, bool condition, bool fromOpt = false) {
+        //XavHelpTo.Look.Print($"Entra a actions con el Buton clickeado {option}");
+        //Actualizamos a el ultimo botón
+        lastOpt = option;
+        //UpdateLastOption();
+
+        //enfocamos al escogido
+
 
        // Debug.Log($"Option . =>  {option} : {condition}");
         if (option.Equals(Option.BACK))
@@ -148,14 +168,21 @@ public class OptionSystem : MonoBehaviour
                     break;
             }
 
+            //XavHelpTo.Look.Print("Entra a actions");
 
             DataPass.SetData(saved);
 
             //si eres language cambiado refrescamos los textos en las pantallas
-            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED)) {
+            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED))
+            {
                 //Seteamos los datos
                 _.RefreshAll();
             }
+            else {
+                //Caso contrario cargamos los que no afectan al texto, solo actualiza msg
+                _.LoadMsg();
+            }
+
 
         }
     }
@@ -188,19 +215,38 @@ public class OptionSystem : MonoBehaviour
     /// </summary>
     private string GetActualValue(){
         string val = OptionData.GetValueMsg(lastOpt); ;
-        Debug.Log(val);
+        //Debug.Log(val);
         //Ponemos aquí que cambie aleatoriamente de color...
 
         return val;
     }
 
+
     /// <summary>
     /// De la lista proporcionada revisa si el seleccionado forma parte
     /// </summary>
-    private static bool OptionEqual(Option opt, params Option[] opts){
+    private static bool OptionEqual(Option opt, params Option[] opts)
+    {
         foreach (Option o in opts) if (opt.Equals(o)) return true;
         return false;
     }
+    /// <summary>
+    /// Dependiendo de la posición del foco (en caso de que tenga un foco
+    /// Actualizará el dato
+    /// </summary>
+    private static void UpdateLastOption(){
+        GameObject[] objs = new GameObject[_.opt_items.Length];
+
+        for (int x = 0; x < objs.Length; x++) objs[x] = _.opt_items[x].btn.gameObject;
+            
+        int index = XavHelpTo.Know.FocusIndex(objs);
+        Debug.Log(index);
+        //En caso de encontrar foco
+        if (!index.Equals(-1)){
+            lastOpt = (Option)index;
+            _.opt_items[index].FocusCenterButton();
+        }
+    } 
   
     #endregion
 }

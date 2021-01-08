@@ -251,7 +251,18 @@ namespace XavLib
             /// <summary>
             /// Revisa si el objeto está seleccionado
             /// </summary>
-            public bool IsFocus(GameObject obj) => obj.Equals(EventSystem.current.currentSelectedGameObject);
+            public static bool Focus(GameObject obj) => obj.Equals(EventSystem.current.currentSelectedGameObject);
+            /// <summary>
+            /// Busca en un arreglo y si encuentra, muestra donde
+            /// <para> caso contrario devuelve -1 </para>
+            /// TODO no sirve...
+            /// </summary>
+            public static int FocusIndex(params GameObject[] objs) {
+                for (int x = 0; x < objs.Length; x++) if (objs.Equals(EventSystem.current.currentSelectedGameObject)) return x;
+                return -1;
+            }   
+
+
             /// <summary>
             /// Conoces el siguiente indice basado en la longitud del arreglo
             /// <para>Se le puede definir un inicio en caso de haber</para>

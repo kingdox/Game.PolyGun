@@ -50,13 +50,20 @@ public class ControlSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Sabemos si se toco la tecla 1 vez en el frame
     /// </summary>
-    /// <param name="kps"></param>
-    /// <returns></returns>
     public static KeyPlayer KnowKey(params KeyPlayer[] kps)
     {
         foreach (KeyPlayer kp in kps) if (KeyDown(kp)) return kp;
+        return KeyPlayer.NO;
+    }
+
+    /// <summary>
+    /// Sabemos si una tecla mantiene presionada
+    /// </summary>
+    public static KeyPlayer KnowKeyHold(params KeyPlayer[] kps)
+    {
+        foreach (KeyPlayer kp in kps) if (KeyPress(kp)) return kp;
         return KeyPlayer.NO;
     }
 
