@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Environment;
 using XavLib;
-//using System;
-//using System.Reflection;
-//using UnityEngine.Analytics;
-//using UnityEngine.Events;
 #endregion
 /// <summary>
 /// Abstract de los Manager para administrar cosas que dependen de inicialización

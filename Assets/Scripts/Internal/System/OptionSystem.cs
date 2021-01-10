@@ -41,7 +41,6 @@ public class OptionSystem : MonoBehaviour
     private void Awake() {
         //Singleton 
         _ = this;
-
         existChanges = false;
         lastOpt = Option.LANGUAGE;
     }

@@ -57,10 +57,11 @@ namespace Environment
     /// </summary>
     public enum Scenes
     {
-        AchievementsScene, // Donde están los logros
+        InitialScene,
         MenuScene, //el menu principal apra acceder a los demás sitios
-        OptionsScene, // las opciones de juego para modificarle al jugador
+        AchievementsScene, // Donde están los logros
         GameScene,
+
     }
     /// <summary>
     /// Son las llaves que posee el jugador en este proyecto
