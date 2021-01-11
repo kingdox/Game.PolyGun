@@ -7,7 +7,7 @@ public enum TKey
 
     // IDIOM
     _IDIOM,
-
+#region Buttons
     // BUTTONS
     _0_PLAY,
     _1_INTRODUCTION,
@@ -20,7 +20,8 @@ public enum TKey
     _8_MUSIC,
     _9_SOUND,
     _10_CONTROLS,
-
+#endregion
+#region Achievements
     //Achievements
     // P1 TODO
     ACHIEVE_KILLS_ROBOT,
@@ -35,11 +36,13 @@ public enum TKey
     ACHIEVE_ROBOTS_ALIVE,
     ACHIEVE_ESPECIAL_READ,
 
-
+#endregion
+#region Messages, del menú
     //Messages (Mensajes del cyborg...)
     MSG_CYBORG_WHERE,
     MSG_CYBORG_UNKNOW,
-
+#endregion
+#region Messages, de Opciones
     //Messages Opt (Mensajes de las opciones
     MSG_OPT_LANGUAGE,
     MSG_OPT_TEXTSPEED,
@@ -66,5 +69,10 @@ public enum TKey
 
     // MSG_OPT_CONTROLS
     MSG_OPT_CONTROLS_NORMAL,
-    MSG_OPT_CONTROLS_INVERT
+    MSG_OPT_CONTROLS_INVERT,
+#endregion
+#region Messages, de Init
+    MSG_INIT_HISTORY,
+    MSG_INIT_PRESS_ANY,
+    #endregion
 }

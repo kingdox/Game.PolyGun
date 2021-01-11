@@ -65,6 +65,7 @@ public class MenuManager : MonoManager
     #endregion
     #region Methods
 
+
     private void ControlCheck()
     {
         //si eres mouse para afuera

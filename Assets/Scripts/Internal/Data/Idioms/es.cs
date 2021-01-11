@@ -8,8 +8,8 @@
                 "Español",
 
 #region Buttons
-            // BUTTONS
-            "_0_PLAY",
+                    // BUTTONS
+                    "_0_PLAY",
                     "_1_INTRODUCTION",
                     "_2_ACHIEVEMENTS",
                     "_3_OPTIONS",
@@ -21,7 +21,7 @@
                     "_9_SOUND",
                     "_10_CONTROLS",
 #endregion
-#region Achievements
+#region AchievementsScene
 
                      //Achievements
                     // P1 TODO
@@ -37,7 +37,7 @@
                     "ACHIEVE_ROBOTS_ALIVE",
                     "ACHIEVE_ESPECIAL_READ",
 #endregion
-#region Messages, del menú
+#region Messages, del menúScene
 
                     //Messages TODO
                     "MSG_CYBORG_WHERE",
@@ -73,6 +73,11 @@
                     "MSG_OPT_CONTROLS_NORMAL",
                     "MSG_OPT_CONTROLS_INVERT",
 #endregion
+#region Messages, de InitScene
+                    "MSG_INIT_HISTORY",
+                    "MSG_INIT_PRESS_ANY",
+#endregion
+
         };
     }
 

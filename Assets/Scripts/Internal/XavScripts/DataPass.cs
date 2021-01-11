@@ -51,6 +51,7 @@ public class DataPass : MonoBehaviour
 
     /// <summary>
     /// Revisamos si existen datos guardados, de no existir los crea
+    /// TODO colocar async await????
     /// </summary>
     private void DataInit()
     {
@@ -109,12 +110,6 @@ public class DataPass : MonoBehaviour
 
     #if DEBUG
 
-        //Esto es solo para DEBUGs
-        private void OnApplicationPause()
-        {
-            //Debug.Log("Guardando, Poder debugger :P");
-            //SaveLoadFile(true);
-        }
         private void OnDisable()
         {
             SaveLoadFile(true);

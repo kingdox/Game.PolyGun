@@ -225,7 +225,6 @@ namespace XavLib
                 if (condition && particle.isStopped) particle.Play();
                 else if (!condition && particle.isPlaying) particle.Stop();
             }
-
         }
         #endregion
         #region Know
@@ -234,14 +233,7 @@ namespace XavLib
         /// </summary>
         public struct Know
         {
-            /// <summary>
-            /// Busca cual es el valor del arreglo que supera al indicado
-            /// <para>Retorna -1 si no encuentra alguno mayor que el mostrado</para>
-            /// </summary>
-            public static int FirstMajor(float val, float[] arr){
-                for (int x = 0; x < arr.Length; x++) if (val < arr[x]) return x;
-                return -1;
-            }
+           
 
             /// <summary>
             /// Devuelve el nombre de la escena activa
@@ -252,41 +244,13 @@ namespace XavLib
             /// Revisa si el objeto está seleccionado
             /// </summary>
             public static bool Focus(GameObject obj) => obj.Equals(EventSystem.current.currentSelectedGameObject);
-            /// <summary>
-            /// Busca en un arreglo y si encuentra, muestra donde
-            /// <para> caso contrario devuelve -1 </para>
-            /// TODO no sirve...
-            /// </summary>
-            public static int FocusIndex(params GameObject[] objs) {
-                for (int x = 0; x < objs.Length; x++) if (objs.Equals(EventSystem.current.currentSelectedGameObject)) return x;
-                return -1;
-            }   
-
-
-            /// <summary>
-            /// Conoces el siguiente indice basado en la longitud del arreglo
-            /// <para>Se le puede definir un inicio en caso de haber</para>
-            /// </summary>
-            public static int NextIndex(bool goNext, int indexLength, int index = 0) => goNext? (index == indexLength - 1 ? 0 : index + 1): (index == 0 ? indexLength - 1 : index - 1);
+            
             /// <summary>
             /// Detecta si el indice está dentro del arreglo
             /// </summary>
             public static bool IsOnBounds(int i, int length) => i == Mathf.Clamp(i, 0, length - 1);
             public static bool IsOnBounds(int i, int length, bool direction) => i == Mathf.Clamp(i + (direction ? 1 : -1) , 0, length - 1);
-            /// <summary>
-            /// Retorna un valor distinto al ultimo suponiendo que la dimension es mayor a 1
-            /// </summary>
-            public static int DifferentIndex(int max, int lastInt = -1)
-            {
-                int _newInt = lastInt;
-
-                while (lastInt == _newInt && max > 1)
-                {
-                    _newInt = Get.ZeroMax(max);
-                }
-
-                return _newInt;
-            }
+            
             /// <summary>
             /// Detecta si de un arreglo con valores, si uno de estos es igual al mostrado
             /// </summary>
@@ -302,8 +266,44 @@ namespace XavLib
             /// </summary>
             public static int IndexOf( char[] chars, int startIndex, params char[] finder){for (int x = startIndex; x < chars.Length; x++) if (Know.IsEqualOf(chars[x], finder)) return x; return -1;}
             public static int IndexOf(string text, int startIndex, params char[] finder) { for (int x = startIndex; x < text.Length; x++) if (Know.IsEqualOf(text[x], finder)) return x; return -1; }
+            /// <summary>
+            /// Busca en un arreglo y si encuentra, muestra donde
+            /// <para> caso contrario devuelve -1 </para>
+            /// TODO no sirve...
+            /// </summary>
+            public static int FocusIndex(params GameObject[] objs)
+            {
+                for (int x = 0; x < objs.Length; x++) if (objs.Equals(EventSystem.current.currentSelectedGameObject)) return x;
+                return -1;
+            }
+            /// <summary>
+            /// Busca cual es el valor del arreglo que supera al indicado
+            /// <para>Retorna -1 si no encuentra alguno mayor que el mostrado</para>
+            /// </summary>
+            public static int FirstMajor(float val, float[] arr)
+            {
+                for (int x = 0; x < arr.Length; x++) if (val < arr[x]) return x;
+                return -1;
+            }
+            /// <summary>
+            /// Conoces el siguiente indice basado en la longitud del arreglo
+            /// <para>Se le puede definir un inicio en caso de haber</para>
+            /// </summary>
+            public static int NextIndex(bool goNext, int indexLength, int index = 0) => goNext ? (index == indexLength - 1 ? 0 : index + 1) : (index == 0 ? indexLength - 1 : index - 1);
+            /// <summary>
+            /// Retorna un valor distinto al ultimo suponiendo que la dimension es mayor a 1
+            /// </summary>
+            public static int DifferentIndex(int max, int lastInt = -1)
+            {
+                int _newInt = lastInt;
 
+                while (lastInt == _newInt && max > 1)
+                {
+                    _newInt = Get.ZeroMax(max);
+                }
 
+                return _newInt;
+            }
             /// <summary>
             /// Devolvemos en un arreglo los 4 puntos para tomar una etiqueta. 
             /// <para>Estas etiqutas SOLO manejan 1 nivel de profundidad</para>
