@@ -36,6 +36,7 @@ public class OptionSystem : MonoBehaviour
 
     [Header("IndexActual")]
     private static Option lastOpt = Option.LANGUAGE;
+    public MenuInputController menuInputs;
     #endregion
     #region Events
     private void Awake() {
@@ -46,19 +47,18 @@ public class OptionSystem : MonoBehaviour
     }
     private void Update()
     {
-        //UpdateLastOption();
-
         if (isOpened)
         {
-            if (Input.anyKeyDown) ControlCheck();
+            //Si es distinto el indice debemos refrescar
+            if (!menuInputs.lastIndex.Equals((int)lastOpt))   
+            {
+                lastOpt = (Option)menuInputs.lastIndex;
+                LoadMsg();
+            }
+            if (Input.anyKeyDown) OptChecker();
 
-            if (Input.anyKey) _.opt_items[(int)lastOpt].FocusCenterButton();
         }
     }
-    //private void LateUpdate()
-    //{
-        
-    //}
     #endregion
     #region Methods
     /// <summary>
@@ -72,47 +72,20 @@ public class OptionSystem : MonoBehaviour
         if (toOpen) _.RefreshAll();
         isOpened = toOpen;
     }
+
+
     /// <summary>
-    /// Checkeamos el teclado y, dependiendo de la posición que se encuentre
-    /// el jugador podrá hacer una accion o otra
+    /// Revisamos si tocó los botones izquierda o derecha para cambiar
     /// </summary>
-    public void ControlCheck()
+    public void OptChecker()
     {
         //si eres mouse para afuera
         if (Input.GetKeyDown(KeyCode.Mouse0)) return;   
 
-        KeyPlayer key = ControlSystem.KnowKeyHold(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
-
-        //botones a detectar
-        switch (key)
-        {
-            case KeyPlayer.LEFT:
-            case KeyPlayer.RIGHT:
-
-                Actions(lastOpt, key.Equals(KeyPlayer.RIGHT));
-
-                break;
-            case KeyPlayer.UP:
-            case KeyPlayer.DOWN:
-
-                //si estas en los limites
-                if (KeyMoveAvailable(key))
-                {
-                    lastOpt += key.Equals(KeyPlayer.DOWN) ? 1 : -1;
-                    LoadMsg();
-                }
-                opt_items[(int)lastOpt].FocusCenterButton();
-                break;
-            default:
-                break;
-        }
-
+        KeyPlayer key = ControlSystem.KnowKeyHold(KeyPlayer.LEFT, KeyPlayer.RIGHT);
+        
+        if (!key.Equals(KeyPlayer.NO)) Actions(lastOpt, key.Equals(KeyPlayer.RIGHT));
     }
-
-    /// <summary>
-    /// Revisa si es disponible mover el key
-    /// </summary>
-    private bool KeyMoveAvailable(KeyPlayer key) => !lastOpt.Equals(Option.LANGUAGE) && key.Equals(KeyPlayer.UP) || !lastOpt.Equals(Option.BACK) && key.Equals(KeyPlayer.DOWN);
 
     /// <summary>
     /// Dependiendo de la opción y la condicioón

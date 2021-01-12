@@ -60,6 +60,7 @@ public class ControlSystem : MonoBehaviour
 
     /// <summary>
     /// Sabemos si una tecla mantiene presionada
+    /// <para>Por defecto devuelve <see cref="KeyPlayer.NO"/></para>
     /// </summary>
     public static KeyPlayer KnowKeyHold(params KeyPlayer[] kps)
     {

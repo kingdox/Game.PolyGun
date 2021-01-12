@@ -23,19 +23,19 @@ public class MenuManager : MonoManager
         TKey.MSG_CYBORG_UNKNOW
     };
     [Header("MenuManager")]
-    public Button[] btns_Menu;
     public MsgController msg_Message;
     //[Space]
     public bool waitToLoad = false;
     //
     public bool wantRefresh;
-    public int focusIndex = 0;
-
+    //
+    [Space]
+    public ImageController transitorScreen;
+    public MenuInputController menuInputs;
     #endregion
     #region Events
-    private void Start()
-    {
-        focusIndex = 0;
+    private void Start(){
+        transitorScreen.gameObject.SetActive(true);
     }
     private void Update() {
 
@@ -51,9 +51,6 @@ public class MenuManager : MonoManager
                 wantRefresh = false;
                 RefreshAll();
             }
-
-            if (Input.anyKeyDown) ControlCheck();
-
         }
 
 
@@ -65,37 +62,6 @@ public class MenuManager : MonoManager
     #endregion
     #region Methods
 
-
-    private void ControlCheck()
-    {
-        //si eres mouse para afuera
-        if (Input.GetKeyDown(KeyCode.Mouse0)) return;
-        KeyPlayer key = ControlSystem.KnowKeyHold(KeyPlayer.DOWN, KeyPlayer.UP, KeyPlayer.LEFT, KeyPlayer.RIGHT);
-        switch (key)
-        {
-            case KeyPlayer.LEFT:
-            case KeyPlayer.RIGHT:
-                //TODO
-                btns_Menu[focusIndex].Select();
-                //focusIndex
-                //    _
-                break;
-
-            case KeyPlayer.UP:
-            case KeyPlayer.DOWN:
-                //comproacion si no es el primero ni el ultimo
-                if (!(focusIndex.Equals(0) || focusIndex.Equals(btns_Menu.Length-1)))  {
-
-                    focusIndex += key.Equals(KeyPlayer.DOWN) ? 1 : -1;
-                }
-                btns_Menu[focusIndex].Select();
-                break;
-
-            default:
-                break;
-        }
-
-    }
 
     /// <summary>
     ///  Revisamos si en las opciones estan cerradas y si el mensaje ya ha terminado
@@ -118,15 +84,15 @@ public class MenuManager : MonoManager
     private void ButtonAdjust(bool adjust = false){
         Menu[] buttonsMenu = { Menu.Play, Menu.Achieve, Menu.Opt};
 
-        for (int x = 0; x < btns_Menu.Length; x++){
+        for (int x = 0; x < menuInputs.buttons.Length; x++){
 
-            btns_Menu[x].interactable = true;
+            menuInputs.buttons[x].interactable = true;
 
             if (adjust){
                 //si encuentra que forma parte de los adjust
                 foreach (Menu btn in buttonsMenu)
                 {
-                    if ((Menu)x == btn) btns_Menu[x].interactable = false;
+                    if ((Menu)x == btn) menuInputs.buttons[x].interactable = false;
                 }
             }
         }
@@ -163,7 +129,7 @@ public class MenuManager : MonoManager
     /// </summary>
     private void RefreshAll() {
 
-        foreach (Button btn in btns_Menu)
+        foreach (Button btn in menuInputs.buttons)
         {
             MsgController msg = btn.GetComponent<MsgController>();
             msg.LoadKey(msg.key);
