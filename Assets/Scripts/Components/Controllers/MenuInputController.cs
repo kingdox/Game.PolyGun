@@ -27,7 +27,6 @@ public class MenuInputController : MonoBehaviour
     private void LateUpdate()
     {
         UpdateFocus();
-        
     }
     #endregion
     #region Methods
@@ -58,8 +57,8 @@ public class MenuInputController : MonoBehaviour
 
         KeyPlayer keyPress = ControlSystem.KnowKeyHold(KeyPlayer.DOWN, KeyPlayer.UP);
 
-        //si presionan arriba o abajo cambiamos el foco
-        if (!keyPress.Equals(KeyPlayer.NO)){
+        //si existe llave presionada
+        if (ControlSystem.KeyExist(keyPress)){
             UpdateLastIndex(keyPress.Equals(KeyPlayer.DOWN));
         }
 

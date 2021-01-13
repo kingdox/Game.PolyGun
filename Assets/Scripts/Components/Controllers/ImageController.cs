@@ -24,6 +24,7 @@ public class ImageController : MonoBehaviour , IImageController
     private void Awake()
     {
         if (!img) img = GetComponent<Image>();
+        img.enabled = true;
         if (!timeToDisable.Equals(-1)) StartCoroutine( DisableOn());
     }
     private void Update() {

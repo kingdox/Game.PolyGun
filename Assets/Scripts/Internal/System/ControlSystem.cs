@@ -69,6 +69,10 @@ public class ControlSystem : MonoBehaviour
     }
 
     /// <summary>
+    ///  Revisamos si encontramos hay una llave del player
+    /// </summary>
+    public static bool KeyExist(KeyPlayer k) => !k.Equals(KeyPlayer.NO);
+    /// <summary>
     /// Presiona el boton si existe interacción
     /// </summary>
     public static void ButtonDown(Button b, params KeyPlayer[] k){if (IsDown(b, k)) Cast(b);}

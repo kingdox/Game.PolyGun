@@ -69,6 +69,7 @@
     <Compile Include="Assets/Scripts/Internal/XavScripts/MusicSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/DataPass.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/Data.cs" />
+    <Compile Include="Assets/Scripts/Components/Controllers/MenuInputController.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/XavLib.cs" />
     <Compile Include="Assets/Scripts/Internal/System/OptionSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/SfxItem.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
-    <Compile Include="Assets/Scripts/Components/Controllers/MenuInputController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -23,19 +23,57 @@ public class Navigator : MonoBehaviour
     public bool haveBounds = false;
     #endregion
     #region Events
-    private void Awake()
+    private void Start()
     {
-        //se coloca en la pagina 0 antes que nada
         indexActual = 0;
-        XavHelpTo.Change.ActiveObjectsExcept(pages);
-        NavButtonsChecker();
+
+        if (!pages.Length.Equals(0))
+        {
+            RefreshPages();
+        }
+        else
+        {
+            pages = new GameObject[0];
+            SetBtnAct(btn_L);
+            SetBtnAct(btn_R);
+        }
     }
     #endregion
     #region Methods
     /// <summary>
+    /// Actualizamos las paginas y mostramos una de estas
+    /// </summary>
+    public void RefreshPages(int i = 0)
+    {
+        XavHelpTo.Change.ActiveObjectsExcept(pages,i);
+        NavButtonsChecker();
+    }
+    /// <summary>
+    /// Agregamos las nuevas paginas
+    /// </summary>
+    public void SetPages(GameObject[] newPages, int i = 0)
+    {
+        Debug.Log(newPages.Length);
+        //si vemos que hay uno entrante
+        if (!newPages.Length.Equals(0))
+        {
+            XavHelpTo.Change.ActiveObjectsExcept(pages, -1);
+            //pages[indexActual].SetActive(false);
+            pages = newPages;
+            indexActual = i;
+        }
+
+        RefreshPages(i);
+    }
+    /// <summary>
     /// Revisamos si vamos hacia adelante o no
     /// </summary>
     public void _NavigateTo(bool goForward) {
+
+        if (goForward && !btn_R.interactable) return;
+        if (!goForward && !btn_L.interactable) return;
+
+
         indexActual = XavHelpTo.Know.NextIndex(goForward, pages.Length, indexActual);
         XavHelpTo.Change.ActiveObjectsExcept(pages, indexActual);
         //Detectamos los limites
@@ -48,8 +86,16 @@ public class Navigator : MonoBehaviour
     private void NavButtonsChecker()
     {
         if (!haveBounds) return;
-        btn_L.interactable = indexActual != 0;
-        btn_R.interactable = indexActual != pages.Length - 1;
+        SetBtnAct(btn_L, indexActual != 0);
+        SetBtnAct(btn_R, indexActual != pages.Length - 1);
     }
+    /// <summary>
+    /// Ingresa la actividad del botón
+    /// </summary>
+    private void SetBtnAct(Button btn, bool condition = false) => btn.interactable = condition;
+    /// <summary>
+    /// Tomamos el indice actual
+    /// </summary>
+    public int GetIndexActual() => indexActual;
     #endregion
 }
