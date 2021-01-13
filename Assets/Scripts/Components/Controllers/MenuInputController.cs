@@ -17,7 +17,7 @@ public class MenuInputController : MonoBehaviour
 
     private readonly float keyTimeCD = 0.25f;
     private float keyTimeCount = 0;
-
+    private readonly KeyPlayer[] movement ={KeyPlayer.UP,KeyPlayer.DOWN,KeyPlayer.LEFT,KeyPlayer.RIGHT};
     #endregion Events
     #region
     private void Update()
@@ -26,7 +26,7 @@ public class MenuInputController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        UpdateFocus();
+        if (!ControlSystem.KnowKeyHold(movement).Equals(KeyPlayer.NO)) UpdateFocus();
     }
     #endregion
     #region Methods

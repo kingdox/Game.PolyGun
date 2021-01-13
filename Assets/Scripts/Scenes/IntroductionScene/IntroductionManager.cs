@@ -15,13 +15,13 @@ public class IntroductionManager : MonoManager
     public Navigator navigator;
     [Space]
     [Header("Pages")]
-    public GameObject[] tutorialPages;
-    public GameObject[] manualPages;
-    public GameObject[] creditsPages;
+    public IntroductionPages[] introPages;
+    //public GameObject[] tutorialPages;
+    //public GameObject[] manualPages;
+    //public GameObject[] creditsPages;
     public GameObject[][] metaPages;
     private int[] indexPages = {};
     private int lastIndex = 0;
-
     // usar un navigator para cambiar de paginas
     // usar el introduction Manager para setear las paginas
     //y reestablecerlo a 0 (o guardar las pos de cada pagina aquí)
@@ -30,9 +30,10 @@ public class IntroductionManager : MonoManager
     private void Start(){
         lastIndex = 0;
         metaPages = new GameObject[][]{
-            tutorialPages,
-            manualPages,
-            creditsPages
+            introPages[0].pagesG,
+            introPages[1].pagesG,
+            introPages[2].pagesG
+            //TODO
         };
         indexPages = new int[metaPages.Length];
         foreach (GameObject[] pags in metaPages) XavHelpTo.Change.ActiveObjectsExcept(pags, -1);
@@ -74,6 +75,7 @@ public class IntroductionManager : MonoManager
             //Actualizamos el ultimo indice
             indexPages[lastIndex] = navigator.GetIndexActual();
 
+            menuInputC.lastIndex = i;
 
             lastIndex = i;
 

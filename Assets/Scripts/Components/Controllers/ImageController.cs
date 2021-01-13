@@ -9,6 +9,7 @@ using XavLib;
 public class ImageController : MonoBehaviour , IImageController
 {
     #region
+    private Color color_initial;
     [Header("Setting")]
     public Image img;
     [Header("Want Settings")]
@@ -24,7 +25,11 @@ public class ImageController : MonoBehaviour , IImageController
     private void Awake()
     {
         if (!img) img = GetComponent<Image>();
+    }
+    private void Start()
+    {
         img.enabled = true;
+        color_initial = img.color;
         if (!timeToDisable.Equals(-1)) StartCoroutine( DisableOn());
     }
     private void Update() {
@@ -32,7 +37,6 @@ public class ImageController : MonoBehaviour , IImageController
     }
     #endregion
     #region
-
     /// <summary>
     /// Actualiza a lo largo del tiempo y la velocidad aplicada
     /// </summary>
@@ -53,6 +57,15 @@ public class ImageController : MonoBehaviour , IImageController
         yield return new WaitForSeconds(timeToDisable);
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// Cargamos el color inicial como valor a buscar
+    /// <para>Colocamos el valor actual como nuevo inicial</para>
+    /// </summary>
+    public void Refresh(){
+        //Color _c = color_want;
+        color_want = color_initial;
+        color_initial = img.color;
+    }
     public bool IsEnd() => img.color.Equals(color_want);
     #endregion
 }
@@ -61,7 +74,7 @@ interface IImageController
 {
     /// <summary>
     ///  Revisa si ha terminado
-    ///  TODO no funciona XD
+    ///  TODO no funciona 
     /// </summary>
     bool IsEnd();
 }

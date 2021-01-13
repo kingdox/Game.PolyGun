@@ -20,8 +20,11 @@ public enum TKey
     _8_MUSIC,
     _9_SOUND,
     _10_CONTROLS,
-#endregion
-#region Achievements
+    _11_TUTORIAL,
+    _12_MANUAL,
+    _13_CREDITS,
+    #endregion
+    #region Achievements
     //Achievements
     // P1 TODO
     ACHIEVE_KILLS_ROBOT,

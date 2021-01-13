@@ -20,6 +20,9 @@
                     "_8_MUSIC",
                     "_9_SOUND",
                     "_10_CONTROLS",
+                    "_11_TUTORIAL",
+                    "_12_MANUAL",
+                    "_13_CREDITS",
 #endregion
 #region AchievementsScene
 
