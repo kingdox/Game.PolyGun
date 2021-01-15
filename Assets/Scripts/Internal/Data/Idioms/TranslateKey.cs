@@ -78,4 +78,19 @@ public enum TKey
     MSG_INIT_HISTORY,
     MSG_INIT_PRESS_ANY,
     #endregion
+    #region IntroductionScene
+    // Tutorial PAGES
+    PAGE_TUTORIAL_1,
+    PAGE_TUTORIAL_2,
+    PAGE_TUTORIAL_3,
+    // Manual PAGES
+    PAGE_MANUAL_1,
+    PAGE_MANUAL_2,
+    PAGE_MANUAL_3,
+    // Credits PAGES
+    PAGE_CREDITS_TITLE,
+    PAGE_CREDITS_1,
+    PAGE_CREDITS_2,
+    PAGE_CREDITS_YOU
+    #endregion
 }
