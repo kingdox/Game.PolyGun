@@ -41,7 +41,7 @@ public enum TKey
 
 #endregion
 #region Messages, del menú
-    //Messages (Mensajes del cyborg...)
+    //Messages (Mensajes del cyborg...).
     MSG_CYBORG_WHERE,
     MSG_CYBORG_UNKNOW,
 #endregion
