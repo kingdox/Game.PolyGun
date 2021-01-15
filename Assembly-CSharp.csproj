@@ -55,6 +55,7 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionPages.cs" />
     <Compile Include="Assets/Scripts/Components/Navigator.cs" />
     <Compile Include="Assets/Scripts/Internal/System/ControlSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/TranslateData.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Assets/Scripts/Scenes/OptionsScene/OptionsItem.cs" />
     <Compile Include="Assets/Scripts/Scenes/InitialScene/InitialManager.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/MusicSystem.cs" />
+    <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionPage.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/DataPass.cs" />
     <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionManager.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/Data.cs" />
@@ -82,8 +84,7 @@
     <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
-    <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionPage.cs" />
-    <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionPages.cs" />
+    <Compile Include="Assets/Scripts/Components/MultiColor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

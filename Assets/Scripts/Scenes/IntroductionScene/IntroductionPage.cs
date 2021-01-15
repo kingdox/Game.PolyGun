@@ -6,8 +6,6 @@ using XavLib;
 #endregion
 public class IntroductionPage : MonoBehaviour
 {
-    //Maneja y refresca toda la información dentro de estas
-    //TODO aquí nos encargamos de refrescar todas las animación y textos..
     #region Variables
     [Header("IntroductionPage Setup")]
     [Space]
@@ -61,12 +59,23 @@ public class IntroductionPage : MonoBehaviour
     /// </summary>
     public void ReloadPage()
     {
-        print($"OBJ {name}");
+        //print($"OBJ {name}");
         for (int j = 0; j < imagesC.Length; j++){
             imagesC[j].Refresh();
         }
         for (int j = 0; j < messagesC.Length; j++){
             messagesC[j].Refresh();
+        }
+    }
+
+    /// <summary>
+    /// Cargamos al instante los datos
+    /// </summary>
+    public void InstantLoadPage()
+    {
+        for (int x = 0; x < messagesC.Length; x++)
+        {
+            messagesC[x].LoadText(messagesC[x]._GetSavedData(),0);
         }
     }
     #endregion

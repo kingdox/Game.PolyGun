@@ -10,7 +10,7 @@ namespace XavLib
     /// <summary>
     /// Herramientas para facilitar codigo
     /// <para>Aquí se poseerán funciones unicamente "static"</para>
-    /// <see cref="XavHelpTo"/> Ultima Actualización => 12 ene 2021
+    /// <see cref="XavHelpTo"/> Ultima Actualización => 15 ene 2021
     /// </summary>
     public struct XavHelpTo
     {
@@ -207,6 +207,10 @@ namespace XavLib
             /// <summary>
             /// Revisamos si sigue contando o si reseteamos el contador
             /// <para>Retorna 0 o sigue contando si no ha sobrepasado</para>
+            /// <para>EX =>
+            /// count = TimeCountOf(count, cooldown);
+            /// if (count.Equals(0)) {...};
+            /// </para>
             /// </summary>
             public static float TimeCountOf(float count, float cooldown) =>  (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
         }

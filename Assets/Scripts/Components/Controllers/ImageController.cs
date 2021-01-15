@@ -12,7 +12,6 @@ public class ImageController : MonoBehaviour , IImageController
     private Color color_initial;
     [Header("Setting")]
     public Image img;
-    [Header("Want Settings")]
     public Color color_want; // => El color que queremos apuntar
     [Space]
     public bool keepUpdate = true;

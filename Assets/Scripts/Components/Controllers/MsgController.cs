@@ -134,9 +134,15 @@ public class MsgController : MonoInit
 
         //Añadimos la carga
         loadNumber++;
-
-        //Corremos el nuevo texto
-        StartCoroutine(SetText(speed,loadNumber, 0, s));
+        if (speed == 0)
+        {
+            txt_msg.text = savedText;
+        }
+        else
+        {
+            //Corremos el nuevo texto
+            StartCoroutine(SetText(speed,loadNumber, 0, s));
+        }
     }
     /// <summary>
     /// Cargamos una llave y la guardamos, 

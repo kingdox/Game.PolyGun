@@ -36,6 +36,10 @@ public class IntroductionManager : MonoManager
     #endregion
     #region Methods
 
+    /// <summary>
+    /// Checkea si ha tocado las teclas en concretas
+    /// <para>ignora el mouse</para>
+    /// </summary>
     private void ControlCheck()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)) return;
@@ -44,6 +48,8 @@ public class IntroductionManager : MonoManager
 
         //si presionan derecha o izq cambiamos la pagina
         if (ControlSystem.KeyExist(keyPress)){
+            //Cargamos la pagina al movernos//TODO
+            introPages[lastIndex].InstantPage(indexPages[lastIndex]);
             navigator._NavigateTo(keyPress.Equals(KeyPlayer.RIGHT));
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XavLib;
 #endregion
 public class IntroductionPages : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class IntroductionPages : MonoBehaviour
         int length = transform.childCount;
         //si hay diferencia de longitudes de pagina
         pages = new IntroductionPage[length];
-        pagesG = new GameObject[length];
+        pagesG = XavHelpTo.Get.Childs(transform);
 
         for (int x = 0; x < length; x++)
         {
@@ -38,7 +39,7 @@ public class IntroductionPages : MonoBehaviour
     /// Carga la pagina en el arreglo
     /// </summary>
     public void LoadPage(int x){
-        pagesG[x] = transform.GetChild(x).gameObject;
+        //pagesG[x] = transform.GetChild(x).gameObject;
         pages[x] = pagesG[x].GetComponent<IntroductionPage>();
         pagesG[x].SetActive(false);
     }
@@ -51,6 +52,17 @@ public class IntroductionPages : MonoBehaviour
         pages[i].ReloadPage();
     }
 
+    /// <summary>
+    /// Actualizo por completo
+    /// </summary>
+    public void InstantPage(int i)
+    {
+        pages[i].InstantLoadPage();
+    }
+
+    /// <summary>
+    /// Devuelve el arreglo de los objetos
+    /// </summary>
     public GameObject[] GetObjectsRef() => pagesG;
     #endregion
 }
