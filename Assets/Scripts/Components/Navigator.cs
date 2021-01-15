@@ -49,11 +49,10 @@ public class Navigator : MonoBehaviour
         NavButtonsChecker();
     }
     /// <summary>
-    /// Agregamos las nuevas paginas
+    /// Agregamos las nuevas paginas como referencias
     /// </summary>
     public void SetPages(GameObject[] newPages, int i = 0)
     {
-        Debug.Log(newPages.Length);
         //si vemos que hay uno entrante
         if (!newPages.Length.Equals(0))
         {

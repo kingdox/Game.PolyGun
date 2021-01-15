@@ -38,6 +38,7 @@ public class MsgController : MonoInit
     #region Events
      new void Awake() {
 
+        if (!txt_msg) txt_msg = GetComponent<Text>();
 
         //keepLoading = true;
         savedText = key.Equals(TKey.No)
@@ -61,7 +62,7 @@ public class MsgController : MonoInit
             if (!key.Equals(TKey.No) ) savedText = Data.Translated().Value(key);
 
             //Cargamos los datos del texto guardado
-            LoadText(savedText);
+            Refresh();
         }
     }
     #endregion
@@ -71,7 +72,10 @@ public class MsgController : MonoInit
     /// Nos informa si ha terminado de cargar el texto
     /// </summary>
     public bool IsFinished() => txt_msg.text == savedText;
-
+    /// <summary>
+    /// Cargamos el ultimo texto guardado
+    /// </summary>
+    public void Refresh() => LoadText(savedText);
 
 
     private IEnumerator SetText(

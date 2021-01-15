@@ -16,35 +16,18 @@ public class IntroductionManager : MonoManager
     [Space]
     [Header("Pages")]
     public IntroductionPages[] introPages;
-    //public GameObject[] tutorialPages;
-    //public GameObject[] manualPages;
-    //public GameObject[] creditsPages;
-    public GameObject[][] metaPages;
     private int[] indexPages = {};
     private int lastIndex = 0;
-    // usar un navigator para cambiar de paginas
-    // usar el introduction Manager para setear las paginas
-    //y reestablecerlo a 0 (o guardar las pos de cada pagina aquí)
     #endregion
     #region Events
     private void Start(){
         lastIndex = 0;
-        metaPages = new GameObject[][]{
-            introPages[0].pagesG,
-            introPages[1].pagesG,
-            introPages[2].pagesG
-            //TODO
-        };
-        indexPages = new int[metaPages.Length];
-        foreach (GameObject[] pags in metaPages) XavHelpTo.Change.ActiveObjectsExcept(pags, -1);
-
+        indexPages = new int[introPages.Length];
         navigator.haveBounds = true;
-        navigator.SetPages(metaPages[0]);
-        //aquí se coloca al navigator e page initial
     }
     public override void Init()
     {
-        print("Hola");
+        navigator.SetPages(introPages[0].GetObjectsRef());
     }
     private void Update()
     {
@@ -80,7 +63,9 @@ public class IntroductionManager : MonoManager
             lastIndex = i;
 
             //Colocamos als nuevas paginas
-            navigator.SetPages(metaPages[i], indexPages[i]);
+            navigator.SetPages(introPages[i].GetObjectsRef(), indexPages[i]);
+
+            introPages[i].ReloadPage(indexPages[i]);
         }
     }
     #endregion

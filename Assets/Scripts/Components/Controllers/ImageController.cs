@@ -57,15 +57,8 @@ public class ImageController : MonoBehaviour , IImageController
         yield return new WaitForSeconds(timeToDisable);
         gameObject.SetActive(false);
     }
-    /// <summary>
-    /// Cargamos el color inicial como valor a buscar
-    /// <para>Colocamos el valor actual como nuevo inicial</para>
-    /// </summary>
-    public void Refresh(){
-        //Color _c = color_want;
-        color_want = color_initial;
-        color_initial = img.color;
-    }
+    
+    public void Refresh() => img.color = color_initial;
     public bool IsEnd() => img.color.Equals(color_want);
     #endregion
 }
@@ -77,4 +70,9 @@ interface IImageController
     ///  TODO no funciona 
     /// </summary>
     bool IsEnd();
+
+    /// <summary>
+    /// Cargamos el color inicial como valor a buscar
+    /// </summary>
+    void Refresh();
 }

@@ -78,7 +78,18 @@ namespace XavLib
             /// <returns></returns>
             public static int ZeroMax(int max) => Random.Range(0, max);
 
-            
+            /// <summary>
+            /// Devuelve organizadamente los hijos de este parent
+            /// </summary>
+            public static GameObject[] Childs(Transform parent) {
+                int lenght = parent.childCount;
+                GameObject[] childs = new GameObject[lenght];
+                for (int x = 0; x < lenght; x++){
+                    childs[x] = parent.GetChild(x).gameObject;
+                }
+                return childs;
+            }
+
         }
         #endregion
         #region Set
