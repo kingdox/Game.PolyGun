@@ -9,36 +9,36 @@
 
 #region Buttons
                     // BUTTONS
-                    "_0_PLAY",
-                    "_1_INTRODUCTION",
-                    "_2_ACHIEVEMENTS",
-                    "_3_OPTIONS",
-                    "_4_EXIT",
-                    "_5_BACK",
-                    "_6_LANGUAGE",
-                    "_7_TEXTSPEED",
-                    "_8_MUSIC",
-                    "_9_SOUND",
-                    "_10_CONTROLS",
-                    "_11_TUTORIAL",
-                    "_12_MANUAL",
-                    "_13_CREDITS",
+                    "Jugar",
+                    "Introducción",
+                    "Logros",
+                    "Opciones",
+                    "Salir",
+                    "Retroceder",
+                    "Lenguaje",
+                    "Lectura",
+                    "Musica",
+                    "Sonidos",
+                    "Controles",
+                    "Tutorial",
+                    "Manual",
+                    "Creditos",
 #endregion
 #region AchievementsScene
 
-                     //Achievements
-                    // P1 TODO
-                    "ACHIEVE_KILLS_ROBOT",
-                    "ACHIEVE_KILLS_BOSS",
-                    "ACHIEVE_WAVES_ENEMIES",
-                    "ACHIEVE_OBJECTS_COLLECTED",
-                    "ACHIEVE_HEALS_GAME",
+                     //Achievements (y su descripción)
+                    // P1
+                    "Erradicador", "Elimina en una partida muchos enemigos.",
+                    "Imponente", "Elimina cuantos Jefes puedas en una partida.",
+                    "Sobreviviente", "¡Aguanta tantas oleadas de enemigos como seas capaz !.",
+                    "Figurate tú", "Recoge tantos fragmentos del suelo como puedas",
+                    "Sanitario", "Recupera mucha vida consumiendo fragmentos",
                     // P2
-                    "ACHIEVE_TIME_DEATHLIMIT",
-                    "ACHIEVE_METTERS_GAME",
-                    "ACHIEVE_CREATIONS_GAME",
-                    "ACHIEVE_ROBOTS_ALIVE",
-                    "ACHIEVE_ESPECIAL_READ",
+                    "Al límite", "Está al borde de morir por unos largos periodos de tiempo",
+                    "Velocista", "Recorre muchos metros moviendo a “Poly”",
+                    "Creacionista", "Crea tantas figuras aliadas como puedas en una partida",
+                    "Estudioso", "Que buen lector :)",
+                    "Corrupto", "Sé tus intenciones, pero no lo encontrarás.",
 #endregion
 #region Messages, del menúScene
 
@@ -69,11 +69,11 @@
                     "MSG_OPT_MUSIC_HIGH",
 
                     // MSG_OPT_SOUND
-                    "MSG_OPT_SOUND_NO",
-                    "MSG_OPT_SOUND_YES",
+                    "Sonido apagado",
+                    "Sonido encendido",
 
                     // MSG_OPT_CONTROLS
-                    "MSG_OPT_CONTROLS_NORMAL",
+                    "Controles por defecto",
                     "MSG_OPT_CONTROLS_INVERT",
 #endregion
 #region Messages, de InitScene

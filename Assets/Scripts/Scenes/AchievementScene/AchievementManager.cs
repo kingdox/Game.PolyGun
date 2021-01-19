@@ -99,6 +99,7 @@ public class AchievementManager : MonoManager
                 //Se asigna los datos del titulo, el limite y el valor guardado
                 items[x].SetItem(new TextValBarItem(
                     achievements[count].key,
+                    achievements[count].keyDesc,
                     achievements[count].limit,
                     DataPass.GetSavedData().achievements[count]
                 ));

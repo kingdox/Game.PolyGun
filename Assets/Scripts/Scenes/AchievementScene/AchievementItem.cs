@@ -19,7 +19,9 @@ public class AchievementItem : MonoBehaviour
 
     [Header("Settings")]
     public MsgController msg_title;
+    public MsgController msg_description;
     public MsgController msg_value;
+
 
     [Space]
     public Image img_bar_last;
@@ -65,6 +67,7 @@ public class AchievementItem : MonoBehaviour
         //Debug.Log($"{item.key}: {item.TextValue}");
         //Cargamos la llave
         msg_title.LoadKey(item.key);
+        msg_description.LoadKey(item.keyDesc);
         //Cargamos el valor
         msg_value.LoadText(item.TextValue);
 

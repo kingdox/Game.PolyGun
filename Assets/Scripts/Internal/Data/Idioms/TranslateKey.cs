@@ -26,21 +26,31 @@ public enum TKey
     #endregion
     #region Achievements
     //Achievements
-    // P1 TODO
-    ACHIEVE_KILLS_ROBOT,
+    // P1 
+    ACHIEVE_KILLS_ENEMY,
+        ACHIEVE_KILLS_ENEMY_DESC,
     ACHIEVE_KILLS_BOSS,
+        ACHIEVE_KILLS_BOSS_DESC,
     ACHIEVE_WAVES_ENEMIES,
+        ACHIEVE_WAVES_ENEMIES_DESC,
     ACHIEVE_OBJECTS_COLLECTED,
+        ACHIEVE_OBJECTS_COLLECTED_DESC,
     ACHIEVE_HEALS_GAME,
+        ACHIEVE_HEALS_GAME_DESC,
     // P2
     ACHIEVE_TIME_DEATHLIMIT,
+        ACHIEVE_TIME_DEATHLIMIT_DESC,
     ACHIEVE_METTERS_GAME,
+        ACHIEVE_METTERS_GAME_DESC,
     ACHIEVE_CREATIONS_GAME,
-    ACHIEVE_ROBOTS_ALIVE,
+        ACHIEVE_CREATIONS_GAME_DESC,
     ACHIEVE_ESPECIAL_READ,
+        ACHIEVE_ESPECIAL_READ_DESC,
+    ACHIEVE_ESPECIAL_CHEATS,
+        ACHIEVE_ESPECIAL_CHEATS_DESC,
 
-#endregion
-#region Messages, del menú
+    #endregion
+    #region Messages, del menú
     //Messages (Mensajes del cyborg...).
     MSG_CYBORG_WHERE,
     MSG_CYBORG_UNKNOW,

@@ -26,9 +26,9 @@ namespace Achievements
 
         //START Achievement 
         // 1 => Reporto los ingredientes de la receta
-        private delegate Achievement AchievementRecipe(TKey key, params float[] limits);
+        private delegate Achievement AchievementRecipe(TKey key, TKey keyDesc, params float[] limits);
         // 2 => Declaro la preparación de la receta
-        private readonly static AchievementRecipe achieve = (TKey key, float[] limits) => new Achievement(key, new Limit(limit(limits)));
+        private readonly static AchievementRecipe achieve = (TKey key, TKey keyDesc, float[] limits) => new Achievement(key, keyDesc, new Limit(limit(limits)));
         //CURRY END
 
         //START Limit
@@ -49,18 +49,18 @@ namespace Achievements
             achievements = new Achievement[]
             {
                 //Pagina 1
-                achieve(TKey.ACHIEVE_KILLS_ROBOT, 30,100,300),
-                achieve(TKey.ACHIEVE_KILLS_BOSS, 5,25,50),
-                achieve(TKey.ACHIEVE_WAVES_ENEMIES, 3,15,30),
-                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED, 50,100,300),
-                achieve(TKey.ACHIEVE_HEALS_GAME, 30,120,300),
+                achieve(TKey.ACHIEVE_KILLS_ENEMY,TKey.ACHIEVE_KILLS_ENEMY_DESC, 30,100,300),
+                achieve(TKey.ACHIEVE_KILLS_BOSS,TKey.ACHIEVE_KILLS_BOSS_DESC, 5,25,50),
+                achieve(TKey.ACHIEVE_WAVES_ENEMIES,TKey.ACHIEVE_WAVES_ENEMIES_DESC, 3,15,30),
+                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED,TKey.ACHIEVE_OBJECTS_COLLECTED_DESC, 50,100,300),
+                achieve(TKey.ACHIEVE_HEALS_GAME,TKey.ACHIEVE_HEALS_GAME_DESC, 30,120,300),
 
                 //Pagina 2 
-                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT, 5,20,60),
-                achieve(TKey.ACHIEVE_METTERS_GAME, 2,5,10),
-                achieve(TKey.ACHIEVE_CREATIONS_GAME, 2,5,10),
-                achieve(TKey.ACHIEVE_ROBOTS_ALIVE, 2,5,10),
-                achieve(TKey.ACHIEVE_ESPECIAL_READ, 2,5,20),
+                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT,TKey.ACHIEVE_TIME_DEATHLIMIT_DESC, 5,20,60),
+                achieve(TKey.ACHIEVE_METTERS_GAME,TKey.ACHIEVE_METTERS_GAME_DESC, 2,5,10),
+                achieve(TKey.ACHIEVE_CREATIONS_GAME,TKey.ACHIEVE_CREATIONS_GAME_DESC, 2,5,10),
+                achieve(TKey.ACHIEVE_ESPECIAL_READ,TKey.ACHIEVE_ESPECIAL_READ_DESC, 2,5,20),
+                achieve(TKey.ACHIEVE_ESPECIAL_CHEATS,TKey.ACHIEVE_ESPECIAL_CHEATS_DESC, 2,5,10),
 
                 //Logro especial ideas
                 //tramposo => has usado ctrl + Q para abrirlo...
@@ -82,10 +82,12 @@ namespace Achievements
     public struct Achievement
     {
         public TKey key;
+        public TKey keyDesc;
         public Limit limit;
-        public Achievement(TKey key, Limit limit)
+        public Achievement(TKey key, TKey keyDesc, Limit limit)
         {
             this.key = key;
+            this.keyDesc = keyDesc;
             this.limit = limit;
         }
     }
@@ -98,6 +100,7 @@ namespace Achievements
     public struct TextValBarItem
     {
         public TKey key;
+        public TKey keyDesc;
         public Limit limit;
         public float value;
 
@@ -113,9 +116,10 @@ namespace Achievements
         /// <summary>
         /// Asigna el titulo el limite y el valor que posee el player sobre ese logro
         /// </summary>
-        public TextValBarItem(TKey key, Limit limit, float value)
+        public TextValBarItem(TKey key, TKey keyDesc, Limit limit, float value)
         {
             this.key = key;
+            this.keyDesc = keyDesc;
             this.limit = limit;
             this.value = value;
         }
