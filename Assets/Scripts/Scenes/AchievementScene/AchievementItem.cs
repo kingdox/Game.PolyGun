@@ -28,7 +28,9 @@ public class AchievementItem : MonoBehaviour
     [Space]
     public Image img_bar_actual;
     public RectTransform rect_bar_actual;
-
+    [Space]
+    [Header("Unlocker")]
+    public bool isUnlockItem = false;
 
     #endregion
     #region Events
@@ -38,11 +40,19 @@ public class AchievementItem : MonoBehaviour
         img_bar_last.color = Color.white;
         //rect_bar_actual.anchorMax = new Vector2(0, rect_bar_actual.anchorMax.y);
         toMax = 0;
+
+       
+    }
+    private void Start()
+    {
+        //Comprobamos si el item es de tipo unlock
+        if (isUnlockItem)
+        {
+            AchieveSystem.SetUnlockItem(this);
+        }
     }
     private void Update(){
-
         DrawBar();
-
     }
     #endregion
     #region Methods
@@ -108,7 +118,7 @@ public class AchievementItem : MonoBehaviour
         //evitamos renderizar
         if (toMax == _rectX) return;
 
-        float _scale = 2;
+        float _scale = 2;//TODO HARDCODED
 
         rect_bar_actual.anchorMax = new Vector2(
             XavHelpTo.Set.UnitInTime(_rectX, toMax,_scale)

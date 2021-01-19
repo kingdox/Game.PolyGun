@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI ;
-using Achievements;
 using XavLib;
 using Environment;
 #endregion
@@ -97,14 +96,7 @@ public class AchievementManager : MonoManager
                 //Debug.Log($"{x}: {achievements[count].key} => {DataPass.GetSavedData().achievements[count]} , de {achievements[count].limit}");
                 //Se asigna los datos del titulo, el limite y el valor guardado
                 AchieveSystem.Setitem(count, items[x]);
-                //items[x].SetItem(new TextValBarItem(
-                //    achievements[count].key,
-                //    achievements[count].keyDesc,
-                //    achievements[count].limit,
-                //    DataPass.GetSavedData().achievements[count]
-                //));
             }
-
 
             count++;
         }

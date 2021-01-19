@@ -26,6 +26,7 @@ public class MenuInputController : MonoBehaviour
     }
     private void LateUpdate()
     {
+        //si hay algún movimiento presionado
         if (!ControlSystem.KnowKeyHold(movement).Equals(KeyPlayer.NO)) UpdateFocus();
     }
     #endregion
@@ -42,7 +43,11 @@ public class MenuInputController : MonoBehaviour
         else if (Input.anyKey)
         {
             keyTimeCount = XavHelpTo.Set.TimeCountOf(keyTimeCount, keyTimeCD);
-            if (keyTimeCount.Equals(0)) ControlCheck();
+            if (keyTimeCount.Equals(0))
+            {
+                ControlCheck();
+                //keyTimeCount = 0;
+            }
         }
         else keyTimeCount = 0;
     }

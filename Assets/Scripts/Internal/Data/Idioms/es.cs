@@ -49,24 +49,24 @@
 #region Messages, de Opciones
 
                     //Messages Opt (Mensajes de las opciones
-                    "ESMSG_OPT_LANGUAGE",
-                    "MSG_OPT_TEXTSPEED",
-                    "MSG_OPT_MUSIC",
-                    "MSG_OPT_SOUND",
-                    "MSG_OPT_CONTROLS",
-                    "MSG_OPT_BACK",
+                    "Idiomas del juego",
+                    "Velocidad de los mensajes para mostrar su contenido",
+                    "Musica de juego",
+                    "Sonidos de juego, efectos de sonido",
+                    "Cambiar la forma en la que juegas y navegas",
+                    "Retroceder al menú anterior",
 
                     // MSG_OPT_TEXTSPEED
-                    "MSG_OPT_TEXTSPEED_INSTANT",
-                    "MSG_OPT_TEXTSPEED_FAST",
-                    "MSG_OPT_TEXTSPEED_NORMAL",
-                    "MSG_OPT_TEXTSPEED_SLOW",
+                    "Texto al Instante",
+                    "Rapido",
+                    "Normal",
+                    "Lento",
 
                     // MSG_OPT_MUSIC
-                    "MSG_OPT_MUSIC_NO",
-                    "MSG_OPT_MUSIC_LOW",
-                    "MSG_OPT_MUSIC_NORMAL",
-                    "MSG_OPT_MUSIC_HIGH",
+                    "Sin musica",
+                    "Baja",
+                    "Normal",
+                    "Alta",
 
                     // MSG_OPT_SOUND
                     "Sonido apagado",
@@ -74,26 +74,26 @@
 
                     // MSG_OPT_CONTROLS
                     "Controles por defecto",
-                    "MSG_OPT_CONTROLS_INVERT",
+                    "Controles invertidos (WASD)",//Show Img?
 #endregion
 #region Messages, de InitScene
-                    "MSG_INIT_HISTORY",
-                    "MSG_INIT_PRESS_ANY",
+                    "Poly es un ser que nunca tuvo que existir, fue un error a causa de la fusión de fragmentos irregulares, las figuras malvadas han decidido eliminar a Poly, pero este no se dejará vencer...",
+                    "Presiona cualquier tecla para iniciar",
 #endregion
 #region IntroductionScene
                     // Tutorial PAGES
-                    "PAGE_TUTORIAL_1",
+                    "Poly-Gun: Irregular adventure es un juego en el que tendremos que recoger fragmentos del suelo y ir eliminando enemigos la mayor cantidad de oleadas posibles, para ello nuestro personaje Poly dispone de un arma para disparar a las figuras enemigas",
                     "PAGE_TUTORIAL_2",
                     "PAGE_TUTORIAL_3",
                     // Manual PAGES
-                    "PAGE_MANUAL_1",
+                    "PAGE_MANUAL_1 ingrese apston de texto",
                     "PAGE_MANUAL_2",
                     "PAGE_MANUAL_3",
                     // Credits PAGES
-                    "PAGE_CREDITS_TITLE",
-                    "PAGE_CREDITS_1",
-                    "PAGE_CREDITS_2",
-                    "PAGE_CREDITS_YOU"
+                    "Creditos",
+                    "Xavier Arpa L.",
+                    "Nadie... :(",
+                    "Y gracias a ti por jugar :)"
 #endregion
         };
     }
