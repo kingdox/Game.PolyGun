@@ -2236,6 +2236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitorScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1280521088165361468, guid: 35f3eda05dd0749198509c3a4fbb6d08, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1280521088165361469, guid: 35f3eda05dd0749198509c3a4fbb6d08, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -12,7 +12,7 @@ public class AchieveSystem : MonoBehaviour
     private readonly Achievement[] achievements = Data.data.GetAchievements();
 
     private static AchieveSystem _;
-
+    public static int achievementLenght;
 
     //Donde controlaremos lo que meustra
     //un manager o el unlocked se asignaa el achieveUnlock para que sepa cual tomar
@@ -32,19 +32,25 @@ public class AchieveSystem : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        achievementLenght = achievements.Length;
+
     }
-    #endregion
-    #region Methods
+#endregion
+#region Methods
 
 
-
-    public static void Setitem(int index)
+/// <summary>
+/// Asigna al item los valores
+/// </summary>
+public static void Setitem(int index, AchievementItem item)
     {
-
-        //achieveItem.SetItem(new TextValBarItem(
-
-        )
-
+        item.SetItem(new TextValBarItem(
+                    _.achievements[index].key,
+                    _.achievements[index].keyDesc,
+                    _.achievements[index].limit,
+                    DataPass.GetSavedData().achievements[index]
+                ));
     }
 
     #endregion

@@ -11,7 +11,6 @@ using Environment;
 public class AchievementManager : MonoManager
 {
     #region Variables
-    private readonly Achievement[] achievements = Data.data.GetAchievements();
 
 
     [Header("Settings")]
@@ -66,11 +65,11 @@ public class AchievementManager : MonoManager
     {
         SavedData _saved = DataPass.GetSavedData();
         //Si se posee distancias distintas se actualiza
-        if (_saved.achievements.Length != achievements.Length)
+        if (_saved.achievements.Length != AchieveSystem.achievementLenght)
         {
             //Asignamos el cambio de dimensión y guardamos
             //Se recomienda limpiar los datos en caso de que haysa hecho muchos cambios...
-            _saved.achievements = XavHelpTo.Set.Length(_saved.achievements, achievements.Length);
+            _saved.achievements = XavHelpTo.Set.Length(_saved.achievements, AchieveSystem.achievementLenght);
             DataPass.SetData(_saved);
             DataPass.SaveLoadFile(true);
         }
@@ -88,7 +87,7 @@ public class AchievementManager : MonoManager
         for (int x = 0; x < items.Length; x++)
         {
             //si existe el item no sale de los limites de los achievements
-            bool condition = XavHelpTo.Know.IsOnBounds(count, achievements.Length);
+            bool condition = XavHelpTo.Know.IsOnBounds(count, AchieveSystem.achievementLenght);
 
             //muestra o esconde en caso de formar parte o no
             XavHelpTo.Change.ActiveObject(items[x].gameObject, condition);
@@ -97,12 +96,13 @@ public class AchievementManager : MonoManager
             if (condition){
                 //Debug.Log($"{x}: {achievements[count].key} => {DataPass.GetSavedData().achievements[count]} , de {achievements[count].limit}");
                 //Se asigna los datos del titulo, el limite y el valor guardado
-                items[x].SetItem(new TextValBarItem(
-                    achievements[count].key,
-                    achievements[count].keyDesc,
-                    achievements[count].limit,
-                    DataPass.GetSavedData().achievements[count]
-                ));
+                AchieveSystem.Setitem(count, items[x]);
+                //items[x].SetItem(new TextValBarItem(
+                //    achievements[count].key,
+                //    achievements[count].keyDesc,
+                //    achievements[count].limit,
+                //    DataPass.GetSavedData().achievements[count]
+                //));
             }
 
 
@@ -123,7 +123,7 @@ public class AchievementManager : MonoManager
         int _newIndex = index + distance;
 
         //si no se ha salido asignamos el nuevo index
-        if (XavHelpTo.Know.IsOnBounds(_newIndex, achievements.Length)) index = _newIndex;
+        if (XavHelpTo.Know.IsOnBounds(_newIndex, AchieveSystem.achievementLenght)) index = _newIndex;
         else index = _newIndex < 0 ? indexlimit : 0;
         AssignAchievementItem();
     }
@@ -136,7 +136,7 @@ public class AchievementManager : MonoManager
     private int GetLimitIndex(){
         int newIndex = 0;
         int distance = items.Length;
-        while (achievements.Length > newIndex) newIndex = distance + newIndex;
+        while (AchieveSystem.achievementLenght > newIndex) newIndex = distance + newIndex;
         return newIndex - distance;
     }
 
