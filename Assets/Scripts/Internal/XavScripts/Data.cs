@@ -22,7 +22,7 @@ namespace Environment
         public static Data data = new Data();
 
         public readonly string savedPath = "saved1.txt";
-        public readonly string version = "v0.3.7";
+        public readonly string version = "v0.5.2";
 
        
        
