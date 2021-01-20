@@ -145,5 +145,3 @@ public class MenuManager : MonoManager
     public void ExitApp() => Application.Quit();
     #endregion
 }
-
-//Podríamos emitir un boolcuando terminamos de cargar el texto? en un updater?

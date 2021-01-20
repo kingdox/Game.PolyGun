@@ -86,6 +86,7 @@
     <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

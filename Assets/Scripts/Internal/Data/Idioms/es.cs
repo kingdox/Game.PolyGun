@@ -43,7 +43,7 @@
 #region Messages, del menúScene
 
                     //Messages TODO
-                    "MSG_CYBORG_WHERE",
+                    "Donde estoy?, por que todos vienen a por mi, será por los distinto que no parecem emr",
                     "MSG_CYBORG_UNKNOW",
 #endregion
 #region Messages, de Opciones
@@ -73,11 +73,11 @@
                     "Sonido encendido",
 
                     // MSG_OPT_CONTROLS
-                    "Controles por defecto",
-                    "Controles invertidos (WASD)",//Show Img?
+                    "Controles por defecto (Flechas y C,V,B)",
+                    "Controles invertidos (WASD y flechas)",//Show Img?
 #endregion
 #region Messages, de InitScene
-                    "Poly es un ser que nunca tuvo que existir, fue un error a causa de la fusión de fragmentos irregulares, las figuras malvadas han decidido eliminar a Poly, pero este no se dejará vencer...",
+                    "En un mundo extraño de figuras se creó a Poly, un ser que nunca tuvo que existir, fue un error a causa de la fusión de fragmentos, las figuras malvadas han decidido eliminar a Poly, pero este no se dejará vencer...",
                     "Presiona cualquier tecla para iniciar",
 #endregion
 #region IntroductionScene

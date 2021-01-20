@@ -57,10 +57,10 @@ namespace Environment
     /// </summary>
     public enum Scenes
     {
-        InitialScene,
+        InitialScene,//Pantalla inicial del lore...
         MenuScene, //el menu principal apra acceder a los demás sitios
         AchievementsScene, // Donde están los logros
-        GameScene,
+        GameScene, //Pantalla de juego
 
     }
     /// <summary>

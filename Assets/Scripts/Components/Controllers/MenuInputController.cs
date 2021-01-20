@@ -20,8 +20,21 @@ public class MenuInputController : MonoBehaviour
     private readonly KeyPlayer[] movement ={KeyPlayer.UP,KeyPlayer.DOWN,KeyPlayer.LEFT,KeyPlayer.RIGHT};
     #endregion Events
     #region
+    private void OnEnable()
+    {
+        buttons[0].Select();
+        lastIndex = 0;
+        //TODO testeo, si daña algo de otra pantalla quitar
+    }
     private void Update()
     {
+        //TODO en GameScene no se esta mostrando el foco
+        //if (Input.anyKeyDown)
+        //{
+        //    print($"MenuInputController Press {lastIndex}");
+
+        //}
+
         KeyDetection();
     }
     private void LateUpdate()
@@ -46,7 +59,6 @@ public class MenuInputController : MonoBehaviour
             if (keyTimeCount.Equals(0))
             {
                 ControlCheck();
-                //keyTimeCount = 0;
             }
         }
         else keyTimeCount = 0;
