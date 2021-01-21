@@ -21,11 +21,24 @@ public class MonoX : MonoBehaviour
     /// Tomamos el valor del mismo objeto y le asignamos el componente 
     /// </summary>
     public void Get<T>(out T t) => t = GetComponent<T>();
-    public void Gets<T>(out T[] t) =>t = GetComponents<T>();
     /// <summary>
-    /// Tomamos del arreglo los componentes hijos
+    /// Tomamos los componentes del mismo tipo del objeto
     /// </summary>
-    public void GetChilds<T>(out T[] t) => t = GetComponentsInChildren<T>();
+    public void Gets<T>(out T[] t) => t = GetComponents<T>();
+    /// <summary>
+    /// Tomamos del arreglo los componentes hijos sin el componente actual
+    /// <para>Este vendrá ordenadamente, su coste es mayor</para>
+    /// </summary>
+    public void GetChilds<T>(out T[] t) {
+        New(out t, transform.childCount);
+        for (int x = 0; x < transform.childCount; x++){
+            t[x] = transform.GetChild(x).GetComponent<T>();
+        }
+    }
+    /// <summary>
+    /// Tomamos los hijos y este objeto en caso de incluir lo buscado
+    /// </summary>
+    public void GetInChilds<T>(out T[] t) => t = GetComponentsInChildren<T>();
 
     /// <summary>
     /// Añades el tipo al objeto y lo asignas

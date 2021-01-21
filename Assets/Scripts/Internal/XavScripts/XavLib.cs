@@ -68,15 +68,19 @@ namespace XavLib
             /// Obtienes el valor del rango dado 
             /// </summary>
             /// <param name="range"></param>
+            //public static T Range<T>(T[] range) => Random.Range(range[0], range[1]);
             public static float Range(float[] range) => Random.Range(range[0], range[1]);
             public static int Range(int[] range) => Random.Range(range[0], range[1]);
-            public static string Range(params string[] range) => range[Random.Range(0, range.Length)];
+            public static T Range<T>(params T[] range) => range[ZeroMax(range.Length)];
+            //public static string Range(params string[] range) => range[ ZeroMax(range.Length)];
+            //public static GameObject Range(params GameObject[] range) => range[ ZeroMax(range.Length)];
 
             /// <summary>
             /// Tomas el valor entre el 0 y el maximo
             /// </summary>
             /// <returns></returns>
             public static int ZeroMax(int max) => Random.Range(0, max);
+            //public static int ZeroMax<T>(int max) => Random.Range(0, max);
 
             /// <summary>
             /// Devuelve organizadamente los hijos de este parent
