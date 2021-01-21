@@ -63,10 +63,11 @@ public class PlayerController : MonoX
     }
     private void Update()
     {
-        if (GameManager.gameStatus.Equals( GameManager.Status.ON_GAME))
+        if (GameManager.GetGameStatus().Equals( GameStatus.ON_GAME))
         {
             CheckOnGame();
         }
+        Pause();
     }
     #endregion
     #region Methods
@@ -76,7 +77,6 @@ public class PlayerController : MonoX
     /// </summary>
     private void CheckOnGame(){
         Movement();
-        Pause();
     }
 
 
@@ -108,11 +108,13 @@ public class PlayerController : MonoX
 
     }
 
+    /// <summary>
+    /// Te permitirá entrar y salir de la pantalla de pausa
+    /// </summary>
     private void Pause(){
-        if (!ControlSystem.KeyPress(keyPause)) return;
-
-        PrintX("En Pausa");
-        GameManager.PauseGame();
+        if (!ControlSystem.KeyDown(keyPause)) return;
+        GameStatus actualStatus = GameManager.GetGameStatus().Equals(GameStatus.ON_GAME) ? GameStatus.ON_PAUSE : GameStatus.ON_GAME; 
+        GameManager.SetGameStatus(actualStatus);
     }
     
     #endregion

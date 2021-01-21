@@ -237,6 +237,8 @@ namespace XavLib
             /// <para>Dependencia con <seealso cref="ObjOnOff(GameObject, bool)"/> </para>
             /// </summary>
             public static void ActiveObjectsExcept(GameObject[] arr, int index = 0) { for (int x = 0; x < arr.Length; x++) ActiveObject(arr[x], x == index); }
+            public static void ActiveObjectsExcept(int index, params GameObject[] arr) { for (int x = 0; x < arr.Length; x++) ActiveObject(arr[x], x == index); }
+
             /// <summary>
             /// Dependiendo de la condición determinamos si iniciar o apagar la animación
             /// <para>Dependencia con <seealso cref="ParticleSystem"/> </para>

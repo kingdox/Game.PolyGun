@@ -10,7 +10,6 @@ using XavLib;
 /// No usar MonoBehaviour, en cambio usar <see cref="MonoX"/>
 /// para adiciones especiales y comunes
 /// <para>
-/// 🔥El mejor codigo se crea a las 3 am 🔥
 /// </para>
 /// </summary>
 public class MonoX : MonoBehaviour
@@ -22,6 +21,11 @@ public class MonoX : MonoBehaviour
     /// Tomamos el valor del mismo objeto y le asignamos el componente 
     /// </summary>
     public void Get<T>(out T t) => t = GetComponent<T>();
+    public void Gets<T>(out T[] t) =>t = GetComponents<T>();
+    /// <summary>
+    /// Tomamos del arreglo los componentes hijos
+    /// </summary>
+    public void GetChilds<T>(out T[] t) => t = GetComponentsInChildren<T>();
 
     /// <summary>
     /// Añades el tipo al objeto y lo asignas
@@ -34,6 +38,7 @@ public class MonoX : MonoBehaviour
     /// Pinta con un color el texto
     /// </summary>
     public static void PrintX(string txt) => print(XavHelpTo.Look.ColorPrint(txt, XavHelpTo.Look.RandomColor()));
+    public static void PrintX<T>(T txt) => PrintX(txt.ToString());
 
 
     /// <summary>
