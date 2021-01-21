@@ -31,11 +31,8 @@ public class Spawner : MonoX
     }
     #endregion
     #region Events
-    private void Awake(){
-        
+    private void Start(){
         GetChilds(out childs);
-
-        PrintX(childs.Length);
     }
     #endregion
     #region Methods
@@ -46,8 +43,7 @@ public class Spawner : MonoX
     /// en cuenta  ciertas cosas, el objetivo influye para los NEAR o FAR
     /// <para>Por defecto el target es el Spawner(Suponiendo que está en el centro del mapa)</para>
     /// </summary>
-    public void Generate<T>(SpawnOpt opt= SpawnOpt.RANDOM, Transform target = default)
-    {
+    public void Generate<T>(SpawnOpt opt= SpawnOpt.RANDOM, Transform target = default){
 
     }
     #endregion
