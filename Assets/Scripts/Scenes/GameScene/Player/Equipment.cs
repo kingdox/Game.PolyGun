@@ -76,22 +76,8 @@ public interface IEquipment{
 
 
 
-/// <summary>
-/// Objeto que tenemos en la escena de juego que nos dará la información
-/// del item, su tipo, y su numero (1,3 si es shape) (1,5 si es Buff)
-/// </summary>
-public struct Item{
 
-    public ItemType type;
-    public ItemContent content;
 
-    public Item( ItemType type, ItemContent content)
-    {
-        this.type = type;
-        this.content = content;
-    }
-
-}
 
 
 

@@ -25,6 +25,7 @@ public class MonoX : MonoBehaviour
     /// Tomamos los componentes del mismo tipo del objeto
     /// </summary>
     public void Gets<T>(out T[] t) => t = GetComponents<T>();
+
     /// <summary>
     /// Tomamos del arreglo los componentes hijos sin el componente actual
     /// <para>Este vendrá ordenadamente, su coste es mayor</para>

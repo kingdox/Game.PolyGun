@@ -20,6 +20,8 @@ public class PlayerController : MonoX
 {
 
     #region Variables
+    private static Transform player;
+
     [Header("Player Movement")]
     public Movement movement;
     private readonly KeyPlayer[] keysHorizontal ={KeyPlayer.RIGHT,KeyPlayer.LEFT,};
@@ -59,6 +61,7 @@ public class PlayerController : MonoX
         Get(out movement);
         Get(out equipment);
         Get(out shot);
+        Get(out player);
 
     }
     private void Update()

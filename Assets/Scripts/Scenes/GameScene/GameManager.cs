@@ -21,10 +21,12 @@ public class GameManager : MonoManager
    
     #endregion
     #region Events
-    private void Awake()
+    private new void Awake()
     {
         _ = this;
         gameStatus = GameStatus.ON_GAME;
+
+        Begin();
 
     }
     private void Start()

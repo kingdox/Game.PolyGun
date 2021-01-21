@@ -26,9 +26,6 @@ public class Spawner : MonoX
     #region Events
     private void Start(){
         GetChilds(out childs);
-
-        //TODO por los momentos irá dirigido al player el target
-
     }
     private void Update()
     {
@@ -91,14 +88,7 @@ public class Spawner : MonoX
         if (_Debug_Spawn){
             //interruptor
             _Debug_Spawn = false;
-
-            //Obtenemos el
             Generate(XavHelpTo.Get.Range(prefs), _Debug_SpawnOpt);
-
-
-            //TODO
-            //Ejecuta la acción
-
         }
     }
 #endif

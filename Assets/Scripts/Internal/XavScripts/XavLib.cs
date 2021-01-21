@@ -281,9 +281,11 @@ namespace XavLib
             /// <summary>
             /// Detecta si de un arreglo con valores, si uno de estos es igual al mostrado
             /// </summary>
-            public static bool IsEqualOf(int value ,params int[] ints) {foreach (int val in ints) if (value.Equals(val)) return true; return false;}
-            public static bool IsEqualOf(string value, params string[] strings) { foreach (string val in strings) if (value.Equals(val)) return true; return false; }
-            public static bool IsEqualOf(char value, params char[] chars) { foreach (char val in chars) if (value.Equals(val)) return true; return false; }
+            public static bool IsEqualOf<T>(T value, params T[] strings) { foreach (T val in strings) if (value.Equals(val)) return true; return false; }
+            //public static bool IsEqualOf(int value ,params int[] ints) {foreach (int val in ints) if (value.Equals(val)) return true; return false;}
+            //public static bool IsEqualOf(string value, params string[] strings) { foreach (string val in strings) if (value.Equals(val)) return true; return false; }
+            //public static bool IsEqualOf(char value, params char[] chars) { foreach (char val in chars) if (value.Equals(val)) return true; return false; }
+
 
             /// <summary>
             /// Detecta el primer caracter de los buscados en el arreglo
@@ -291,8 +293,12 @@ namespace XavLib
             /// <para>Devuelve -1 si no encuentra</para>
             /// <para>Dependencia con <see cref="IsEqualOf(char, char[])"/> para hacer más de una busqueda</para>
             /// </summary>
-            public static int IndexOf( char[] chars, int startIndex, params char[] finder){for (int x = startIndex; x < chars.Length; x++) if (Know.IsEqualOf(chars[x], finder)) return x; return -1;}
+            /// 
+            public static int IndexOf<T>( T[] ts, int startIndex, params T[] finder){for (int x = startIndex; x < ts.Length; x++) if (Know.IsEqualOf(ts[x], finder)) return x; return -1;}
+            public static int IndexOf(char[] chars, int startIndex, params char[] finder) { for (int x = startIndex; x < chars.Length; x++) if (Know.IsEqualOf(chars[x], finder)) return x; return -1; }
             public static int IndexOf(string text, int startIndex, params char[] finder) { for (int x = startIndex; x < text.Length; x++) if (Know.IsEqualOf(text[x], finder)) return x; return -1; }
+            //public static int IndexOf<T>( T t, int startIndex, params T[] finder){for (int x = startIndex; x < t.Length; x++) if (Know.IsEqualOf(ts[x], finder)) return x; return -1;}
+
             /// <summary>
             /// Busca en un arreglo y si encuentra, muestra donde
             /// <para> caso contrario devuelve -1 </para>
