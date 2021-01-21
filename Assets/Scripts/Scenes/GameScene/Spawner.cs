@@ -8,19 +8,22 @@ public class Spawner : MonoX
 {
     #region Variables
 
-    /// <summary>
-    /// Lugar donde tendremos los hijos y sus posiciones
-    /// </summary>
     [Header("Prefabs to create")]
-    public GameObject[] prefs;
     [Space]
+    /// <summary>
+    /// Lugar objetivo del jugador
+    /// </summary>
     public Transform target;
+    /// <summary>
+    /// DOnde se creara como hijo de este objeto
+    /// </summary>
     public Transform parent;
-    public Transform[] childs;
+    private Transform[] childs;
 
 
     [Header("Debug")]
     public bool _Debug_Spawn = false;
+    public GameObject[] _Debug_prefs;
     public SpawnOpt _Debug_SpawnOpt = SpawnOpt.RANDOM;
     #endregion
     #region Events
@@ -88,7 +91,7 @@ public class Spawner : MonoX
         if (_Debug_Spawn){
             //interruptor
             _Debug_Spawn = false;
-            Generate(XavHelpTo.Get.Range(prefs), _Debug_SpawnOpt);
+            Generate(XavHelpTo.Get.Range(_Debug_prefs), _Debug_SpawnOpt);
         }
     }
 #endif
