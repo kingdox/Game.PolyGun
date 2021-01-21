@@ -93,7 +93,6 @@ public class AchievementManager : MonoManager
 
             //Si está dentro de los limites entonces hace el pintado
             if (condition){
-                //Debug.Log($"{x}: {achievements[count].key} => {DataPass.GetSavedData().achievements[count]} , de {achievements[count].limit}");
                 //Se asigna los datos del titulo, el limite y el valor guardado
                 AchieveSystem.Setitem(count, items[x]);
             }

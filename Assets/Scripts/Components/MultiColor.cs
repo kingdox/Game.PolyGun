@@ -10,7 +10,7 @@ using XavLib;
 /// Cada cierto tiempo
 /// <para>Dependencia con <see cref="ImageController"/></para>
 /// </summary>
-public class MultiColor : MonoBehaviour
+public class MultiColor : MonoX
 {
     #region Variable
     [Header("Settings")]
@@ -23,8 +23,8 @@ public class MultiColor : MonoBehaviour
     #endregion
     #region Events
     private void Start(){
-        if (!imgController) imgController = transform.GetComponent<ImageController>();
-        if (!imgController) imgController = this.gameObject.AddComponent<ImageController>();
+        if (!imgController) Get(out imgController);
+        if (!imgController) Add(out imgController);
 
     }
     private void Update()

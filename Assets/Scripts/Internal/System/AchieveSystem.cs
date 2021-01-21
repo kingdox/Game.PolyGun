@@ -23,6 +23,11 @@ public class AchieveSystem : MonoBehaviour
     public static int achievementLenght;
     public static bool unlockShow = false;
 
+    [Header("Debug")]
+    public bool _Debug_ShowUnlock = false;
+    public bool _Debug_SetRandomAchieve = false;
+
+
     #endregion
     #region Events
     private void Awake()
@@ -36,12 +41,17 @@ public class AchieveSystem : MonoBehaviour
         achievementLenght = achievements.Length;
 
     }
+  
     private void Update()
     {
         if (_.achieveUnlockItem != null)
         {
             HideShowUnlock();
         }
+
+#if DEBUG
+        _Debug();
+#endif
     }
     #endregion
     #region Methods
@@ -49,15 +59,16 @@ public class AchieveSystem : MonoBehaviour
     /// <summary>
     /// Colocamos la referencia del item unlocker de esta pantalla
     /// </summary>
-    /// <param name="item"></param>
+    ///= default
     public static void SetUnlockItem(AchievementItem item){
-        unlockShow = false;
+        Debug.Log("Set item UNlock");
+        //unlockShow = false;
         _.achieveUnlockItem = item;
         _.rect_unlockItem = _.achieveUnlockItem.GetComponent<RectTransform>();
 
         //Colocamos las variables en un inicio sin mostrarse
         _.rect_unlockItem.anchorMin.Set(0, 1);
-        _.rect_unlockItem.anchorMin = new Vector2(1, 2);
+        _.rect_unlockItem.anchorMax = new Vector2(1, 2);
 
     }
 
@@ -67,21 +78,16 @@ public class AchieveSystem : MonoBehaviour
     private void HideShowUnlock(){
 
         int minY = unlockShow ? 0 : 1;
-        int maxY = unlockShow ? 1 : 2;
+        //int maxY = unlockShow ? 1 : 2;
 
         Vector2 newMin = new Vector2(0, minY);
-        Vector2 newMax = new Vector2(1, maxY);
+        Vector2 newMax = new Vector2(1, 1);
 
         //me las retorna en 0-1
-        newMin.y = XavHelpTo.Set.UnitInTime(rect_unlockItem.anchorMin.y, minY, 1.5f);
-        newMax.y = XavHelpTo.Set.UnitInTime(rect_unlockItem.anchorMax.y, maxY, 1.5f);
-
-        //protejemos que se exceda...?
-        newMin.y = Mathf.Clamp(newMin.y * 2 , 0, minY);
-        newMax.y = Mathf.Clamp(newMax.y * 2 , 1, maxY);
+        newMin.y = XavHelpTo.Set.UnitInTime(rect_unlockItem.anchorMin.y, minY);
 
         rect_unlockItem.anchorMin = newMin;
-        rect_unlockItem.anchorMax = newMax;
+        rect_unlockItem.anchorMax = newMin + newMax;
     }
     /// <summary>
     /// Asigna al item los valores
@@ -96,5 +102,23 @@ public class AchieveSystem : MonoBehaviour
         ));
     }
 
+    #if DEBUG
+
+    private void _Debug()
+    {
+        //si es true solamente
+        if (_Debug_ShowUnlock)
+        {
+            _Debug_ShowUnlock = false;
+            unlockShow = !unlockShow;
+        }
+
+        if (_Debug_SetRandomAchieve)
+        {
+            _Debug_SetRandomAchieve = false;
+            Setitem(XavHelpTo.Get.ZeroMax(10), achieveUnlockItem);
+        }
+    }
+    #endif
     #endregion
 }

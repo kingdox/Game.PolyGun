@@ -72,7 +72,7 @@ namespace Achievements
         /// </summary>
         public Achievement[] _GetAllAchievements() => achievements;
 
-    }
+    } 
     #endregion
     #region Achievement
     /// <summary>

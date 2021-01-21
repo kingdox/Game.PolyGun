@@ -8,7 +8,7 @@ using UnityEngine;
 /// <para>Al hacerlo emitimos un evento <see cref="Init"/></para>
 /// <para>Los derivados de esta clase sabrán cuando iniciar cosas...</para>
 /// </summary>
-public abstract class MonoInit : MonoBehaviour, IInit
+public abstract class MonoInit : MonoX, IInit
 {
     #region Var
     [Header("MonoInit")]

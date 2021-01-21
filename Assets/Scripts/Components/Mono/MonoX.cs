@@ -1,0 +1,49 @@
+﻿#region Imports
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using XavLib;
+#endregion
+/// <summary>
+/// MonoX poseerá todas las propiedades comunes para los objetos
+/// No usar MonoBehaviour, en cambio usar <see cref="MonoX"/>
+/// para adiciones especiales y comunes
+/// <para>
+/// 🔥El mejor codigo se crea a las 3 am 🔥
+/// </para>
+/// </summary>
+public class MonoX : MonoBehaviour
+{
+    #region Variables-X
+    #endregion
+    #region Methods-X
+    /// <summary>
+    /// Tomamos el valor del mismo objeto y le asignamos el componente 
+    /// </summary>
+    public void Get<T>(out T t) => t = GetComponent<T>();
+
+    /// <summary>
+    /// Añades el tipo al objeto y lo asignas
+    /// </summary>
+    public void Add<T>(out T t) {
+        gameObject.AddComponent(typeof(T));
+        Get(out t);
+    }
+    /// <summary>
+    /// Pinta con un color el texto
+    /// </summary>
+    public static void PrintX(string txt) => print(XavHelpTo.Look.ColorPrint(txt, XavHelpTo.Look.RandomColor()));
+
+
+    /// <summary>
+    /// Creas una nueva dimension de arreglo del tipo que desees
+    /// </summary>
+    public void New<T>(out T[] t,int qty) => t = new T[qty];
+
+    //public bool IsNull<T>(T t) => t ^ null;
+    //public bool IsNull(Component t) => t ^ null;
+    //protected?
+    //TODO hacerte un getset getAdd ??
+    #endregion
+}

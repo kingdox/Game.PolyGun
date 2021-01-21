@@ -44,13 +44,18 @@ public class ControlSystem : MonoBehaviour
         foreach (int k in ks) if (KeyDown(k)) return true;
         return false;
     }
+
+    /// <summary>
+    /// Revisamos si se ha tocado alguna de las teclas mostradas
+    /// </summary>
     public static bool KeyDown(params KeyPlayer[] kps){
         foreach (KeyPlayer kp in kps) if (KeyDown(kp)) return true;
         return false;   
     }
 
     /// <summary>
-    /// Sabemos si se toco la tecla 1 vez en el frame
+    /// Sabemos si se toco la tecla 1 vez en el frame,
+    /// <para>Devuelve el primero en encontrar</para>
     /// </summary>
     public static KeyPlayer KnowKey(params KeyPlayer[] kps)
     {
@@ -59,10 +64,19 @@ public class ControlSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Sabemos si una tecla mantiene presionada
-    /// <para>Por defecto devuelve <see cref="KeyPlayer.NO"/></para>
+    /// Sabemos si se toco la tecla 1 vez en el frame
     /// </summary>
-    public static KeyPlayer KnowKeyHold(params KeyPlayer[] kps)
+    public static int KnowKeyIndex(params KeyPlayer[] kps){
+        for (int i = 0; i < kps.Length; i++){
+            if (KeyDown(kps[i])) return i;
+        }
+        return -1;
+    }
+        /// <summary>
+        /// Sabemos si una tecla mantiene presionada, devueelve la primera que encuentra
+        /// <para>Por defecto devuelve <see cref="KeyPlayer.NO"/></para>
+        /// </summary>
+        public static KeyPlayer KnowKeyHold(params KeyPlayer[] kps)
     {
         foreach (KeyPlayer kp in kps) if (KeyPress(kp)) return kp;
         return KeyPlayer.NO;
@@ -103,6 +117,23 @@ public class ControlSystem : MonoBehaviour
             foreach (KeyCode code in keys[x].keyCodes)codes[c++] = code; 
         }
     }
-    
+    /// <summary>
+    /// Revisamos si la tecla fue presionada y, dependiendo devolveremos:
+    /// <para>-1, 0, 1</para>
+    /// <para>el keys[0] es el que suma, y keys[1] resta, solo tomará los 2 primeros del arreglo</para>
+    /// </summary>
+    public static int GetAxisOf(KeyPlayer[] keys, int _val = 0)
+    {
+
+        for (int x = 0; x < 2; x++)
+        {
+            if (ControlSystem.KeyPress(keys[x]))
+            {
+                _val += x == 0 ? 1 : -1;
+            }
+        }
+        //sino...
+        return _val;
+    }
     #endregion
 }

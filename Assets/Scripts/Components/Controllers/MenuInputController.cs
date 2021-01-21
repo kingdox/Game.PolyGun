@@ -24,17 +24,9 @@ public class MenuInputController : MonoBehaviour
     {
         buttons[0].Select();
         lastIndex = 0;
-        //TODO testeo, si daña algo de otra pantalla quitar
     }
     private void Update()
     {
-        //TODO en GameScene no se esta mostrando el foco
-        //if (Input.anyKeyDown)
-        //{
-        //    print($"MenuInputController Press {lastIndex}");
-
-        //}
-
         KeyDetection();
     }
     private void LateUpdate()

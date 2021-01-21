@@ -38,7 +38,6 @@ public class AchievementItem : MonoBehaviour
         //Iniciamos en 0% el ancho de la barra
         rect_bar_actual.anchorMax = new Vector2(0, rect_bar_actual.anchorMax.y);
         img_bar_last.color = Color.white;
-        //rect_bar_actual.anchorMax = new Vector2(0, rect_bar_actual.anchorMax.y);
         toMax = 0;
 
        
@@ -98,8 +97,8 @@ public class AchievementItem : MonoBehaviour
         else
         {
             //Si supera los limites
-            img_bar_last.color = Color.black; //AchievementData.colorSteps[2];//XavHelpTo.SetColorParam(img_bar_last.color, (int)ColorType.RGB, AchievementData.colorSteps[2]);
-            img_bar_actual.color = Color.red; //AchievementData.colorSteps[2];
+            img_bar_last.color = Color.black; 
+            img_bar_actual.color = Color.red; 
             toMax = 1;
         }
 

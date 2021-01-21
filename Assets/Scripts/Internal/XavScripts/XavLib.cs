@@ -385,7 +385,7 @@ namespace XavLib
             /// <summary>
             /// Selector aleatorio de color, pretenden para debug, no para manejos de otras cosas..
             /// </summary>
-            public static string RandomColor() => Get.Range("green", "red", "pink", "white", "orange","yellow");
+            public static string RandomColor() => Get.Range("green", "red", "magenta", "white","yellow");
 
             /// <summary>
             /// Leemos en consola un arreglo de strings
