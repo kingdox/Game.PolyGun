@@ -23,17 +23,17 @@ public class PlayerController : MonoX
     private static Transform player;
 
     [Header("Player Movement")]
-    public Movement movement;
+    private Movement movement;
     private readonly KeyPlayer[] keysHorizontal ={KeyPlayer.RIGHT,KeyPlayer.LEFT,};
     private readonly KeyPlayer[] keysForward ={KeyPlayer.UP,KeyPlayer.DOWN,};
 
     [Space]
     [Header("Player Equipment")]
-    public Equipment equipment;
+    private Equipment equipment;
     private readonly KeyPlayer[] keysObjects = {KeyPlayer.C,KeyPlayer.V,KeyPlayer.B};
 
     [Header("Player Attack")]
-    public Shot shot;
+    private Shot shot;
     private readonly KeyPlayer keyAttack = KeyPlayer.OK_FIRE;
 
     [Header("Player Settings")]
@@ -57,7 +57,6 @@ public class PlayerController : MonoX
     #region Events
     private void Awake()
     {
-        //Bro y esto :0
         Get(out movement);
         Get(out equipment);
         Get(out shot);
@@ -66,10 +65,7 @@ public class PlayerController : MonoX
     }
     private void Update()
     {
-        if (GameManager.GetGameStatus().Equals( GameStatus.ON_GAME))
-        {
-            CheckOnGame();
-        }
+        CheckOnGame();
         Pause();
     }
     #endregion
@@ -81,15 +77,12 @@ public class PlayerController : MonoX
     private void CheckOnGame(){
         Movement();
     }
-
-
-        /// <summary>
-        /// Movemos la player en la dirección en la que ha tocado las teclas
-        /// Se revisa cada tecla presionada por separado para asignar los
-        /// valores correspondientes
-        /// </summary>
-        private void Movement(){
-        //Revisamos si hay adiciones por parte de las teclas presionadas
+    /// <summary>
+    /// Movemos la player en la dirección en la que ha tocado las teclas
+    /// Se revisa cada tecla presionada por separado para asignar los
+    /// valores correspondientes
+    /// </summary>
+    private void Movement(){
         movement.SetAxis(ControlSystem.GetAxisOf(keysHorizontal), 0, ControlSystem.GetAxisOf(keysForward));
         movement.Move();
     }
@@ -101,8 +94,6 @@ public class PlayerController : MonoX
 
         //Buscamos la primera acciond e objeto selecta
         ControlSystem.KnowKeyIndex(keysObjects);
-
-
 
     }
 
@@ -116,7 +107,7 @@ public class PlayerController : MonoX
     /// </summary>
     private void Pause(){
         if (!ControlSystem.KeyDown(keyPause)) return;
-        GameStatus actualStatus = GameManager.GetGameStatus().Equals(GameStatus.ON_GAME) ? GameStatus.ON_PAUSE : GameStatus.ON_GAME; 
+        GameStatus actualStatus = GameManager.IsOnGame() ? GameStatus.ON_PAUSE : GameStatus.ON_GAME; 
         GameManager.SetGameStatus(actualStatus);
     }
     

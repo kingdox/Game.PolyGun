@@ -25,7 +25,7 @@ public class GameManager : MonoManager
     {
         _ = this;
         gameStatus = GameStatus.ON_GAME;
-
+        Time.timeScale = 1f;
         Begin();
 
     }
@@ -49,6 +49,10 @@ public class GameManager : MonoManager
     /// Buscamos el estado actual del juego 
     /// </summary>
     public static GameStatus GetGameStatus() => _.gameStatus;
+    /// <summary>
+    /// Preguntamos si estamos en un estado de jugando o no
+    /// </summary>
+    public static bool IsOnGame() => _.gameStatus.Equals(GameStatus.ON_GAME) && !OptionSystem.isOpened;
     /// <summary>
     /// Asignamos un nuevo estado al juego
     /// </summary>

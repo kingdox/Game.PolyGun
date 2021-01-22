@@ -18,8 +18,8 @@ public class Spawner : MonoX
     /// DOnde se creara como hijo de este objeto
     /// </summary>
     public Transform parent;
-    private Transform[] childs;
-
+    public float range= 3f;
+    private Vector3[] childsPos;
 
     [Header("Debug")]
     public bool _Debug_Spawn = false;
@@ -28,7 +28,15 @@ public class Spawner : MonoX
     #endregion
     #region Events
     private void Start(){
+        Transform[] childs;
+
         GetChilds(out childs);
+
+        New(out childsPos, childs.Length);
+
+        for (int i = 0; i < childs.Length; i++){
+            childsPos[i] = childs[i].position;
+        }
     }
     private void Update()
     {
@@ -45,13 +53,16 @@ public class Spawner : MonoX
     /// en cuenta  ciertas cosas, el objetivo influye para los NEAR o FAR
     /// <para>Por defecto el target es el Spawner(Suponiendo que está en el centro del mapa)</para>
     /// </summary>
-    public void Generate(GameObject pref, SpawnOpt opt= SpawnOpt.RANDOM){
+    public void Generate(GameObject pref, SpawnOpt opt){
         //Hay que crear un objeto ? o añadirle eso...
         int i = GetIndexOfDistanceType(opt);
 
-        Instantiate(pref, childs[i].transform.position, Quaternion.identity, parent);
+        Vector3 pos = XavHelpTo.Get.MinusMax(childsPos[i], range, 1);
+
+        Instantiate(pref, pos, Quaternion.identity, parent);
     }
 
+    public int GetActualQty() => parent.childCount;
 
     /// <summary>
     /// Toma el indice mas apropiado basado en el tipo de spawn
@@ -59,15 +70,15 @@ public class Spawner : MonoX
     private int GetIndexOfDistanceType(SpawnOpt opt){
 
         if (opt.Equals(SpawnOpt.RANDOM))   {
-            return XavHelpTo.Get.ZeroMax(childs.Length);
+            return XavHelpTo.Get.ZeroMax(childsPos.Length);
         }
         else
         {
             int nearIndex = 0 ;
-            float nearest = Vector3.Distance(childs[0].position, target.position); ;
+            float nearest = Vector3.Distance(childsPos[0], target.position); ;
 
-            for (int i = 0; i < childs.Length; i++){
-                float distance = Vector3.Distance(childs[i].position, target.position);
+            for (int i = 0; i < childsPos.Length; i++){
+                float distance = Vector3.Distance(childsPos[i], target.position);
                 //si la distancia es menor que la supuesta "mas cercana" la sustituye
                 if (
                     (opt.Equals(SpawnOpt.NEAR) && distance < nearest)

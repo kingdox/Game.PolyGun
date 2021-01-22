@@ -60,6 +60,14 @@ public class MonoX : MonoBehaviour
     /// </summary>
     public void New<T>(out T[] t,int qty) => t = new T[qty];
 
+
+
+    /// <summary>
+    /// Hace el conteo y devuelve true cuando pasa una vuelta.
+    /// <para>Se usa <see cref="XavHelpTo.Set.TimeCountOf(ref float, float) para aprovechar el codigo, y reducir texto"/></para>
+    /// </summary>
+    public bool Timer(ref float count,float timer) => XavHelpTo.Set.TimeCountOf(ref count, timer);
+
     //public bool IsNull<T>(T t) => t ^ null;
     //public bool IsNull(Component t) => t ^ null;
     //protected?

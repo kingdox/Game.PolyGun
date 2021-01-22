@@ -35,6 +35,7 @@ public class MenuManager : MonoManager
     #endregion
     #region Events
     private void Start(){
+        Time.timeScale = 1f;
         transitorScreen.gameObject.SetActive(true);
     }
     private void Update() {

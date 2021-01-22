@@ -76,6 +76,22 @@ namespace XavLib
             //public static GameObject Range(params GameObject[] range) => range[ ZeroMax(range.Length)];
 
             /// <summary>
+            /// Tomas el valor entre el -valor y ell valor,
+            /// //TODO de momento acepta max positivo?
+            /// </summary>
+            public static float MinusMax(float max) => Random.Range(-max, max);
+
+            public static Vector3 MinusMax(Vector3 pos, float range, int blocked = -1){
+
+                for (int x = 0; x < 3; x++){
+                    if (blocked != x){
+                        pos[x] += MinusMax(range);
+                    }
+                }
+                return pos;
+            }
+
+            /// <summary>
             /// Tomas el valor entre el 0 y el maximo
             /// </summary>
             /// <returns></returns>
@@ -217,6 +233,7 @@ namespace XavLib
             /// </para>
             /// </summary>
             public static float TimeCountOf(float count, float cooldown) =>  (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
+            public static bool TimeCountOf(ref float count, float cooldown) => (count = (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime) == 0;
         }
         #endregion
         #region Change

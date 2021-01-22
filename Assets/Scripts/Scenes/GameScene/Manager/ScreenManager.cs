@@ -53,16 +53,8 @@ public class ScreenManager : MonoBehaviour
             //Activamos la pantalla
             ActiveScreenOf(lastGameStatus);
 
-            switch (GameManager.GetGameStatus())
-            {
-                case GameStatus.ON_GAME:
-                case GameStatus.ON_PAUSE:
-                case GameStatus.ON_END:
-                    break;
-                default:
-                    print("Stado desconocido");
-                    break;
-            }
+            //Actualizamos el estado, dependiendo del cambio
+            //Time.timeScale = GameManager.IsOnGame() ? 1 : 0;
 
 
 
