@@ -18,11 +18,11 @@ public class ControlSystem : MonoX
     private Key.Key[] keys = Data.data.GetKeys();
     private KeyCode[] codes;
 
-    private readonly static KeyPlayer[] keysMovement = { KeyPlayer.UP, KeyPlayer.DOWN, KeyPlayer.RIGHT, KeyPlayer.LEFT, };
+    public readonly static KeyPlayer[] keysMovement = { KeyPlayer.UP, KeyPlayer.DOWN, KeyPlayer.RIGHT, KeyPlayer.LEFT, };
 
-    private readonly static KeyPlayer[] keysHorizontal = { KeyPlayer.RIGHT, KeyPlayer.LEFT, };
-    private readonly static KeyPlayer[] keysVertical = { };
-    private readonly static KeyPlayer[] keysForward = { KeyPlayer.UP, KeyPlayer.DOWN, };
+    public readonly static KeyPlayer[] keysHorizontal = { KeyPlayer.RIGHT, KeyPlayer.LEFT, };
+    public readonly static KeyPlayer[] keysVertical = { };
+    public readonly static KeyPlayer[] keysForward = { KeyPlayer.UP, KeyPlayer.DOWN, };
 
     //public
     #endregion

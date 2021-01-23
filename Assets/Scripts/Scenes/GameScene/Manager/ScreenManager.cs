@@ -9,7 +9,7 @@ public class ScreenManager : MonoBehaviour
     #region variables
 
     [Header("Screen Settings")]
-    private GameStatus lastGameStatus = GameStatus.ON_GAME;
+    public GameStatus lastGameStatus = GameStatus.ON_GAME;
 
     [Header("Screens")]
     public GameObject HUDScreen;
@@ -31,7 +31,6 @@ public class ScreenManager : MonoBehaviour
     }
     private void Update(){
 
-        Cursor.visible = !GameManager.IsOnGame();
 
         StatusChange();
 

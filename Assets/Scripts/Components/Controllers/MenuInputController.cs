@@ -13,12 +13,9 @@ public class MenuInputController : MonoX
     // => Los botones que vamos a evaluar 
     public Button[] buttons;
     public int lastIndex = 0;
-    [Space]
 
-    private readonly float keyTimeCD = 0.25f;
-    private float keyTimeCount = 0;
-    private readonly KeyPlayer[] movement ={KeyPlayer.UP,KeyPlayer.DOWN,KeyPlayer.LEFT,KeyPlayer.RIGHT};
-    private readonly KeyPlayer[] vertical = { KeyPlayer.UP, KeyPlayer.DOWN };
+    //private readonly float keyTimeCD = 0.25f;private float keyTimeCount = 0;
+
     #endregion Events
     #region
     private void OnEnable()
@@ -43,10 +40,10 @@ public class MenuInputController : MonoX
         if (Input.GetKey(KeyCode.Mouse0)) return;
 
         //si toca una tecla en el FRAME
-        VerticalCheck(ControlSystem.KnowKeyFrame(vertical));
+        VerticalCheck(ControlSystem.KnowKeyFrame(ControlSystem.keysForward));
 
         //si toca una tecla en el HOLD
-        if (ControlSystem.IsKeyHold(movement)) UpdateFocus();
+        if (ControlSystem.IsKeyHold(ControlSystem.keysMovement)) UpdateFocus();
     }
 
     /// <summary>

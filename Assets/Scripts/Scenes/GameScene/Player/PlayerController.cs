@@ -24,8 +24,6 @@ public class PlayerController : MonoX
 
     [Header("Player Movement")]
     private Movement movement;
-    private readonly KeyPlayer[] keysHorizontal ={KeyPlayer.RIGHT,KeyPlayer.LEFT,};
-    private readonly KeyPlayer[] keysForward ={KeyPlayer.UP,KeyPlayer.DOWN,};
 
     [Space]
     [Header("Player Equipment")]
@@ -84,7 +82,7 @@ public class PlayerController : MonoX
     /// </summary>
     private void Movement(){
         //movement.SetAxis(ControlSystem.GetAxis());
-        movement.SetAxis(ControlSystem.GetAxisOf(keysHorizontal), 0, ControlSystem.GetAxisOf(keysForward));
+        movement.SetAxis(ControlSystem.GetAxisOf(ControlSystem.keysHorizontal), 0, ControlSystem.GetAxisOf(ControlSystem.keysForward));
         movement.Move();
     }
     /// <summary>
@@ -111,9 +109,9 @@ public class PlayerController : MonoX
 
         if (!OptionSystem.isOpened){   
             GameStatus actualStatus = GameManager.IsOnGame() ? GameStatus.ON_PAUSE : GameStatus.ON_GAME;
-            PrintX(actualStatus);
             GameManager.SetGameStatus(actualStatus);
         }
+      
     }
     
     #endregion

@@ -56,7 +56,6 @@ public class OptionSystem : MonoBehaviour
                 LoadMsg();
             }
             if (Input.anyKeyDown) OptChecker();
-
         }
     }
     #endregion

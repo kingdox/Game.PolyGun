@@ -5,15 +5,12 @@ using UnityEngine;
 using XavLib;
 using Environment;
 #endregion
-/// <summary>
-/// TODO arreglar la camera en el Field Of View
-/// </summary>
 public class GameManager : MonoManager
 {
     #region Variable
 
     [Header("Game Settigns")]
-    private GameStatus gameStatus;
+    public GameStatus gameStatus;
     private static GameManager _;
 
     [Header("Debug")]
@@ -38,7 +35,7 @@ public class GameManager : MonoManager
     }
     private void Update()
     {
-
+        Cursor.visible = !gameStatus.Equals(GameStatus.ON_GAME);
     }
     public override void Init()
     {
