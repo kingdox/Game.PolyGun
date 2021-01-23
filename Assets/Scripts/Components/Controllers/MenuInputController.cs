@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Environment;
 using XavLib;
 #endregion
-public class MenuInputController : MonoBehaviour
+public class MenuInputController : MonoX
 {
     #region Variables
     [Header("MenuInputController")]
@@ -18,22 +18,19 @@ public class MenuInputController : MonoBehaviour
     private readonly float keyTimeCD = 0.25f;
     private float keyTimeCount = 0;
     private readonly KeyPlayer[] movement ={KeyPlayer.UP,KeyPlayer.DOWN,KeyPlayer.LEFT,KeyPlayer.RIGHT};
+    private readonly KeyPlayer[] vertical = { KeyPlayer.UP, KeyPlayer.DOWN };
     #endregion Events
     #region
     private void OnEnable()
     {
-        buttons[0].Select();
         lastIndex = 0;
+        //UpdateFocus();
+        //buttons[0].Select();
     }
-    private void Update()
-    {
+    private void Update(){
         KeyDetection();
     }
-    private void LateUpdate()
-    {
-        //si hay algún movimiento presionado
-        if (!ControlSystem.KnowKeyHold(movement).Equals(KeyPlayer.NO)) UpdateFocus();
-    }
+
     #endregion
     #region Methods
     /// <summary>
@@ -43,31 +40,22 @@ public class MenuInputController : MonoBehaviour
     private void KeyDetection()
     {
         if (!MonoInit.Inited) return;
+        if (Input.GetKey(KeyCode.Mouse0)) return;
 
-        if (Input.anyKeyDown) ControlCheck();
-        else if (Input.anyKey)
-        {
-            keyTimeCount = XavHelpTo.Set.TimeCountOf(keyTimeCount, keyTimeCD);
-            if (keyTimeCount.Equals(0))
-            {
-                ControlCheck();
-            }
-        }
-        else keyTimeCount = 0;
+        //si toca una tecla en el FRAME
+        VerticalCheck(ControlSystem.KnowKeyFrame(vertical));
+
+        //si toca una tecla en el HOLD
+        if (ControlSystem.IsKeyHold(movement)) UpdateFocus();
     }
 
     /// <summary>
     /// Revisamos la tecla presionada
     /// y como comportarnos dependiendo de la tecla
     /// </summary>
-    private void ControlCheck(){
-        //Esto evita contactos por el click
-        if (Input.GetKeyDown(KeyCode.Mouse0)) return;
-
-        KeyPlayer keyPress = ControlSystem.KnowKeyHold(KeyPlayer.DOWN, KeyPlayer.UP);
-
-        //si existe llave presionada
-        if (ControlSystem.KeyExist(keyPress)){
+    private void VerticalCheck(KeyPlayer keyPress){
+        //Si existe alguna llave
+        if (ControlSystem.IsKeyExist(keyPress)){
             UpdateLastIndex(keyPress.Equals(KeyPlayer.DOWN));
         }
 

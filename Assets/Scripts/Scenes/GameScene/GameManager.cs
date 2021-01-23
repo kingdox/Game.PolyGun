@@ -26,6 +26,8 @@ public class GameManager : MonoManager
         _ = this;
         gameStatus = GameStatus.ON_GAME;
         Time.timeScale = 1f;
+        Cursor.visible = false;
+
         Begin();
 
     }

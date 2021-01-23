@@ -11,7 +11,7 @@ using Options;
 /// <summary>
 /// Clase utilizada para el manejo del sistema de opciones en la pantalla
 /// de opciones, siendo siempre hija de alguna escena puesto que aparece
-/// en más de un sitio, esta hecha como un prefab
+/// en más de un sitio, esta hecha como un prefab para evitar problemas de duplicados
 /// </summary>
 public class OptionSystem : MonoBehaviour
 {
@@ -85,6 +85,10 @@ public class OptionSystem : MonoBehaviour
         KeyPlayer key = ControlSystem.KnowKeyHold(KeyPlayer.LEFT, KeyPlayer.RIGHT);
         
         if (!key.Equals(KeyPlayer.NO)) Actions(lastOpt, key.Equals(KeyPlayer.RIGHT));
+
+        if (ControlSystem.IsKeyFrame(KeyPlayer.BACK)){
+            OpenClose(false);
+        }
     }
 
     /// <summary>

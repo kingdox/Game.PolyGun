@@ -18,7 +18,7 @@ public class CameraTrack : MonoBehaviour
     public float transitionSpeed = 1;
 
     //public LayerMask occlusionLayer;
-    private RaycastHit occlusionHit = new RaycastHit();
+    //private RaycastHit occlusionHit = new RaycastHit();
     #endregion
     #region Events
     private void LateUpdate() 

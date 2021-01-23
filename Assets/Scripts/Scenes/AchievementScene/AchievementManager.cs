@@ -50,11 +50,11 @@ public class AchievementManager : MonoManager
 
 
         //Navigation
-        ControlSystem.ButtonSelect(btn_BACK, KeyPlayer.DOWN);
+        ControlSystem.SelectButtonFrame(btn_BACK, KeyPlayer.DOWN);
 
-        ControlSystem.ButtonDown(btn_BACK, KeyPlayer.BACK);
-        ControlSystem.ButtonDown(btn_R, KeyPlayer.RIGHT);
-        ControlSystem.ButtonDown(btn_L, KeyPlayer.LEFT);
+        ControlSystem.CastButtonFrame(btn_BACK, KeyPlayer.BACK);
+        ControlSystem.CastButtonFrame(btn_R, KeyPlayer.RIGHT);
+        ControlSystem.CastButtonFrame(btn_L, KeyPlayer.LEFT);
     }
 
     /// <summary>

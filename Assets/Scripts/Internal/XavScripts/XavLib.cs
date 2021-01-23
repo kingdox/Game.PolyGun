@@ -233,7 +233,7 @@ namespace XavLib
             /// </para>
             /// </summary>
             public static float TimeCountOf(float count, float cooldown) =>  (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
-            public static bool TimeCountOf(ref float count, float cooldown) => (count = (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime) == 0;
+            public static bool TimeCountOf(ref float count, float cooldown) => (count = (count+Time.deltaTime >= cooldown) ? 0 : count+Time.deltaTime) == 0;
         }
         #endregion
         #region Change
@@ -269,6 +269,11 @@ namespace XavLib
                 if (condition && particle.isStopped) particle.Play();
                 else if (!condition && particle.isPlaying) particle.Stop();
             }
+
+            /// <summary>
+            /// Cambia de bool a int su valor
+            /// </summary>
+            public static int BoolToInt(bool condition) => condition ? 1 : -1;
         }
         #endregion
         #region Know

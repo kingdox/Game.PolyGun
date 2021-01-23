@@ -44,21 +44,25 @@ public class IntroductionManager : MonoManager
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)) return;
 
-        KeyPlayer keyPress = ControlSystem.KnowKey(KeyPlayer.LEFT, KeyPlayer.RIGHT);
+        KeyPlayer keyPress = ControlSystem.KnowKeyFrame(KeyPlayer.LEFT, KeyPlayer.RIGHT);
 
         //si presionan derecha o izq cambiamos la pagina
-        if (ControlSystem.KeyExist(keyPress)){
+        if (ControlSystem.IsKeyExist(keyPress)){
             //Cargamos la pagina al movernos//TODO
             introPages[lastIndex].InstantPage(indexPages[lastIndex]);
             navigator._NavigateTo(keyPress.Equals(KeyPlayer.RIGHT));
         }
+
+        if (ControlSystem.IsKeyFrame(KeyPlayer.BACK)){
+            GoToScene(Scenes.MenuScene);
+        }
     }
 
-    /// <summary>
-    /// Cambiamos de entre las paginas
-    /// Solo si este cambio es distinto
-    /// </summary>
-    public void ChangePagesTo(int i){
+        /// <summary>
+        /// Cambiamos de entre las paginas
+        /// Solo si este cambio es distinto
+        /// </summary>
+        public void ChangePagesTo(int i){
         if (!lastIndex.Equals(i)){
 
             //Actualizamos el ultimo indice

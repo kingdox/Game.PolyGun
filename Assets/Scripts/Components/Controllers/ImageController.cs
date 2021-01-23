@@ -25,6 +25,7 @@ public class ImageController : MonoBehaviour , IImageController
     {
         if (!img) img = GetComponent<Image>();
     }
+  
     private void Start()
     {
         img.enabled = true;

@@ -61,7 +61,6 @@ public class AchieveSystem : MonoBehaviour
     /// </summary>
     ///= default
     public static void SetUnlockItem(AchievementItem item){
-        Debug.Log("Set item UNlock");
         //unlockShow = false;
         _.achieveUnlockItem = item;
         _.rect_unlockItem = _.achieveUnlockItem.GetComponent<RectTransform>();

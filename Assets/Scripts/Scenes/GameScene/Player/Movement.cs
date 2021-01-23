@@ -45,6 +45,7 @@ public class Movement : MonoX
     /// Asignamos los axis del movimiento
     /// </summary>
     public void SetAxis(float x, float y, float z) => axis = new Vector3(x, y, z);
+    public void SetAxis(Vector3 _axis) => axis = _axis;
 
     private void SetRotation(Vector3 _axis = default){
         if (_axis == default) _axis = this.axis;    

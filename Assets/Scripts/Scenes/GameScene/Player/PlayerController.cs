@@ -83,6 +83,7 @@ public class PlayerController : MonoX
     /// valores correspondientes
     /// </summary>
     private void Movement(){
+        //movement.SetAxis(ControlSystem.GetAxis());
         movement.SetAxis(ControlSystem.GetAxisOf(keysHorizontal), 0, ControlSystem.GetAxisOf(keysForward));
         movement.Move();
     }
@@ -93,7 +94,7 @@ public class PlayerController : MonoX
     private void Equipment(){
 
         //Buscamos la primera acciond e objeto selecta
-        ControlSystem.KnowKeyIndex(keysObjects);
+        ControlSystem.KnowIndexKeyFrame(keysObjects);
 
     }
 
@@ -106,9 +107,13 @@ public class PlayerController : MonoX
     /// Te permitirá entrar y salir de la pantalla de pausa
     /// </summary>
     private void Pause(){
-        if (!ControlSystem.KeyDown(keyPause)) return;
-        GameStatus actualStatus = GameManager.IsOnGame() ? GameStatus.ON_PAUSE : GameStatus.ON_GAME; 
-        GameManager.SetGameStatus(actualStatus);
+        if (!ControlSystem.IsKeyFrame(keyPause)) return;
+
+        if (!OptionSystem.isOpened){   
+            GameStatus actualStatus = GameManager.IsOnGame() ? GameStatus.ON_PAUSE : GameStatus.ON_GAME;
+            PrintX(actualStatus);
+            GameManager.SetGameStatus(actualStatus);
+        }
     }
     
     #endregion

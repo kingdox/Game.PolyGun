@@ -71,6 +71,5 @@ public class MonoX : MonoBehaviour
     //public bool IsNull<T>(T t) => t ^ null;
     //public bool IsNull(Component t) => t ^ null;
     //protected?
-    //TODO hacerte un getset getAdd ??
     #endregion
 }

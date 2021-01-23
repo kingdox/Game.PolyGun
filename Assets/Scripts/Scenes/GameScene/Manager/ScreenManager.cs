@@ -29,8 +29,10 @@ public class ScreenManager : MonoBehaviour
         ActiveScreenOf();
         lastGameStatus = GameStatus.ON_GAME;
     }
-    private void Update()
-    {
+    private void Update(){
+
+        Cursor.visible = !GameManager.IsOnGame();
+
         StatusChange();
 
 #if DEBUG
