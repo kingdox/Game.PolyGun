@@ -10,14 +10,13 @@ public class Item : MonoX
     [Header("Item Settings")]
     public ItemContent type;
     [Space]
-    public Rigidbody body;
+    private Rigidbody body;
     private Vector3 lastVel;
-    //TODO revisar los fallos
 
     #endregion
     #region Events
     private void Awake(){
-        //Get(out body);
+        Get(out body);
     }
     private void Update()
     {
@@ -28,6 +27,7 @@ public class Item : MonoX
 
     private void CheckBody()
     {
+        //TODO puede que entre para MONOX ? TODO
         if (GameManager.IsOnGame()){
             //si se reanuda y andaba durmiendo...
             if (body.IsSleeping()) { body.velocity = lastVel; }
@@ -40,8 +40,10 @@ public class Item : MonoX
     #endregion
 }
 
-public enum ItemContent
-{
+[SerializeField]
+public enum ItemContent{
+    NO = -1,
+
     SQUARE,
     CIRCLE,
     TRIANGLE,

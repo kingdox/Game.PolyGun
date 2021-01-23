@@ -248,6 +248,17 @@ namespace XavLib
             /// </summary>
             public static float TimeCountOf(float count, float cooldown) =>  (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
             public static bool TimeCountOf(ref float count, float cooldown) => (count = (count+Time.deltaTime >= cooldown) ? 0 : count+Time.deltaTime) == 0;
+
+
+            /// <summary>
+            /// Llenamos un arreglo con el valor escogido
+            /// </summary>
+            public static T[] FillWith<T>(T tValue, params T[] ts){
+                for (int x = 0; x < ts.Length; x++){
+                    ts[x] = tValue;
+                }
+                return ts;
+            }
         }
         #endregion
         #region Change

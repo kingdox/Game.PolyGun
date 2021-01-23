@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using XavLib;
 #endregion
+/// <summary>
+//TODO
+/// Encargarse de las actualización de cada pantallas y HUD correspondientemente
+/// </summary>
 public class ScreenManager : MonoBehaviour
 {
     #region variables
@@ -19,6 +23,7 @@ public class ScreenManager : MonoBehaviour
 
     [Header("End Settings")]
     public AchievementItem[] endItems;
+
 
 
     [Header("Debug")]

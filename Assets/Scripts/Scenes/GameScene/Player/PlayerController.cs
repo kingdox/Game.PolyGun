@@ -20,36 +20,17 @@ public class PlayerController : MonoX
 {
 
     #region Variables
-    private static Transform player;
+    //private static Transform player;
 
-    [Header("Player Movement")]
-    private Movement movement;
+    [Header("PlayerSettings")]
+    [SerializeField]
+    public Character character;
 
     [Space]
-    [Header("Player Equipment")]
+    private Movement movement;
     private Equipment equipment;
-    private readonly KeyPlayer[] keysObjects = {KeyPlayer.C,KeyPlayer.V,KeyPlayer.B};
-
-    [Header("Player Attack")]
     private Shot shot;
-    private readonly KeyPlayer keyAttack = KeyPlayer.OK_FIRE;
 
-    [Header("Player Settings")]
-    private readonly KeyPlayer keyPause = KeyPlayer.BACK;
-
-    /*
-     * Este script se encarga de detectar las teclas y ejecutar
-     * algo correspondiente dependiendo de  la tecla
-     * 
-     * TODO
-     * Encargado de la interacción entre el objeto y el jugador
-     * 
-     * En este script podrñas saber:
-     * 
-     * - Disparar
-     * 
-     * 
-     */
     #endregion
 
     #region Events
@@ -58,7 +39,7 @@ public class PlayerController : MonoX
         Get(out movement);
         Get(out equipment);
         Get(out shot);
-        Get(out player);
+        //Get(out player);
 
     }
     private void Update()
@@ -73,7 +54,14 @@ public class PlayerController : MonoX
     /// Detectas los  controles para en juego
     /// </summary>
     private void CheckOnGame(){
+
+        //se maneja internamente
         Movement();
+
+        //retornamos si no esta en juego
+        if (!GameManager.IsOnGame()) return;
+        Equipment();
+        Attack();
     }
     /// <summary>
     /// Movemos la player en la dirección en la que ha tocado las teclas
@@ -90,22 +78,24 @@ public class PlayerController : MonoX
     /// ejecuta una acción en <see cref="Equipment"/>
     /// </summary>
     private void Equipment(){
-
-        //Buscamos la primera acciond e objeto selecta
-        ControlSystem.KnowIndexKeyFrame(keysObjects);
-
+        //Buscamos la primera accion de objeto selecta
+        equipment.Action(ControlSystem.KnowIndexKeyFrame(ControlSystem.keysObjects));
     }
 
-    private void Attack()
-    {
-
+    /// <summary>
+    /// Ejecuta el ataque del player si la tecla fue presionada
+    /// </summary>
+    private void Attack(){
+        if (ControlSystem.IsKeyFrame(KeyPlayer.OK_FIRE)){
+            shot.ShotBullet( new BulletShot(character.atkSpeed + character.speed, character.range, character.damage));
+        }
     }
 
     /// <summary>
     /// Te permitirá entrar y salir de la pantalla de pausa
     /// </summary>
     private void Pause(){
-        if (!ControlSystem.IsKeyFrame(keyPause)) return;
+        if (!ControlSystem.IsKeyFrame(KeyPlayer.BACK)) return;
 
         if (!OptionSystem.isOpened){   
             GameStatus actualStatus = GameManager.IsOnGame() ? GameStatus.ON_PAUSE : GameStatus.ON_GAME;
@@ -117,3 +107,31 @@ public class PlayerController : MonoX
     #endregion
 }
 
+/// <summary>
+/// Modelo que conforma la estructura los seres (aliados y enemigos, incluyendo al player) 
+/// </summary>
+[Serializable]
+public struct Character{
+
+    /// <summary>
+    /// Nos indica cuanto tiempo de vida posee, este decrese a medida que pasa el tiempo
+    /// </summary>
+    public float timeLife;
+    /// <summary>
+    /// indica la velocidad de desplazamiento
+    /// </summary>
+    public float speed;
+    /// <summary>
+    /// Indica la cantidad que reduce de tiempo de vida, este frecuenta poseer algo de variabilidad al uso
+    /// </summary>
+    public float damage;
+    /// <summary>
+    /// Rango minimo requerido para poder hacer que el personaje pueda atacar
+    /// </summary>
+    public float range;
+    /// <summary>
+    /// Velocidad en interactuar con el area para infligir daño
+    /// </summary>
+    public float atkSpeed;
+
+}

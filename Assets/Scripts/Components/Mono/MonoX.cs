@@ -68,6 +68,16 @@ public class MonoX : MonoBehaviour
     /// </summary>
     public bool Timer(ref float count,float timer) => XavHelpTo.Set.TimeCountOf(ref count, timer);
 
+
+    /// <summary>
+    /// Permite activar el flag "can"___ para poder volver a usarlo, este se mide por tiempo
+    /// </summary>
+    public bool CanPassedTime(ref bool flag, ref float count, float timer){
+        if (!flag && Timer(ref count, timer)){
+            flag = true;
+        }   
+        return flag;
+    }
     //public bool IsNull<T>(T t) => t ^ null;
     //public bool IsNull(Component t) => t ^ null;
     //protected?

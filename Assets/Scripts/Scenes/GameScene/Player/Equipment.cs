@@ -2,88 +2,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XavLib;
 #endregion
-public class Equipment : MonoX, IEquipment
+public class Equipment : MonoX
 {
     #region Variables
-    
+
+    public bool canCraft = false;
+
     private ItemContent[] slots;
     private PlayerDetector detector;
-    /*
-     * TODO
-     * Aqui vamos ha hacer el manejo de los Equipments encontrados
-     * Este script:
-     * - Almacena hasta 3 slots los items
-     * - Al conseguir los 3, dependiendo del tipo genera una cosa o otra
-     *  enviando una acción...
-     * 
-     *  * _ Recoger objeto
-     * _ Consumir objeto
-     * 
-     */
+    //cuenta la cantidad de objetos que posee actualmente
+    private int equipedQty = 0;
+
+    private float timeCount_craft = 0;
+    private float timer_craft = 5f;
+
     #endregion
     #region Events
     private void Start()
     {
         New(out slots, 3);
+        ClearSlots();
         Get(out detector);
+        equipedQty = 0;
+    }
+    private void Update(){
+
+        //cuidaremos que se actualice el flag para poder crear tras el tiempo...
+        CanPassedTime(ref canCraft, ref timeCount_craft, timer_craft);
+
+
+        //si tenemos equipado la misma cantidad del slot limite
+        //checkearemos
+        if (canCraft && equipedQty.Equals(slots.Length) ){
+            //...
+        }
+
     }
     #endregion
     #region Methods
+
+    
 
     /// <summary>
     /// Dependiendo del Slot Seleccionado podremos Tomar un objetoo y guardarlo
     /// o podemos usar el objeto
     /// </summary>
     public void Action(int i){
-        //TODO falta un struct para el manejo de los items
-        //(tanto obj como Buff, de ser buff mostrar su tipo)
+        if (i.Equals(-1)) return;
 
+        //si no hay coloca
+        if (slots[i].Equals(ItemContent.NO)){
+            //asignas el objeto encontrado
+            detector.SetNearestItemType(ref slots[i]);
+            equipedQty++;
+
+        }
+        else{
+            equipedQty--;
+
+            //si hay lo usa
+            //usandolo.....
+
+            //TODO
+            PrintX($"Se usó {slots[i]}");
+            slots[i] = ItemContent.NO;
+
+        }
 
     }
-
     /// <summary>
-    /// Colocamos el Item encontrado del suelo, independiente de si es
-    /// un tipo <see cref="ShapesType"/> o si es un <see cref="BuffType"/>
+    /// Limpiamos los slots y los dejamos con <see cref="ItemContent.NO"/>
     /// </summary>
-    public void SetItem(int i)
-    {
-
-    }
-
-    public void UseSlot(int i)
-    {
-
-    }
-
+    private void ClearSlots() => slots = XavHelpTo.Set.FillWith(ItemContent.NO, slots);
     #endregion
 }
-
-public interface IEquipment{
-
-    //Revisa el i y dependiendo buscará en el slot
-    void Action(int i);
-
-    //coloca el nuevo obj encontrado del suelo
-    void SetItem(int i);
-
-    void UseSlot(int i);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /// <summary>
 /// Aliados posibles en el juego
@@ -102,13 +96,3 @@ public enum EnemyType{
     PLUR,
     MOND
 }
-
-/*
- * TODO resolver de objetos
- Los objetos cercanos se detectarán:
-    Todos verán la posición del player, pero si hay uno más cerca
-    Entonces se añade al "Mas cercano actual" si este se aleja del rango ó
-    otro de estos obj encuentra más cercania que el anterior lo setea
- 
- */
-

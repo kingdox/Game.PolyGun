@@ -24,6 +24,9 @@ public class ControlSystem : MonoX
     public readonly static KeyPlayer[] keysVertical = { };
     public readonly static KeyPlayer[] keysForward = { KeyPlayer.UP, KeyPlayer.DOWN, };
 
+    //Botones para recoger 
+    public readonly static KeyPlayer[] keysObjects = { KeyPlayer.C, KeyPlayer.V, KeyPlayer.B };
+
     //public
     #endregion
     #region Events
@@ -66,10 +69,12 @@ public class ControlSystem : MonoX
 
     /// <summary>
     /// Devuelve el indice que FUE presionada en el frame
+    /// <para>-1 en caso de no encontrar</para>
     /// </summary>
     public static int KnowIndexKeyHold(params KeyPlayer[] kps) { for (int i = 0; i < kps.Length; i++) { if (IsKeyHold(kps[i])) return i; } return -1; }
     /// <summary>
     /// Devuelve el indice que FUE presionada en el frame
+    /// <para>-1 en caso de no encontrar</para>
     /// </summary>
     public static int KnowIndexKeyFrame(params KeyPlayer[] kps){for (int i = 0; i < kps.Length; i++){if (IsKeyFrame(kps[i])) return i;}return -1;}
 
