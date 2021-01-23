@@ -164,6 +164,10 @@ public struct SavedData
 
     // Arreglo ordenado de los valores de cada logro correspondiente
     public float[] achievements;
+    [Space]
+    //TODO - Donde guardaremos el record de qué tan lejos ha llegado contra las oleadas
+    public int record_waves;
+
 
     //Extra Debug ?
     [Space(10)]

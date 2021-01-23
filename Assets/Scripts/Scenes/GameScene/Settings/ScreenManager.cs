@@ -8,7 +8,7 @@ using XavLib;
 //TODO
 /// Encargarse de las actualización de cada pantallas y HUD correspondientemente
 /// </summary>
-public class ScreenManager : MonoBehaviour
+public class ScreenManager : MonoX
 {
     #region variables
 
@@ -39,9 +39,7 @@ public class ScreenManager : MonoBehaviour
 
         StatusChange();
 
-#if DEBUG
         _Debug();
-#endif
     }
     #endregion
     #region methods
@@ -83,23 +81,17 @@ public class ScreenManager : MonoBehaviour
 
 
 
-#if DEBUG
+    /// <summary>
+    /// Revisa los debugs...?
+    /// </summary>
     private void _Debug()
     {
-        //detector de si esta debugeando
-        if (!GameManager._onDebug) return;  
+        if (!DebugFlag(ref _Debug_LoadEnd)) return;
 
-        //Cargar de LoadEnd los logros, random
-        if (_Debug_LoadEnd)
+        foreach (AchievementItem i in endItems)
         {
-            _Debug_LoadEnd = false;
-            foreach (AchievementItem i in endItems)
-            {
-                AchieveSystem.Setitem(XavHelpTo.Get.ZeroMax(10), i);
-            }
-
+            AchieveSystem.Setitem(XavHelpTo.Get.ZeroMax(10), i);
         }
     }
-#endif
     #endregion
 }

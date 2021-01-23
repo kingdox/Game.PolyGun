@@ -18,6 +18,7 @@ public class Shot : MonoX
     #endregion
     #region Events
     private void Update(){
+        UIManager.Refresh_weaponCD(timeCount_bullet);
         // si no puede disparar y termina su vuelta de tiempo... (el tiempo no corre si pudiese disparar
         CanPassedTime(ref canShot, ref timeCount_bullet, timer_bullet);
     }

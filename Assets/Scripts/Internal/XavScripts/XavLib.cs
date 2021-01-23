@@ -96,6 +96,8 @@ namespace XavLib
             /// </summary>
             /// <returns></returns>
             public static int ZeroMax(int max) => Random.Range(0, max);
+            public static float ZeroMax(float max) => Random.Range(0, max);
+
             //public static int ZeroMax<T>(int max) => Random.Range(0, max);
 
             /// <summary>

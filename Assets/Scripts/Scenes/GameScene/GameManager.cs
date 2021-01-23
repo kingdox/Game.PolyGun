@@ -14,8 +14,10 @@ public class GameManager : MonoManager
     private static GameManager _;
 
     [Header("Debug")]
+    public bool onDebug = false;
     public static bool _onDebug = false;
-   
+
+
     #endregion
     #region Events
     private new void Awake()
@@ -35,6 +37,7 @@ public class GameManager : MonoManager
     }
     private void Update()
     {
+        __onDebug();
         Cursor.visible = !gameStatus.Equals(GameStatus.ON_GAME);
     }
     public override void Init()
@@ -81,6 +84,15 @@ public class GameManager : MonoManager
         //AchieveSystem.Setitem()
     }
 
+
+    /// <summary>
+    /// Cambiamos el modo debug o no
+    /// </summary>
+    public void __onDebug(){
+        if (!DebugFlag(ref onDebug, onDebug)) return;
+        _onDebug = !_onDebug;
+        PrintX($"DEBUGMODE => {_onDebug}");
+    }
 
     #endregion
 }

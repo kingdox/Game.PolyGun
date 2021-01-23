@@ -26,12 +26,25 @@ public class Bullet : MonoX
         movement.SetAxis(Vector3.Normalize(direction));
         movement.speed = bulletShot.speed;
     }
-    private void Update(){
+    private void Update(){ 
 
         if (PassedRange()){
             Destroy(gameObject);
         }else{
             movement.Move(Vector3.Normalize(direction), bulletShot.speed);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        string tag = other.transform.tag;
+        
+        if (XavLib.XavHelpTo.Know.IsEqualOf(tag, "obstacle", "enemy"))
+        {
+            if (tag.Equals("enemy")){
+                Destroy(other.gameObject);
+            }
+            Destroy(gameObject);
         }
     }
     #endregion

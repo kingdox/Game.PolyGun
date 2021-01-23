@@ -79,6 +79,7 @@ public class Equipment : MonoX
     #endregion
 }
 
+//TODO aquí estan los ALLY
 /// <summary>
 /// Aliados posibles en el juego
 /// </summary>
@@ -88,11 +89,4 @@ public enum AllyType{
     HEARTH,
     ROMB,
     POL
-}
-/// <summary>
-/// Tipos de enemigos en el juego
-/// </summary>
-public enum EnemyType{
-    PLUR,
-    MOND
 }

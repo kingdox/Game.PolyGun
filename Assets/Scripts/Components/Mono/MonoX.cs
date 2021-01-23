@@ -78,6 +78,25 @@ public class MonoX : MonoBehaviour
         }   
         return flag;
     }
+
+
+    /// <summary>
+    /// Permite accionar algo y desactivar el flag debug ,
+    /// Siempre y cuando estemos en modo "Debug"
+    /// </summary>
+    public bool DebugFlag(ref bool c, bool bypass = false){
+        if (c && GameManager._onDebug || bypass){
+            c = false;
+            return true;
+        }
+
+        if (!GameManager._onDebug && c){
+            PrintX("DebugFlag: Asignar a GameManager._onDebug como true para usarlo");
+            c = false;
+        }
+
+        return false;
+    }
     //public bool IsNull<T>(T t) => t ^ null;
     //public bool IsNull(Component t) => t ^ null;
     //protected?

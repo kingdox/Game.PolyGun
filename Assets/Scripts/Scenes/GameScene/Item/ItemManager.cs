@@ -41,7 +41,10 @@ public class ItemManager : MonoX
     #region Methods
 
 
-
+    /// <summary>
+    /// Crea un Item y lo posiciona en alguno de los sitios correspondientes
+    /// llamando al <see cref="Spawner"/>
+    /// </summary>
     private void SpawnItem()
     {
         int selected = XavHelpTo.Get.ZeroMax(prefs_Item.Length);

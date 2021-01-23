@@ -40,9 +40,8 @@ public class Spawner : MonoX
     }
     private void Update()
     {
-#if DEBUG
+
         __Debug_Spawn();
-#endif
     }
     #endregion
     #region Methods
@@ -99,11 +98,10 @@ public class Spawner : MonoX
     /// Nos permite spawnaear cosas
     /// </summary>
     public void __Debug_Spawn(){
-        if (_Debug_Spawn){
-            //interruptor
-            _Debug_Spawn = false;
-            Generate(XavHelpTo.Get.Range(_Debug_prefs), _Debug_SpawnOpt);
-        }
+        if (!DebugFlag(ref _Debug_Spawn)) return;
+
+
+        Generate(XavHelpTo.Get.Range(_Debug_prefs), _Debug_SpawnOpt);
     }
 #endif
     #endregion

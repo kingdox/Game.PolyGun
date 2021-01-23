@@ -24,7 +24,7 @@ public class PlayerController : MonoX
 
     [Header("PlayerSettings")]
     [SerializeField]
-    public Character character;
+    public Stats stats;
 
     [Space]
     private Movement movement;
@@ -87,7 +87,7 @@ public class PlayerController : MonoX
     /// </summary>
     private void Attack(){
         if (ControlSystem.IsKeyFrame(KeyPlayer.OK_FIRE)){
-            shot.ShotBullet( new BulletShot(character.atkSpeed + character.speed, character.range, character.damage));
+            shot.ShotBullet( new BulletShot(stats.atkSpeed + stats.speed,stats.range,stats.damage));
         }
     }
 
@@ -111,7 +111,7 @@ public class PlayerController : MonoX
 /// Modelo que conforma la estructura los seres (aliados y enemigos, incluyendo al player) 
 /// </summary>
 [Serializable]
-public struct Character{
+public struct Stats{
 
     /// <summary>
     /// Nos indica cuanto tiempo de vida posee, este decrese a medida que pasa el tiempo
