@@ -15,69 +15,65 @@ public class PlayerDetector : MonoX
 
     [Header("Detector Item")]
 
-    ///Vemos si tenemos un item cerca a lo esperdo
-    public bool isAnItemNear = false;
-    public Vector3 lastNearPos;
-    public GameObject lastObj;
-    public float _distance;
-
+    //Ultimo Item cercano
+    public Transform nearestItem = null;
     #endregion
     #region Events
 
     private void Awake(){
         Get(out body);
-
     }
     private void OnTriggerStay(Collider other){
-
-        //PrintX($"En contacto con algo {collision.gameObject.name}");
-       
-        if (XavHelpTo.Know.IsEqualOf(other.tag, tags)){
-
-
-            // si el objeto entrante es distinto que el ultimo
-            if (other.gameObject != lastObj){
-                //recogemos el objeto mas cercano
-
-                float _newDistance = Vector3.Distance(lastNearPos, other.transform.position);
-
-                ///Si encuentro uno más cerca del player
-                if (_newDistance < _distance ){
-                    _distance = _newDistance;
-                    lastNearPos = other.transform.position;
-                    lastObj = other.gameObject;
-
-                    PrintX($"Encontrado {_distance}");
-                }
-
-
-            }
-
-
-
-
-            Contact(other);
-        }
+        CheckDetection(other.transform);
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        //collision.collider
+    private void OnTriggerExit(Collider other){
+        if (other.transform.Equals(nearestItem)){
+            nearestItem = null;
+        }
+    }
+    private void OnDrawGizmos(){
+        if (nearestItem != null){
+            Gizmos.DrawLine(nearestItem.position, transform.position);
+        }
     }
     #endregion
     #region Methods
 
-    private void Contact<T>(T t){
 
-        //PrintX($"En contacto con {typeof(T)} {t}");
+    /// <summary>
+    /// Detecta el objeto entrante y, si nota que es un objeto
+    /// revisará las distancia s para guardarlo
+    /// </summary>
+    private void CheckDetection(Transform other)
+    {
+        if (XavHelpTo.Know.IsEqualOf(other.tag, tags))
+        {
+            // si el objeto entrante es distinto que el ultimo
+            if (!other.gameObject.Equals(nearestItem))
+            {
+
+                //en caso de no tener
+                if (nearestItem == null)
+                {
+                    nearestItem = other;
+                }
+                else
+                {
+                    //Revisamos la distancia, sie s mas cercano que el anterior
+                    float oldSum = Vector3.Distance(nearestItem.position, transform.position);
+                    float entrySum = Vector3.Distance(other.position, transform.position);
+
+                    if (entrySum < oldSum)
+                    {
+                        nearestItem = other;
+                    }
+
+                }
+            }
+        }
     }
+
+
     #endregion
 }
-
-/*
- Debe detectar si hay un item, de ser así si está en el rango más cercano
-Y que sea el más cercano de los encontrados...
- 
- 
- */
-

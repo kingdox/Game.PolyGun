@@ -10,7 +10,7 @@ namespace XavLib
     /// <summary>
     /// Herramientas para facilitar codigo
     /// <para>Aquí se poseerán funciones unicamente "static"</para>
-    /// <see cref="XavHelpTo"/> Ultima Actualización => 15 ene 2021
+    /// <see cref="XavHelpTo"/> Ultima Actualización => 23 ene 2021
     /// </summary>
     public struct XavHelpTo
     {
@@ -110,6 +110,18 @@ namespace XavLib
                 return childs;
             }
 
+
+            /// <summary>
+            /// Sumamos los valores de un arreglo
+            /// </summary>
+            public static float SummAll(params float[] values){
+                float c = 0;
+                foreach (float val in values){c += val;}
+                return c;
+            }
+            public static float SummAll(Vector3 values) => SummAll(Change.ToArray(values));
+
+
         }
         #endregion
         #region Set
@@ -131,6 +143,8 @@ namespace XavLib
             /// Asignas el valor a positivo en caso de ser negativo
             /// </summary>
             public static float Positive(float f) => f < 0 ? f * -1 : f;
+            //public static float Positive(params float[] f) => 
+
             /// <summary>
             /// Obtenemos el valor dentro de los limites de la unidad de 0 y 1
             /// <para>tambien puede psoeer decimales</para>
@@ -274,6 +288,10 @@ namespace XavLib
             /// Cambia de bool a int su valor
             /// </summary>
             public static int BoolToInt(bool condition) => condition ? 1 : -1;
+            /// <summary>
+            /// Cambia los valores del vector a un arreglo con estos
+            /// </summary>
+            public static float[] ToArray(Vector3 v) => new float[] {v[0], v[1], v[2] };
         }
         #endregion
         #region Know

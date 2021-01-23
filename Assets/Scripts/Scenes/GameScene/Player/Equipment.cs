@@ -6,12 +6,9 @@ using UnityEngine;
 public class Equipment : MonoX, IEquipment
 {
     #region Variables
-    /// <summary>
-    /// Contenedor del tipo, TODO en vez de un string contendrá el
-    /// tipo de fragmento o modulo....
-    /// </summary>
-    public string[] slots = new string[3];
-
+    
+    private ItemContent[] slots;
+    private PlayerDetector detector;
     /*
      * TODO
      * Aqui vamos ha hacer el manejo de los Equipments encontrados
@@ -26,10 +23,10 @@ public class Equipment : MonoX, IEquipment
      */
     #endregion
     #region Events
-    private void Awake(){
-        
+    private void Start()
+    {
         New(out slots, 3);
-        
+        Get(out detector);
     }
     #endregion
     #region Methods
@@ -84,26 +81,9 @@ public interface IEquipment{
 
 
 
-public enum ItemType{
-    SHAPES,
-    BUFFS
-}
 
-/// <summary>
-/// Contenido de el Item
-/// </summary>
-public enum ItemContent{
-    SQUARE,
-    CIRCLE,
-    TRIANGLE,
 
-    /// Mejoras posibles en el juego
-    ATK_SPEED,
-    TARGET_SHOT,
-    FROST,
-    STREGHT,
-    SPEED
-}
+
 
 /// <summary>
 /// Aliados posibles en el juego
