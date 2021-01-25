@@ -17,7 +17,7 @@ public class Bullet : MonoX
     [Space]
     public bool canFollow = false;
     //private Vector3 lastPos_follow;
-    private Quaternion provitionalRotate;
+    //private Quaternion provitionalRotate;
     #endregion
     #region Events
     private void Awake(){
@@ -32,10 +32,19 @@ public class Bullet : MonoX
         {
             //Buscarmos un enemigo random de la colección
             Transform tran_finder = GameManager.GetEnemiesContainer();
-            direction = transform.position - tran_finder.GetChild(tran_finder.childCount-1).position;
-            PrintX(direction);
-            provitionalRotate = Quaternion.LookRotation(direction);
-            
+            direction = tran_finder.GetChild(tran_finder.childCount - 1).position;
+            //direction.Normalize();
+            //Vector3.Normalize(direction);
+            //TODO
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (canFollow)
+        {
+            Gizmos.DrawLine(transform.position, direction);
+            Gizmos.DrawLine(direction, direction * 10);
 
         }
     }
@@ -44,14 +53,7 @@ public class Bullet : MonoX
         if (PassedRange()){
             Destroy(gameObject);
         }else{
-            if (canFollow)
-            {
-                //transform.rotation = Quaternion.LookRotation(direction);
-                //Quaternion.Slerp(transform.rotation, provitionalRotate, Time.deltaTime);
-                //TODO problemas aquí, me pone  -1, 0 ó 1...
-                //SetDirection(Quaternion.LookRotation(lastPos_follow));
-            }
-            movement.Move(direction, bulletShot.speed);
+           movement.Move(direction, bulletShot.speed, canFollow);
         }
     }
 

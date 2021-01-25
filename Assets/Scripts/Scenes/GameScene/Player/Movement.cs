@@ -5,8 +5,6 @@ using UnityEngine;
 public class Movement : MonoX
 {
     #region Variables
-    //public float speed = 5f;
-    //private Vector3 axis = Vector3.zero;
     private Rigidbody body;
     private Quaternion lastRotation;
 
@@ -25,9 +23,8 @@ public class Movement : MonoX
     /// que tiene <see cref="Movement"/>
     /// </para>
     /// </summary>
-    public void Move(Vector3 _axis, float speed){
-        //if (speed == default) speed = this.speed;
-        //if (_axis == default) _axis = this.axis;
+    public void Move(Vector3 _axis, float speed, bool oneDir = false){
+
 
         if (!GameManager.IsOnGame()){
             body.Sleep();
@@ -35,10 +32,20 @@ public class Movement : MonoX
         else{
             body.WakeUp();
 
-            SetRotation(_axis);
-           
+            //SetRotation(_axis);
+            if (oneDir)
+            {
+                //transform.rotation = Quaternion.LookRotation(Vector3.Normalize(transform.position) - _axis);
+                transform.rotation = Quaternion.LookRotation(_axis, Vector3.forward);
+
+            }
+            else
+            {
+                transform.rotation = Quaternion.LookRotation(_axis);
+            }
 
             body.velocity = new Vector3(_axis.x, 0, _axis.z) * speed;
+            body.velocity = _axis * speed;// * Time.deltaTime;
         }
     }
 
@@ -47,11 +54,11 @@ public class Movement : MonoX
     /// </summary>
     private void SetRotation(Vector3 _axis){
         // si movemos
+
         if (!_axis.Equals(Vector3.zero)){
-            transform.rotation = Quaternion.LookRotation(_axis);
-            lastRotation = transform.rotation;
+            //lastRotation = transform.rotation;
         }else{
-            transform.rotation = lastRotation;
+            //transform.rotation = lastRotation;
         }
     }
     #endregion
