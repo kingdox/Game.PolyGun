@@ -146,27 +146,32 @@ public class ControlSystem : MonoX
 
 
     ////TODO revisar
-    //public static Vector3 GetAxis(Vector3 axis = default)
-    //{
-    //    KeyPlayer[][] axisKeys ={
-    //        keysHorizontal,
-    //        keysVertical,
-    //        keysForward
-    //    };
-    //    PrintX(axis);
-    //    //keysMovement
-    //    for (int x = 0; x < 3; x++){
+    public static Vector3 GetAxis(Vector3 axis = default)
+    {
+        //KeyPlayer[][] axisKeys ={
+        //    keysHorizontal,
+        //    keysVertical,
+        //    keysForward
+        //};
+        //PrintX(axis);
+        ////keysMovement
+        //for (int x = 0; x < 3; x++)
+        //{
 
-    //        bool c = IsKeyHold(axisKeys[x]);
-    //        //si toco una tecla
-    //        if (c) {
-    //            foreach (KeyPlayer kp in axisKeys[x]){   
-    //                axis[x] += XavHelpTo.Change.BoolToInt(KnowIndexKeyHold(axisKeys[x]).Equals(0) );
-    //            }
-    //        }
-    //    }
-
-    //    return axis;
-    //}
+        //    bool c = IsKeyHold(axisKeys[x]);
+        //    //si toco una tecla
+        //    if (c)
+        //    {
+        //        foreach (KeyPlayer kp in axisKeys[x])
+        //        {
+        //            axis[x] += XavHelpTo.Change.BoolToInt(KnowIndexKeyHold(axisKeys[x]).Equals(0));
+        //        }
+        //    }
+        //}
+        axis.x = ControlSystem.GetAxisOf(ControlSystem.keysHorizontal);
+        axis.y = 0;// -defensivo-
+        axis.z = ControlSystem.GetAxisOf(ControlSystem.keysForward);
+        return axis;
+    }
     #endregion
 }

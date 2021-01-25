@@ -27,7 +27,6 @@ namespace Grid
         [Space]
         public bool initLoaded = true;
 
-
         //Conocimiento para saber el tamaño esperado
         private int countOfItems = 0;
         private Vector2 spacing = new Vector2(0,0);
@@ -72,8 +71,11 @@ namespace Grid
 
             Vector2 _objSize = GetChildSize();
 
-            //Debug.Log($"Contenedores : {rect_containers.Length}, Tamaño : {_objSize} Sobre {_screenSize}");
-            childSize = new Vector2(_objSize.x , _objSize.y / countOfItems) - spacing;
+            if (grid.startAxis.Equals(GridLayoutGroup.Axis.Horizontal)){
+                childSize = new Vector2(_objSize.x / countOfItems, _objSize.y ) - spacing;
+            }else{
+                childSize = new Vector2(_objSize.x , _objSize.y / countOfItems) - spacing;
+            }
         }
 
 

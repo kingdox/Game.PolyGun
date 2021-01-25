@@ -8,10 +8,17 @@ using Environment;
 public class GameManager : MonoManager
 {
     #region Variable
+    private static GameManager _;
+    //SOLO para lectura y refresco, no guardado
+    private static SavedData lastSaved;
 
     [Header("Game Settigns")]
     public GameStatus gameStatus;
-    private static GameManager _;
+    [Space]
+    [Header("@Areas")]
+    public Transform @LeftoverContainer;
+    public Transform @EnemiesContainer;
+    [Space]
 
     [Header("Debug")]
     public bool onDebug = false;
@@ -26,6 +33,8 @@ public class GameManager : MonoManager
         gameStatus = GameStatus.ON_GAME;
         Time.timeScale = 1f;
         Cursor.visible = false;
+
+       
 
         Begin();
 
@@ -42,10 +51,20 @@ public class GameManager : MonoManager
     }
     public override void Init()
     {
-
+        //Tomamos el ultimo guardado
+        lastSaved = DataPass.GetSavedData();
     }
     #endregion
     #region Methods
+    /// <summary>
+    /// Tomamos el elemento del LeftoverCOntainer fisico 
+    /// </summary>
+    public static Transform GetLeftoverContainer() => _.LeftoverContainer;
+    /// <summary>
+    /// Tomamos el elemento EnemiesContainer del mundo fisico
+    /// </summary>
+    public static Transform GetEnemiesContainer() => _.EnemiesContainer;
+
 
     /// <summary>
     /// Buscamos el estado actual del juego 

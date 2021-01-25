@@ -1,23 +1,46 @@
-﻿using System.Collections;
+﻿#region IMports
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Enemy : MonoBehaviour
+#endregion
+public class Enemy : MonoX
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Variables
+
+    public Destructure destructure;
+    #endregion
+    #region Events
+    private void Start()
     {
-        
+        Get(out destructure);
+    }
+    #endregion
+    #region Methods
+
+    public void CheckDamage(float damage)
+    {
+        //
+
+        //TODO si es detruido por que se queda sin vida...
+        if (true)
+        {
+            //permite añadir al checker de achieve
+            Kil();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    /// <summary>
+    /// Hace el proceso de eliminación del enemigo
+    /// </summary>
+    private void Kil()
     {
-        
+        destructure.DestructureThis();
+        Destroy(gameObject);
     }
+
+    #endregion
 }
-
-
 
 /// <summary>
 /// Conocemos las diferencias entre los enemigos por el tipo
@@ -26,14 +49,7 @@ public struct EnemyType{
 
     public EnemyName name;
     public bool isBoss;
-
-    /*
-     *  - Tenemos que saber qué Enemigo fue (enum)
-     *  - Tenemos que saber si era un boss o no (bool)
-     *  
-     */
 }
-
 /// <summary>
 /// Los enemigos que hay en el juego
 /// </summary>

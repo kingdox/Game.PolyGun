@@ -32,7 +32,6 @@ public class Equipment : MonoX
         //cuidaremos que se actualice el flag para poder crear tras el tiempo...
         CanPassedTime(ref canCraft, ref timeCount_craft, timer_craft);
 
-
         //si tenemos equipado la misma cantidad del slot limite
         //checkearemos
         if (canCraft && equipedQty.Equals(slots.Length) ){
@@ -46,37 +45,92 @@ public class Equipment : MonoX
     
 
     /// <summary>
-    /// Dependiendo del Slot Seleccionado podremos Tomar un objetoo y guardarlo
+    /// Dependiendo del Slot Seleccionado podremos Tomar un objeto y guardarlo
     /// o podemos usar el objeto
     /// </summary>
-    public void Action(int i){
-        if (i.Equals(-1)) return;
+    public ActionType Action(int i){
 
-        //si no hay coloca
-        if (slots[i].Equals(ItemContent.NO)){
+        ActionType actionType = new ActionType(
+            slots[i]
+            , !slots[i].Equals(ItemContent.NO)
+        ); 
+
+        //si no Esta siendo USADO
+        if (!actionType.used){
             //asignas el objeto encontrado
             detector.SetNearestItemType(ref slots[i]);
             equipedQty++;
-
-        }
-        else{
+        }else{
+            //si esta siendo usado lo consumimos
             equipedQty--;
-
-            //si hay lo usa
-            //usandolo.....
-
-            //TODO
-            PrintX($"Se usó {slots[i]}");
             slots[i] = ItemContent.NO;
-
         }
 
+        return actionType;
     }
+
+    /// <summary>
+    /// Devuelve los slots actuales de equipamiento
+    /// </summary>
+    public ItemContent[] GetSlots() => slots;
+
     /// <summary>
     /// Limpiamos los slots y los dejamos con <see cref="ItemContent.NO"/>
     /// </summary>
     private void ClearSlots() => slots = XavHelpTo.Set.FillWith(ItemContent.NO, slots);
     #endregion
+}
+
+public struct ActionType {
+    public ItemContent item;
+    public bool used;
+    public ActionType(ItemContent item, bool used){
+        this.item = item;
+        this.used = used;
+    }
+
+    /// <summary>
+    /// Pregunta si la acción es con un Item
+    /// </summary>
+    public bool IsItem()
+    {
+        return XavHelpTo.Know.IsEqualOf(item,
+                    ItemContent.CIRCLE,
+                    ItemContent.TRIANGLE,
+                    ItemContent.SQUARE
+                );
+    }
+
+    public BuffType ToBuffType()
+    {
+        BuffType type = BuffType.NO;
+
+        //Boilerplate....
+        switch (item)
+        {
+            case ItemContent.ATK_SPEED:
+                type = BuffType.ATK_SPEED;
+                break;
+            case ItemContent.TARGET_SHOT:
+                type = BuffType.TARGET_SHOT;
+                break;
+            case ItemContent.FROST:
+                type = BuffType.FROST;
+                break;
+            case ItemContent.STREGHT:
+                type = BuffType.STREGHT;
+                break;
+            case ItemContent.SPEED:
+                type = BuffType.SPEED;
+                break;
+            default:
+                break;
+        }
+
+        return type;
+    }
+
+
 }
 
 //TODO aquí estan los ALLY

@@ -7,9 +7,9 @@ using XavLib;
 #endregion
 /// <summary>
 /// MonoX poseerá todas las propiedades comunes para los objetos
-/// No usar MonoBehaviour, en cambio usar <see cref="MonoX"/>
 /// para adiciones especiales y comunes
 /// <para>
+/// Util para herramientas...
 /// </para>
 /// </summary>
 public class MonoX : MonoBehaviour
@@ -21,21 +21,55 @@ public class MonoX : MonoBehaviour
     /// Tomamos el valor del mismo objeto y le asignamos el componente 
     /// </summary>
     public void Get<T>(out T t) => t = GetComponent<T>();
+   
+
     /// <summary>
     /// Tomamos los componentes del mismo tipo del objeto
     /// </summary>
     public void Gets<T>(out T[] t) => t = GetComponents<T>();
 
     /// <summary>
-    /// Tomamos del arreglo los componentes hijos sin el componente actual
-    /// <para>Este vendrá ordenadamente, su coste es mayor</para>
+    /// Buscamos de los hijos del target el que tenga la misma tag
+    /// <para>sino devuelve falso </para>
     /// </summary>
-    public void GetChilds<T>(out T[] t) {
-        New(out t, transform.childCount);
-        for (int x = 0; x < transform.childCount; x++){
-            t[x] = transform.GetChild(x).GetComponent<T>();
+    public bool TryGetChild(out Transform t, Transform target, string tag)
+    {
+        for (int i = 0; i < target.childCount; i++)
+        {
+            Transform child = target.GetChild(i);
+            if (child.CompareTag(tag))
+            {
+                t = child;
+                return true;
+            }
+        }
+        t = null;
+        return false;
+    }
+    /// <summary>
+    /// Tomamos del arreglo los componentes hijos sin el componente actual
+    /// <para>Este vendrá ordenadamente, su coste es alto</para>
+    /// </summary>
+    public void GetChilds<T>(out T[] t, Transform target = null){
+        //if (target == null) target = transform;
+        Default(ref target, transform);
+        New(out t, target.childCount);
+        for (int x = 0; x < target.childCount; x++){
+            t[x] = target.GetChild(x).GetComponent<T>();
         }
     }
+    //public void GetChilds<T>(out T[] t)
+    //{
+    //    New(out t, transform.childCount);
+    //    for (int x = 0; x < transform.childCount; x++)
+    //    {
+    //        t[x] = transform.GetChild(x).GetComponent<T>();
+    //    }
+    //}
+
+
+
+
     /// <summary>
     /// Tomamos los hijos y este objeto en caso de incluir lo buscado
     /// </summary>
@@ -48,6 +82,14 @@ public class MonoX : MonoBehaviour
         gameObject.AddComponent(typeof(T));
         Get(out t);
     }
+
+    ///// <summary>
+    ///// Añades un componente al objeto
+    ///// </summary>
+    //public void AddComp<Type>(Type type, GameObject obj){
+    //    obj.AddComponent(typeof(Type));
+    //}
+
     /// <summary>
     /// Pinta con un color el texto
     /// </summary>
@@ -97,7 +139,16 @@ public class MonoX : MonoBehaviour
 
         return false;
     }
-    //public bool IsNull<T>(T t) => t ^ null;
+
+    /// <summary>
+    /// Preguntamos si es nulo el valor indicado
+    /// </summary>
+    public bool IsNull<T>(T t) => t == null;
+
+    /// <summary>
+    /// Coloca el valor puesto en caso de que sea null
+    /// </summary>
+    public void Default<T>(ref T value, T defaultVal) => value = IsNull(value) ? defaultVal : value;
     //public bool IsNull(Component t) => t ^ null;
     //protected?
     #endregion

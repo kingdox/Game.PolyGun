@@ -16,7 +16,7 @@ public class EnemyManager : MonoX
 
     [Space]
 
-    private readonly SpawnOpt[] spawnPatron = { SpawnOpt.NEAR, SpawnOpt.FAR, SpawnOpt.RANDOM, SpawnOpt.FAR, SpawnOpt.RANDOM };
+    private readonly SpawnOpt[] spawnPatron = { SpawnOpt.NEAR, SpawnOpt.NEAR, SpawnOpt.RANDOM, SpawnOpt.FAR, SpawnOpt.RANDOM };
     private int spawnOrder = 0;
     [Space]
     public float timer = 5f; private float count;
@@ -26,7 +26,7 @@ public class EnemyManager : MonoX
     //Cantidad de enemigos que faltan por invocar
     public int enemiesLeft = 0;
     // Indicador de la oleada actual
-    public int waveActual = 0;
+    public static int waveActual = 0;
 
     [Header("Debug")]
     public bool _Debug_SetWave = false;
@@ -122,8 +122,6 @@ public class EnemyManager : MonoX
     /// Comprueba si NO hay enemigos faltantes por invocar ni enemigos en la escena
     /// </summary>
     private bool IsWaveEnd() => enemiesLeft.Equals(0) && spawner.parent.childCount.Equals(0);
-
-
 
 
 

@@ -249,9 +249,7 @@ public class MsgController : MonoInit
             }
         }
     }
-    /// <summary>
-    /// TODO esto solo es para testeos
-    /// </summary>
+
     public string _GetSavedData() => savedText;
     #endregion
 }

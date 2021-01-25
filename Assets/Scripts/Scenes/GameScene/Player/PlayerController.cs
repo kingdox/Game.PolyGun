@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Environment;
+using XavLib;
 #endregion
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Equipment))]
@@ -24,13 +25,17 @@ public class PlayerController : MonoX
 
     [Header("PlayerSettings")]
     [SerializeField]
-    public Stats stats;
-
+    public Character character;
     [Space]
     private Movement movement;
     private Equipment equipment;
     private Shot shot;
+    [Space]
+    private Destructure destructure;
 
+    [Header("Buffs")]
+    public Transform buffList;
+    public ItemBuff[] buffs;
     #endregion
 
     #region Events
@@ -39,39 +44,61 @@ public class PlayerController : MonoX
         Get(out movement);
         Get(out equipment);
         Get(out shot);
-        //Get(out player);
+        Get(out destructure);
 
+        GetChilds(out buffs, buffList);
+        character.type = CharacterType.PLAYER;
     }
     private void Update()
     {
         CheckOnGame();
-        Pause();
     }
     #endregion
     #region Methods
 
     /// <summary>
-    /// Detectas los  controles para en juego
+    /// Detectas las caracteristicas de cuando estas en juego
     /// </summary>
     private void CheckOnGame(){
+        if (character.IsAlive()){
+            Pause();
+            Movement(); // movement se maneja internamente
 
-        //se maneja internamente
-        Movement();
+            if (GameManager.IsOnGame()){
+                BuffsUpdate();
+                Equipment();
+                Attack();
 
-        //retornamos si no esta en juego
-        if (!GameManager.IsOnGame()) return;
-        Equipment();
-        Attack();
+                character.LessLife();
+            }
+
+        }else{
+            //Eliminamos a poly
+            destructure.DestructureThis();
+            //equipment.slo
+        }
     }
+
+   /// <summary>
+   /// Recorre la lista de buffs existentes y aplica sus propiedades en caso
+   /// de que exista
+   /// </summary>
+   private void BuffsUpdate()
+   {
+        for (int x = 0; x < buffs.Length; x++)  
+        {
+            //revisamos si NO ha podido aplicar el buff
+            buffs[x].CanApplyBuff(ref character);
+        }
+    }
+
     /// <summary>
     /// Movemos la player en la dirección en la que ha tocado las teclas
     /// Se revisa cada tecla presionada por separado para asignar los
     /// valores correspondientes
     /// </summary>
     private void Movement(){
-        //movement.SetAxis(ControlSystem.GetAxis());
-        movement.SetAxis(ControlSystem.GetAxisOf(ControlSystem.keysHorizontal), 0, ControlSystem.GetAxisOf(ControlSystem.keysForward));
-        movement.Move();
+        movement.Move(ControlSystem.GetAxis(), character.speed);
     }
     /// <summary>
     /// Detecta si has tocado alguna tecla de equipación, de ser así
@@ -79,7 +106,44 @@ public class PlayerController : MonoX
     /// </summary>
     private void Equipment(){
         //Buscamos la primera accion de objeto selecta
-        equipment.Action(ControlSystem.KnowIndexKeyFrame(ControlSystem.keysObjects));
+        int indexK = ControlSystem.KnowIndexKeyFrame(ControlSystem.keysObjects);
+        //si tocamos una tecla
+        if (!indexK.Equals(-1)){
+            ActionType action = equipment.Action(indexK);
+            //si se usó
+            if (action.used){
+
+                //PrintX($"{action.item}");
+
+                //si es un item, entonces curamos
+                if (action.IsItem())
+                {
+                    //PrintX("Curando");
+                    character.timeLife += Data.data.healShape[(int)action.item];
+                }
+                else
+                {
+                    BuffType buffType = action.ToBuffType();
+                    //Esta recorriendo para buscar el buff y asignarle
+                    foreach (ItemBuff buff in buffs)
+                    {
+                        if (buff.buff.Equals(buffType))  
+                        {
+                            //iniciamos a correr isrunning...
+                            buff.count = 0;
+                            buff.isRunning = true;
+                            PrintX($"Aplica buff de tipo {buff.buff}");
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                //Agarró el objeto
+            }
+        
+        }
     }
 
     /// <summary>
@@ -87,7 +151,8 @@ public class PlayerController : MonoX
     /// </summary>
     private void Attack(){
         if (ControlSystem.IsKeyFrame(KeyPlayer.OK_FIRE)){
-            shot.ShotBullet( new BulletShot(stats.atkSpeed + stats.speed,stats.range,stats.damage));
+            //bool shotSuccees = 
+            shot.ShotBullet(character);
         }
     }
 
@@ -111,12 +176,17 @@ public class PlayerController : MonoX
 /// Modelo que conforma la estructura los seres (aliados y enemigos, incluyendo al player) 
 /// </summary>
 [Serializable]
-public struct Stats{
+public struct Character{
 
+    public CharacterType type;
     /// <summary>
     /// Nos indica cuanto tiempo de vida posee, este decrese a medida que pasa el tiempo
     /// </summary>
     public float timeLife;
+    /// <summary>
+    /// Nos muestra la vida maxima que posee
+    /// </summary>
+    public float timeLifeMax;
     /// <summary>
     /// indica la velocidad de desplazamiento
     /// </summary>
@@ -134,4 +204,46 @@ public struct Stats{
     /// </summary>
     public float atkSpeed;
 
+    //****BUFF THINGS
+    public bool isInmortal;
+    public bool canExtraShots;
+
+    /// <summary>
+    /// Revisa si sigue con vida
+    /// </summary>
+    public bool IsAlive() => !timeLife.Equals(0);
+
+    /// <summary>
+    /// Hace que pierda vida el player a medida que pasa el tiempo
+    /// <para>Si llega a 0 activa el <see cref="GameManager.GameOver"/></para>
+    /// </summary>
+    public void LessLife()
+    {
+        if (!isInmortal)
+        {
+            timeLife = Mathf.Clamp(timeLife - Time.deltaTime, 0, timeLifeMax);
+        }
+    }
+
+    /// <summary>
+    /// Manejador que comprueba la vida y resta lo correspondiente
+    /// </summary>
+    public void LostLife(float val)
+    {
+        if (!isInmortal)
+        {
+            this.timeLife -= val;
+        }
+    }
+}
+
+/// <summary>
+/// Los tipos de personajes en pantalla
+/// </summary>
+public enum CharacterType
+{
+    PLAYER,
+    ENEMY,
+    ALLY,
+    BOSS
 }

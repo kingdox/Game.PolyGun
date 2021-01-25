@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Achievements;
 using XavLib;
 using Environment;
@@ -11,7 +12,6 @@ public class AchieveSystem : MonoBehaviour
     #region Variables
     private readonly Achievement[] achievements = Data.data.GetAchievements();
     private static AchieveSystem _;
-
 
     [Header("Achieve Unlock Settings")]
     //Donde controlaremos lo que meustra
@@ -55,6 +55,8 @@ public class AchieveSystem : MonoBehaviour
     }
     #endregion
     #region Methods
+
+   
 
     /// <summary>
     /// Colocamos la referencia del item unlocker de esta pantalla
@@ -100,8 +102,9 @@ public class AchieveSystem : MonoBehaviour
             DataPass.GetSavedData().achievements[index]
         ));
     }
+  
 
-    #if DEBUG
+#if DEBUG
 
     private void _Debug()
     {
@@ -120,4 +123,5 @@ public class AchieveSystem : MonoBehaviour
     }
     #endif
     #endregion
+
 }

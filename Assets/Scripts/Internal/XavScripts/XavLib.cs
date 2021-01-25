@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Environment;
 using UnityEngine.EventSystems;
@@ -193,6 +194,12 @@ namespace XavLib
 
                 return c;
             }
+            public static void ColorParam(ref Image img, ColorType i, float val = 1){
+                Color c = img.color;
+                img.color = ColorParam(c, (int)i, val);
+            }
+
+
             /// <summary>
             /// Actualizamos el arreglo para que posea el mismo tamaño que el nuevo,
             /// estos cambios pueden eliminar o añadir huecos, los nuevos iniciarán en 0
@@ -249,7 +256,7 @@ namespace XavLib
             /// </para>
             /// </summary>
             public static float TimeCountOf(float count, float cooldown) =>  (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
-            public static bool TimeCountOf(ref float count, float cooldown) => (count = (count+Time.deltaTime >= cooldown) ? 0 : count+Time.deltaTime) == 0;
+            public static bool TimeCountOf(ref float count, float cooldown) => (count = TimeCountOf(count,cooldown) ) == 0;
 
 
             /// <summary>
@@ -425,7 +432,8 @@ namespace XavLib
         #region Debug
         /// <summary>
         /// Herramienta para facilitar a xavier su progreso.
-        ///  Tambien está para visualizar cosas mejor
+        ///  Tambien está para visualizar cosas mejor.
+        ///  posee cosas esteticas....
         /// </summary>
         public struct Look
         {

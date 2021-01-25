@@ -74,7 +74,7 @@ public class Spawner : MonoX
         else
         {
             int nearIndex = 0 ;
-            float nearest = Vector3.Distance(childsPos[0], target.position); ;
+            float nearest = Vector3.Distance(childsPos[0], target.position);
 
             for (int i = 0; i < childsPos.Length; i++){
                 float distance = Vector3.Distance(childsPos[i], target.position);

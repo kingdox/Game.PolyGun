@@ -55,3 +55,19 @@ public enum ItemContent{
     STREGHT,
     SPEED
 }
+
+
+//public enum ItemType2
+//{
+//    NO = -1,
+
+//    SHAPE,
+//    BUFF
+//}
+////Test
+//public struct ItemContentType2
+//{
+//    ItemType2 type;
+//    BuffType buff;
+//}
+

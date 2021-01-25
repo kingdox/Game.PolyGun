@@ -10,6 +10,9 @@ TagManager:
   - player
   - ground
   - obstacle
+  - leftover
+  - world
+  - model
   layers:
   - Default
   - TransparentFX

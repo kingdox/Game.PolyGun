@@ -5,8 +5,8 @@ using UnityEngine;
 public class Movement : MonoX
 {
     #region Variables
-    public float speed = 5f;
-    private Vector3 axis = Vector3.zero;
+    //public float speed = 5f;
+    //private Vector3 axis = Vector3.zero;
     private Rigidbody body;
     private Quaternion lastRotation;
 
@@ -25,9 +25,9 @@ public class Movement : MonoX
     /// que tiene <see cref="Movement"/>
     /// </para>
     /// </summary>
-    public void Move(Vector3 _axis = default, float speed = default){
-        if (speed == default) speed = this.speed;
-        if (_axis == default) _axis = this.axis;
+    public void Move(Vector3 _axis, float speed){
+        //if (speed == default) speed = this.speed;
+        //if (_axis == default) _axis = this.axis;
 
         if (!GameManager.IsOnGame()){
             body.Sleep();
@@ -41,19 +41,11 @@ public class Movement : MonoX
             body.velocity = new Vector3(_axis.x, 0, _axis.z) * speed;
         }
     }
-    /// <summary>
-    /// Asignamos los axis del movimiento
-    /// </summary>
-    public void SetAxis(float x, float y, float z) => axis = new Vector3(x, y, z);
-    public void SetAxis(Vector3 _axis) => axis = _axis;
 
     /// <summary>
-    /// Devolvemos los axis
+    /// Asignamos la rotación basado en la dirección(del axis);
     /// </summary>
-    public Vector3 GetAxis() => axis;
-
-    private void SetRotation(Vector3 _axis = default){
-        if (_axis == default) _axis = this.axis;    
+    private void SetRotation(Vector3 _axis){
         // si movemos
         if (!_axis.Equals(Vector3.zero)){
             transform.rotation = Quaternion.LookRotation(_axis);

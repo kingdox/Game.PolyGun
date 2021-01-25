@@ -20,19 +20,31 @@ public class MultiColor : MonoX
     [Header("Time")]
     public float tick = 1;
     private float count = 0;
+
+    //guardamos el wanted inicial
+    private Color wantedInit;
+    public bool isPlaying = true;
+
     #endregion
     #region Events
     private void Start(){
         if (!imgController) Get(out imgController);
         if (!imgController) Add(out imgController);
 
+        wantedInit = imgController.color_want;
+
     }
     private void Update()
     {
-        count = XavHelpTo.Set.TimeCountOf(count, tick);
-        if (count.Equals(0)) {
+
+        if (isPlaying && Timer(ref count, tick)) {
             ChangeColor();
-        };
+        }
+        else if(!isPlaying && imgController.color_want != wantedInit){
+            //asigna el valor del color_want
+            imgController.color_want = wantedInit;
+        }
+
     }
     #endregion
     #region Methods
