@@ -39,7 +39,6 @@ public class Shot : MonoX
         //estas solo aparecen si en el rango hay algún objetivo?
         if (character.canExtraShots)
         {
-            //CreateBullet(character).canFollow = true;
             StartCoroutine(CreateFollowBullet(character));
         }
 
@@ -55,8 +54,13 @@ public class Shot : MonoX
     {
         Default(ref t, transform);
 
-        Bullet newBullet = Instantiate(pref_bullet, t.position, Quaternion.LookRotation(t.position), parent_bullet);
-        newBullet.SetDirection(transform.rotation);
+        //.LookRotation(t.position)
+        Bullet newBullet = Instantiate(pref_bullet, t.position, Quaternion.identity , parent_bullet);
+
+        //asignation of rotation
+        newBullet.SetDirection(t);
+
+        //Asignation of stats
         newBullet.bulletShot.GetShotOf(character);
         return newBullet;
     }

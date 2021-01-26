@@ -7,23 +7,20 @@ public class Movement : MonoX
     #region Variables
     private Rigidbody body;
     private Quaternion lastRotation;
+    //private Rotation rotation;
 
     #endregion
     #region Events
     private void Awake(){
         Get(out body);
+        //Get(out rotation);
     }
     #endregion
     #region Methods
     /// <summary>
-    /// Asignamos el movimiento basado en la dirección que se movera
-    /// y la velocidad que lo hará
-    /// <para>
-    /// En caso de no asignarle velocidad se establecerá la
-    /// que tiene <see cref="Movement"/>
-    /// </para>
+    /// enable movement, if following it keeps fetching with the position..
     /// </summary>
-    public void Move(Vector3 _axis, float speed, bool oneDir = false){
+    public void Move(Vector3 _axis, float speed, bool following = false){
 
 
         if (!GameManager.IsOnGame()){
@@ -32,33 +29,19 @@ public class Movement : MonoX
         else{
             body.WakeUp();
 
-            //SetRotation(_axis);
-            if (oneDir)
+            if (following)
             {
-                //transform.rotation = Quaternion.LookRotation(Vector3.Normalize(transform.position) - _axis);
-                transform.rotation = Quaternion.LookRotation(_axis, Vector3.forward);
-
+                transform.position = Vector3.MoveTowards(
+                    transform.position,
+                    _axis,
+                    Time.deltaTime
+                    * speed
+                );
             }
             else
             {
-                transform.rotation = Quaternion.LookRotation(_axis);
+                body.velocity = _axis * speed;
             }
-
-            body.velocity = new Vector3(_axis.x, 0, _axis.z) * speed;
-            body.velocity = _axis * speed;// * Time.deltaTime;
-        }
-    }
-
-    /// <summary>
-    /// Asignamos la rotación basado en la dirección(del axis);
-    /// </summary>
-    private void SetRotation(Vector3 _axis){
-        // si movemos
-
-        if (!_axis.Equals(Vector3.zero)){
-            //lastRotation = transform.rotation;
-        }else{
-            //transform.rotation = lastRotation;
         }
     }
     #endregion

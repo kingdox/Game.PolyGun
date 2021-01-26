@@ -68,6 +68,7 @@
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/es.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/KeyData.cs" />
     <Compile Include="Assets/Scripts/Scenes/OptionsScene/OptionsItem.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Buff/ItemBuff.cs" />
     <Compile Include="Assets/Scripts/Scenes/InitialScene/InitialManager.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/MusicSystem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/GameManager.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionPage.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Item/Item.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/DataPass.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Buff/BuffHUD.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Bullet.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Settings/ScreenManager.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Item/ItemManager.cs" />
@@ -103,8 +105,8 @@
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Buff/ItemBuff.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Buff/BuffHUD.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Rotation.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Monox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

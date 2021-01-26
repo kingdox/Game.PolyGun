@@ -9,54 +9,59 @@ public class Bullet : MonoX
     #region Variables
 
     private Movement movement;
+    private Rotation rotation;
     private Vector3 initPos;
     [Header("Bullet Settings")]
     [Space]
     public BulletShot bulletShot;
     public Vector3 direction;
+
     [Space]
     public bool canFollow = false;
-    //private Vector3 lastPos_follow;
-    //private Quaternion provitionalRotate;
     #endregion
     #region Events
     private void Awake(){
         Get(out movement);
+        Get(out rotation);
         initPos = transform.position;
     }
 
     private void Start()
     {
-        //Si puede seguirlo hace un calculo extra...
+        //Si puede seguir busca a un enemigo y se ajusta
         if (canFollow)
         {
-            //Buscarmos un enemigo random de la colección
             Transform tran_finder = GameManager.GetEnemiesContainer();
             direction = tran_finder.GetChild(tran_finder.childCount - 1).position;
-            //direction.Normalize();
-            //Vector3.Normalize(direction);
-            //TODO
+            rotation.LookTo(direction);
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        if (canFollow)
-        {
-            Gizmos.DrawLine(transform.position, direction);
-            Gizmos.DrawLine(direction, direction * 10);
-
-        }
-    }
+    
     private void Update(){ 
 
         if (PassedRange()){
             Destroy(gameObject);
         }else{
-           movement.Move(direction, bulletShot.speed, canFollow);
+
+            if (canFollow)
+            {
+                //updates the rotation based on the actual direction
+                rotation.LookTo(direction);
+                //movement following the actual directiong
+                movement.Move(direction, bulletShot.speed, canFollow);
+            }
+            else
+            {
+                //Lo movemos con el ejeZ
+                movement.Move(transform.forward.normalized, bulletShot.speed, canFollow);
+            }
         }
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, direction);
+    }
     private void OnTriggerEnter(Collider other)
     {
         string tag = other.transform.tag;
@@ -76,9 +81,12 @@ public class Bullet : MonoX
     #region Methods
 
     /// <summary>
-    /// Asignamos una dirección (de tipo axis) basada en una rotación
+    /// Set the direction 
     /// </summary>
-    public void SetDirection(Quaternion rotation) => direction = Vector3.Normalize(rotation * Vector3.forward);
+    public void SetDirection(Transform trans) {
+        rotation.SetDirection(trans.rotation);
+        direction = trans.position;
+    }
 
     /// <summary>
     /// Preguntamos si ha pasado el rango desde el punto inicial con el actual

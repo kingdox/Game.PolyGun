@@ -8,6 +8,7 @@ using Environment;
 using XavLib;
 #endregion
 [RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(Rotation))]
 [RequireComponent(typeof(Equipment))]
 [RequireComponent(typeof(Shot))]
 ///<summary>
@@ -28,6 +29,7 @@ public class PlayerController : MonoX
     public Character character;
     [Space]
     private Movement movement;
+    private Rotation rotation;
     private Equipment equipment;
     private Shot shot;
     [Space]
@@ -42,6 +44,7 @@ public class PlayerController : MonoX
     private void Awake()
     {
         Get(out movement);
+        Get(out rotation);
         Get(out equipment);
         Get(out shot);
         Get(out destructure);
@@ -98,7 +101,9 @@ public class PlayerController : MonoX
     /// valores correspondientes
     /// </summary>
     private void Movement(){
-        movement.Move(ControlSystem.GetAxis(), character.speed);
+        Vector3 axis = ControlSystem.GetAxis();
+        movement.Move(axis, character.speed);
+        rotation.RotateByAxis(axis);
     }
     /// <summary>
     /// Detecta si has tocado alguna tecla de equipación, de ser así
