@@ -16,7 +16,7 @@ using XavLib;
 /// <para>
 /// Dependiendo de la tecla presionada buscaremos
 /// hacer una acción o otra
-/// </para>
+/// </para>da
 ///</summary>
 public class PlayerController : MonoX
 {
@@ -110,6 +110,10 @@ public class PlayerController : MonoX
     /// ejecuta una acción en <see cref="Equipment"/>
     /// </summary>
     private void Equipment(){
+
+        //si hay algo por fabricar
+        equipment.WaitedCraft(ref character, ref buffs);
+
         //Buscamos la primera accion de objeto selecta
         int indexK = ControlSystem.KnowIndexKeyFrame(ControlSystem.keysObjects);
         //si tocamos una tecla
@@ -134,20 +138,12 @@ public class PlayerController : MonoX
                     {
                         if (buff.buff.Equals(buffType))  
                         {
-                            //iniciamos a correr isrunning...
-                            buff.count = 0;
-                            buff.isRunning = true;
-                            PrintX($"Aplica buff de tipo {buff.buff}");
+                            buff.StartBuff();
                         }
                     }
                 }
 
             }
-            else
-            {
-                //Agarró el objeto
-            }
-        
         }
     }
 

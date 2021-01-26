@@ -16,6 +16,7 @@ public class ItemBuff : MonoX
     public float buffValue = -1;
     //Cuenta la cantidad de Buffs aplicados
 
+    public int stacks = 0;
     [Space]
     public bool isRunning = false;
     //de momento 10 s
@@ -68,7 +69,12 @@ public class ItemBuff : MonoX
     {
         if (isRunning && Timer(ref count, timer))
         {
-            isRunning = false;
+            stacks--;
+            if (stacks.Equals(0))   
+            {
+                isRunning = false;
+
+            }
             //savedValue = -1;
 
         }
@@ -85,7 +91,6 @@ public class ItemBuff : MonoX
     {
         bool canApply = true;
 
-        //Boilerplate.....
         switch (buff)
         {
             case BuffType.ATK_SPEED:
@@ -114,6 +119,15 @@ public class ItemBuff : MonoX
 
         //devolvemos informando si hay escepciones o no
         return canApply;
+    }
+
+    public void StartBuff()
+    {
+        //si hay otro buff lo checkeamos y añadimos como pila
+        //de momento lo resetea
+        //count = 0;
+        stacks++;
+        isRunning = true;
     }
 
     #endregion

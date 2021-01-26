@@ -136,10 +136,11 @@ namespace XavLib
             /// <summary>
             /// Añade un string a un arreglo de strings.
             /// </summary>
-            public static string[] Push(string value ,params string[] values){
+            public static string[] Push(string value, params string[] values)
+            {
                 string[] newArr = new string[values.Length + 1];
                 for (int x = 0; x < newArr.Length; x++) newArr[x] = (x == newArr.Length - 1) ? value : values[x];
-                return newArr;  
+                return newArr;
             }
 
             /// <summary>
@@ -159,7 +160,7 @@ namespace XavLib
             /// <para>se puede implementar un texto inicial</para>
             /// </summ int start = 0, int end = -1, string startText = "") {for (int x = start; x < (end.Equals(-1) ? text.Length : end + 1); x++) startText += text[x];return startText; }
             public static string Join(string text, int start = 0, int end = -1, string startText = "") { for (int x = start; x < (end.Equals(-1) ? text.Length : end + 1); x++) startText += text[x]; return startText; }
-            public static string Join(string[] texts, string startText = "") { for (int x = 0; x < texts.Length ; x++) startText += texts[x]; return startText; }
+            public static string Join(string[] texts, string startText = "") { for (int x = 0; x < texts.Length; x++) startText += texts[x]; return startText; }
 
 
             /// <summary>
@@ -194,7 +195,8 @@ namespace XavLib
 
                 return c;
             }
-            public static void ColorParam(ref Image img, ColorType i, float val = 1){
+            public static void ColorParam(ref Image img, ColorType i, float val = 1)
+            {
                 Color c = img.color;
                 img.color = ColorParam(c, (int)i, val);
             }
@@ -255,26 +257,29 @@ namespace XavLib
             /// if (count.Equals(0)) {...};
             /// </para>
             /// </summary>
-            public static float TimeCountOf(float count, float cooldown) =>  (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
-            public static bool TimeCountOf(ref float count, float cooldown) => (count = TimeCountOf(count,cooldown) ) == 0;
+            public static float TimeCountOf(float count, float cooldown) => (count + Time.deltaTime > cooldown) ? 0 : count + Time.deltaTime;
+            public static bool TimeCountOf(ref float count, float cooldown) => (count = TimeCountOf(count, cooldown)) == 0;
 
 
             /// <summary>
             /// Llenamos un arreglo con el valor escogido
             /// </summary>
-            public static T[] FillWith<T>(T tValue, params T[] ts){
-                for (int x = 0; x < ts.Length; x++){
+            public static T[] FillWith<T>(T tValue, params T[] ts)
+            {
+                for (int x = 0; x < ts.Length; x++)
+                {
                     ts[x] = tValue;
                 }
                 return ts;
             }
+            public static T[] FillWith<T>(T tValue, int qty) => FillWith(tValue, new T[qty]);
         }
-        #endregion
-        #region Change
-        /// <summary>
-        /// Herramienta para la alteración de cosas
-        /// </summary>
-        public struct Change{
+            #endregion
+            #region Change
+            /// <summary>
+            /// Herramienta para la alteración de cosas
+            /// </summary>
+            public struct Change{
             /// <summary>
             /// Cambiamos a la escena indicada en numerico
             /// </summary>

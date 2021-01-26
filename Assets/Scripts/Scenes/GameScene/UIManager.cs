@@ -138,9 +138,10 @@ public class UIManager : MonoX
         for (int x = 0; x < img_slots.Length; x++){
 
             if (!equipItems[x].Equals(ItemContent.NO)){
-                
+
+                int val = (int)equipItems[x];
                 //TODO provisional, falta asignar los colores
-                if ((int)equipItems[x] >= 3)
+                if (val >= 3)
                 {
                     img_slots[x].sprite = sprite_items[3];
                     XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, 1);
@@ -148,7 +149,7 @@ public class UIManager : MonoX
                 else
                 {
                     //lo normal
-                    img_slots[x].sprite = sprite_items[x];
+                    img_slots[x].sprite = sprite_items[val];
                     XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, 1);
                 }
             }

@@ -1677,8 +1677,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character:
     type: 0
-    timeLife: 30
-    timeLifeMax: 30
+    timeLife: 999
+    timeLifeMax: 999
     speed: 20
     damage: 19.04
     range: 50
@@ -1717,6 +1717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canCraft: 0
+  slots: 
+  equipedQty: 0
 --- !u!114 &385533602
 MonoBehaviour:
   m_ObjectHideFlags: 0

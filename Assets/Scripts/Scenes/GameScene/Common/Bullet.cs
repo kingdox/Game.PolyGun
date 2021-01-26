@@ -49,6 +49,7 @@ public class Bullet : MonoX
                 rotation.LookTo(direction);
                 //movement following the actual directiong
                 movement.Move(direction, bulletShot.speed, canFollow);
+
             }
             else
             {

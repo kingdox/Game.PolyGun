@@ -2,7 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Environment;
 using XavLib;
+using Crafts;
+
 #endregion
 public class Equipment : MonoX
 {
@@ -10,13 +13,17 @@ public class Equipment : MonoX
 
     public bool canCraft = false;
 
-    private ItemContent[] slots;
+    [SerializeField]
+    public ItemContent[] slots;
     private PlayerDetector detector;
     //cuenta la cantidad de objetos que posee actualmente
-    private int equipedQty = 0;
+    public int equipedQty = 0;
 
     private float timeCount_craft = 0;
     private float timer_craft = 5f;
+
+    //TODO test
+    public CraftType craftWaiting = CraftType.NO;
 
     #endregion
     #region Events
@@ -25,7 +32,7 @@ public class Equipment : MonoX
         New(out slots, 3);
         ClearSlots();
         Get(out detector);
-        equipedQty = 0;
+        craftWaiting = CraftType.NO;
     }
     private void Update(){
 
@@ -35,52 +42,17 @@ public class Equipment : MonoX
         //si tenemos equipado la misma cantidad del slot limite
         //checkearemos
         if (canCraft && equipedQty.Equals(slots.Length) ){
-            //...
 
-            //se revisa la cantidad de repetidos
-            int repeats = -1;
-            ItemContent mostItem = ItemContent.NO;
-            for (int x = 0; x < slots.Length; x++)  {
+            CraftType type = Data.data.SlotsMatch(slots);
 
-                int localRepeats = -1;
-
-                foreach (ItemContent i in slots)
-                {
-                    //añade por cada extra
-                    localRepeats += i.Equals(slots[x]) ? 1 : 0;
-                }
-
-                if (localRepeats > repeats)
-                {
-                    repeats = localRepeats;
-                    //le muestra el tipo que hay más actualmente...
-                    mostItem = slots[x];
-
-                }
-
-                //TODO siempre devuelve 3 revisar....
-            }
-
-
-            CraftType craftType = CraftType.NO;
-            //con saber cuantos repetidos hay podemos saber mejor por donde buscar...
-            switch (repeats)
+            if (!type.Equals(CraftType.NO))
             {
-                case 1:
-                    craftType = CraftType.ABC;
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-                    CraftType[] type3 = { CraftType.AAA, CraftType.BBB, CraftType.CCC };
-                    //TODO
-                    //craftType = mostItem;
-                    //ya con encontrar uno haga la ejecución
-                    break;
-                default:
-                    break;
+                PrintX($"Match : {type}");
+                canCraft = false;
+                ClearSlots();
+                craftWaiting = type;
             }
+
 
 
         }
@@ -89,7 +61,57 @@ public class Equipment : MonoX
     #endregion
     #region Methods
 
-    
+    /// <summary>
+    /// If exist a craft waiting to, calls with the parent and based on the properties
+    /// Build a thing
+    /// </summary>
+    public void WaitedCraft(ref Character character, ref ItemBuff[] buffs)
+    {
+        if (craftWaiting.Equals(CraftType.NO)) return;
+
+
+        switch (craftWaiting)
+        {
+            //3
+            case CraftType.AAA:
+            case CraftType.BBB:
+            case CraftType.CCC:
+
+            // 2
+            // A
+            case CraftType.AAB:
+            case CraftType.AAC:
+
+            //B
+            case CraftType.BBA:
+            case CraftType.BBC:
+
+            //C
+            case CraftType.CCA:
+            case CraftType.CCB:
+
+            // 1
+            case CraftType.ABC:
+                break;
+
+            case CraftType.EXTRA:
+                //activates all the buffs
+                foreach (ItemBuff buff in buffs)
+                {
+                    buff.StartBuff();
+                }
+
+                break;
+            default:
+                break;
+        }
+
+
+
+        //y al final
+        craftWaiting = CraftType.NO;
+    }
+
 
     /// <summary>
     /// Dependiendo del Slot Seleccionado podremos Tomar un objeto y guardarlo
@@ -102,11 +124,15 @@ public class Equipment : MonoX
             , !slots[i].Equals(ItemContent.NO)
         ); 
 
-        //si no Esta siendo USADO
+        //si NO Esta siendo USADO
         if (!actionType.used){
             //asignas el objeto encontrado
             detector.SetNearestItemType(ref slots[i]);
-            equipedQty++;
+
+            if (!slots[i].Equals(ItemContent.NO))
+            {
+                equipedQty++;
+            }
         }else{
             //si esta siendo usado lo consumimos
             equipedQty--;
@@ -124,7 +150,11 @@ public class Equipment : MonoX
     /// <summary>
     /// Limpiamos los slots y los dejamos con <see cref="ItemContent.NO"/>
     /// </summary>
-    private void ClearSlots() => slots = XavHelpTo.Set.FillWith(ItemContent.NO, slots);
+    private void ClearSlots()
+    {
+        slots = XavHelpTo.Set.FillWith(ItemContent.NO, slots);
+        equipedQty = 0;
+    }
     #endregion
 }
 
@@ -142,9 +172,9 @@ public struct ActionType {
     public bool IsItem()
     {
         return XavHelpTo.Know.IsEqualOf(item,
+                    ItemContent.SQUARE,
                     ItemContent.CIRCLE,
-                    ItemContent.TRIANGLE,
-                    ItemContent.SQUARE
+                    ItemContent.TRIANGLE
                 );
     }
 
@@ -192,15 +222,3 @@ public enum AllyType{
     POL
 }
 
-
-/// <summary>
-/// Combinations to craft
-/// </summary>
-public enum CraftType
-{
-    NO = -1,
-
-    AAA, BBB, CCC,
-    AAB, AAC, BBA, BBC, CCA, CCB,
-    ABC
-}

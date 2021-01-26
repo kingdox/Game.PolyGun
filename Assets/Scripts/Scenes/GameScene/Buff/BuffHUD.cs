@@ -27,7 +27,8 @@ public class BuffHUD : MonoX
     /// </summary>
     public void Draw(Color color)
     {
-        float count_hud = item.timer - item.count;
+        //todo menor- revisar esto
+        float count_hud = (item.timer * item.stacks) - item.count;
         text_HUD_timeCount.text = $"{Math.Round(count_hud, 1)} s";
         img_HUD_buff.color = color;
     }

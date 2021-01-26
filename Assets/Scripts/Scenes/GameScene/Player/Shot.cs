@@ -39,7 +39,7 @@ public class Shot : MonoX
         //estas solo aparecen si en el rango hay algún objetivo?
         if (character.canExtraShots)
         {
-            StartCoroutine(CreateFollowBullet(character));
+            CreateBullet(character).canFollow = true;
         }
 
         CreateBullet(character);
@@ -63,13 +63,6 @@ public class Shot : MonoX
         //Asignation of stats
         newBullet.bulletShot.GetShotOf(character);
         return newBullet;
-    }
-
-    IEnumerator CreateFollowBullet(Character character)
-    {
-        yield return new WaitForSeconds(1);
-        CreateBullet(character).canFollow = true;
-
     }
     #endregion
 }

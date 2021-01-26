@@ -35,11 +35,20 @@ public class Movement : MonoX
                 _axis.y = transform.position.y;
 
                 transform.position = Vector3.MoveTowards(
-                    transform.position,
-                    _axis,
-                    Time.deltaTime
-                    * speed
-                );
+                        transform.position,
+                        _axis,
+                        Time.deltaTime
+                        * speed
+                    );
+
+                if (transform.position.Equals(_axis))
+                {
+                    //TODO
+                    //De momento lo eliminaremos..
+                    Destroy(gameObject);
+
+                }
+                    
             }
             else
             {

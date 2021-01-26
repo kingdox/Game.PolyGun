@@ -8,6 +8,7 @@ using Achievements;
 using Key;
 using Environment;
 using Translate;
+using Crafts;
 #endregion
 
 namespace Environment
@@ -37,7 +38,9 @@ namespace Environment
 
        
 
-        //Extra
+        [Header("Datos de CraftData")]
+        private readonly CraftData craft = new CraftData();
+
         [Header("Datos de TranslateData")]
         private readonly TranslateData translate = new TranslateData();
 
@@ -47,8 +50,15 @@ namespace Environment
         [Header("Datos de las Llaves")]
         private readonly KeyData keyData = new KeyData();
 
+        
         public Achievement[] GetAchievements () => achievement._GetAllAchievements();
         public Key.Key[] GetKeys() => keyData._GetAllKeys();
+
+
+        /// <summary>
+        /// Search in the craft data and try to match
+        /// </summary>
+        public CraftType SlotsMatch(ItemContent[] slots) => craft.MatchType(slots);
 
         /// <summary>
         /// Obtenemos el <see cref="Language"/> guardado en <see cref="DataPass"/>
