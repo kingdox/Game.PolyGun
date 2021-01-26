@@ -110,6 +110,8 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Ally.cs" />
     <Compile Include="Assets/Scripts/Components/FollowCollider.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/AllyManager.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/BoxBoxController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/TriShotController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

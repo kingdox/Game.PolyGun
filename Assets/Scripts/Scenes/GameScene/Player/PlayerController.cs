@@ -78,7 +78,6 @@ public class PlayerController : MonoX
         }else{
             //Eliminamos a poly
             destructure.DestructureThis();
-            //equipment.slo
         }
     }
 

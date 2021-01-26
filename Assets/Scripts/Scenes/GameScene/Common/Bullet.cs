@@ -33,9 +33,22 @@ public class Bullet : MonoX
         //Si puede seguir busca a un enemigo y se ajusta
         if (canFollow)
         {
-            Transform tran_finder = GameManager.GetEnemiesContainer();
-            direction = tran_finder.GetChild(tran_finder.childCount - 1).position;
-            rotation.LookTo(direction);
+            Transform tran_enemy = EnemyManager.GetEnemy(transform);
+
+            //si no consigue enemigo...
+            if (tran_enemy == null) 
+            {
+                canFollow = false;
+
+
+            }
+            else
+            {
+                direction = tran_enemy.position;
+                //direction = transform.position + transform.forward.normalized;
+                //canFollow = false;
+                rotation.LookTo(direction);
+            }
         }
     }
     

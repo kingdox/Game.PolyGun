@@ -76,8 +76,8 @@ GameObject:
   - component: {fileID: 8949274893201407843}
   - component: {fileID: 9173329130517467290}
   m_Layer: 0
-  m_Name: BoxBox Placeholder
-  m_TagString: Untagged
+  m_Name: ally etc
+  m_TagString: ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -10,6 +10,7 @@ public class EnemyManager : MonoX
 {
 
     #region Variables
+    private static EnemyManager _;
     [Header("Enemy Manager Settings")]
     public GameObject[] prefs_Enemies;
     public Spawner spawner;
@@ -34,6 +35,7 @@ public class EnemyManager : MonoX
     #endregion
     #region Events
     private void Awake(){
+        Get(out _);
         waveActual = 0;
         enemiesLeft = 0;
 
@@ -124,6 +126,46 @@ public class EnemyManager : MonoX
     private bool IsWaveEnd() => enemiesLeft.Equals(0) && spawner.parent.childCount.Equals(0);
 
 
+    /// <summary>
+    /// Gets one of the enemies, if exist a <see cref="Transform"/> as arg, then
+    /// it is the most Near;
+    /// </summary>
+    public static Transform GetEnemy(Transform tr = null)
+    {
+        Transform trEnemy = null;
+        Transform trContainer = GameManager.GetEnemiesContainer();
+
+        if (!trContainer.childCount.Equals(0))
+        {
+            if (tr == null) 
+            {
+                trEnemy = trContainer.GetChild(trContainer.childCount - 1);
+                //normal
+            }
+            else
+            {
+                //si hay posición
+
+                float distance = -1;
+
+                for (int x = 0; x < trContainer.childCount; x++)
+                {
+
+                    Transform enemy = trContainer.GetChild(x);
+                    Vector3 pos = enemy.position;
+                    float dist = Vector3.Distance(tr.position, pos);
+
+                    if (trEnemy == null || dist > distance)
+                    {
+                        // asign the nearest enemy
+                        trEnemy = enemy;
+                    }
+                }
+            }
+        }
+
+        return trEnemy;
+    }
 
 
     /// <summary>
@@ -144,12 +186,8 @@ public class EnemyManager : MonoX
  * 
  * Enemy Manager será un manejador de oleadas y de enemigos
  * decidirá:
- * 
- *  - Cuantos enemigos por x tiempo aparecerán
- *  - Cuantos enemigos habrá en la oleada
  *  - Si habrá Jefe o no
  *  - Qué tipos de enemigos habrá
- *  - DOnde se colocarán esos enemigos
  * 
  * 
  */
