@@ -21,7 +21,6 @@ public class MonoX : MonoBehaviour
     /// Tomamos el valor del mismo objeto y le asignamos el componente 
     /// </summary>
     public void Get<T>(out T t) => t = GetComponent<T>();
-   
 
     /// <summary>
     /// Tomamos los componentes del mismo tipo del objeto
@@ -58,16 +57,6 @@ public class MonoX : MonoBehaviour
             t[x] = target.GetChild(x).GetComponent<T>();
         }
     }
-    //public void GetChilds<T>(out T[] t)
-    //{
-    //    New(out t, transform.childCount);
-    //    for (int x = 0; x < transform.childCount; x++)
-    //    {
-    //        t[x] = transform.GetChild(x).GetComponent<T>();
-    //    }
-    //}
-
-
 
 
     /// <summary>

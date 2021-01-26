@@ -11,16 +11,16 @@ public class Equipment : MonoX
 {
     #region Variables
 
-    public bool canCraft = false;
-
-    [SerializeField]
-    public ItemContent[] slots;
     private PlayerDetector detector;
-    //cuenta la cantidad de objetos que posee actualmente
-    public int equipedQty = 0;
+
+    [Header("Equipment settings")]
+    public bool canCraft = false;
+    public float timer_craft = 5f;
 
     private float timeCount_craft = 0;
-    private float timer_craft = 5f;
+    private ItemContent[] slots;
+    //cuenta la cantidad de objetos que posee actualmente
+    private int equipedQty = 0;
 
     //TODO test
     public CraftType craftWaiting = CraftType.NO;
@@ -74,24 +74,39 @@ public class Equipment : MonoX
         {
             //3
             case CraftType.AAA:
+                buffs[(int)BuffType.STREGHT].StartBuff();
+                break;
             case CraftType.BBB:
+                buffs[(int)BuffType.ATK_SPEED].StartBuff();
+                break;
             case CraftType.CCC:
-
+                buffs[(int)BuffType.SPEED].StartBuff();
+                break;
             // 2
             // A
             case CraftType.AAB:
+                buffs[(int)BuffType.TARGET_SHOT].StartBuff();
+                break;
             case CraftType.AAC:
-
+                AllyManager.GenerateAlly(transform, AllyType.TRI_SHOT);
+                break;
             //B
             case CraftType.BBA:
+                AllyManager.GenerateAlly(transform, AllyType.HEARTH);
+                break;
             case CraftType.BBC:
-
+                AllyManager.GenerateAlly(transform, AllyType.POL);
+                break;
             //C
             case CraftType.CCA:
+                buffs[(int)BuffType.FROST].StartBuff();
+                break;
             case CraftType.CCB:
-
+                AllyManager.GenerateAlly(transform, AllyType.ROMB);
+                break;
             // 1
             case CraftType.ABC:
+                AllyManager.GenerateAlly(transform, AllyType.BOXBOX);
                 break;
 
             case CraftType.EXTRA:
@@ -100,12 +115,8 @@ public class Equipment : MonoX
                 {
                     buff.StartBuff();
                 }
-
-                break;
-            default:
                 break;
         }
-
 
 
         //y al final
@@ -208,17 +219,5 @@ public struct ActionType {
     }
 
 
-}
-
-//TODO aquí estan los ALLY
-/// <summary>
-/// Aliados posibles en el juego
-/// </summary>
-public enum AllyType{
-    BOXBOX,
-    TRI_SHOT,
-    HEARTH,
-    ROMB,
-    POL
 }
 

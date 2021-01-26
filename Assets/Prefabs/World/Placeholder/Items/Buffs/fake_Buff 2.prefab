@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7a613219162e447eea4357a7803e8da6, type: 2}
+  - {fileID: 2100000, guid: ae3ef63e6c0db4ac6ac1c633cd1990f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: -176224733502738840}
   - component: {fileID: 8750240410340623808}
   m_Layer: 0
-  m_Name: fake_Buff
+  m_Name: fake_Buff 2
   m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,6 +10,7 @@ public class Bullet : MonoX
 
     private Movement movement;
     private Rotation rotation;
+    private Destructure destructure;
     private Vector3 initPos;
     [Header("Bullet Settings")]
     [Space]
@@ -21,6 +22,7 @@ public class Bullet : MonoX
     #endregion
     #region Events
     private void Awake(){
+        Get(out destructure);
         Get(out movement);
         Get(out rotation);
         initPos = transform.position;
@@ -40,16 +42,20 @@ public class Bullet : MonoX
     private void Update(){ 
 
         if (PassedRange()){
-            Destroy(gameObject);
-        }else{
+            DeleteBullet();
+        }
+        else
+        {
 
             if (canFollow)
             {
                 //updates the rotation based on the actual direction
                 rotation.LookTo(direction);
                 //movement following the actual directiong
-                movement.Move(direction, bulletShot.speed, canFollow);
-
+                if (movement.Move(direction, bulletShot.speed, canFollow))
+                {
+                    DeleteBullet(); 
+                }
             }
             else
             {
@@ -74,12 +80,17 @@ public class Bullet : MonoX
                 Enemy enemy = other.GetComponent<Enemy>();
                 enemy.CheckDamage(bulletShot.damage);
             }
-
-            Destroy(gameObject);
+            DeleteBullet();
         }
     }
     #endregion
     #region Methods
+
+    public void DeleteBullet()
+    {
+        destructure.DestructureThis();
+        Destroy(gameObject);
+    }
 
     /// <summary>
     /// Set the direction 

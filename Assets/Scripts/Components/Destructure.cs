@@ -59,7 +59,7 @@ public class Destructure : MonoX
 
             
             Transform child = part.childCount > 0 ? part.GetChild(0) : null;
-
+            rigid.mass = 0.01f;
             // Reajusta la posición
             if (child)
             {

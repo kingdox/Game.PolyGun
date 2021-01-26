@@ -125,6 +125,11 @@ namespace XavLib
             public static float SummAll(Vector3 values) => SummAll(Change.ToArray(values));
 
 
+            /// <summary>
+            /// Devuelve un valor verdadero o falso
+            /// </summary>
+            public static bool RandomBool() => Random.Range(0, 2) == 0;
+
         }
         #endregion
         #region Set

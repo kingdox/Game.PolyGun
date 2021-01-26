@@ -18,6 +18,8 @@ public class GameManager : MonoManager
     [Header("@Areas")]
     public Transform @LeftoverContainer;
     public Transform @EnemiesContainer;
+    //public Transform @WORLD;
+
     [Space]
 
     [Header("Debug")]
@@ -64,7 +66,6 @@ public class GameManager : MonoManager
     /// Tomamos el elemento EnemiesContainer del mundo fisico
     /// </summary>
     public static Transform GetEnemiesContainer() => _.EnemiesContainer;
-
 
     /// <summary>
     /// Buscamos el estado actual del juego 

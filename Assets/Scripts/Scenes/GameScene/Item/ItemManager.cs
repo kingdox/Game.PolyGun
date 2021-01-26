@@ -54,3 +54,21 @@ public class ItemManager : MonoX
     }
     #endregion
 }
+
+
+[SerializeField]
+public enum ItemContent
+{
+    NO = -1,
+
+    SQUARE,
+    CIRCLE,
+    TRIANGLE,
+
+    /// Mejoras posibles en el juego
+    ATK_SPEED,
+    TARGET_SHOT,
+    FROST,
+    STREGHT,
+    SPEED
+}

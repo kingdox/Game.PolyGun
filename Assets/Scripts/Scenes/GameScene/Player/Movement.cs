@@ -19,9 +19,11 @@ public class Movement : MonoX
     #region Methods
     /// <summary>
     /// enable movement, if following it keeps fetching with the position..
+    /// <para>returns true if reaches the side</para>
     /// </summary>
-    public void Move(Vector3 _axis, float speed, bool following = false){
+    public bool Move(Vector3 _axis, float speed, bool following = false){
 
+        bool reached = false;
 
         if (!GameManager.IsOnGame()){
             body.Sleep();
@@ -40,21 +42,20 @@ public class Movement : MonoX
                         Time.deltaTime
                         * speed
                     );
-
                 if (transform.position.Equals(_axis))
                 {
-                    //TODO
-                    //De momento lo eliminaremos..
-                    Destroy(gameObject);
-
+                    reached = true;
                 }
-                    
             }
             else
             {
                 body.velocity = _axis * speed;
             }
+
         }
+       
+
+        return reached;
     }
     #endregion
 }

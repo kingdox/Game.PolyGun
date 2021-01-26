@@ -39,35 +39,3 @@ public class Item : MonoX
     }
     #endregion
 }
-
-[SerializeField]
-public enum ItemContent{
-    NO = -1,
-
-    SQUARE,
-    CIRCLE,
-    TRIANGLE,
-
-    /// Mejoras posibles en el juego
-    ATK_SPEED,
-    TARGET_SHOT,
-    FROST,
-    STREGHT,
-    SPEED
-}
-
-
-//public enum ItemType2
-//{
-//    NO = -1,
-
-//    SHAPE,
-//    BUFF
-//}
-////Test
-//public struct ItemContentType2
-//{
-//    ItemType2 type;
-//    BuffType buff;
-//}
-

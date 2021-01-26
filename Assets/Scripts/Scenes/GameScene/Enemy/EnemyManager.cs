@@ -154,6 +154,20 @@ public class EnemyManager : MonoX
  * 
  */
 
+/// <summary>
+/// Conocemos las diferencias entre los enemigos por el tipo
+/// </summary>
+public struct EnemyType
+{
 
-
-
+    public EnemyName name;
+    public bool isBoss;
+}
+/// <summary>
+/// Los enemigos que hay en el juego
+/// </summary>
+public enum EnemyName
+{
+    MOND,
+    PLUR
+}
