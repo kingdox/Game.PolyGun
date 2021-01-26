@@ -31,6 +31,9 @@ public class Movement : MonoX
 
             if (following)
             {
+                //new added yo prevent search whne falls the enemy
+                _axis.y = transform.position.y;
+
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     _axis,

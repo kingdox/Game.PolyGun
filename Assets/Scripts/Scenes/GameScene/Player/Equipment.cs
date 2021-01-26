@@ -36,6 +36,53 @@ public class Equipment : MonoX
         //checkearemos
         if (canCraft && equipedQty.Equals(slots.Length) ){
             //...
+
+            //se revisa la cantidad de repetidos
+            int repeats = -1;
+            ItemContent mostItem = ItemContent.NO;
+            for (int x = 0; x < slots.Length; x++)  {
+
+                int localRepeats = -1;
+
+                foreach (ItemContent i in slots)
+                {
+                    //añade por cada extra
+                    localRepeats += i.Equals(slots[x]) ? 1 : 0;
+                }
+
+                if (localRepeats > repeats)
+                {
+                    repeats = localRepeats;
+                    //le muestra el tipo que hay más actualmente...
+                    mostItem = slots[x];
+
+                }
+
+                //TODO siempre devuelve 3 revisar....
+            }
+
+
+            CraftType craftType = CraftType.NO;
+            //con saber cuantos repetidos hay podemos saber mejor por donde buscar...
+            switch (repeats)
+            {
+                case 1:
+                    craftType = CraftType.ABC;
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    CraftType[] type3 = { CraftType.AAA, CraftType.BBB, CraftType.CCC };
+                    //TODO
+                    //craftType = mostItem;
+                    //ya con encontrar uno haga la ejecución
+                    break;
+                default:
+                    break;
+            }
+
+
         }
 
     }
@@ -143,4 +190,17 @@ public enum AllyType{
     HEARTH,
     ROMB,
     POL
+}
+
+
+/// <summary>
+/// Combinations to craft
+/// </summary>
+public enum CraftType
+{
+    NO = -1,
+
+    AAA, BBB, CCC,
+    AAB, AAC, BBA, BBC, CCA, CCB,
+    ABC
 }
