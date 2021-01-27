@@ -18,7 +18,7 @@ public abstract class Enemy : MonoX
     public Destructure destructure;
     [Space]
     public bool isBoss=false;
-    private string targetTagName = "player";
+    private readonly string targetTagName = "player";
     #endregion
     #region Events
     private void Start()
@@ -27,21 +27,7 @@ public abstract class Enemy : MonoX
         GetAdd(ref destructure);
         //CheckForTarget(targetTagName);
     }
-    private void Update()
-    {
-        if (GameManager.IsOnGame())
-        {
-            character.LessLife();
-            if (!character.IsAlive())
-            {
-                Kil();
-            }
-        }
-        else
-        {
-            navMeshAgent.SetDestination(transform.position);
-        }
-    }
+   
     #endregion
     #region Methods
 
@@ -83,7 +69,7 @@ public abstract class Enemy : MonoX
         if (!character.IsAlive())
         {
             //permite añadir al checker de achieve
-            Kil();
+            Kill();
         }
     }
 
@@ -91,7 +77,7 @@ public abstract class Enemy : MonoX
     /// <summary>
     /// Hace el proceso de eliminación del enemigo
     /// </summary>
-    private void Kil()
+    public void Kill()
     {
         destructure.DestructureThis();
         Destroy(gameObject);

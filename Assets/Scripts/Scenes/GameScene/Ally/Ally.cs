@@ -51,44 +51,7 @@ public abstract class Ally : MonoX
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Get as target the nearest enemy
-    /// </summary>
-    public void GetNearEnemy()
-    {
-        Transform enemy = EnemyManager.GetEnemy(transform);
-        if (target != null) //isNull ?
-        {
-            target = enemy;
-        }
-        else
-        {
-            //de momento me pongo a mi mismo
-            target = transform;
-            //persigue a player...?
-        }
-    }
-    /// <summary>
-    /// Find the nearest item
-    /// </summary>
-    public void GetNearItem()
-    {
-
-    }
-    /// <summary>
-    /// select as target the boss
-    /// </summary>
-    public void GetBoss()
-    {
-
-    }
-    /// <summary>
-    /// target the player
-    /// </summary>
-    public void GetPlayer()
-    {
-
-    }
+   
     #endregion
 }
 

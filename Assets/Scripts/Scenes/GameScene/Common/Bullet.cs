@@ -33,7 +33,7 @@ public class Bullet : MonoX
         //Si puede seguir busca a un enemigo y se ajusta
         if (canFollow)
         {
-            Transform tran_enemy = EnemyManager.GetEnemy(transform);
+            Transform tran_enemy = TargetManager.GetEnemy(transform);
 
             //si no consigue enemigo...
             if (tran_enemy == null) 

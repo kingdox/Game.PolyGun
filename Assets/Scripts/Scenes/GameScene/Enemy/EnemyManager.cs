@@ -35,7 +35,8 @@ public class EnemyManager : MonoX
     #endregion
     #region Events
     private void Awake(){
-        Get(out _);
+        _ = this;
+
         waveActual = 0;
         enemiesLeft = 0;
 
@@ -127,48 +128,6 @@ public class EnemyManager : MonoX
 
 
     /// <summary>
-    /// Gets one of the enemies, if exist a <see cref="Transform"/> as arg, then
-    /// it is the most Near;
-    /// </summary>
-    public static Transform GetEnemy(Transform tr = null)
-    {
-        Transform trEnemy = null;
-        Transform trContainer = GameManager.GetEnemiesContainer();
-
-        if (!trContainer.childCount.Equals(0))
-        {
-            if (tr == null) 
-            {
-                trEnemy = trContainer.GetChild(trContainer.childCount - 1);
-                //normal
-            }
-            else
-            {
-                //si hay posición
-
-                float distance = -1;
-
-                for (int x = 0; x < trContainer.childCount; x++)
-                {
-
-                    Transform enemy = trContainer.GetChild(x);
-                    Vector3 pos = enemy.position;
-                    float dist = Vector3.Distance(tr.position, pos);
-
-                    if (trEnemy == null || dist > distance)
-                    {
-                        // asign the nearest enemy
-                        trEnemy = enemy;
-                    }
-                }
-            }
-        }
-
-        return trEnemy;
-    }
-
-
-    /// <summary>
     /// Permite añadir la siguiente oleada
     /// </summary>
     public void __Debug_SetWave(){
@@ -180,17 +139,6 @@ public class EnemyManager : MonoX
     #endregion
 }
 
-/*
- * 
- * TODO
- * 
- * Enemy Manager será un manejador de oleadas y de enemigos
- * decidirá:
- *  - Si habrá Jefe o no
- *  - Qué tipos de enemigos habrá
- * 
- * 
- */
 
 /// <summary>
 /// Conocemos las diferencias entre los enemigos por el tipo

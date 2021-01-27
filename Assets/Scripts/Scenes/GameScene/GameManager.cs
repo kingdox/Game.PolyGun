@@ -15,12 +15,6 @@ public class GameManager : MonoManager
     [Header("Game Settigns")]
     public GameStatus gameStatus;
     [Space]
-    [Header("@Areas")]
-    public Transform @LeftoverContainer;
-    public Transform @EnemiesContainer;
-    //public Transform @WORLD;
-
-    [Space]
 
     [Header("Debug")]
     public bool onDebug = false;
@@ -32,11 +26,11 @@ public class GameManager : MonoManager
     private new void Awake()
     {
         _ = this;
+
+
         gameStatus = GameStatus.ON_GAME;
         Time.timeScale = 1f;
         Cursor.visible = false;
-
-       
 
         Begin();
 
@@ -58,14 +52,6 @@ public class GameManager : MonoManager
     }
     #endregion
     #region Methods
-    /// <summary>
-    /// Tomamos el elemento del LeftoverCOntainer fisico 
-    /// </summary>
-    public static Transform GetLeftoverContainer() => _.LeftoverContainer;
-    /// <summary>
-    /// Tomamos el elemento EnemiesContainer del mundo fisico
-    /// </summary>
-    public static Transform GetEnemiesContainer() => _.EnemiesContainer;
 
     /// <summary>
     /// Buscamos el estado actual del juego 

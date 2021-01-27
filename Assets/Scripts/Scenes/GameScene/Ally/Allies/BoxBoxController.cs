@@ -18,7 +18,7 @@ public class BoxBoxController : Ally
     #region Events
     private void Start()
     {
-        
+
 
         GetAdd(ref rotation);
         UpdateMesh();
@@ -48,7 +48,7 @@ public class BoxBoxController : Ally
                 else
                 {
                     //BoxBox everytime try to find a enemy
-                    GetNearEnemy();
+                    TargetManager.GetEnemy(transform);
                 }
             }
             else

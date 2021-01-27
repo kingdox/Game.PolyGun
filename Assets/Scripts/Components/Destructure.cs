@@ -23,7 +23,7 @@ public class Destructure : MonoX
         //Si no hay parent busca el tipo de tag world
         if (!targetWorld)
         {
-            targetWorld = GameManager.GetLeftoverContainer();
+            targetWorld = TargetManager.GetLeftoverContainer();
         }
 
         if (!targetModel)
