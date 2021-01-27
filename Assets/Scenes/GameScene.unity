@@ -612,7 +612,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plur
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4282083809400295765, guid: 0de60cce24fa44e14854ffcd46d5c51f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0de60cce24fa44e14854ffcd46d5c51f, type: 3}
 --- !u!4 &186292697 stripped
 Transform:
@@ -1006,7 +1007,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1813049899}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &281900181 stripped
 RectTransform:
@@ -1388,6 +1389,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 295262742}
     m_Modifications:
+    - target: {fileID: 2357100928583170058, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2357100928583170058, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 739655239}
+    - target: {fileID: 2783241688366467026, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
+      propertyPath: targetModel
+      value: 
+      objectReference: {fileID: 1243644925}
     - target: {fileID: 8100060435436238248, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
       propertyPath: m_Name
       value: BoxBox Placeholder
@@ -1539,12 +1552,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character:
     type: 0
-    timeLife: 999
-    timeLifeMax: 999
-    speed: 20
-    damage: 19.04
-    range: 10
-    atkSpeed: 5
+    timeLife: 10030
+    timeLifeMax: 10030
+    speed: 10
+    damage: 4
+    range: 40
+    atkSpeed: 2
     isInmortal: 0
     canExtraShots: 0
   buffList: {fileID: 1835756807}
@@ -1620,7 +1633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWorld: {fileID: 0}
-  targetModel: {fileID: 0}
+  targetModel: {fileID: 492262392}
   modelParts: []
   _Debug_Destructure: 0
 --- !u!114 &385533605
@@ -1630,7 +1643,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385533594}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83303654a21214e709d88c1b423d5b40, type: 3}
   m_Name: 
@@ -2054,7 +2067,7 @@ GameObject:
   m_Component:
   - component: {fileID: 472069048}
   m_Layer: 0
-  m_Name: '@Decorations'
+  m_Name: '@Decorations Container'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3454,6 +3467,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6141465729727827565, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
   m_PrefabInstance: {fileID: 722159317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &739655239 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 8509834311331096870, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
+  m_PrefabInstance: {fileID: 383952307}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &741814813
 GameObject:
@@ -5119,7 +5137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1813049899}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1152885965
 GameObject:
@@ -5536,6 +5554,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1243644925 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8100060435549469798, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
+  m_PrefabInstance: {fileID: 383952307}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1278703157
 GameObject:
   m_ObjectHideFlags: 0
@@ -5695,7 +5718,7 @@ RectTransform:
   - {fileID: 741814814}
   - {fileID: 1640313611}
   m_Father: {fileID: 1813049899}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7722,6 +7745,7 @@ MonoBehaviour:
     canExtraShots: 0
   target: {fileID: 0}
   navMeshAgent: {fileID: 0}
+  destructure: {fileID: 0}
 --- !u!1 &1774390458
 GameObject:
   m_ObjectHideFlags: 0
@@ -8166,9 +8190,9 @@ Transform:
   - {fileID: 295262742}
   - {fileID: 397529987}
   - {fileID: 1520102854}
-  - {fileID: 1317027530}
   - {fileID: 1145320396}
   - {fileID: 253653119}
+  - {fileID: 1317027530}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

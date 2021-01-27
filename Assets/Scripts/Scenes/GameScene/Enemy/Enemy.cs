@@ -5,27 +5,42 @@ using UnityEngine;
 using UnityEngine.AI;
 #endregion
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoX
+public abstract class Enemy : MonoX
 {
     #region Variables
-    private NavMeshAgent nav;
-    public string targetTagName = "player";
-    private Transform target;
+    [Header("Enemy Settings")]
+    public Character character;
+    [Space]
+    public Transform target;
+    [Space]
+    public NavMeshAgent navMeshAgent;
+    [Space]
     public Destructure destructure;
+    [Space]
+    public bool isBoss=false;
+    private string targetTagName = "player";
     #endregion
     #region Events
     private void Start()
     {
-        Get(out nav);
-        Get(out destructure);
+        Get(out navMeshAgent);
+        GetAdd(ref destructure);
         //CheckForTarget(targetTagName);
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        //if (nav.enabled && target != null)
-        //{
-        //    nav.SetDestination(target.position);
-        //}
+        if (GameManager.IsOnGame())
+        {
+            character.LessLife();
+            if (!character.IsAlive())
+            {
+                Kil();
+            }
+        }
+        else
+        {
+            navMeshAgent.SetDestination(transform.position);
+        }
     }
     #endregion
     #region Methods
@@ -62,9 +77,10 @@ public class Enemy : MonoX
     public void CheckDamage(float damage)
     {
         //
+        character.timeLife -= damage;
 
         //TODO si es detruido por que se queda sin vida...
-        if (true)
+        if (!character.IsAlive())
         {
             //permite añadir al checker de achieve
             Kil();

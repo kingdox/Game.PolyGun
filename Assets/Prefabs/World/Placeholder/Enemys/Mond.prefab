@@ -73,11 +73,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3026232870604690232}
-  - component: {fileID: 4282083809400295765}
   - component: {fileID: 8865023186745710275}
   - component: {fileID: 273268932979773341}
   - component: {fileID: 5817871187700996458}
   - component: {fileID: 873950058756658716}
+  - component: {fileID: -1688110803976621123}
   m_Layer: 0
   m_Name: Mond
   m_TagString: enemy
@@ -100,20 +100,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4282083809400295765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3497901762425382142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11267b1731132492c88273b9903ef2f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTagName: player
-  destructure: {fileID: 0}
 --- !u!54 &8865023186745710275
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -178,9 +164,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWorld: {fileID: 0}
-  targetModel: {fileID: 0}
+  targetModel: {fileID: 7043371756717783334}
   modelParts: []
   _Debug_Destructure: 0
+--- !u!114 &-1688110803976621123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497901762425382142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5bb671c27ce94d15a598a43a6571b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character:
+    type: 0
+    timeLife: 0
+    timeLifeMax: 0
+    speed: 0
+    damage: 0
+    range: 0
+    atkSpeed: 0
+    isInmortal: 0
+    canExtraShots: 0
+  target: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  destructure: {fileID: 0}
+  isBoss: 0
 --- !u!1 &3911641963886628379
 GameObject:
   m_ObjectHideFlags: 0

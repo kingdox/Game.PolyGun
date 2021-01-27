@@ -28,14 +28,14 @@ public class Destructure : MonoX
 
         if (!targetModel)
         {
-            if (!TryGetChild(out targetModel, transform, "model"))
+            if (!TryGetChild(ref targetModel, transform, "model"))
             {
                 PrintX("Destructure.cs => Colocar etiqueta 'model' o bien asignarlo en el inspector");
             }
-        }   
+        }
         //podriamos colocar algo parecido para los modelos, en caso de no asignarlo..
         GetChilds(out modelParts, targetModel);
-        
+
     }
     private void Update(){
         __Debug_Destructure();

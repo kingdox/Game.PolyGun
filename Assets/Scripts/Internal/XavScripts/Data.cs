@@ -25,6 +25,7 @@ namespace Environment
         public readonly string savedPath = "saved1.txt";
         public readonly string version = "v0.7.2";
 
+        //TODO poner parametros de character con enums y arreglos de valores...
 
         /// <summary>
         /// Cantidad que cura cada shape respectivo
@@ -36,7 +37,7 @@ namespace Environment
             5.5f
         };
 
-       
+        public readonly float bulletSpeed = 15f;
 
         [Header("Datos de CraftData")]
         private readonly CraftData craft = new CraftData();

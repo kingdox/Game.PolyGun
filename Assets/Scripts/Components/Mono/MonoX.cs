@@ -12,7 +12,7 @@ using XavLib;
 /// Util para herramientas...
 /// </para>
 /// </summary>
-public class MonoX : MonoBehaviour
+public abstract class MonoX : MonoBehaviour
 {
     #region Variables-X
     #endregion
@@ -31,19 +31,24 @@ public class MonoX : MonoBehaviour
     /// Buscamos de los hijos del target el que tenga la misma tag
     /// <para>sino devuelve falso </para>
     /// </summary>
-    public bool TryGetChild(out Transform t, Transform target, string tag)
+    public bool TryGetChild(ref Transform t, Transform target, string tag)
     {
+        bool finded = false;
         for (int i = 0; i < target.childCount; i++)
         {
             Transform child = target.GetChild(i);
             if (child.CompareTag(tag))
             {
                 t = child;
-                return true;
+                finded =  true;
+                break;
             }
         }
-        t = null;
-        return false;
+        if (!finded)
+        {
+            t = null;
+        }
+        return finded;
     }
     /// <summary>
     /// Tomamos del arreglo los componentes hijos sin el componente actual
@@ -72,13 +77,19 @@ public class MonoX : MonoBehaviour
         Get(out t);
     }
 
-    ///// <summary>
-    ///// Añades un componente al objeto
-    ///// </summary>
-    //public void AddComp<Type>(Type type, GameObject obj){
-    //    obj.AddComponent(typeof(Type));
-    //}
-
+    /// <summary>
+    /// Añades el tipo al objeto y lo asignas, si hay uno solo lo asigna
+    /// </summary>
+    public void GetAdd<T>(ref T t)
+    {
+        //primero busca
+        Get(out t);
+        //si no encuentra añade
+        if (IsNull(t))  
+        {
+            Add(out t);
+        }
+    }
     /// <summary>
     /// Pinta con un color el texto
     /// </summary>

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Environment;
 using XavLib;
 #endregion
 
@@ -87,7 +88,7 @@ public struct BulletShot {
     /// Devuelve los datos del disparo de el personaje
     /// </summary>
     public static BulletShot GetShotOf(Character character, BulletShot bulletShot){
-        bulletShot.speed = character.atkSpeed + character.speed;
+        bulletShot.speed = character.speed + Data.data.bulletSpeed;
         bulletShot.range = character.range;
         bulletShot.damage = character.damage;
         return bulletShot;

@@ -89,8 +89,9 @@ public class Bullet : MonoX
         if (XavLib.XavHelpTo.Know.IsEqualOf(tag, "obstacle", "enemy"))
         {
             if (tag.Equals("enemy")){
-
+                //TODO
                 Enemy enemy = other.GetComponent<Enemy>();
+                //si no hay enemigo?
                 enemy.CheckDamage(bulletShot.damage);
             }
             DeleteBullet();

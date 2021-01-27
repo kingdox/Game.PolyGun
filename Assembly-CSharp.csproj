@@ -56,6 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionPages.cs" />
+    <Compile Include="Assets/Scripts/Components/FollowCollider.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/BoxBoxController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/TriShotController.cs" />
     <Compile Include="Assets/Scripts/Components/Navigator.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Equipment.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Movement.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="Assets/Scripts/Components/Destructure.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/MsgController.cs" />
     <Compile Include="Assets/Scripts/Components/MultiColor.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/AllyManager.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Shot.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Spawner.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/AchievementData.cs" />
@@ -104,14 +108,12 @@
     <Compile Include="Assets/Scripts/Components/Mono/MonoInit.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/GridController.cs" />
     <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Ally.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Ally.cs" />
-    <Compile Include="Assets/Scripts/Components/FollowCollider.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/AllyManager.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/BoxBoxController.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/TriShotController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/PlurController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/MondController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
