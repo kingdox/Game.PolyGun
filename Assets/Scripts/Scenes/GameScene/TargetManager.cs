@@ -9,9 +9,12 @@ public class TargetManager : MonoX
     private static TargetManager _;
 
     [Header("@Areas")]
-    public Transform @LeftoverContainer;
+    public Transform @AlliesContainer;
     public Transform @EnemiesContainer;
-
+    public Transform @ItemsContainer;
+    public Transform @LeftoverContainer;
+    [Space]
+    public Transform Player;
     #endregion
     #region Events
     private void Awake(){
@@ -20,13 +23,53 @@ public class TargetManager : MonoX
     #endregion
     #region Methods
     /// <summary>
-    /// Tomamos el elemento del LeftoverCOntainer fisico 
+    /// return the container of the leftover thing (caused by <seealso cref="Destructure"/>)
     /// </summary>
     public static Transform GetLeftoverContainer() => _.LeftoverContainer;
     /// <summary>
-    /// Tomamos el elemento EnemiesContainer del mundo fisico
+    /// return the container of the enemies
     /// </summary>
     public static Transform GetEnemiesContainer() => _.EnemiesContainer;
+    /// <summary>
+    /// return the container of the allies
+    /// </summary>
+    public static Transform GetAlliesContainer() => _.AlliesContainer;
+    /// <summary>
+    /// return the container of the enemies
+    /// </summary>
+    public static Transform GetItemsContainer() => _.ItemsContainer;
+    /// <summary>
+    /// return the player
+    /// </summary>
+    public static Transform GetPlayer() => _.Player;
+
+    /// <summary>
+    /// Gets a random enemy, if exist a <see cref="Transform"/> as arg, then
+    /// it is the most Near;
+    /// </summary>
+    public static Transform GetEnemy(Transform tr = null) => GetFromContainer(_.EnemiesContainer, tr);
+
+    /// <summary>
+    /// Gets a random ally, if exist a <see cref="Transform"/> as arg, then
+    /// it is the most Near;
+    /// </summary>
+    public static Transform GetAlly(Transform tr = null) => GetFromContainer(_.EnemiesContainer, tr);
+
+    /// <summary>
+    /// Find the nearest item
+    /// </summary>
+    public static Transform GetItem(Transform tr = null) => GetFromContainer(_.ItemsContainer, tr);
+
+    /// <summary>
+    /// select as target the boss
+    /// </summary>
+    public static Transform GetBoss()
+    {
+        //TODO aquí tienes que buscar con excepcion dentro de los enemies...
+
+        return _.transform;
+    }
+
 
 
 
@@ -34,64 +77,40 @@ public class TargetManager : MonoX
     /// Gets a random enemy, if exist a <see cref="Transform"/> as arg, then
     /// it is the most Near;
     /// </summary>
-    public static Transform GetEnemy(Transform tr = null)
-    {
-        Transform trEnemy = null;
+    private static Transform GetFromContainer(Transform container, Transform target = null){
+
+        Transform trResult = null;
 
         //if exist enemy in scene
-        if (!_.@EnemiesContainer.childCount.Equals(0))
+        if (!container.childCount.Equals(0))
         {
             //if get a random or exist a target to get the nearest
-            if (tr == null)
+            if (_.IsNull(target))
             {
-                int random = Random.Range(0, _.@EnemiesContainer.childCount);
-                trEnemy = _.@EnemiesContainer.GetChild(random);
-                //normal, it's random enemy
+                int random = Random.Range(0, container.childCount);
+                trResult = container.GetChild(random);
+                //normal, it's random 
             }
             else
             {
-                float distance = -1;
+                float lastDistance = -1;
 
-                for (int x = 0; x < _.@EnemiesContainer.childCount; x++)
+                for (int x = 0; x < container.childCount; x++)
                 {
 
-                    Transform enemy = _.@EnemiesContainer.GetChild(x);
-                    Vector3 pos = enemy.position;
-                    float dist = Vector3.Distance(tr.position, pos);
+                    Transform child = container.GetChild(x);
+                    float dist = Vector3.Distance(target.position, child.position);
 
-                    if (trEnemy == null || dist > distance)
+                    if (_.IsNull(trResult) || dist > lastDistance)
                     {
                         // asign the nearest enemy
-                        trEnemy = enemy;
+                        trResult = child;
                     }
                 }
             }
         }
 
-        return trEnemy;
-    }
-
-
-    /// <summary>
-    /// Find the nearest item
-    /// </summary>
-    public static Transform GetNearItem(Transform tr)
-    {
-        return _.transform;
-    }
-    /// <summary>
-    /// select as target the boss
-    /// </summary>
-    public static Transform GetBoss()
-    {
-        return _.transform;
-    }
-    /// <summary>
-    /// target the player
-    /// </summary>
-    public static Transform GetPlayer()
-    {
-        return _.transform;
+        return trResult;
     }
     #endregion
 }

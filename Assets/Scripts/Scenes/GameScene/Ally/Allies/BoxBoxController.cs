@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
+[RequireComponent(typeof(Rotation))]
 public class BoxBoxController : Ally
 {
     #region Variable
 
     private Rotation rotation;
-
+    private Movement movement;
     [Header("BoxBox Settings")]
-    
     public float damageTimeCount;
     public bool canDamage;
 
@@ -18,80 +18,85 @@ public class BoxBoxController : Ally
     #region Events
     private void Start()
     {
-
-
         GetAdd(ref rotation);
-        UpdateMesh();
+        GetAdd(ref movement);
+
+        target = transform;
     }
     private void Update()
     {
-        if (GameManager.IsOnGame())
+
+        if (UpdateAlly())
         {
-            character.LessLife();
-
-            //si pasa este tiempo puede volver a atacar
-            if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
-            {
-                //PrintX("_______________________________-");
-                canDamage = true;
-            }
-        
-
-            if (character.IsAlive())
-            {
-                if (target != null && target != transform)
-                {   
-                    //set the new path b the target position
-                    navMeshAgent.SetDestination(target.position);
-                    rotation.LookTo(target.position);
-                }
-                else
-                {
-                    //BoxBox everytime try to find a enemy
-                    TargetManager.GetEnemy(transform);
-                }
-            }
-            else
-            {
-                Delete();
-            }
+            AttackUpdate();
+            PathUpdate();
         }
-        else
-        {
-            //la dejo en su mismo punto
-            navMeshAgent.SetDestination(transform.position);
-        }
-
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
         //si es un enemigo le hará daño y reseteara el timer de daño
-        if (canDamage && collision.transform.CompareTag("enemy"))
+        if (GameManager.IsOnGame() && canDamage && other.transform.CompareTag("enemy"))
         {
             canDamage = false;
-            Enemy enemy = collision.transform.GetComponent<Enemy>();
-
-            enemy.CheckDamage(character.damage);
-            //PrintX($"Ataca");
+            Enemy enemy = other.transform.GetComponent<Enemy>();
+            enemy.character.timeLife -= character.damage;
         }
     }
     #endregion
     #region Methods
 
-   
 
+    /// <summary>
+    /// Check if the ally is on the range between he and the target
+    /// </summary>
+    private bool IsInRange()
+    {
+        float distance = Vector3.Distance(transform.position, target.position);
+        return distance < character.range;
+    }
+    
+
+    /// <summary>
+    /// Updates the attack of BoxBox
+    /// </summary>
+    private void AttackUpdate()
+    {
+        if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
+        {
+            canDamage = true;
+        }
+    }
+
+   
+    /// <summary>
+    ///  Follow the nearest enemy, else it follow itself (does'nt move)
+    ///  rotates if exist a enemy target
+    /// </summary>
+    private void PathUpdate()
+    {
+        //if can't find a target then try to look another
+        if (target != null && target != transform)
+        {
+
+            if (!IsInRange())
+            {
+                rotation.LookTo(target.position);
+                movement.Move(transform.forward.normalized, character.speed);
+            }
+            else
+            {
+                movement.StopMovement();
+            }
+
+        }
+        else
+        {
+            //BoxBox everytime try to find a enemy
+            target = TargetManager.GetEnemy(transform);
+        }
+
+    }
 
     #endregion
 }
-
-/*
- * TODO
-//Este se encarga de seguir al enemigo más cercano y atacar,
-tiene un rango de corto alcance(ataca cuerpo a cuerpo,
-con sus puños que son cubos).
-
-
-
-
-- Busca al enemigo mas cercano, sino al player
- */

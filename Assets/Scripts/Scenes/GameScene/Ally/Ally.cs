@@ -4,40 +4,59 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 #endregion
+//[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Destructure))]
+[RequireComponent(typeof(SaveVelocity))]
+//[RequireComponent(typeof(Rigidbody))]
 public abstract class Ally : MonoX
 {
     #region Variables
     [Header("Ally Settings")]
     public Character character;
-    [Space]
     public Transform target;
-    [Space]
-    public NavMeshAgent navMeshAgent;
-    [Space]
-    public Destructure destructure;
-    [Space]
     protected bool isDead = false;
-    #endregion
-    #region Events
-    private void Awake()
-    {
-        Get(out navMeshAgent);
-        GetAdd(ref destructure);
-    }
-    //DON'T USE UPDATE HERE
+    [Space]
+    [Header("Requirements")]
+    //public NavMeshAgent navMeshAgent;
+    public Destructure destructure;
+    //public Rigidbody rigidbody;
+
     #endregion
     #region Methods
-    public void UpdateMesh()
-    {
-        navMeshAgent.angularSpeed = 360;
-        navMeshAgent.speed = character.speed;
-        navMeshAgent.acceleration = character.speed;
-        navMeshAgent.stoppingDistance = 5;//TODO temporal
-        navMeshAgent.updatePosition = true;
-        navMeshAgent.updateRotation = true;
-        navMeshAgent.updateUpAxis = true;
-    }
 
+    /// <summary>
+    /// Updates the basics of the allies and then returns true wether is alive 
+    /// </summary>
+    public bool UpdateAlly(){
+        bool keepGoing = false;
+        if (GameManager.IsOnGame())
+        {
+            //rigidbody.WakeUp();
+            if (character.IsAlive())
+            {
+                //pierde vida
+                character.LessLife();
+                keepGoing = true;
+            }
+            else
+            {
+                Delete();
+            }
+        }
+      
+
+        return keepGoing;
+    }
+    ///// <summary>
+    ///// Move it
+    ///// </summary>
+    //public void Move(Transform tr = null)
+    //{
+    //    //if (navMeshAgent == null) return;
+    //    if (!navMeshAgent.isOnNavMesh) return;
+    //    if (tr == null) tr = transform;
+    //    navMeshAgent.SetDestination(tr.position);
+    //}
 
     /// <summary>
     /// Destroy the ally
@@ -54,17 +73,3 @@ public abstract class Ally : MonoX
    
     #endregion
 }
-
-/*
-
-    TODO ver
-    Comportamiento de cada aliado..
-
-    Qué se asemejan los ally?
-
-    - poseen un objetivo a donde dirigirse
-    - poseen un rango para accionar algo
-    - poseen
-
-
- */

@@ -56,6 +56,7 @@ public class Destructure : MonoX
             part.parent = targetWorld;
             Rigidbody rigid = part.gameObject.AddComponent<Rigidbody>();
             BoxCollider collider = part.gameObject.AddComponent<BoxCollider>();
+            part.gameObject.AddComponent<SaveVelocity>();
 
             
             Transform child = part.childCount > 0 ? part.GetChild(0) : null;
@@ -113,16 +114,3 @@ public class Destructure : MonoX
 
     #endregion
 }
-
-
-/*
- * TODO
- * 
- * 
- * Script encargado de separar partes del modelo, viendo las partes del hijo
- * 
- * estas partes las asigna a un target que debería de ser el @WORLD para dejarlas en el mapa
- * tambien aprovecha de asignarle un RigidBody para mantenerlas fisicamente
- * 
- * 
- */

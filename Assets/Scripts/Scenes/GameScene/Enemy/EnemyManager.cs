@@ -28,6 +28,9 @@ public class EnemyManager : MonoX
     public int enemiesLeft = 0;
     // Indicador de la oleada actual
     public static int waveActual = 0;
+    [Space]
+    public int bossWaves = 5;
+
 
     [Header("Debug")]
     public bool _Debug_SetWave = false;
@@ -100,14 +103,10 @@ public class EnemyManager : MonoX
         //TODO revisar si es la oleada numero 5
 
         // Cada 5 oleadas se añade un Enemigo Jefe, TODO ver como implementar leugo
-        if (waveActual % 5 == 0){
+        if (waveActual % bossWaves == 0){
             PrintX("////BOSS/////");
         }
-
-
     }
-
-
 
     /// <summary>
     /// Crea un Enemigo y lo posiciona en alguno de los sitios correspondientes
@@ -119,12 +118,12 @@ public class EnemyManager : MonoX
         int selected = XavHelpTo.Get.ZeroMax(prefs_Enemies.Length);
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
-        spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder]);
+        spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
     }
     /// <summary>
     /// Comprueba si NO hay enemigos faltantes por invocar ni enemigos en la escena
     /// </summary>
-    private bool IsWaveEnd() => enemiesLeft.Equals(0) && spawner.parent.childCount.Equals(0);
+    private bool IsWaveEnd() => enemiesLeft.Equals(0) && TargetManager.GetEnemiesContainer().childCount.Equals(0);
 
 
     /// <summary>

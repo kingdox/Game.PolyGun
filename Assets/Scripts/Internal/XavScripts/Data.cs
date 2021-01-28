@@ -37,7 +37,7 @@ namespace Environment
             5.5f
         };
 
-        public readonly float bulletSpeed = 15f;
+        public readonly float bulletSpeed = 20f;
 
         [Header("Datos de CraftData")]
         private readonly CraftData craft = new CraftData();

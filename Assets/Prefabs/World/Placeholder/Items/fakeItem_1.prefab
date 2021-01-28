@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 881161633359811163}
   - component: {fileID: -2780593580461133797}
   - component: {fileID: 4490448654257868757}
+  - component: {fileID: 448485141701364412}
   m_Layer: 0
   m_Name: fakeItem_1
   m_TagString: item
@@ -107,6 +108,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &448485141701364412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677400317231314648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c3445bd80d04629946353178681b1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9020967766699854015
 GameObject:
   m_ObjectHideFlags: 0

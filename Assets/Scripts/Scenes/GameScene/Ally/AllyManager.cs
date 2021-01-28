@@ -8,8 +8,6 @@ public class AllyManager : MonoX
 {
     #region Variable
     private static AllyManager _;
-    //container de ally
-    public Transform @allyContainer;
     public GameObject[] prefs_Allies;
 
     [Header("Debug")]
@@ -53,7 +51,7 @@ public class AllyManager : MonoX
         Instantiate(
             _.prefs_Allies[allyIndex],
             target.position + distance ,
-            Quaternion.LookRotation(target.forward), _.@allyContainer
+            Quaternion.LookRotation(target.forward),  TargetManager.GetAlliesContainer()
         );
 
 

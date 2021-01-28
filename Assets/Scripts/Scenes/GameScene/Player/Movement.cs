@@ -13,7 +13,6 @@ public class Movement : MonoX
     #region Events
     private void Awake(){
         Get(out body);
-        //Get(out rotation);
     }
     #endregion
     #region Methods
@@ -25,12 +24,14 @@ public class Movement : MonoX
 
         bool reached = false;
 
-        if (!GameManager.IsOnGame()){
-            body.Sleep();
-        }
-        else{
-            body.WakeUp();
+        //if (!GameManager.IsOnGame()){
+        //    body.Sleep();
+        //}
+        //else{
+        //    body.WakeUp();
 
+        if (GameManager.IsOnGame())
+        {
             if (following)
             {
                 //new added yo prevent search whne falls the enemy
@@ -51,11 +52,23 @@ public class Movement : MonoX
             {
                 body.velocity = _axis * speed;
             }
-
         }
-       
+
+
+        //}
+
 
         return reached;
     }
+
+
+    /// <summary>
+    /// Stops the velocity
+    /// </summary>
+    public void StopMovement()
+    {
+        body.velocity = Vector3.zero;
+    }
+
     #endregion
 }

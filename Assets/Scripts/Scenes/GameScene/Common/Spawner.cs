@@ -10,15 +10,9 @@ public class Spawner : MonoX
 
     [Header("Prefabs to create")]
     [Space]
-    /// <summary>
-    /// Lugar objetivo del jugador
-    /// </summary>
-    public Transform target;
-    /// <summary>
-    /// DOnde se creara como hijo de este objeto
-    /// </summary>
-    public Transform parent;
+    
     public float range= 3f;
+    private Transform target;
     private Vector3[] childsPos;
 
     [Header("Debug")]
@@ -29,7 +23,7 @@ public class Spawner : MonoX
     #region Events
     private void Start(){
         Transform[] childs;
-
+        target = TargetManager.GetPlayer();
         GetChilds(out childs);
 
         New(out childsPos, childs.Length);
@@ -52,8 +46,7 @@ public class Spawner : MonoX
     /// en cuenta  ciertas cosas, el objetivo influye para los NEAR o FAR
     /// <para>Por defecto el target es el Spawner(Suponiendo que está en el centro del mapa)</para>
     /// </summary>
-    public void Generate(GameObject pref, SpawnOpt opt){
-        //Hay que crear un objeto ? o añadirle eso...
+    public void Generate(GameObject pref, SpawnOpt opt, Transform parent){
         int i = GetIndexOfDistanceType(opt);
 
         Vector3 pos = XavHelpTo.Get.MinusMax(childsPos[i], range, 1);
@@ -61,7 +54,7 @@ public class Spawner : MonoX
         Instantiate(pref, pos, Quaternion.identity, parent);
     }
 
-    public int GetActualQty() => parent.childCount;
+    //public int GetActualQty() => parent.childCount;
 
     /// <summary>
     /// Toma el indice mas apropiado basado en el tipo de spawn
@@ -100,8 +93,7 @@ public class Spawner : MonoX
     public void __Debug_Spawn(){
         if (!DebugFlag(ref _Debug_Spawn)) return;
 
-
-        Generate(XavHelpTo.Get.Range(_Debug_prefs), _Debug_SpawnOpt);
+        Generate(XavHelpTo.Get.Range(_Debug_prefs), _Debug_SpawnOpt, TargetManager.GetEnemiesContainer());
     }
 #endif
     #endregion

@@ -31,7 +31,7 @@ public class ItemManager : MonoX
         if (
             GameManager.IsOnGame()
             && Timer(ref count, timerSpawn)
-            && spawner.GetActualQty() < itemsLimit // si supera el limite
+            && TargetManager.GetItemsContainer().childCount < itemsLimit // si supera el limite
             ){
             SpawnItem();
         }
@@ -50,7 +50,7 @@ public class ItemManager : MonoX
         int selected = XavHelpTo.Get.ZeroMax(prefs_Item.Length);
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
-        spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder]);
+        spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());
     }
     #endregion
 }

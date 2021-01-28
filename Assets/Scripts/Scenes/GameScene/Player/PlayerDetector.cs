@@ -17,19 +17,15 @@ public class PlayerDetector : MonoX
     [Header("Detector Item")]
 
     //Ultimo Item cercano
-    public Transform nearestItem = null;
+    public Item itemNear = null;
+
     #endregion
     #region Events
 
     private void Awake(){
         Get(out body);
     }
-    
-    //private void OnCollisionEnter(Collision collision){
-    //    if (XavHelpTo.Know.IsEqualOf(collision.gameObject.tag, tags)){
-    //        PrintX($"OnCollisionEnter{collision.gameObject.name}");
-    //    }
-    //}
+ 
     private void OnTriggerStay(Collider other){
         if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
         {
@@ -40,15 +36,16 @@ public class PlayerDetector : MonoX
     private void OnTriggerExit(Collider other){
         if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
         {
-            if (other.transform.Equals(nearestItem))
+            if (other.transform.Equals(itemNear.transform))
             {
-                nearestItem = null;
+                itemNear.Isselected = false;
+                itemNear = null;
             }
         }
     }
     private void OnDrawGizmos(){
-        if (nearestItem != null){
-            Gizmos.DrawLine(nearestItem.position, transform.position);
+        if (itemNear != null){
+            Gizmos.DrawLine(itemNear.transform.position, transform.position);
         }
     }
 
@@ -62,23 +59,28 @@ public class PlayerDetector : MonoX
     /// </summary>
     private void CheckDetection(Transform other)
     {
+        Item itemOther = other.GetComponent<Item>();
+
         // si el objeto entrante es distinto que el ultimo
-        if (!other.gameObject.Equals(nearestItem)){
+        if (!itemOther.Equals(itemNear)){
 
             //en caso de no tener
-            if (nearestItem == null)
+            if (itemNear == null)
             {
-                nearestItem = other;
+                itemNear = itemOther;
+                itemNear.Isselected = true;
             }
             else
             {
                 //Revisamos la distancia, sie s mas cercano que el anterior
-                float oldSum = Vector3.Distance(nearestItem.position, transform.position);
+                float oldSum = Vector3.Distance(itemNear.transform.position, transform.position);
                 float entrySum = Vector3.Distance(other.position, transform.position);
 
                 if (entrySum < oldSum)
                 {
-                    nearestItem = other;
+                    itemNear.Isselected = false;
+                    itemOther.Isselected = true;
+                    itemNear = itemOther;
                 }
 
             }
@@ -91,10 +93,10 @@ public class PlayerDetector : MonoX
     /// <para>al hacerlo, este se elimina del mundo</para>
     /// </summary>
     public void SetNearestItemType(ref ItemContent slot) {
-        if (nearestItem != null){
-            slot = nearestItem.GetComponent<Item>().type;
-            Destroy(nearestItem.gameObject);
-            nearestItem = null;
+        if (itemNear != null){
+            slot = itemNear.type;
+            Destroy(itemNear.gameObject);
+            itemNear = null;
         }
     }
     #endregion

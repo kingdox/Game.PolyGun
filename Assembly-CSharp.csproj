@@ -115,6 +115,7 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/TargetManager.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/SaveVelocity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

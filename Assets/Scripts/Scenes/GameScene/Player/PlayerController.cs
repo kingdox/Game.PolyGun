@@ -25,7 +25,6 @@ public class PlayerController : MonoX
     //private static Transform player;
 
     [Header("PlayerSettings")]
-    [SerializeField]
     public Character character;
     [Space]
     private Movement movement;
@@ -211,7 +210,7 @@ public struct Character{
     /// <summary>
     /// Revisa si sigue con vida
     /// </summary>
-    public bool IsAlive() => !timeLife.Equals(0);
+    public bool IsAlive() => timeLife > 0;
 
     /// <summary>
     /// Hace que pierda vida el player a medida que pasa el tiempo

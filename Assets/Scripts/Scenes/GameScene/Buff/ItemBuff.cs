@@ -147,3 +147,16 @@ public enum BuffType
     SPEED
 }
 
+
+
+
+
+/*
+LOS buff tienen un corto periodo de tiempo pero
+cuando se consumen individualmente estos aumentan en x4 ns
+
+extra crafting 5s 
+cada uno separado 15 / 20
+
+ 
+ */

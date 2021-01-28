@@ -1,7 +1,7 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using XavLib;
 #endregion
 
 public class Item : MonoX
@@ -9,33 +9,17 @@ public class Item : MonoX
     #region Variables
     [Header("Item Settings")]
     public ItemContent type;
-    [Space]
-    private Rigidbody body;
-    private Vector3 lastVel;
+    public ParticleSystem part_selected;
+    public bool Isselected = false;
 
+    public static event Action Selection;
     #endregion
     #region Events
-    private void Awake(){
-        Get(out body);
-    }
     private void Update()
     {
-        CheckBody();
+        XavHelpTo.Change.ActiveParticle(part_selected, Isselected);
     }
     #endregion
     #region Methods
-
-    private void CheckBody()
-    {
-        //TODO puede que entre para MONOX ? TODO
-        if (GameManager.IsOnGame()){
-            //si se reanuda y andaba durmiendo...
-            if (body.IsSleeping()) { body.velocity = lastVel; }
-            lastVel = body.velocity;
-            body.WakeUp();
-        }else{
-            body.Sleep();
-        }
-    }
     #endregion
 }
