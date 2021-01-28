@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriShotController : Ally
+public class TriShotController : Minion
 {
     private void Start()
     {

@@ -1,10 +1,9 @@
 ﻿#region Imports
-using System;
 using UnityEngine;
 using XavLib;
 #endregion
 
-public class Item : MonoX
+public class Item : MonoBehaviour
 {
     #region Variables
     [Header("Item Settings")]
@@ -12,12 +11,15 @@ public class Item : MonoX
     public ParticleSystem part_selected;
     public bool Isselected = false;
 
-    public static event Action Selection;
     #endregion
     #region Events
-    private void Update()
+     private void Update()
     {
         XavHelpTo.Change.ActiveParticle(part_selected, Isselected);
+        if (!Isselected)
+        {
+            part_selected.Clear();
+        }
     }
     #endregion
     #region Methods

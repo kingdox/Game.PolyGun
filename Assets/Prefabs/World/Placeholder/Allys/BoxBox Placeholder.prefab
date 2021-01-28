@@ -558,7 +558,6 @@ GameObject:
   - component: {fileID: 1237324315652444107}
   - component: {fileID: 2099501594534117471}
   - component: {fileID: 7888259186895931012}
-  - component: {fileID: 8509834311331096870}
   - component: {fileID: 2357100928583170058}
   - component: {fileID: 2783241688366467026}
   - component: {fileID: 8849522936439292644}
@@ -627,28 +626,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &8509834311331096870
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8100060435436238248}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 1
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 360
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &2357100928583170058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,7 +649,7 @@ MonoBehaviour:
     isInmortal: 0
     canExtraShots: 0
   target: {fileID: 0}
-  destructure: {fileID: 2783241688366467026}
+  body: {fileID: 0}
   damageTimeCount: 0
   canDamage: 0
 --- !u!114 &2783241688366467026

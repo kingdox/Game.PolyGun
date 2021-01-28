@@ -3,44 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
-public class PlurController : Enemy
+public class PlurController : Minion
 {
 
     #region Variables
-
+    [Header("Plur Settings")]
     public float damageTimeCount;
     public bool canDamage;
     #endregion
     #region Events
     private void Start()
     {
+        Get(out body);
 
-        InitEnemy();
+        LoadMinion();
     }
     private void Update()
     {
 
-        if (UpdateEnemy())
+        if (UpdateMinion())
         {
             AttackUpdate();
             PathUpdate();
         }
-        else
-        {
-            //pausa el movimiento
-            Move();
-        }
-        //if (!navMeshAgent.isOnNavMesh)
-        //{
-        //    XavLib.XavHelpTo.Look.WithColor("No nos encontramos en la malla, ver como recalcular");
-        //    navMeshAgent.ResetPath();
-        //}
-        
-        //if (navMeshAgent)
-        //{
-
-        //}
-        //navMeshAgent.ResetPath
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -52,8 +37,8 @@ public class PlurController : Enemy
             switch (collision.transform.tag)
             {
                 case "ally":
-                    Ally ally = collision.transform.GetComponent<Ally>();
-                    ally.character.timeLife -= character.damage;
+                    Minion minion = collision.transform.GetComponent<Minion>();
+                    minion.character.timeLife -= character.damage;
                     break;
                 case "player":
                     PlayerController player = collision.transform.GetComponent<PlayerController>();
@@ -106,7 +91,7 @@ public class PlurController : Enemy
                 }
 
             }
-            Move(target);
+            //Move(target);
         }
     }
     #endregion

@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  part_selected: {fileID: 0}
+  part_selected: {fileID: 8285455699027355462}
   Isselected: 0
 --- !u!65 &8750240410340623808
 BoxCollider:

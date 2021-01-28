@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MondController : Enemy
+public class MondController : Minion
 {
    
 }

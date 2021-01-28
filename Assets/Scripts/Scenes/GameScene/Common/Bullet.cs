@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
-
+[RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(Destructure))]
+[RequireComponent(typeof(SaveVelocity))]
 public class Bullet : MonoX
 {
     #region Variables
@@ -11,6 +13,7 @@ public class Bullet : MonoX
     private Movement movement;
     private Rotation rotation;
     private Destructure destructure;
+    private SaveVelocity saveVelocity;
     private Vector3 initPos;
     [Header("Bullet Settings")]
     [Space]
@@ -25,6 +28,8 @@ public class Bullet : MonoX
         Get(out destructure);
         Get(out movement);
         Get(out rotation);
+        GetAdd(ref saveVelocity);
+
         initPos = transform.position;
     }
 
@@ -89,14 +94,14 @@ public class Bullet : MonoX
         if (XavLib.XavHelpTo.Know.IsEqualOf(tag, "obstacle", "enemy"))
         {
             if (tag.Equals("enemy")){
-                Enemy enemy = other.GetComponent<Enemy>();
-                if (enemy != null)
+                Minion minion = other.GetComponent<Minion>();
+                if (minion != null)
                 {
-                    enemy.character.timeLife -= bulletShot.damage;
+                    minion.character.timeLife -= bulletShot.damage;
                 }
                 else
                 {
-                    Debug.LogError("Este enemy no tiene asignado enemy component");
+                    Debug.LogError("Este enemy no tiene asignado el Minion component");
                 }
             }
             DeleteBullet();

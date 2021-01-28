@@ -87,7 +87,6 @@
     <Compile Include="Assets/Scripts/Scenes/IntroductionScene/IntroductionManager.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Settings/CameraTrack.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/Data.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/Enemy.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/CraftData.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/MenuInputController.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Assets/Scripts/Internal/System/AchieveSystem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/EnemyManager.cs" />
     <Compile Include="Assets/Scripts/Components/Mono/MonoX.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/SaveVelocity.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/SfxItem.cs" />
     <Compile Include="Assets/Scripts/Components/Destructure.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/MsgController.cs" />
@@ -110,12 +110,11 @@
     <Compile Include="Assets/Scripts/Components/Mono/MonoInit.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/GridController.cs" />
     <Compile Include="Assets/Scripts/Scenes/MenuScene/MenuManager.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Ally.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Minion.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/TargetManager.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/SaveVelocity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

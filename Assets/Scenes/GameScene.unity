@@ -1196,6 +1196,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 295262742}
     m_Modifications:
+    - target: {fileID: 7888259186895931012, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8100060435436238248, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
       propertyPath: m_Name
       value: BoxBox Placeholder
@@ -1250,9 +1254,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849522936439292644, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8509834311331096870, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 733604c7fb396401c984ed2a9ca3f584, type: 3}
 --- !u!1 &346866607
 GameObject:
@@ -1539,7 +1544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5120cf16a65234ecea674ed847eaa529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearestItem: {fileID: 0}
+  itemNear: {fileID: 0}
 --- !u!135 &385533603
 SphereCollider:
   m_ObjectHideFlags: 0
