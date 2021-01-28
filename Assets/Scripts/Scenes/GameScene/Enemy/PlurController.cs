@@ -14,8 +14,6 @@ public class PlurController : Minion
     #region Events
     private void Start()
     {
-        Get(out body);
-
         LoadMinion();
     }
     private void Update()
@@ -24,13 +22,22 @@ public class PlurController : Minion
         if (UpdateMinion())
         {
             AttackUpdate();
-            PathUpdate();
+
+            if (canDamage)
+            {
+                PathUpdate();
+            }
+            else
+            {
+                movement.StopMovement();
+            }
+            
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
         //si es un enemigo le hará daño y reseteara el timer de daño
-        if (canDamage) 
+        if (GameManager.IsOnGame() && canDamage) 
         {
             canDamage = false;
 
@@ -38,7 +45,8 @@ public class PlurController : Minion
             {
                 case "ally":
                     Minion minion = collision.transform.GetComponent<Minion>();
-                    minion.character.timeLife -= character.damage;
+                    MinionDamage(minion);
+                    //minion.character.timeLife -= character.damage;
                     break;
                 case "player":
                     PlayerController player = collision.transform.GetComponent<PlayerController>();
@@ -67,6 +75,8 @@ public class PlurController : Minion
     /// </summary>
     private void PathUpdate()
     {
+        //TODO Tratar de buscar al más cercano,
+        //TODO aquí se queda pegado en player
         //if can't find a target then try to look another
         if (target == null || target == transform)
         {

@@ -11,15 +11,11 @@ public class BoxBoxController : Minion
     [Header("BoxBox Settings")]
     public float damageTimeCount;
     public bool canDamage;
-
-    
-
     #endregion
     #region Events
     private void Start()
     {
         LoadMinion();
-        target = transform;
     }
     private void Update()
     {
@@ -35,7 +31,6 @@ public class BoxBoxController : Minion
             }
             else
             {
-                //TODO revisar el bump
                 movement.StopMovement();
             }
         }

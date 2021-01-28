@@ -42,6 +42,8 @@ public abstract class Minion : MonoX
         GetAdd(ref destructure);
         //in case of not set
         GetAdd(ref saveVelocity);
+
+        target = transform;
     }
 
     /// <summary>
