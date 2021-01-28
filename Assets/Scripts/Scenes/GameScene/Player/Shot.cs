@@ -10,7 +10,7 @@ public class Shot : MonoX
 {
     #region
     [Header("ShotSettings")]
-    public Transform parent_bullet;
+    //public Transform parent_bullet;
     public Bullet pref_bullet;
     [Space] // creación
     public bool canShot;
@@ -56,7 +56,7 @@ public class Shot : MonoX
         Default(ref t, transform);
 
         //.LookRotation(t.position)
-        Bullet newBullet = Instantiate(pref_bullet, t.position, Quaternion.identity , parent_bullet);
+        Bullet newBullet = Instantiate(pref_bullet, t.position, Quaternion.identity , TargetManager.GetBulletsContainer() );
 
         //asignation of rotation
         newBullet.SetDirection(t);

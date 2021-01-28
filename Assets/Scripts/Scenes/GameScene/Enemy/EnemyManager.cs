@@ -31,7 +31,6 @@ public class EnemyManager : MonoX
     [Space]
     public int bossWaves = 5;
 
-
     [Header("Debug")]
     public bool _Debug_SetWave = false;
 
@@ -99,13 +98,7 @@ public class EnemyManager : MonoX
 
         //cuenta la cantidad de enemigos faltantes
         enemiesLeft = (int)Math.Round(result, 0);
-
-        //TODO revisar si es la oleada numero 5
-
-        // Cada 5 oleadas se añade un Enemigo Jefe, TODO ver como implementar leugo
-        if (waveActual % bossWaves == 0){
-            PrintX("////BOSS/////");
-        }
+        
     }
 
     /// <summary>
@@ -119,6 +112,8 @@ public class EnemyManager : MonoX
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
         spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
+
+       
     }
     /// <summary>
     /// Comprueba si NO hay enemigos faltantes por invocar ni enemigos en la escena
@@ -156,3 +151,13 @@ public enum EnemyName
     MOND,
     PLUR
 }
+
+
+////TODO
+////TODO revisar si es la oleada numero 5
+
+//// Cada 5 oleadas se añade un Enemigo Jefe, TODO ver como implementar leugo
+//if (waveActual % bossWaves == 0)
+//{
+//    PrintX("////BOSS/////");
+//}

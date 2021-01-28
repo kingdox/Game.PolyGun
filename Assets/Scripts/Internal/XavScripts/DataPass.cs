@@ -52,6 +52,7 @@ public class DataPass : MonoBehaviour
     /// <summary>
     /// Revisamos si existen datos guardados, de no existir los crea
     /// TODO colocar async await????
+    /// usar actions para el evento?
     /// </summary>
     private void DataInit()
     {

@@ -11,6 +11,8 @@ using XavLib;
 [RequireComponent(typeof(Rotation))]
 [RequireComponent(typeof(Equipment))]
 [RequireComponent(typeof(Shot))]
+[RequireComponent(typeof(SaveVelocity))]
+
 ///<summary>
 /// Manejo de los controles de Player
 /// <para>
@@ -26,19 +28,22 @@ public class PlayerController : MonoX
 
     [Header("PlayerSettings")]
     public Character character;
-    [Space]
-    private Movement movement;
-    private Rotation rotation;
-    private Equipment equipment;
-    private Shot shot;
+   
     [Space]
     private Destructure destructure;
 
     [Header("Buffs")]
     public Transform buffList;
     public ItemBuff[] buffs;
-    #endregion
 
+    [Header("Requirement")]
+    private Movement movement;
+    private Rotation rotation;
+    private Equipment equipment;
+    private Shot shot;
+    private SaveVelocity saveVelocity;
+    private Rigidbody body;
+    #endregion
     #region Events
     private void Awake()
     {
@@ -47,6 +52,8 @@ public class PlayerController : MonoX
         Get(out equipment);
         Get(out shot);
         Get(out destructure);
+        GetAdd(ref saveVelocity);
+        Get(out body);
 
         GetChilds(out buffs, buffList);
         character.type = CharacterType.PLAYER;
@@ -150,8 +157,12 @@ public class PlayerController : MonoX
     /// </summary>
     private void Attack(){
         if (ControlSystem.IsKeyFrame(KeyPlayer.OK_FIRE)){
-            //bool shotSuccees = 
-            shot.ShotBullet(character);
+
+            //Dispara y ve si ha completado
+            if (shot.ShotBullet(character))
+            {
+                body.AddForce(-transform.forward * 20, ForceMode.Impulse);
+            }
         }
     }
 

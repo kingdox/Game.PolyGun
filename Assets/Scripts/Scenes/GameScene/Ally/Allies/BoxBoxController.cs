@@ -43,18 +43,14 @@ public class BoxBoxController : Minion
             BoxBoxAttack(collision.transform);
         }
     }
-    /// <summary>
-    /// collider boxbox interact with a trigger collider...
-    /// </summary>
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    //si es un enemigo le hará daño y reseteara el timer de daño
-    //    if (CanAttack(other.transform))
-    //    {
-    //        canDamage = false;
-    //        BoxBoxAttack(other.transform);
-    //    }
-    //}
+    private void OnDrawGizmos()
+    {
+        if (target != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, target.position);
+        }
+    }
     #endregion
     #region Methods
     private bool CanAttack(Transform tr) => GameManager.IsOnGame() && canDamage && tr.CompareTag("enemy");
@@ -89,8 +85,7 @@ public class BoxBoxController : Minion
         if (target != null && target != transform)
         {
 
-            //TODO el objetivo buscado debe estar cerca del suelo
-            if (target.position.y > 5) return;
+           
 
             if (!IsInRange())
             {
@@ -109,6 +104,7 @@ public class BoxBoxController : Minion
             //BoxBox everytime try to find a enemy
             target = TargetManager.GetEnemy(transform);
 
+            
         }
 
     }

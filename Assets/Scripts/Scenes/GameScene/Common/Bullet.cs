@@ -44,14 +44,10 @@ public class Bullet : MonoX
             if (tran_enemy == null) 
             {
                 canFollow = false;
-
-
             }
             else
             {
                 direction = tran_enemy.position;
-                //direction = transform.position + transform.forward.normalized;
-                //canFollow = false;
                 rotation.LookTo(direction);
             }
         }
@@ -82,33 +78,82 @@ public class Bullet : MonoX
             }
         }
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, direction);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(transform.position, direction);
+    //}
+
+
+    //TODO refactorizar
     private void OnTriggerEnter(Collider other)
     {
         string tag = other.transform.tag;
-        
-        if (XavLib.XavHelpTo.Know.IsEqualOf(tag, "obstacle", "enemy"))
-        {
-            if (tag.Equals("enemy")){
-                Minion minion = other.GetComponent<Minion>();
-                if (minion != null)
-                {
-                    minion.character.timeLife -= bulletShot.damage;
-                }
-                else
-                {
-                    Debug.LogError("Este enemy no tiene asignado el Minion component");
-                }
-            }
+
+        if (!IsTag(tag, "obstacle", "enemy", "player", "ally")) return;
+
+        if (IsTag(tag,"obstacle"))
+        {   
             DeleteBullet();
+            return;
         }
+
+        switch (bulletShot.owner)
+        {
+            case CharacterType.ALLY:
+            case CharacterType.PLAYER:
+                if (!IsTag(tag, "enemy")) return;
+
+                ShotByAllyOrPlayer(other.transform);
+                break;
+            case CharacterType.ENEMY:
+                if (!IsTag(tag, "player", "ally")) return;
+                
+                ShotByEnemy(other.transform);
+                break;
+            default:
+                //otro..... 
+                break;
+        }
+
+        DeleteBullet();
     }
     #endregion
     #region Methods
+
+
+
+    /// <summary>
+    /// Check if the enemy is the selected, then it inflict the damage
+    /// </summary>
+    private void ShotByAllyOrPlayer( Transform enemy)
+    {
+
+        Minion minion = enemy.GetComponent<Minion>();
+        if (minion != null)
+        {
+            minion.character.timeLife -= bulletShot.damage;
+            minion.body.AddForce(transform.forward * 5, ForceMode.Impulse);
+        }
+        else
+        {
+            Debug.LogError("Este enemy no tiene asignado el Minion component");
+        }
+    }
+
+
+    /// <summary>
+    /// TODO
+    /// </summary>
+    private void ShotByEnemy(Transform allyOrPlayer)
+    {
+
+    }
+
+
+
+
+
 
     public void DeleteBullet()
     {
@@ -129,5 +174,11 @@ public class Bullet : MonoX
     /// </summary>
     private bool PassedRange() => Vector3.Distance(initPos, transform.position) > bulletShot.range;
 
+
+
+    /// <summary>
+    ///  Checks for on of the tags
+    /// </summary>
+    private bool IsTag(string tag, params string[] tags) => XavLib.XavHelpTo.Know.IsEqualOf(tag, tags);
     #endregion
 }

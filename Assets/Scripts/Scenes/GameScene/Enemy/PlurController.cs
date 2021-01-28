@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
+
 public class PlurController : Minion
 {
 
     #region Variables
     [Header("Plur Settings")]
-    public float damageTimeCount;
-    public bool canDamage;
+    public float damageTimeCount = 0;
+    public bool canDamage = true;
+    [Space]
+    public ParticleSystem par_explode;
+
     #endregion
     #region Events
     private void Start()
@@ -31,24 +35,34 @@ public class PlurController : Minion
             {
                 movement.StopMovement();
             }
-            
+
         }
+    }
+    private void OnDisable()
+    {
+        par_explode.transform.parent = TargetManager.GetLeftoverContainer();
+        par_explode.Play();
+        Destroy(par_explode.gameObject, par_explode.main.duration);
     }
     private void OnCollisionEnter(Collision collision)
     {
         //si es un enemigo le hará daño y reseteara el timer de daño
         if (GameManager.IsOnGame() && canDamage) 
         {
-            canDamage = false;
 
             switch (collision.transform.tag)
             {
                 case "ally":
-                    Minion minion = collision.transform.GetComponent<Minion>();
-                    MinionDamage(minion);
+                    PlurAttack(collision.transform);
+                    canDamage = false;
+
+                    //Minion minion = collision.transform.GetComponent<Minion>();
+                    //MinionDamage(minion);
                     //minion.character.timeLife -= character.damage;
                     break;
                 case "player":
+                    //Exception
+                    canDamage = false;
                     PlayerController player = collision.transform.GetComponent<PlayerController>();
                     player.character.timeLife -= character.damage;
                     break;
@@ -59,6 +73,17 @@ public class PlurController : Minion
     }
     #endregion
     #region Methods
+
+    /// <summary>
+    /// action to damage a minion enemy
+    /// </summary>
+    /// <param name="enemyInContact"></param>
+    private void PlurAttack(Transform tr)
+    {
+        Minion minion = tr.GetComponent<Minion>();
+        MinionDamage(minion);
+    }
+
     /// <summary>
     /// Updates the attack of BoxBox
     /// </summary>
@@ -80,9 +105,11 @@ public class PlurController : Minion
         //if can't find a target then try to look another
         if (target == null || target == transform)
         {
+
             //Buscar el player o un ally
             Transform player = TargetManager.GetPlayer();
-            target = TargetManager.GetEnemy(transform);
+            //busca uno de los aliados
+            target = TargetManager.GetAlly(transform);
 
             float playerDistance = Vector3.Distance(transform.position, player.position);
 
@@ -101,7 +128,23 @@ public class PlurController : Minion
                 }
 
             }
-            //Move(target);
+        }
+        else
+        {
+            if (transform.position.y < 3)
+            {
+                //moves it
+                if (!IsInRange())
+                {
+                    rotation.LookTo(target.position);
+                    movement.Move(transform.forward.normalized, character.speed);
+                }
+                else
+                {
+                    movement.StopMovement();
+                }
+            }
+
         }
     }
     #endregion

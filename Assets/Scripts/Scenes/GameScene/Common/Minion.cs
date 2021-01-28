@@ -89,8 +89,10 @@ public abstract class Minion : MonoX
 
         //PrintX($"Minion Ataca! {tag}, {name}");
 
-        //TODO hace un empuje
-        minionInContact.body.AddForce(-minionInContact.transform.forward * 10, ForceMode.Impulse);
+        //RECOIL
+        int magnitude = 10;
+        minionInContact.body.AddForce(transform.forward * magnitude, ForceMode.VelocityChange);
+        body.AddForce(-transform.forward * magnitude * 2, ForceMode.VelocityChange);
     }
 
     /// <summary>

@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 7590123040884621618}
   - component: {fileID: 4563376440553333647}
   m_Layer: 0
-  m_Name: Trail
+  m_Name: $Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -640,8 +640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character:
     type: 2
-    timeLife: 10
-    timeLifeMax: 10
+    timeLife: 20
+    timeLifeMax: 20
     speed: 15
     damage: 2
     range: 0

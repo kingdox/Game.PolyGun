@@ -121,12 +121,12 @@ public class ItemBuff : MonoX
         return canApply;
     }
 
-    public void StartBuff()
+    public void StartBuff(int stackQty=1)
     {
         //si hay otro buff lo checkeamos y añadimos como pila
         //de momento lo resetea
         //count = 0;
-        stacks++;
+        stacks += stackQty;
         isRunning = true;
     }
 

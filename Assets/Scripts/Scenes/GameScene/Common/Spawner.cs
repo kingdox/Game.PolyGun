@@ -14,6 +14,7 @@ public class Spawner : MonoX
     public float range= 3f;
     private Transform target;
     private Vector3[] childsPos;
+    private int generates = 0;
 
     [Header("Debug")]
     public bool _Debug_Spawn = false;
@@ -51,7 +52,10 @@ public class Spawner : MonoX
 
         Vector3 pos = XavHelpTo.Get.MinusMax(childsPos[i], range, 1);
 
-        Instantiate(pref, pos, Quaternion.identity, parent);
+        GameObject obj = Instantiate(pref, pos, Quaternion.identity, parent);
+
+        obj.name = $"{pref.name} {generates}";
+        generates++;
     }
 
     //public int GetActualQty() => parent.childCount;

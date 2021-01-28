@@ -32,26 +32,43 @@ public class Movement : MonoX
 
         if (GameManager.IsOnGame())
         {
-            if (following)
+            //si estás cerca del suelo
+            if (IsOnFloor())
             {
-                //new added yo prevent search whne falls the enemy
-                _axis.y = transform.position.y;
 
-                transform.position = Vector3.MoveTowards(
-                        transform.position,
-                        _axis,
-                        Time.deltaTime
-                        * speed
-                    );
-                if (transform.position.Equals(_axis))
+                if (following)
                 {
-                    reached = true;
+                    //new added yo prevent search whne falls the enemy
+                    _axis.y = transform.position.y;
+
+                    transform.position = Vector3.MoveTowards(
+                            transform.position,
+                            _axis,
+                            Time.deltaTime
+                            * speed
+                        );
+                    if (transform.position.Equals(_axis))
+                    {
+                        reached = true;
+                    }
+                }
+                else
+                {
+                    //Vector3
+                    //_axis.y = 0;
+                    //transform.position
+                    body.velocity = (_axis * speed) + (Vector3.up * body.velocity.y);
+
+                    //Old
+                    //body.velocity = (_axis * speed);// + (Vector3.up * body.velocity.y);
                 }
             }
             else
             {
-                body.velocity = _axis * speed;
+                //go down more faster if it's far in Y
+                transform.position -= transform.up * Time.deltaTime;
             }
+
         }
 
 
@@ -61,6 +78,12 @@ public class Movement : MonoX
         return reached;
     }
 
+
+    /// <summary>
+    /// check if we are near of the floor
+    /// </summary>
+    /// <returns></returns>
+    public bool IsOnFloor() => transform.position.y < 5;//HARDCODED?
 
     /// <summary>
     /// Stops the velocity

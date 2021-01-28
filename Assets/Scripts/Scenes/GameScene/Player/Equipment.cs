@@ -74,18 +74,18 @@ public class Equipment : MonoX
         {
             //3
             case CraftType.AAA:
-                buffs[(int)BuffType.STREGHT].StartBuff();
+                buffs[(int)BuffType.STREGHT].StartBuff(3);
                 break;
             case CraftType.BBB:
-                buffs[(int)BuffType.ATK_SPEED].StartBuff();
+                buffs[(int)BuffType.ATK_SPEED].StartBuff(3);
                 break;
             case CraftType.CCC:
-                buffs[(int)BuffType.SPEED].StartBuff();
+                buffs[(int)BuffType.SPEED].StartBuff(3);
                 break;
             // 2
             // A
             case CraftType.AAB:
-                buffs[(int)BuffType.TARGET_SHOT].StartBuff();
+                buffs[(int)BuffType.TARGET_SHOT].StartBuff(3);
                 break;
             case CraftType.AAC:
                 AllyManager.GenerateAlly(transform, AllyType.TRI_SHOT);
@@ -99,7 +99,7 @@ public class Equipment : MonoX
                 break;
             //C
             case CraftType.CCA:
-                buffs[(int)BuffType.FROST].StartBuff();
+                buffs[(int)BuffType.FROST].StartBuff(3);
                 break;
             case CraftType.CCB:
                 AllyManager.GenerateAlly(transform, AllyType.ROMB);

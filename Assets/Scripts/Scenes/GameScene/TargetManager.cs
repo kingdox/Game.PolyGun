@@ -11,7 +11,10 @@ public class TargetManager : MonoX
     [Header("@Areas")]
     public Transform @AlliesContainer;
     public Transform @EnemiesContainer;
+    [Space]
     public Transform @ItemsContainer;
+    public Transform @BulletsContainer;
+    [Space]
     public Transform @LeftoverContainer;
     [Space]
     public Transform Player;
@@ -35,9 +38,13 @@ public class TargetManager : MonoX
     /// </summary>
     public static Transform GetAlliesContainer() => _.AlliesContainer;
     /// <summary>
-    /// return the container of the enemies
+    /// return the container
     /// </summary>
     public static Transform GetItemsContainer() => _.ItemsContainer;
+    /// <summary>
+    /// return the container
+    /// </summary>
+    public static Transform GetBulletsContainer() => _.BulletsContainer;
     /// <summary>
     /// return the player
     /// </summary>
@@ -48,12 +55,13 @@ public class TargetManager : MonoX
     /// it is the most Near;
     /// </summary>
     public static Transform GetEnemy(Transform tr = null) => GetFromContainer(_.EnemiesContainer, tr);
+    
 
     /// <summary>
     /// Gets a random ally, if exist a <see cref="Transform"/> as arg, then
     /// it is the most Near;
     /// </summary>
-    public static Transform GetAlly(Transform tr = null) => GetFromContainer(_.EnemiesContainer, tr);
+    public static Transform GetAlly(Transform tr = null) => GetFromContainer(_.AlliesContainer, tr);
 
     /// <summary>
     /// Find the nearest item
@@ -74,7 +82,7 @@ public class TargetManager : MonoX
 
 
     /// <summary>
-    /// Gets a random enemy, if exist a <see cref="Transform"/> as arg, then
+    /// Gets a random, if exist a <see cref="Transform"/> as arg, then
     /// it is the most Near;
     /// </summary>
     private static Transform GetFromContainer(Transform container, Transform target = null){
@@ -101,7 +109,8 @@ public class TargetManager : MonoX
                     Transform child = container.GetChild(x);
                     float dist = Vector3.Distance(target.position, child.position);
 
-                    if (_.IsNull(trResult) || dist > lastDistance)
+                    //if (target.position.y > 5) return;
+                    if ((_.IsNull(trResult) || dist > lastDistance) && child.position.y < 3)
                     {
                         // asign the nearest enemy
                         trResult = child;
