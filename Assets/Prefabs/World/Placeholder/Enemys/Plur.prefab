@@ -5158,7 +5158,7 @@ MonoBehaviour:
     type: 1
     timeLife: 30
     timeLifeMax: 30
-    speed: 15
+    speed: 10
     damage: 2
     range: 0
     atkSpeed: 1

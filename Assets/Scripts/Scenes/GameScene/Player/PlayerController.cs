@@ -12,7 +12,7 @@ using XavLib;
 [RequireComponent(typeof(Equipment))]
 [RequireComponent(typeof(Shot))]
 [RequireComponent(typeof(SaveVelocity))]
-
+[RequireComponent(typeof(Rigidbody))]
 ///<summary>
 /// Manejo de los controles de Player
 /// <para>
@@ -42,7 +42,8 @@ public class PlayerController : MonoX
     private Equipment equipment;
     private Shot shot;
     private SaveVelocity saveVelocity;
-    private Rigidbody body;
+    [HideInInspector]
+    public Rigidbody body;
     #endregion
     #region Events
     private void Awake()

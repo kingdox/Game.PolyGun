@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XavLib;
+using Environment;
 #endregion
 [RequireComponent(typeof(Spawner))]
 public class ItemManager : MonoX
@@ -48,6 +49,13 @@ public class ItemManager : MonoX
     private void SpawnItem()
     {
         int selected = XavHelpTo.Get.ZeroMax(prefs_Item.Length);
+
+        //proabilidad de que salga item
+        if (Random.Range(0,1f) < Data.data.itemShapeRate) {
+            //busca solo items
+            selected = XavHelpTo.Get.ZeroMax(2);
+        }
+
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
         spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());

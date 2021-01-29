@@ -11,9 +11,10 @@ public class Equipment : MonoX
 {
     #region Variables
 
-    private PlayerDetector detector;
 
     [Header("Equipment settings")]
+    public PlayerDetector detector;
+    [Space]
     public bool canCraft = false;
     public float timer_craft = 5f;
 
@@ -22,7 +23,6 @@ public class Equipment : MonoX
     //cuenta la cantidad de objetos que posee actualmente
     private int equipedQty = 0;
 
-    //TODO test
     public CraftType craftWaiting = CraftType.NO;
 
     #endregion
@@ -31,7 +31,7 @@ public class Equipment : MonoX
     {
         New(out slots, 3);
         ClearSlots();
-        Get(out detector);
+        //Get(out detector);
         craftWaiting = CraftType.NO;
     }
     private void Update(){

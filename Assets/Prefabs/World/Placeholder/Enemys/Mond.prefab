@@ -9963,6 +9963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026232870604690232}
   - component: {fileID: 8865023186745710275}
+  - component: {fileID: 661644143815936114}
   - component: {fileID: 5817871187700996458}
   - component: {fileID: 873950058756658716}
   - component: {fileID: 3384629288179389247}
@@ -10007,6 +10008,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!136 &661644143815936114
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497901762425382142}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &5817871187700996458
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10077,6 +10092,10 @@ MonoBehaviour:
   target: {fileID: 0}
   body: {fileID: 8865023186745710275}
   par_explode: {fileID: 3319004858239794178}
+  radiusCenter: 40
+  minRangeSize: 4
+  stayRangeSize: 2
+  runRangeSize: 4
 --- !u!95 &4309568719355378145
 Animator:
   serializedVersion: 3

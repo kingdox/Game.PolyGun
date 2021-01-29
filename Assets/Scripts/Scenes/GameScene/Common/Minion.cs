@@ -47,11 +47,12 @@ public abstract class Minion : MonoX
     }
 
     /// <summary>
-    /// Updates the basics of the allies and then returns true wether is alive 
+    /// Updates the basics of the minions and then returns true wether is alive 
     /// </summary>
     public bool UpdateMinion(){
         bool keepGoing = false;
-        if (GameManager.IsOnGame())
+        //if is on game and the minion is near of the floor then....
+        if (GameManager.IsOnGame() && movement.IsOnFloor())
         {
             //rigidbody.WakeUp();
             if (character.IsAlive())

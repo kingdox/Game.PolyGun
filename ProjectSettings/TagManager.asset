@@ -13,6 +13,7 @@ TagManager:
   - leftover
   - world
   - model
+  - bullet
   layers:
   - Default
   - TransparentFX

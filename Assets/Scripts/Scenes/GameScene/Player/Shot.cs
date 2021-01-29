@@ -91,6 +91,7 @@ public struct BulletShot {
         bulletShot.speed = character.speed + Data.data.bulletSpeed;
         bulletShot.range = character.range;
         bulletShot.damage = character.damage;
+        bulletShot.owner = character.type;
         return bulletShot;
     }
     public BulletShot GetShotOf(Character character) => this = GetShotOf(character, this);

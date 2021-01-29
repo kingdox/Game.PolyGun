@@ -22,6 +22,9 @@ public class Bullet : MonoX
 
     [Space]
     public bool canFollow = false;
+    [Header("Effects")]
+    public TrailRenderer part_trail;
+    public ParticleSystem part_contact;
     #endregion
     #region Events
     private void Awake(){
@@ -85,72 +88,103 @@ public class Bullet : MonoX
     //}
 
 
-    //TODO refactorizar
+    /// <summary>
+    /// interact with another trigger...
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        string tag = other.transform.tag;
 
-        if (!IsTag(tag, "obstacle", "enemy", "player", "ally")) return;
+        /*
+         * la bala ignora si tienen el mismo tag
+         * la bala ignora si la etiqueta no es una de las esperadas
+         * la bala siempre se destruye si choca con una etiqueta esperada
+         * 
+         * 
+         */
 
-        if (IsTag(tag,"obstacle"))
-        {   
-            DeleteBullet();
-            return;
-        }
+        //bullets only interact with those tags
+        string[] possibleTags ={"obstacle", "enemy", "player", "ally"};
+        //the tag who gonna be detected
+        string entryTag = other.transform.tag;
+        //wheter is the bullet need to be destroyed
+        bool destroyBullet = IsTag(entryTag, possibleTags);//Sleeping Games
 
-        switch (bulletShot.owner)
+        // If is true then destroy the bullet
+        if (destroyBullet)
         {
-            case CharacterType.ALLY:
-            case CharacterType.PLAYER:
-                if (!IsTag(tag, "enemy")) return;
+            //PrintX($"[{bulletShot.owner}]-{name} is triggering with tag [{entryTag}] - {other.name}");
+            if (!entryTag.Equals("obstacle"))
+            {
+                switch (bulletShot.owner)
+                {
+                    case CharacterType.ALLY:
+                    case CharacterType.PLAYER:
+                        if (!IsTag(entryTag, "enemy")) return;
 
-                ShotByAllyOrPlayer(other.transform);
-                break;
-            case CharacterType.ENEMY:
-                if (!IsTag(tag, "player", "ally")) return;
-                
-                ShotByEnemy(other.transform);
-                break;
-            default:
-                //otro..... 
-                break;
+                        ShotMinion(other.transform);
+                        break;
+                    case CharacterType.ENEMY:
+                        if (!IsTag(entryTag, "player", "ally")) return;
+
+                        if (entryTag.Equals("player"))
+                        {
+                            ShotPlayer(other.transform);
+                        }
+                        else
+                        {
+                            ShotMinion(other.transform);
+                        }
+                        break;
+                    default:
+                        //otro..... 
+                        break;
+                }
+            }
+
+            DeleteBullet();
+
         }
 
-        DeleteBullet();
+    }
+    private void OnDisable()
+    {
+        part_trail.transform.parent = TargetManager.GetLeftoverContainer();
+        Destroy(part_trail, part_trail.time);
+
+        part_contact.transform.parent = TargetManager.GetLeftoverContainer();
+        part_contact.Play();
+        Destroy(part_contact.gameObject, part_contact.main.duration);
+
     }
     #endregion
     #region Methods
 
 
-
     /// <summary>
-    /// Check if the enemy is the selected, then it inflict the damage
+    /// Inflict damage to a minion
     /// </summary>
-    private void ShotByAllyOrPlayer( Transform enemy)
+    private void ShotMinion(Transform tr_minion)
     {
+        Minion minion = tr_minion.GetComponent<Minion>();
 
-        Minion minion = enemy.GetComponent<Minion>();
-        if (minion != null)
+        if (minion)
         {
             minion.character.timeLife -= bulletShot.damage;
             minion.body.AddForce(transform.forward * 5, ForceMode.Impulse);
         }
         else
         {
-            Debug.LogError("Este enemy no tiene asignado el Minion component");
+            Debug.LogError("No tiene asignado el Minion component");
         }
     }
 
-
-    /// <summary>
-    /// TODO
-    /// </summary>
-    private void ShotByEnemy(Transform allyOrPlayer)
+    private void ShotPlayer(Transform tr_player)
     {
+        PlayerController player = tr_player.GetComponent<PlayerController>();
+        player.body.AddForce(transform.forward * 5, ForceMode.Impulse);
 
     }
-
-
 
 
 

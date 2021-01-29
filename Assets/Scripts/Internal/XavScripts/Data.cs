@@ -36,6 +36,7 @@ namespace Environment
             3.5f,
             5.5f
         };
+        public readonly float itemShapeRate = 0.80f; // %
 
         public readonly float bulletSpeed = 20f;
 
