@@ -39,6 +39,14 @@ public class SaveVelocity : MonoX
                 lastpos = transform.position;
             }
             body.WakeUp();
+
+
+                //Destruimos los objetos que superan los 200 en eje y, haciendo que estan cayendo al abismo
+            if (transform.position.y < -200)
+            {
+                Destroy(gameObject);
+            }
+
         }
         else
         {

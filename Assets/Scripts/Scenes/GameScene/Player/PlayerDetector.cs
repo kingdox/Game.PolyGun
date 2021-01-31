@@ -1,6 +1,4 @@
 ﻿#region 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using XavLib;
 #endregion
@@ -36,7 +34,7 @@ public class PlayerDetector : MonoX
     private void OnTriggerExit(Collider other){
         if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
         {
-            if (other.transform.Equals(itemNear.transform))
+            if (itemNear == null || other.transform.Equals(itemNear.transform))
             {
                 itemNear.Isselected = false;
                 itemNear = null;

@@ -1,6 +1,4 @@
 ﻿#region
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using XavLib;
 using Environment;
@@ -53,7 +51,8 @@ public class ItemManager : MonoX
         //proabilidad de que salga item
         if (Random.Range(0,1f) < Data.data.itemShapeRate) {
             //busca solo items
-            selected = XavHelpTo.Get.ZeroMax(2);
+            selected = XavHelpTo.Get.ZeroMax(3);
+            PrintX($"Result {selected }");
         }
 
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);

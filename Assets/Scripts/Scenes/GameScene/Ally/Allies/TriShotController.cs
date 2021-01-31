@@ -1,6 +1,4 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #endregion
 [RequireComponent(typeof(Shot))]
@@ -18,15 +16,17 @@ public class TriShotController : Minion
     [Space]
     private float refreshTargetCount;
     [Space]
+    private float damageTimeCount;
+    private bool canDamage;
+    [Space]
     public float maxRangeSize = 2;
     public float minRangeSize = 4;
-
     #endregion
     #region Events
     private void Start()
     {
         Get(out shot);
-
+        
         LoadMinion();
         //al inicio se carga target con el transform de este obj
         _player = TargetManager.GetPlayer();
@@ -40,17 +40,20 @@ public class TriShotController : Minion
             if (target != null)
             {
 
+
                 // Target refresher
                 if (Timer(ref refreshTargetCount, 1))
                 {
                     UpdateTarget();
                 }
 
-                //Rotation Refresh
+                //Rotation & attack Refresh
                 if (target != transform)
                 {
                     // rotates to that target
                     rotation.LookTo(target.position);
+
+                    AttackUpdate();
                 }
 
 
@@ -68,65 +71,71 @@ public class TriShotController : Minion
     {
         if (_player != null)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(_player.position, character.range);
+            //Gizmos.color = Color.blue;
+            //Gizmos.DrawWireSphere(transform.position, character.range);
 
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(_player.position, character.range / maxRangeSize);
+            //Gizmos.color = Color.white;
+            //Gizmos.DrawWireSphere(_player.position, character.range / maxRangeSize);
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_player.position, character.range / minRangeSize);
+            //Gizmos.color = Color.red;
+            //Gizmos.DrawWireSphere(_player.position, character.range / minRangeSize);
         }
     }
     #endregion
     #region Methods
 
-
-    private void UpdateTarget()
+    /// <summary>
+    /// Updates the attack
+    /// </summary>
+    private void AttackUpdate()
     {
-
+        if (IsInRange())
+        {
+            shot.ShotBullet(character);
+        }
     }
 
+    /// <summary>
+    /// updates the enemy target
+    /// </summary>
+    private void UpdateTarget()
+    {
+        target = TargetManager.GetEnemy(transform);
+    }
+
+    /// <summary>
+    /// Brings the ally to the player with a range
+    /// </summary>
     private void UpdatePlayerFollow()
     {
 
         float distance = Vector3.Distance(transform.position, _player.position);
-        int orientation = 1;
-        bool canMove = false;
-        bool isGoingToSafeArea = false;
-        bool inRange = distance > character.range / maxRangeSize && (distance < character.range / minRangeSize);
-        /*
-         * TRI SHOT
-         * 
-         *  estara cerca del player hasta cierto punto,
-         * 
-         */
+        
+        //bool inRange = distance > character.range / maxRangeSize && (distance < character.range / minRangeSize);
 
+        //si están por encima del rango se quedan tranquilos
+        if (distance > character.range / minRangeSize )
+        {
 
-        //if (distance > character.range / maxRangeSize)
-        //{
-        //    canMove = true;
-        //}
-        //else
-        //{
-        //    if (distance < character.range / minRangeSize)
-        //    {
-        //        canMove = true;
-        //        isGoingToSafeArea = true;
-        //    }
-        //    else
-        //    {
-        //        canMove = true;
-        //    }
+            //si está por encima del rango maximo entonces regresa a donde el player
+            if (distance > character.range / maxRangeSize)
+            {
+                Vector3 direction = _player.position - transform.position;
+                direction = Vector3.Normalize(direction);
+                movement.Move(direction,character.speed);
+            }
+        }
+        else
+        {
+            Vector3 direction = transform.position - _player.position ;
+            //direction = direction.normalized;
+            direction = Vector3.Normalize(direction);
 
-        //}
+            movement.Move(direction, character.speed);
 
-        //if (canMove)
-        //{
+            //si están dentro del player
+        }
 
-        //}
-
-        //movement.Move(orientation * transform.forward.normalized, character.speed);
     }
 
     #endregion

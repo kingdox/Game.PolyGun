@@ -1,8 +1,5 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 #endregion
 //[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]

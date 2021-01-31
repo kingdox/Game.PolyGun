@@ -1,9 +1,6 @@
 ﻿#region
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Environment;
-using XavLib;
 #endregion
 
 public class Shot : MonoX
