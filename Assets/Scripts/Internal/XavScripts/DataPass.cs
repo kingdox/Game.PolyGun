@@ -95,7 +95,9 @@ public class DataPass : MonoBehaviour
         }
     }
 
-    /// <returns>Los datos guardados</returns>
+    /// <summary>
+    /// Tomamos los datos que ya estén cargados
+    /// </summary>
     public static SavedData GetSavedData() => _.savedData;
 
     /// <summary>

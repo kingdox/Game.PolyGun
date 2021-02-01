@@ -1,28 +1,25 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Achievements;
 using XavLib;
 using Environment;
 #endregion
-public class AchieveSystem : MonoBehaviour
+public class AchieveSystem : MonoX
 {
     #region Variables
     private readonly Achievement[] achievements = Data.data.GetAchievements();
     private static AchieveSystem _;
 
     [Header("Achieve Unlock Settings")]
-    //Donde controlaremos lo que meustra
-    //un manager o el unlocked se asignaa el achieveUnlock para que sepa cual tomar
-    private AchievementItem achieveUnlockItem;
-    private RectTransform rect_unlockItem;
 
+    public float achieveShowTimer = 5;
+    private float achieveShowCount = 0;
 
     public static int achievementLenght;
     public static bool unlockShow = false;
 
+    private AchievementItem achieveUnlockItem;
+    private RectTransform rect_unlockItem;
     #endregion
     #region Events
     private void Awake()
@@ -42,17 +39,26 @@ public class AchieveSystem : MonoBehaviour
         if (_.achieveUnlockItem != null)
         {
             HideShowUnlock();
+
+
+            //si pasa ese tiempo mientras se está mostrando en pantalla el  modal lo cierra
+            if (unlockShow && Timer(ref achieveShowCount, achieveShowTimer))  
+            {
+                unlockShow = false;
+
+            }
+
         }
     }
     #endregion
     #region Methods
 
+    
    
 
     /// <summary>
     /// Colocamos la referencia del item unlocker de esta pantalla
     /// </summary>
-    ///= default
     public static void SetUnlockItem(AchievementItem item){
         //unlockShow = false;
         _.achieveUnlockItem = item;
@@ -95,6 +101,77 @@ public class AchieveSystem : MonoBehaviour
     }
 
 
+
+    /// <summary>
+    /// haremos el manejo de las actualizaciones con datapass y los achievements
+    /// esto solo las implementa Y, detecta si hubo una batida de achievement para mostrar el modal
+    /// </summary>
+    public static void UpdateAchieve(Achieves index, float value = 1, bool overwrite=false) => UpdateAchieve((int)index, value, overwrite);
+    public static void UpdateAchieve(int index, float value = 1, bool overwrite = false)
+    {
+        //se sumará la cantidad asignada
+        //tomamos los datos
+        SavedData saved = DataPass.GetSavedData();
+
+        //guardamos el valor anterior
+        float oldValue = saved.achievements[index];
+
+        //sumamos las cantidades correspondientes
+        if (overwrite)
+        {
+            saved.achievements[index] = value;
+
+        }
+        else
+        {
+            saved.achievements[index] += value;
+        }
+
+
+        //limites
+            float[] limitsActual = _.achievements[index].limit.ToArray();
+
+            //revisa ambos valores, el antiguo y el actual y revisa si poseen distinto limit, de ser así se batió un record...
+        
+            int old_LimitIndex = XavHelpTo.Know.FirstMajor(oldValue, limitsActual);
+            int actual_LimitIndex = XavHelpTo.Know.FirstMajor(saved.achievements[index], limitsActual);
+
+            if (old_LimitIndex != actual_LimitIndex )
+            {
+                //Se batió un record
+                PrintX($"Record batido, de {old_LimitIndex} a {actual_LimitIndex}");
+                unlockShow = true;
+                Setitem(index, _.achieveUnlockItem);
+
+            }
+
+    }
+
+
+    /// <summary>
+    /// Retorna los mejores achievements con diferencia de los datos otorgados,
+    /// estos deberían ser datos guardados previos, siendo una comparativa entre lo viejo con lo nuevo
+    /// esto organizará de los mejores a los peores
+    /// </summary>
+    public static int[] GetBestAchievements(float[] oldAchievements)
+    {
+        //int[] newAcheiveOrder = new int[oldAchievements.Length];
+        int[] newAcheiveOrder = { 0, 1, 9 };
+
+
+        //Organizar por los que tuvieron mayores cambios
+        //se resta 
+
+
+
+
+
+
+        return newAcheiveOrder;
+    }
+
+
+
     /// <summary>
     /// SET AN achievement saved from datapass in Unlock
     /// </summary>
@@ -104,10 +181,28 @@ public class AchieveSystem : MonoBehaviour
 
         Setitem((int)i, _.achieveUnlockItem);
     }
+    /// <summary>
+    /// Open or close the modal
+    /// </summary>
     public static void __Debug_OpenCloseAchieveModal()
     {
         unlockShow = !unlockShow;
     }
-    #endregion
 
+
+    #endregion
+}
+public enum Achieves
+{
+    KILLS_ENEMY,
+    KILLS_BOSS,
+    WAVES_ENEMIES,
+    OBJECTS_COLLECTED,
+    HEALS_GAME,
+
+    TIME_DEATHLIMIT,
+    METTERS_GAME,
+    CREATIONS_GAME,
+    ESPECIAL_READ,
+    ESPECIAL_CHEATS
 }

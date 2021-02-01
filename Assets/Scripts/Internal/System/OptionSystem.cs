@@ -173,7 +173,7 @@ public class OptionSystem : MonoBehaviour
 
         LoadMsg();
 
-        msg_title.LoadKey(msg_description.key);
+        msg_title.LoadKey(msg_title.key);
     }
 
     //XavHelpTo.Set.ColorTag(extraValue)

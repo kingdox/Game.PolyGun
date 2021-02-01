@@ -29,19 +29,19 @@ namespace Achievements
         private delegate Achievement AchievementRecipe(TKey key, TKey keyDesc, params float[] limits);
         // 2 => Declaro la preparación de la receta
         private readonly static AchievementRecipe achieve = (TKey key, TKey keyDesc, float[] limits) => new Achievement(key, keyDesc, new Limit(limit(limits)));
-        //CURRY END
+        // END
 
         //START Limit
         private delegate Limit LimitRecipe(params float[] limits);
         private readonly static LimitRecipe limit = (float[] limits) => new Limit(limits);
-        //CURRY END
+        // END
         
 
         private static readonly Achievement[] achievements;
 
         /// <summary>
         /// Constructor, Crea los achievements
-        /// <para>este HACK debe llamarse una sola vez</para>
+        /// <para>este """HACK""" debe llamarse una sola vez</para>
         /// </summary>
         static AchievementData()
         {
@@ -49,7 +49,7 @@ namespace Achievements
             achievements = new Achievement[]
             {
                 //Pagina 1
-                achieve(TKey.ACHIEVE_KILLS_ENEMY,TKey.ACHIEVE_KILLS_ENEMY_DESC, 30,100,300),
+                achieve(TKey.ACHIEVE_KILLS_ENEMY,TKey.ACHIEVE_KILLS_ENEMY_DESC, 15,60,240),
                 achieve(TKey.ACHIEVE_KILLS_BOSS,TKey.ACHIEVE_KILLS_BOSS_DESC, 5,25,50),
                 achieve(TKey.ACHIEVE_WAVES_ENEMIES,TKey.ACHIEVE_WAVES_ENEMIES_DESC, 3,15,30),
                 achieve(TKey.ACHIEVE_OBJECTS_COLLECTED,TKey.ACHIEVE_OBJECTS_COLLECTED_DESC, 50,100,300),
@@ -110,8 +110,8 @@ namespace Achievements
         public int LimitReached => XavHelpTo.Know.FirstMajor(value, limit.ToArray());
 
         public string TextValue => $" {value} {ShowLimiters} ";
-
-        private string ShowLimiters => value > limit.gold ? "" : "/ " + limit[LimitReached];
+         //> limit.gold
+        private string ShowLimiters => LimitReached.Equals(-1) ? "" : "/ " + limit[LimitReached];
 
         /// <summary>
         /// Asigna el titulo el limite y el valor que posee el player sobre ese logro
@@ -154,6 +154,13 @@ namespace Achievements
         /// Devuelve el Limit en un arreglo
         /// </summary>
         public float[] ToArray() => new float[] { bronze, silver, gold };
+
+        public float find(float val)
+        {
+
+
+            return val;
+        }
         /// <summary>
         /// Devuelve el valor especificado del limit
         /// </summary>

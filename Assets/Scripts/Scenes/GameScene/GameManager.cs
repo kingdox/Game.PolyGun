@@ -98,14 +98,14 @@ public class GameManager : MonoManager
 
         yield return new WaitForSeconds(1);// es 5,
         _.gameStatus = GameStatus.ON_END;
-        yield return new WaitForSeconds(1);// es 5,
+        yield return new WaitForSeconds(.5f);// es 5,
 
-        //FAKE TODO
-        int[] bestAchieves = { 0, 3, 4 };
-        //por porcentaje se puede ver cuanto ha mejorado, conociendo su limite...
-        //tambien se peuden colocar los records batidos en la partida
 
-        ScreenManager.SetEndItems(bestAchieves);
+        //nos devolvera organizadamente los indices de los achievements,
+        //mostrando el que ruco mayores cambios en esta partida, a excepcion de los uq poseen -1
+        int[] ach_pct = AchieveSystem.GetBestAchievements(lastSaved.achievements);
+        //se envia los achievements ordenados por lo mejor, ya el tomará los primeros que quiera....
+        ScreenManager.SetEndItems(ach_pct);
     }
 
 
@@ -129,6 +129,18 @@ public class GameManager : MonoManager
     {
         Time.timeScale = pct;
 
+    }
+
+    /// <summary>
+    /// Clear the saved data
+    /// </summary>
+    public static void __ClearData()
+    {
+        SavedData saved = default;
+        saved.achievements = new float[AchieveSystem.achievementLenght];
+        saved.isIntroCompleted = true;
+        DataPass.SetData(saved);
+        DataPass.SaveLoadFile(true);
     }
     #endregion
 }

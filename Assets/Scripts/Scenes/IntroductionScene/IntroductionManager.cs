@@ -28,6 +28,12 @@ public class IntroductionManager : MonoManager
     public override void Init()
     {
         navigator.SetPages(introPages[0].GetObjectsRef());
+
+        SavedData saved = DataPass.GetSavedData();
+        saved.isIntroCompleted = true;
+        DataPass.SetData(saved);
+        AchieveSystem.UpdateAchieve(Achieves.ESPECIAL_READ);
+
     }
     private void Update()
     {

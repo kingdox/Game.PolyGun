@@ -41,6 +41,8 @@ namespace Environment
 
         public readonly float timeToCraft = 5f;
 
+        public readonly float pctMinionDeathItem = .25f;
+
         [Header("Datos de CraftData")]
         private readonly CraftData craft = new CraftData();
 

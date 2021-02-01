@@ -76,6 +76,8 @@ public class EnemyManager : MonoX
     private void SetNewWave(){
         waveActual++;
         PrintX($"////WAVE {waveActual}/////");
+        //updates the achievement of the amount of waves
+        AchieveSystem.UpdateAchieve(Achieves.WAVES_ENEMIES);
 
         //Conocemos el record
         int waveRecord = DataPass.GetSavedData().record_waves;

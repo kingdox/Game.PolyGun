@@ -170,6 +170,26 @@ public class Bullet : MonoX
         {
             minion.character.timeLife -= bulletShot.damage;
             minion.body.AddForce(transform.forward * 5, ForceMode.Impulse);
+
+
+            //Si el player logra matar al enemigo sumamos un punto en achieves
+            if (!minion.character.IsAlive())
+            {
+                if (minion.character.type.Equals(CharacterType.ENEMY) && bulletShot.owner.Equals(CharacterType.PLAYER))
+                {
+                    if (minion.isEnemyBoss)
+                    {   
+                        AchieveSystem.UpdateAchieve(Achieves.KILLS_BOSS);
+                    }
+                    else
+                    {
+                        AchieveSystem.UpdateAchieve(Achieves.KILLS_ENEMY);
+                    }
+                }
+            }
+
+
+
         }
         else
         {

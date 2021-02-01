@@ -116,6 +116,19 @@ public class Equipment : MonoX
                 break;
         }
 
+        //Si el player es el que esta haciendo el crafteo
+        if (character.type.Equals(CharacterType.PLAYER))
+        {
+            CraftType[] creations = { CraftType.AAC, CraftType.BBA, CraftType.BBC , CraftType.CCB , CraftType.ABC };
+            bool isCreation = XavHelpTo.Know.IsEqualOf(craftWaiting, creations);
+            if (isCreation)
+            {
+                AchieveSystem.UpdateAchieve(Achieves.CREATIONS_GAME);   
+
+            }
+
+        }
+
 
         //y al final
         craftWaiting = CraftType.NO;
@@ -130,7 +143,8 @@ public class Equipment : MonoX
 
         ActionType actionType = new ActionType(
             slots[i]
-            , !slots[i].Equals(ItemContent.NO)
+            , !slots[i].Equals(ItemContent.NO),
+            detector.itemNear != null
         ); 
 
         //si NO Esta siendo USADO
@@ -143,10 +157,12 @@ public class Equipment : MonoX
                 equipedQty++;
             }
         }else{
+
             //si esta siendo usado lo consumimos
             equipedQty--;
             slots[i] = ItemContent.NO;
         }
+
 
         return actionType;
     }
@@ -201,9 +217,12 @@ public class Equipment : MonoX
 public struct ActionType {
     public ItemContent item;
     public bool used;
-    public ActionType(ItemContent item, bool used){
+    public bool existSomething;
+    public ActionType(ItemContent item, bool used, bool existSomething)
+    {
         this.item = item;
         this.used = used;
+        this.existSomething = existSomething;
     }
 
     /// <summary>

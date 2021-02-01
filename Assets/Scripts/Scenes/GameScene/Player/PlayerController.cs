@@ -28,7 +28,6 @@ public class PlayerController : MonoX
 
     [Header("PlayerSettings")]
     public Character character;
-   
     [Space]
     private Destructure destructure;
     private bool isDead = false;
@@ -45,6 +44,10 @@ public class PlayerController : MonoX
     private SaveVelocity saveVelocity;
     [HideInInspector]
     public Rigidbody body;
+    [Space]
+    private float deathLimitCount=0;
+    private float movementsCount = 0;
+
     [Header("Debug")]
     private static float entryLife = -1;
 
@@ -72,6 +75,14 @@ public class PlayerController : MonoX
             character.timeLife = entryLife;
             entryLife = -1;
         }
+
+
+        //si estas largos periodos de tiempo (el deathlimit) y pasa ese tiempo
+        if (character.IsInDeathLimit() && Timer(ref deathLimitCount, 10))
+        {
+            AchieveSystem.UpdateAchieve(Achieves.TIME_DEATHLIMIT);
+        }
+
 
     }
     private void FixedUpdate()
@@ -125,6 +136,7 @@ public class PlayerController : MonoX
         if (isDead) return;
         isDead = true;
         destructure.DestructureThis();
+
         GameManager.GameOver();
     }
 
@@ -148,6 +160,14 @@ public class PlayerController : MonoX
     /// </summary>
     private void Movement(){
         Vector3 axis = ControlSystem.GetAxis();
+
+        //Combrobar que hay movimiento, que ha pasado 1 segundo
+        if (!axis.Equals(Vector3.zero) && Timer(ref movementsCount, 1))
+        {
+            AchieveSystem.UpdateAchieve(Achieves.METTERS_GAME);
+        }
+
+
         movement.Move(axis, character.speed);
         rotation.RotateByAxis(axis);
     }
@@ -175,6 +195,8 @@ public class PlayerController : MonoX
                 {
                     //PrintX("Curando");
                     character.timeLife += Data.data.healShape[(int)action.item];
+                    AchieveSystem.UpdateAchieve(Achieves.HEALS_GAME);
+
                 }
                 else
                 {
@@ -189,6 +211,14 @@ public class PlayerController : MonoX
                     }
                 }
 
+            }
+            else
+            {
+                if (action.existSomething)
+                {
+                    //If the player collected somethign from the field
+                    AchieveSystem.UpdateAchieve(Achieves.OBJECTS_COLLECTED);
+                }
             }
         }
     }
@@ -227,8 +257,10 @@ public class PlayerController : MonoX
     {
         if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Q))
         {
+            AchieveSystem.UpdateAchieve(Achieves.ESPECIAL_CHEATS);
             //Activates or disactivates the debug mode
             GameManager._onDebug = !GameManager._onDebug;
+
         }
     }
     /// <summary>
@@ -290,6 +322,11 @@ public struct Character{
     /// Revisa si sigue con vida
     /// </summary>
     public bool IsAlive() => timeLife > 0;
+
+    /// <summary>
+    /// Revisa si esta en tiempo limite
+    /// </summary>
+    public bool IsInDeathLimit() => timeLife < 10;
 
     /// <summary>
     /// Hace que pierda vida el player a medida que pasa el tiempo

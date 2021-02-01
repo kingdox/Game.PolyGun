@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3202866858852256615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.77}
+  m_LocalPosition: {x: 0, y: 0, z: -0.492}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3247634351041403479}
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 2783241688366467026}
   - component: {fileID: 8849522936439292644}
   m_Layer: 0
-  m_Name: BoxBox Placeholder
+  m_Name: BoxBox
   m_TagString: ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +650,6 @@ MonoBehaviour:
     canExtraShots: 0
   target: {fileID: 0}
   body: {fileID: 0}
-  damageTimeCount: 0
   canDamage: 0
 --- !u!114 &2783241688366467026
 MonoBehaviour:

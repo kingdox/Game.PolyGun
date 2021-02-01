@@ -1,5 +1,6 @@
 ﻿#region Imports
 using UnityEngine;
+using Environment;
 #endregion
 //[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
@@ -13,8 +14,8 @@ public abstract class Minion : MonoX
     [Header("Minion Settings")]
     public Character character;
     public Transform target;
+    public bool isEnemyBoss = false;
     protected bool isDead = false;
-    protected bool isEnemyBoss = false;
     [Space]
     //protected float actionTimeCount;
     //protected bool canAction;
@@ -100,9 +101,22 @@ public abstract class Minion : MonoX
     {
         if (isDead) return;
 
+
+        //90% de que se cree un objeto
+        if (Random.Range(0,1f) < Data.data.pctMinionDeathItem)
+        {
+            Instantiate(
+                ItemManager.GetRandomItemShape(),
+                transform.position,
+                Quaternion.identity,
+                TargetManager.GetItemsContainer()
+            );
+        }
+
         isDead = true;
         destructure.DestructureThis();
         Destroy(gameObject);
+
     }
 
    
