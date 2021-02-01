@@ -91,9 +91,7 @@ public class MsgController : MonoInit
 
         if (loadNumber.Equals(number)) 
         {
-            //Seguirá cargando siempre que el texto guardado sea el mismo que el que corre
-            if (savedText == s)
-            {
+           
                 //Si todiavía falta por recorrer
                 if (index < s.Length){
                     //si la velocidad es 0 para cargar al instante
@@ -115,7 +113,6 @@ public class MsgController : MonoInit
                         }
                     }
                 }
-            }
         }
     }
 

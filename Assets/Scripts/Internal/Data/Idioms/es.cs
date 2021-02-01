@@ -82,17 +82,17 @@
 #endregion
 #region IntroductionScene
                     // Tutorial PAGES
-                    "Poly-Gun: Irregular adventure es un juego en el que tendremos que recoger fragmentos del suelo y ir eliminando enemigos la mayor cantidad de oleadas posibles, para ello nuestro personaje Poly dispone de un arma para disparar a las figuras enemigas",
-                    "PAGE_TUTORIAL_2",
-                    "PAGE_TUTORIAL_3",
+                    "Poly-Gun: Irregular adventure es un juego en el que tendremos que ir eliminando las oleadas con enemigos posibles.",
+                    "Poly podrá disparar a sus enemigos y tambien recoger los objetos del suelo. Dependiendo de los recogidos puedes crear cosas",
+                    "Los objetos recogidos pueden ser consumidos para recuperar vida o tener ventajas, si reunes 3 puede que creas aliados o mejoras",
                     // Manual PAGES
-                    "PAGE_MANUAL_1 ingrese apston de texto",
+                    "Te moveras con las <color=red>teclas de flechas</color>. \n\nPodrás agarrar y consumir los objetos con <color=red>C</color>,<color=red>V</colo> y <color=red>B</colo>. \n(se mostrará brillando el objeto más cercano para agarrarlo).  ",
                     "PAGE_MANUAL_2",
                     "PAGE_MANUAL_3",
                     // Credits PAGES
                     "Creditos",
                     "Xavier Arpa L.",
-                    "Nadie... :(",
+                    "Nadie más... :(",
                     "Y gracias a ti por jugar :)"
 #endregion
         };

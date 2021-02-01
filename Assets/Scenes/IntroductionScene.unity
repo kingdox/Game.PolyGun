@@ -1650,6 +1650,7 @@ MonoBehaviour:
   - {r: 0.5, g: 0, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   tick: 1
+  isPlaying: 1
 --- !u!1001 &830940837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2615,7 +2616,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 480, y: 78.4}
+  m_CellSize: {x: 495, y: 78.4}
   m_Spacing: {x: 0, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 1
@@ -3424,36 +3425,11 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
-  m_StartAxis: 0
+  m_StartAxis: 1
   m_CellSize: {x: 767.99994, y: 151.19998}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1 &1325132025 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8016103598118217346, guid: 67c376e8eded64e9a8f0bf67d161e6af, type: 3}
-  m_PrefabInstance: {fileID: 8016103597490801787}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1325132029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325132025}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1986a82c2d53d43af8ee359e0a2b5df2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imgController: {fileID: 0}
-  colors:
-  - {r: 0.8113208, g: 0.11863652, b: 0.11863652, a: 1}
-  - {r: 0.6226415, g: 0.1321645, b: 0.1321645, a: 1}
-  - {r: 0.5707547, g: 1, b: 0.63131547, a: 1}
-  - {r: 0.8207547, g: 0.70848167, b: 0.70848167, a: 1}
-  - {r: 0.51167655, g: 0.15312389, b: 0.8773585, a: 1}
-  tick: 0.1
 --- !u!1001 &1383861416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4316,7 +4292,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3261715021006430153, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
       propertyPath: m_Text
-      value: Introduction?
+      value: Intro
       objectReference: {fileID: 0}
     - target: {fileID: 3261715021006430153, guid: 3cffcb8e612a9479298027f70718ba00, type: 3}
       propertyPath: m_FontData.m_FontSize

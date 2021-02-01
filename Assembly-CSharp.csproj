@@ -62,6 +62,7 @@
     <Compile Include="Assets/Scripts/Components/Navigator.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Equipment.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Movement.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/PolController.cs" />
     <Compile Include="Assets/Scripts/Internal/System/ControlSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/TranslateData.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/OptionData.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets/Scripts/Internal/XavScripts/Data.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Player/PlayerController.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/CraftData.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/RombController.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/MenuInputController.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/XavLib.cs" />
     <Compile Include="Assets/Scripts/Internal/System/OptionSystem.cs" />
@@ -116,10 +118,10 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/TargetManager.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/RombController.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/PolController.cs" />
+    <Compile Include="Assets/Scripts/Components/Parallax.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets/Fonts/Audiowide/OFL.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2020.1.2f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
