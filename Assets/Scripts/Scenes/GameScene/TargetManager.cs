@@ -110,7 +110,7 @@ public class TargetManager : MonoX
                     float dist = Vector3.Distance(target.position, child.position);
 
                     //if (target.position.y > 5) return;
-                    if ((_.IsNull(trResult) || dist > lastDistance) && child.position.y < 3)
+                    if ((_.IsNull(trResult) || dist > lastDistance) && child.position.y < 5)
                     {
                         // asign the nearest enemy
                         trResult = child;
@@ -120,6 +120,65 @@ public class TargetManager : MonoX
         }
 
         return trResult;
+    }
+
+
+
+    public void __Debug_ClearCharacter(int type)
+    {
+        //(CharacterType)type
+
+        switch ((CharacterType)type)    
+        {
+            case CharacterType.MINIONS:
+                __Debug_ClearMinion(AlliesContainer);
+                __Debug_ClearMinion(EnemiesContainer);
+                break;
+            case CharacterType.PLAYER:
+                GetPlayer().GetComponent<PlayerController>().SetDead();
+                break;
+            case CharacterType.ENEMY:
+                __Debug_ClearMinion(EnemiesContainer);
+                break;
+            case CharacterType.ALLY:
+                __Debug_ClearMinion(AlliesContainer);
+                break;
+
+            case CharacterType.BOSS:
+                //Nothing...
+                break;
+
+            default:
+                break;
+        }
+
+
+    }
+    /// <summary>
+    /// Destructure the cointainer of minions
+    /// </summary>
+    private void __Debug_ClearMinion(Transform container)
+    {
+        Minion[] minions = container.GetComponentsInChildren<Minion>();
+
+        foreach (Minion minion in minions)
+        {
+            minion.Delete();
+        }
+    }
+
+    /// <summary>
+    /// Destroys al the objects in leftover container
+    /// codigo repetido..
+    /// </summary>
+    public void __Debug_DestroyLeftover()
+    {
+        Transform container = LeftoverContainer;
+
+        for (int x = 0; x < container.childCount; x++)
+        {
+            Destroy(container.GetChild(x).gameObject);
+        }
     }
     #endregion
 }

@@ -65,7 +65,7 @@ public class RombController : Minion
         Instantiate(
             ItemManager.GetRandomItemShape(),
            transform.position + transform.forward,
-           Quaternion.identity, TargetManager.GetAlliesContainer()
+           Quaternion.identity, TargetManager.GetItemsContainer()
        );
     }
 

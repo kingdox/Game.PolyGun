@@ -24,6 +24,7 @@ public class MondController : Minion
     [Header("DEBUG")]
     public float radiusCenter = 0;
     public float minRangeSize = 4;
+    [Space]
     public float stayRangeSize = 2;
     public float runRangeSize = 4;
     private bool wantGoMinRange = false;
@@ -102,22 +103,25 @@ public class MondController : Minion
     }
     //private void OnDrawGizmos()
     //{
-    //    //if (target != null)
-    //    //{
-    //    //Gizmos.color = Color.red;
-    //    //    Gizmos.DrawLine(transform.position, target.position);
-    //    //    Debug.DrawLine(transform.position, target.position, Color.red);
-    //    //    Gizmos.DrawWireSphere(transform.position, character.range);
-    //    //    Gizmos.color = Color.white;
-    //    //    Gizmos.DrawWireSphere(transform.position, character.range / stayRangeSize);
-    //    //    Gizmos.color = Color.green;
-    //    //    Gizmos.DrawWireSphere(transform.position, character.range / runRangeSize);
-    //    //}
-    //    ////radio del centro en el que puede moverse, pera evitar las esquinas...
-    //    //Gizmos.color = Color.blue;
-    //    //Gizmos.DrawWireSphere(Vector3.zero, radiusCenter);
-    //    //Gizmos.color = Color.magenta;
-    //    //Gizmos.DrawWireSphere(Vector3.zero, radiusCenter - radiusCenter / minRangeSize);
+    //    if (target != null)
+    //    {
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawLine(transform.position, target.position);
+    //        Debug.DrawLine(transform.position, target.position, Color.red);
+
+    //        Gizmos.DrawWireSphere(transform.position, character.range);
+
+    //        Gizmos.color = Color.white;
+    //        Gizmos.DrawWireSphere(transform.position, character.range / stayRangeSize);
+
+    //        Gizmos.color = Color.green;
+    //        Gizmos.DrawWireSphere(transform.position, character.range / runRangeSize);
+    //    }
+    //    //radio del centro en el que puede moverse, pera evitar las esquinas...
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(Vector3.zero, radiusCenter);
+    //    Gizmos.color = Color.magenta;
+    //    Gizmos.DrawWireSphere(Vector3.zero, radiusCenter - radiusCenter / minRangeSize);
 
     //}
     #endregion

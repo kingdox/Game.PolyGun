@@ -49,7 +49,7 @@ public abstract class Minion : MonoX
     public bool UpdateMinion(){
         bool keepGoing = false;
         //if is on game and the minion is near of the floor then....
-        if (GameManager.IsOnGame() && movement.IsOnFloor())
+        if (GameManager.IsOnGame() && movement.IsOnFloor() && !isDead)
         {
             //rigidbody.WakeUp();
             if (character.IsAlive())

@@ -1168,6 +1168,8 @@ MonoBehaviour:
     canExtraShots: 0
   target: {fileID: 0}
   body: {fileID: 0}
+  priority: 1
+  attackMode: 0
 --- !u!1 &8100060435496773610
 GameObject:
   m_ObjectHideFlags: 0

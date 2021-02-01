@@ -35,7 +35,7 @@ public class Parallax : MonoBehaviour
 
     private void Update() {
 
-        Vector2 camPos = Vector2.one;// = Camera.main().pos;
+        Vector2 camPos = Camera.main.transform.position; //XavLib.XavHelpTo.Get.pos;// = Camera.main().pos;
 
         Vector2 camVar = new Vector2(camPos.x - camOldPos.x, camPos.y - camOldPos.y);
 

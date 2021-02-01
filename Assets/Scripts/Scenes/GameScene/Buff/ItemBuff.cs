@@ -130,6 +130,16 @@ public class ItemBuff : MonoX
         isRunning = true;
     }
 
+    /// <summary>
+    /// clear all the buffs
+    /// 
+    /// </summary>
+    public void Reset()
+    {
+        isRunning = false;
+        stacks = 0;
+        count = 0;
+    }
     #endregion
 }
 

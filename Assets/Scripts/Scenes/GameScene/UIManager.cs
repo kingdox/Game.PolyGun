@@ -74,7 +74,10 @@ public class UIManager : MonoX
         if (GameManager.IsOnGame()) {
             Refresh_weaponArea(shot_player.timeCount_bullet);
             Refresh_waves(EnemyManager.waveActual);
-            Refresh_playerLife(player.character.timeLife);
+
+
+            float life = player.character.timeLife > 0 ? player.character.timeLife : 0;
+            Refresh_playerLife(life);
             Refresh_playerEquipment(equipment_player.GetSlots());
             Refresh_playerBuff(buffsHUD, buffHUDcolors);
         }

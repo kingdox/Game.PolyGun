@@ -14,72 +14,86 @@ using UnityEngine;
 public class PolController : Minion
 {
     #region
-    //[Header("Pol Settings")]
+    [Header("Pol Settings")]
+    private Shot shot;
+    private Transform _player;
 
 
     //cuando se vuelve true puede atacar cuando quiera, puesto que tiene el perseguir bala
     private bool canAttackInDistance = false;
+    [Space]
+    private float damageTimeCount;
+    private bool canDamage;
+    [Space]
+
+    public Priority priority = Priority.ITEM;
+    public enum Priority
+    {
+        ENEMY,
+        ITEM,
+        CRAFT
+    }
+    public enum AttackMode
+    {
+        CAC,
+        RANGED
+    }
+    public AttackMode attackMode = AttackMode.CAC;
     #endregion
     #region
     private void Start()
     {
+        Get(out shot);
+
         LoadMinion();
 
         //TODO ajustar el rango de cogida de items con char.range
 
         //TODO el Pol SIEMPRE ataca al enemigo sin importar su rango, puesto que este se rige por comsas como boxbox
-
+        _player = TargetManager.GetPlayer();
     }
     private void Update()
     {
         if (UpdateMinion())
         {
 
-            bool modoDeAtaque=false;
-            if (modoDeAtaque)
-            {
-                //CaC
-            }
-            else
-            {
-                //Rango
-            }
+            //bool modoDeAtaque=false;
+            //if (modoDeAtaque)
+            //{
+            //    //CaC
+            //}
+            //else
+            //{
+            //    //Rango
+            //}
 
 
 
-            bool modoTarget = false;
-            if (modoTarget)
-            {
-                //Buscas un item (prioridad)
-            }
-            else
-            {
-                //Buscas un enemigo (estos deben de estar MUY cerca)
-            }
+            //bool modoTarget = false;
+          
 
 
-            ///Moverse a un item, moverse a un enemigo cercano
-            Vector3 moverse;
+            /////Moverse a un item, moverse a un enemigo cercano
+            //Vector3 moverse;
 
-            //mirar a un Item, mirar a el enemigo mas cercano
-            Quaternion rotart;
-
-
-            //siempre que peuda
-            bool estoyCercaDelItem = false;
-            if (estoyCercaDelItem)
-            {
-                //coge el item
-            }
+            ////mirar a un Item, mirar a el enemigo mas cercano
+            ////
+            //Quaternion rotart;
 
 
+            ////siempre que peuda
+            //bool estoyCercaDelItem = false;
+            //if (estoyCercaDelItem)
+            //{
+            //    //coge el item
+            //}
 
 
-            bool tengoBuffs = false;    
-            if (tengoBuffs)
-            {
-                //cambia cosas para conveniencia del Pol
-            }
+            //bool tengoBuffs = false;    
+            //if (tengoBuffs)
+            //{
+            //    //cambia cosas para conveniencia del Pol
+            //}
 
         }
     }
@@ -88,13 +102,32 @@ public class PolController : Minion
 
 
 
+    /// <summary>
+    /// refresh the target to get a item or an enemy as a target depending with the status and the nearest level..
+    /// </summary>
+    private void UpdateTarget()
+    {
+        //poly hará:
+        /* 
+         * buscará el item más cercano y el enemigo más cercano, dependiendo de cual esté más cerca, 
+         * poly asignará al más cerca
+         * 
+        */
+
+        Transform nearest_enemy = TargetManager.GetEnemy(transform);
+        Transform nearest_item = TargetManager.GetItem(transform);
+
+
+        if (priority.Equals(Priority.ITEM))
+        {
+            //Buscas un item (prioridad)
+        }
+        else
+        {
+            //Buscas un enemigo (estos deben de estar MUY cerca)
+        }
+
+    }
 
     #endregion
 }
-/*
- * TODO
- * 
- * - buscar item o atacar (prioridad a conseguir 3 items, luego pelear)(revisar esto en caso de buffos y eso..)
- * - 
- * 
- */

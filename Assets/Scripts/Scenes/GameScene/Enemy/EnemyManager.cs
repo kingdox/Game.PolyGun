@@ -30,7 +30,7 @@ public class EnemyManager : MonoX
     public int bossWaves = 5;
 
     [Header("Debug")]
-    public bool _Debug_SetWave = false;
+    public bool _Debug_CanNOTGenerate = false;
 
     #endregion
     #region Events
@@ -55,14 +55,15 @@ public class EnemyManager : MonoX
         }else{
 
             //Cuando pasaba el tiempo invocamos un enemigo
-            if (!enemiesLeft.Equals(0) && Timer(ref count, timer)){
+            if ( !enemiesLeft.Equals(0) && Timer(ref count, timer)){
+                
                 SpawnEnemy();
             }
 
         }
 
 
-        __Debug_SetWave();
+        //__Debug_SetWave();
     }
     #endregion
     #region Methods
@@ -104,15 +105,31 @@ public class EnemyManager : MonoX
     /// llamando al <see cref="Spawner"/>
     /// </summary>
     private void SpawnEnemy(){
+        if (_Debug_CanNOTGenerate) return;  
         enemiesLeft--;
 
-        int selected = XavHelpTo.Get.ZeroMax(prefs_Enemies.Length);
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
-        spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
-
+        GenerateEnemy(-1);
+        //spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
        
     }
+
+    /// <summary>
+    /// Generate the enemy
+    /// </summary>
+    public void GenerateEnemy( int selected)
+    {
+        //(EnemyName)selected;
+
+        if (selected.Equals(-1))    
+        {
+            selected = XavHelpTo.Get.ZeroMax(prefs_Enemies.Length);
+        }
+
+        spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
+    }
+
     /// <summary>
     /// Comprueba si NO hay enemigos faltantes por invocar ni enemigos en la escena
     /// </summary>
@@ -123,11 +140,17 @@ public class EnemyManager : MonoX
     /// Permite añadir la siguiente oleada
     /// </summary>
     public void __Debug_SetWave(){
-        if (!DebugFlag(ref _Debug_SetWave)) return;
+        //if (!DebugFlag(ref _Debug_SetWave)) return;
         SetNewWave();
 
     }
-
+    /// <summary>
+    /// Set if you can generate or not
+    /// </summary>
+    public void __Debug_GeneratePlayStop()
+    {
+        _Debug_CanNOTGenerate = !_Debug_CanNOTGenerate;
+    }
     #endregion
 }
 

@@ -10,9 +10,9 @@ public class AllyManager : MonoX
     private static AllyManager _;
     public GameObject[] prefs_Allies;
 
-    [Header("Debug")]
-    public bool _Debug_Invoke = false;
-    public Transform _Debug_player;
+    //[Header("Debug")]
+    //public bool _Debug_Invoke = false;
+    //public Transform _Debug_player;
 
     #endregion
     #region Events
@@ -22,7 +22,7 @@ public class AllyManager : MonoX
     }
     private void Update()
     {
-        __Debug_Invoke();
+        //__Debug_Invoke();
     }
     #endregion
     #region Methods
@@ -59,17 +59,14 @@ public class AllyManager : MonoX
 
 
     /// <summary>
-    /// Invocamos aleatoriamente un Aliado al lado del player
+    /// Invocamos un Aliado al lado del player
     /// </summary>
-    private void __Debug_Invoke(){
-        if (!DebugFlag(ref _Debug_Invoke) )return;
-
-        PrintX("Creando player");
-        GenerateAlly(_Debug_player, AllyType.NO);
-
-
-
+    public void __Debug_Invoke(int index){
+        //if (!DebugFlag(ref _Debug_Invoke) )return;
+        //
+        GenerateAlly(TargetManager.GetPlayer(), (AllyType)index);
     }
+  
 
     #endregion
 }

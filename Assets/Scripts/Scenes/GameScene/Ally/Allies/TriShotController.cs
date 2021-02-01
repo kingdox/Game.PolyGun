@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Shot))]
 /// <summary>
 /// TriShot keep following the player and it try to keep focus to attack the nearest enemies
+///  *case CraftType.AAC:*
+/// 
 /// </summary>
 public class TriShotController : Minion
 {
@@ -16,9 +18,6 @@ public class TriShotController : Minion
     [Space]
     private float refreshTargetCount;
     [Space]
-    private float damageTimeCount;
-    private bool canDamage;
-    [Space]
     public float maxRangeSize = 2;
     public float minRangeSize = 4;
     #endregion
@@ -30,6 +29,9 @@ public class TriShotController : Minion
         LoadMinion();
         //al inicio se carga target con el transform de este obj
         _player = TargetManager.GetPlayer();
+
+
+        //movement.StopMovement();
     }
     private void Update()
     {

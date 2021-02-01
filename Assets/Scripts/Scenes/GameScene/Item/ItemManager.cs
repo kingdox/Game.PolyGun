@@ -22,6 +22,8 @@ public class ItemManager : MonoX
     [Space]
     //si sobrepasa o alcanza el numero deja de producir
     public int itemsLimit = 20;
+    [Header("Debug")]
+    private bool _Debug_CanNOTGenerate = false;
 
     #endregion
     #region
@@ -51,18 +53,35 @@ public class ItemManager : MonoX
     /// </summary>
     private void SpawnItem()
     {
-        int selected = XavHelpTo.Get.ZeroMax(prefs_Item.Length);
+        if (_Debug_CanNOTGenerate) return;
+
+        int selected = -1;// XavHelpTo.Get.ZeroMax(prefs_Item.Length);
 
         //proabilidad de que salga item
         if (Random.Range(0,1f) < Data.data.itemShapeRate) {
             //busca solo items
             selected = XavHelpTo.Get.ZeroMax(3);
-            PrintX($"Result {selected }");
         }
 
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
+        GenerateItem(selected);
+        //spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());
+    }
+
+    /// <summary>
+    /// Generates the item selected
+    /// </summary>
+    public void GenerateItem(int selected)
+    {
+
+        if (selected.Equals((int)ItemContent.NO))    
+        {
+            //Random
+            selected = XavHelpTo.Get.ZeroMax(prefs_Item.Length);
+        }
 
         spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());
+
     }
 
 
@@ -73,6 +92,26 @@ public class ItemManager : MonoX
     public static GameObject GetRandomItemShape()
     {
         return _.prefs_Item[XavHelpTo.Get.ZeroMax(3)];
+    }
+    /// <summary>
+    /// Set if you can generate or not
+    /// </summary>
+    public void __Debug_GeneratePlayStop()
+    {
+        _Debug_CanNOTGenerate = !_Debug_CanNOTGenerate;
+    }
+
+    /// <summary>
+    /// Destroys all the items in scene
+    /// </summary>
+    public void __Debug_DestroyAll()
+    {
+        Transform container = TargetManager.GetItemsContainer();
+
+        for (int x = 0; x < container.childCount; x++)
+        {
+            Destroy(container.GetChild(x).gameObject);
+        }
     }
     #endregion
 }

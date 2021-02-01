@@ -19,6 +19,7 @@ public class ScreenManager : MonoX
     public GameObject HUDScreen;
     public GameObject pauseScreen;
     public GameObject endScreen;
+    public GameObject debug_Screen;
 
 
     [Header("End Settings")]
@@ -36,9 +37,10 @@ public class ScreenManager : MonoX
     }
     private void Update(){
 
+        //if is on debug mode and is on game then activates the debug screen
+        debug_Screen.SetActive(GameManager.IsOnGame() && GameManager._onDebug);
 
         StatusChange();
-
         _Debug();
     }
     #endregion

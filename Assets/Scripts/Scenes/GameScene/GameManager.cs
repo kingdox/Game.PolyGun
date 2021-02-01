@@ -16,8 +16,8 @@ public class GameManager : MonoManager
     public GameStatus gameStatus;
     [Space]
 
-    [Header("Debug")]
-    public bool onDebug = false;
+    //[Header("Debug")]
+    //public bool onDebug = false;
     public static bool _onDebug = false;
 
 
@@ -42,8 +42,7 @@ public class GameManager : MonoManager
     }
     private void Update()
     {
-        __onDebug();
-        Cursor.visible = !gameStatus.Equals(GameStatus.ON_GAME);
+        Cursor.visible = !IsOnGame() || _onDebug;
     }
     public override void Init()
     {
@@ -89,17 +88,25 @@ public class GameManager : MonoManager
         //4. Pintamos los items con los datos
         //AchieveSystem.Setitem()
     }
-
-
+    
     /// <summary>
     /// Cambiamos el modo debug o no
     /// </summary>
     public void __onDebug(){
-        if (!DebugFlag(ref onDebug, onDebug)) return;
+        //if (!DebugFlag(ref onDebug, onDebug)) return;
         _onDebug = !_onDebug;
         PrintX($"DEBUGMODE => {_onDebug}");
     }
 
+    /// <summary>
+    /// set the unit percentaje of timescale,
+    /// </summary>
+    /// <param name="pct"></param>
+    public static void __Debug_SetTimeScale(float pct)
+    {
+        Time.timeScale = pct;
+
+    }
     #endregion
 }
 

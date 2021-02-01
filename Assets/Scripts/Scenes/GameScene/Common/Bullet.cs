@@ -180,6 +180,7 @@ public class Bullet : MonoX
     private void ShotPlayer(Transform tr_player)
     {
         PlayerController player = tr_player.GetComponent<PlayerController>();
+        player.character.timeLife -= bulletShot.damage;
         player.body.AddForce(transform.forward * 5, ForceMode.Impulse);
 
     }

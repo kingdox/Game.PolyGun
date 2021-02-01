@@ -10094,8 +10094,8 @@ MonoBehaviour:
   par_explode: {fileID: 3319004858239794178}
   radiusCenter: 40
   minRangeSize: 4
-  stayRangeSize: 2
-  runRangeSize: 4
+  stayRangeSize: 1.9
+  runRangeSize: 2
 --- !u!95 &4309568719355378145
 Animator:
   serializedVersion: 3

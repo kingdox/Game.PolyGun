@@ -49,9 +49,9 @@ public class AchieveSystem : MonoBehaviour
             HideShowUnlock();
         }
 
-#if DEBUG
-        _Debug();
-#endif
+        #if DEBUG
+                _Debug();
+        #endif
     }
     #endregion
     #region Methods

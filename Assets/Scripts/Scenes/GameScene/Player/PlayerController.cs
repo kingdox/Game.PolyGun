@@ -31,6 +31,7 @@ public class PlayerController : MonoX
    
     [Space]
     private Destructure destructure;
+    private bool isDead = false;
 
     [Header("Buffs")]
     public Transform buffList;
@@ -44,6 +45,9 @@ public class PlayerController : MonoX
     private SaveVelocity saveVelocity;
     [HideInInspector]
     public Rigidbody body;
+    [Header("Debug")]
+    private static float entryLife = -1;
+
     #endregion
     #region Events
     private void Awake()
@@ -62,6 +66,24 @@ public class PlayerController : MonoX
     private void Update()
     {
         CheckOnGame();
+
+        //hay cambios
+        if (!entryLife.Equals(-1)){
+            character.timeLife = entryLife;
+            entryLife = -1;
+        }
+
+    }
+    private void FixedUpdate()
+    {
+        if (!isDead && GameManager.IsOnGame())
+        {
+            Movement(); // movement se maneja internamente
+        }
+        else
+        {
+            movement.StopMovement();
+        }
     }
     #endregion
     #region Methods
@@ -70,29 +92,48 @@ public class PlayerController : MonoX
     /// Detectas las caracteristicas de cuando estas en juego
     /// </summary>
     private void CheckOnGame(){
-        if (character.IsAlive()){
+        if (!isDead && character.IsAlive()){
             Pause();
-            Movement(); // movement se maneja internamente
 
             if (GameManager.IsOnGame()){
                 BuffsUpdate();
                 Equipment();
                 Attack();
 
+
+                if (character.timeLifeMax < character.timeLife)
+                {
+                    character.timeLife = character.timeLifeMax;
+                }
                 character.LessLife();
+
+                DebugChecker();
             }
+           
 
         }else{
             //Eliminamos a poly
-            destructure.DestructureThis();
+            SetDead();
         }
     }
 
-   /// <summary>
-   /// Recorre la lista de buffs existentes y aplica sus propiedades en caso
-   /// de que exista
-   /// </summary>
-   private void BuffsUpdate()
+    /// <summary>
+    /// Set the dead of player
+    /// </summary>
+    public void SetDead()
+    {
+        if (isDead) return;
+        isDead = true;
+        destructure.DestructureThis();
+        //GameManager.gameOver
+
+    }
+
+    /// <summary>
+    /// Recorre la lista de buffs existentes y aplica sus propiedades en caso
+    /// de que exista
+    /// </summary>
+    private void BuffsUpdate()
    {
         for (int x = 0; x < buffs.Length; x++)  
         {
@@ -179,7 +220,34 @@ public class PlayerController : MonoX
         }
       
     }
-    
+
+    /// <summary>
+    /// Checks if it was pressed the debug mode
+    /// </summary>
+    private void DebugChecker()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Q))
+        {
+            //Activates or disactivates the debug mode
+            GameManager._onDebug = !GameManager._onDebug;
+        }
+    }
+    /// <summary>
+    /// Clear all the efects
+    /// </summary>
+    public void __Debug_ClearBuffEffects()
+    {
+        foreach (ItemBuff buff in buffs)
+        {
+            buff.Reset();
+        }
+    }
+    //Set a new qty of life
+    public static void __Debug_SetLife(float newLife)
+    {
+        entryLife = newLife;
+
+    }
     #endregion
 }
 
@@ -246,6 +314,7 @@ public struct Character{
             this.timeLife -= val;
         }
     }
+
 }
 
 /// <summary>
@@ -253,6 +322,8 @@ public struct Character{
 /// </summary>
 public enum CharacterType
 {
+    MINIONS = -1,
+
     PLAYER,
     ENEMY,
     ALLY,
