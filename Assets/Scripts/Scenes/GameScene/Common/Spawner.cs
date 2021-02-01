@@ -20,6 +20,7 @@ public class Spawner : MonoX
     public bool _Debug_Spawn = false;
     public GameObject[] _Debug_prefs;
     public SpawnOpt _Debug_SpawnOpt = SpawnOpt.RANDOM;
+    //public Color _debug_lines = Color.black;
     #endregion
     #region Events
     private void Start(){
@@ -38,6 +39,17 @@ public class Spawner : MonoX
 
         __Debug_Spawn();
     }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = _debug_lines;
+    //    if (childsPos.Length != 0)
+    //    {
+    //        foreach (Vector3 tr in childsPos)
+    //        {
+    //            Gizmos.DrawWireSphere(tr, range);
+    //        }
+    //    }
+    //}
     #endregion
     #region Methods
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #endregion
-[RequireComponent(typeof(Shot))] //para cuando puede disparar...
+//[RequireComponent(typeof(Shot))] //para cuando puede disparar...
 [RequireComponent(typeof(Equipment))]
 /// <summary>
 /// Este recoge los fragmentos y mejoras más cercanos,
@@ -16,51 +16,46 @@ public class PolController : Minion
 
     #region
     [Header("Pol Settings")]
-    private Shot shot;
-    private Transform _player;
-    private float refreshTargetCount;
-    //cuando se vuelve true puede atacar cuando quiera, puesto que tiene el perseguir bala
-    private bool canAttackInDistance = false;
-    [Space]
+
+    //attack
     private float damageTimeCount;
     private bool canDamage;
-    [Space]
-    //buffs
-    [Space]
-    public Priority priority = Priority.ITEM;
-    public enum Priority
-    {
-        ENEMY,
-        ITEM,
-        CRAFT
-    }
-    public enum AttackMode
-    {
-        CAC,
-        RANGED
-    }
-    public AttackMode attackMode = AttackMode.CAC;
+    // target refresher
+    private float refreshTargetCount;
+    ///Equipments
+    public float minRangeSize = 2.5f;
+    public Equipment equipment;
+    //[Space]
+    //ranged attack
+    //private Shot shot;
+   
     #endregion
     #region
     private void Start()
     {
-        Get(out shot);
+        //Get(out shot);
+        Get(out equipment);
 
         LoadMinion();
-
-        //TODO ajustar el rango de cogida de items con char.range
-
-        //TODO el Pol SIEMPRE ataca al enemigo sin importar su rango, puesto que este se rige por comsas como boxbox
-        _player = TargetManager.GetPlayer();
     }
     private void Update()
     {
         if (UpdateMinion())
         {
-            if (transform != null)
+
+            if (target != null)
             {
+                AttackUpdate();
 
-
+                if (target != transform)
+                {
+                    //movements
+                    UpdateMovement();
+                    //rotates
+                    rotation.LookTo(target.position);
+                    //check for the item
+                    ItemChecker();
+                }
 
                 //Refresh the target
                 if (Timer(ref refreshTargetCount, 1)  )
@@ -72,28 +67,6 @@ public class PolController : Minion
             {
                 UpdateTarget();
             }
-            //bool modoDeAtaque=false;
-            //if (modoDeAtaque)
-            //{
-            //    //CaC
-            //}
-            //else
-            //{
-            //    //Rango
-            //}
-
-
-
-            //bool modoTarget = false;
-
-
-
-            /////Moverse a un item, moverse a un enemigo cercano
-            //Vector3 moverse;
-
-            ////mirar a un Item, mirar a el enemigo mas cercano
-            ////
-            //Quaternion rotart;
 
 
             ////siempre que peuda
@@ -103,31 +76,102 @@ public class PolController : Minion
             //    //coge el item
             //}
 
-
-            //bool tengoBuffs = false;    
-            //if (tengoBuffs)
-            //{
-            //    //cambia cosas para conveniencia del Pol
-            //}
-
         }
     }
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, character.range / minRangeSize);
         if (target != null && target != transform)
         {
-            Gizmos.color = Color.blue;
             Gizmos.DrawLine(transform.position, target.position);
-
-
-
-
         }
     }
     #endregion
     #region 
 
 
+    /// <summary>
+    /// Updates the attack of BoxBox
+    /// </summary>
+    private void AttackUpdate()
+    {
+        if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
+        {
+            //can attack again
+            canDamage = true;
+        }
+    }
+
+
+
+    /// <summary>
+    /// Checks the target wheter is 
+    /// </summary>
+    private void ItemChecker()
+    {
+        bool isOnRange = Vector3.Distance(transform.position, target.position) > character.range / minRangeSize;
+
+        //if the actual target is the item and if is on the range
+        if (target.CompareTag("item") && isOnRange)
+        {
+
+            //1 - Revisamos si tenemos espacio para incluirlo
+            //tomaremos los slots y veremos si, hay espacio vacío, en caso de estar lleno usaremos un buff para llenarlo con el item target
+            int index = equipment.GetVoidSlotIndex();
+
+            // si están llenos los huecos de items
+            if (index.Equals(-1))
+            {
+                // tomaremos el indice que contenga un buff para consumirlo
+                index = equipment.GetBuffSlotIndex();
+            }
+
+            //si hay un hueco o un buff entonces hace acciones ahí
+            if (!index.Equals(-1))
+            {
+                //TODO
+                ActionType action = equipment.Action(index);
+                PrintX($"{action.item} {action.used}");
+
+            }
+
+
+            // 2 - Tomamos el objeto, y lo colocamos en un hueco vacío
+
+
+        }
+    }
+
+
+
+    /// <summary>
+    /// Updates the movement of the minion
+    /// </summary>
+    private void UpdateMovement()
+    {
+        bool canMove = true;
+
+        //if you're following a enemy...
+        if (target.CompareTag("enemy"))
+        {
+            canMove = canDamage;
+        }
+
+
+        if (canMove)
+        {
+            Vector3 direction = target.position - transform.position;
+            direction = Vector3.Normalize(direction);
+            direction.y = 0;
+            movement.Move(direction, character.speed);
+        }
+        else
+        {
+
+            movement.StopMovement();
+        }
+    }
 
     /// <summary>
     /// refresh the target to get a item or an enemy as a target depending with the status and the nearest level..
@@ -143,8 +187,6 @@ public class PolController : Minion
 
         Transform nearest_enemy = TargetManager.GetEnemy(transform);
         Transform nearest_item = TargetManager.GetItem(transform);
-        Vector3 direction = Vector3.zero;
-
         Transform newtarget = null;
 
         //if exist all the "nearest"
@@ -181,25 +223,6 @@ public class PolController : Minion
         }
 
         target = newtarget;
-
-
-        //TODO SEPARAR EL MOVEMENT
-
-
-        //sets here the movement
-        //if (!direction.Equals(Vector3.zero))
-        //{
-        //    direction = Vector3.Normalize(direction);
-        //    movement.Move(direction, character.speed);
-        //    //move to the direction.
-        //}
-        //else
-        //{
-        //    movement.StopMovement();
-        //}
-
-
-
     }
 
     #endregion

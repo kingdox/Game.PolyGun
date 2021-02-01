@@ -71,11 +71,11 @@ public class GameManager : MonoManager
     /// pasara x tiempo y luego mostrará la pantalla de final
     /// se deberá cargar los datos de los achievements
     /// </summary>
-    public void GameOver()
+    public static void GameOver()
     {
-        //TODO hacemos los manejos finales Y luego es que se muestra el estado final
+        _.StartCoroutine(SetGameEnd());
 
-        //gameStatus = Status.ON_END;
+
         //1. Calculamos la diferencia de los datos guardados
         //y los progresados
 
@@ -88,7 +88,30 @@ public class GameManager : MonoManager
         //4. Pintamos los items con los datos
         //AchieveSystem.Setitem()
     }
-    
+
+    /// <summary>
+    /// Configurations to set the Game End Screen
+    /// </summary>
+    private static IEnumerator SetGameEnd()
+    {
+        PrintX($"GG !, setting GameEnd Screen with results...");
+
+        yield return new WaitForSeconds(1);// es 5,
+        _.gameStatus = GameStatus.ON_END;
+        yield return new WaitForSeconds(1);// es 5,
+
+        //FAKE TODO
+        int[] bestAchieves = { 0, 3, 4 };
+        //por porcentaje se puede ver cuanto ha mejorado, conociendo su limite...
+        //tambien se peuden colocar los records batidos en la partida
+
+        ScreenManager.SetEndItems(bestAchieves);
+    }
+
+
+
+
+
     /// <summary>
     /// Cambiamos el modo debug o no
     /// </summary>

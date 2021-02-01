@@ -2,7 +2,7 @@
 using UnityEngine;
 using XavLib;
 #endregion
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider))]
 public class PlayerDetector : MonoX
 {
     #region Variables
@@ -15,11 +15,13 @@ public class PlayerDetector : MonoX
 
     //Ultimo Item cercano
     public Item itemNear = null;
-
+    //public SphereCollider sphereCollider_detector;
     #endregion
     #region Events
-
- 
+    //private void Awake()
+    //{
+    //    Get(out sphereCollider_detector);
+    //}
     private void OnTriggerStay(Collider other){
         if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
         {

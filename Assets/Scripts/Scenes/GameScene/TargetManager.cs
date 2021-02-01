@@ -112,7 +112,7 @@ public class TargetManager : MonoX
                 foreach (Transform child in childs)   
                 {
                     //if we don't have a child
-                    if (nearestChild == null)
+                    if (nearestChild == null && child.position.y < 5)
                     {
                         //default
                         nearestChild = child;
@@ -207,58 +207,3 @@ public class TargetManager : MonoX
     }
     #endregion
 }
-/* Old
- 
-                //float lastDistance = -1;
-                //int lastIndex = -1;
-
-                ////Recorremos el contenedor y por cada elemento
-                //for (int x = 0; x < distances.Length; x++)
-                //{
-                //    //obtenemos el elemento
-                //    Transform child = container.GetChild(x);
-                //    if (child.position.y < 5)
-                //    {
-                //        //preguntamos la distancia entre el elemento y el player
-                //        distances[x] = Vector3.Distance(target.position, child.position);
-                //    }
-                //    else
-                //    {
-                //        distances[x] = -1;
-                //    }
-
-
-                //    //if ((_.IsNull(trResult) || dist > lastDistance) && child.position.y < 5)
-                //    //{
-                //    //    // asign the nearest enemy
-                //    //    trResult = child;
-                //    //}
-                //}
-
-                //for (int z = 0; z < distances.Length; z++)
-                //{
-
-                //    if (lastDistance > distances[z] && lastDistance > 0 && distances[z] != -1)
-                //    {
-                //        lastDistance = distances[z];
-                //        lastIndex = z;
-                //    }
-
-                //}
-
-                //if (lastIndex != -1)
-                //{
-                //    trResult = container.GetChild(lastIndex);
-                //}
-                ////foreach (float distance in distances)
-                ////{
-                ////    //if the last distance is greater than the actual then overwrites it
-                ////    if (lastDistance > distance)
-                ////    {
-                ////        lastDistance = distance;
-                ////    }
-
-
-                ////}
- 
- */

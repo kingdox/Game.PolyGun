@@ -101,6 +101,18 @@ public enum TKey
     PAGE_CREDITS_TITLE,
     PAGE_CREDITS_1,
     PAGE_CREDITS_2,
-    PAGE_CREDITS_YOU
+    PAGE_CREDITS_YOU,
+    #endregion
+    #region Etc
+    _14_REPLAY,
+    END_RESUME,
+
+    //Titles
+    TITLE_MENU,
+    TITLE_INTRO,
+    TITLE_ACHIEVE,
+    TITLE_OPTIONS,
+
+
     #endregion
 }

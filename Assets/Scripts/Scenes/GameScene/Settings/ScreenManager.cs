@@ -12,6 +12,7 @@ public class ScreenManager : MonoX
 {
     #region variables
 
+    private static ScreenManager _;
     [Header("Screen Settings")]
     public GameStatus lastGameStatus = GameStatus.ON_GAME;
 
@@ -31,6 +32,10 @@ public class ScreenManager : MonoX
     public bool _Debug_LoadEnd = false;
     #endregion
     #region events
+    private void Awake()
+    {
+        _ = this;
+    }
     private void Start(){
         ActiveScreenOf();
         lastGameStatus = GameStatus.ON_GAME;
@@ -82,6 +87,20 @@ public class ScreenManager : MonoX
     private void ActiveScreenOf(GameStatus v = GameStatus.ON_GAME) => ActiveScreenOf((int)v);
 
 
+
+    /// <summary>
+    /// Implementation of the resume of the achievements
+    /// </summary>
+    public static void SetEndItems(int[] bestAchieves)
+    {
+        //recorremos los endItems y añadimos del indice el record correspondiente
+        for (int x = 0; x < _.endItems.Length; x++)
+        {
+            AchieveSystem.Setitem(bestAchieves[x], _.endItems[x]);
+        }
+
+
+    }
 
     /// <summary>
     /// Revisa los debugs...?

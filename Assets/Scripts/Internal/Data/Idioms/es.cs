@@ -42,9 +42,9 @@
 #endregion
 #region Messages, del menúScene
 
-                    //Messages TODO
-                    "Donde estoy?, por que todos vienen a por mi, será por los distinto que no parecem emr",
-                    "MSG_CYBORG_UNKNOW",
+                    //Messages
+                    "Bienvenido :) \n Usa las flechas y espacio o bien usa el mouse para navegar ",
+                    "¿Cuanto tiempo estarás aquí?",
 #endregion
 #region Messages, de Opciones
 
@@ -86,14 +86,23 @@
                     "Poly podrá disparar a sus enemigos y tambien recoger los objetos del suelo. Dependiendo de los recogidos puedes crear cosas",
                     "Los objetos recogidos pueden ser consumidos para recuperar vida o tener ventajas, si reunes 3 puede que creas aliados o mejoras",
                     // Manual PAGES
-                    "Te moveras con las <color=red>teclas de flechas</color>. \n\nPodrás agarrar y consumir los objetos con <color=red>C</color>,<color=red>V</colo> y <color=red>B</colo>. \n(se mostrará brillando el objeto más cercano para agarrarlo).  ",
-                    "PAGE_MANUAL_2",
-                    "PAGE_MANUAL_3",
+                    "Te moveras con las <color=red>teclas de flechas</color>. \n\nPodrás agarrar y consumir los objetos con C,V y B. \n(se mostrará brillando el objeto más cercano para agarrarlo).  ",
+                    "Poseerás un contador de tiempo que será la vida de Poly, al igual como las demás personas, morirán si este llega a 0, recupera tiempo consumiendo fragmentos !",
+                    "Recuerda que los enemigos y los aliados poseen tiempo de vida, es aconsejable conocerse los tiempos de todo...",
                     // Credits PAGES
                     "Creditos",
                     "Xavier Arpa L.",
-                    "Nadie más... :(",
-                    "Y gracias a ti por jugar :)"
+                    "Y...Nadie más... :(",
+                    "Y gracias a ti por jugar :)",
+#endregion
+#region 
+                    "Volver a jugar",
+                    "Resumen",
+                    //Titles
+                    "Poly-Gun: Irregular adventure",
+                    "Introducción",
+                    "Logros",
+                    "Opciones",
 #endregion
         };
     }

@@ -37,6 +37,8 @@ public class TriShotController : Minion
     {
         if (UpdateMinion())
         {
+            //Player following
+            UpdatePlayerFollow();
 
             //if exist a target then...
             if (target != null)
@@ -55,8 +57,7 @@ public class TriShotController : Minion
                 }
 
 
-                //Player following
-                UpdatePlayerFollow();
+
 
 
 
@@ -128,6 +129,7 @@ public class TriShotController : Minion
             {
                 Vector3 direction = _player.position - transform.position;
                 direction = Vector3.Normalize(direction);
+                direction.y = 0;
                 movement.Move(direction,character.speed);
             }
         }
@@ -136,6 +138,7 @@ public class TriShotController : Minion
             Vector3 direction = transform.position - _player.position ;
             //direction = direction.normalized;
             direction = Vector3.Normalize(direction);
+            direction.y = 0;
 
             movement.Move(direction, character.speed);
 

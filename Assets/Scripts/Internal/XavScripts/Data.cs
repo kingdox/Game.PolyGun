@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Achievements;
 using Key;
-using Environment;
 using Translate;
 using Crafts;
 #endregion
@@ -23,9 +22,9 @@ namespace Environment
         public static Data data = new Data();
 
         public readonly string savedPath = "saved1.txt";
-        public readonly string version = "v0.7.2";
+        public readonly string version = "v0.8.2";
 
-        //TODO poner parametros de character con enums y arreglos de valores...
+        //TODO poner parametros de character con enums y arreglos de valores si hay tiempo...
 
         /// <summary>
         /// Cantidad que cura cada shape respectivo
@@ -39,6 +38,8 @@ namespace Environment
         public readonly float itemShapeRate = 0.80f; // %
 
         public readonly float bulletSpeed = 20f;
+
+        public readonly float timeToCraft = 5f;
 
         [Header("Datos de CraftData")]
         private readonly CraftData craft = new CraftData();

@@ -13,8 +13,8 @@ public class Equipment : MonoX
     [Header("Equipment settings")]
     public PlayerDetector detector;
     [Space]
-    public bool canCraft = false;
-    public float timer_craft = 5f;
+    private bool canCraft = false;
+    public float timer_craft = Data.data.timeToCraft;
 
     private float timeCount_craft = 0;
     private ItemContent[] slots;
@@ -155,6 +155,37 @@ public class Equipment : MonoX
     /// Devuelve los slots actuales de equipamiento
     /// </summary>
     public ItemContent[] GetSlots() => slots;
+
+    /// <summary>
+    /// returns the first void slot
+    /// </summary>
+    public int GetVoidSlotIndex()
+    {
+        int index = -1;
+
+        for (int i = 0; i < slots.Length; i++)
+        {
+            //if is the first and is void
+            if (index.Equals(-1) && slots[i].Equals(ItemContent.NO))
+            {
+                index = i;
+            }
+        }
+
+        return index;
+    }
+    /// <summary>
+    /// Returns the first slot with a buff
+    /// </summary>
+    public int GetBuffSlotIndex()
+    {
+        int index = -1;
+
+
+
+
+        return index;
+    }
 
     /// <summary>
     /// Limpiamos los slots y los dejamos con <see cref="ItemContent.NO"/>

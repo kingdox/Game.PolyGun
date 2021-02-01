@@ -125,8 +125,7 @@ public class PlayerController : MonoX
         if (isDead) return;
         isDead = true;
         destructure.DestructureThis();
-        //GameManager.gameOver
-
+        GameManager.GameOver();
     }
 
     /// <summary>
@@ -294,7 +293,6 @@ public struct Character{
 
     /// <summary>
     /// Hace que pierda vida el player a medida que pasa el tiempo
-    /// <para>Si llega a 0 activa el <see cref="GameManager.GameOver"/></para>
     /// </summary>
     public void LessLife()
     {

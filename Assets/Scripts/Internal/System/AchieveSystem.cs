@@ -23,11 +23,6 @@ public class AchieveSystem : MonoBehaviour
     public static int achievementLenght;
     public static bool unlockShow = false;
 
-    [Header("Debug")]
-    public bool _Debug_ShowUnlock = false;
-    public bool _Debug_SetRandomAchieve = false;
-
-
     #endregion
     #region Events
     private void Awake()
@@ -48,10 +43,6 @@ public class AchieveSystem : MonoBehaviour
         {
             HideShowUnlock();
         }
-
-        #if DEBUG
-                _Debug();
-        #endif
     }
     #endregion
     #region Methods
@@ -102,26 +93,21 @@ public class AchieveSystem : MonoBehaviour
             DataPass.GetSavedData().achievements[index]
         ));
     }
-  
 
-#if DEBUG
 
-    private void _Debug()
+    /// <summary>
+    /// SET AN achievement saved from datapass in Unlock
+    /// </summary>
+    /// <param name="i"></param>
+    public static void __Debug_SetAchieve(float i)
     {
-        //si es true solamente
-        if (_Debug_ShowUnlock)
-        {
-            _Debug_ShowUnlock = false;
-            unlockShow = !unlockShow;
-        }
 
-        if (_Debug_SetRandomAchieve)
-        {
-            _Debug_SetRandomAchieve = false;
-            Setitem(XavHelpTo.Get.ZeroMax(10), achieveUnlockItem);
-        }
+        Setitem((int)i, _.achieveUnlockItem);
     }
-    #endif
+    public static void __Debug_OpenCloseAchieveModal()
+    {
+        unlockShow = !unlockShow;
+    }
     #endregion
 
 }

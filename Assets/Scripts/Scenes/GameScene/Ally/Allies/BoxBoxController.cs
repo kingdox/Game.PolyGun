@@ -7,7 +7,7 @@ public class BoxBoxController : Minion
 
    
     [Header("BoxBox Settings")]
-    public float damageTimeCount;
+    private float damageTimeCount;
     public bool canDamage;
     #endregion
     #region Events
