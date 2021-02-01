@@ -132,6 +132,7 @@ MonoBehaviour:
   img_bar_last: {fileID: 1590168465396638389}
   img_bar_actual: {fileID: 1590168465436574488}
   rect_bar_actual: {fileID: 1590168465436574491}
+  isUnlockItem: 0
 --- !u!1 &1590168465396638391
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +789,10 @@ PrefabInstance:
     - target: {fileID: 1685767259011752786, guid: 6197e86d373c54b9fb3edd41d5b7869d, type: 3}
       propertyPath: m_Text
       value: Testeo de mensaje
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685767259011752786, guid: 6197e86d373c54b9fb3edd41d5b7869d, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4469226642732522169, guid: 6197e86d373c54b9fb3edd41d5b7869d, type: 3}
       propertyPath: m_Name

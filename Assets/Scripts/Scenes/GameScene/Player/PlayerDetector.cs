@@ -2,13 +2,12 @@
 using UnityEngine;
 using XavLib;
 #endregion
-
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerDetector : MonoX
 {
     #region Variables
 
-    private Rigidbody body;
-    private readonly string[] CollisionTags = { "enemy"};
+    //private readonly string[] CollisionTags = { "enemy"};
     private readonly string[] triggerTags = { "item" };
 
 
@@ -20,9 +19,6 @@ public class PlayerDetector : MonoX
     #endregion
     #region Events
 
-    private void Awake(){
-        Get(out body);
-    }
  
     private void OnTriggerStay(Collider other){
         if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
@@ -34,9 +30,16 @@ public class PlayerDetector : MonoX
     private void OnTriggerExit(Collider other){
         if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
         {
-            if (itemNear == null || other.transform.Equals(itemNear.transform))
+            bool isItemNearNull = itemNear == null;
+
+            if (isItemNearNull || other.transform.Equals(itemNear.transform))
             {
-                itemNear.Isselected = false;
+                //TODO Patch, refactor this. ?
+                if (!isItemNearNull)
+                {
+                    itemNear.Isselected = false;
+                }
+
                 itemNear = null;
             }
         }

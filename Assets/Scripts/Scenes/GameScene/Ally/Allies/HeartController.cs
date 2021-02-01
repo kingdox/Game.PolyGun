@@ -15,12 +15,14 @@ public class HeartController : Minion
 
 
     public float refreshTargetCount;
-    public Transform player;
-    
-    [Space]
-    //rangos para perseguir al target
+    public ParticleSystem part_heal;
     public float minRangeSize;
-    public float maxRangeSize;
+    [Space]
+    private Transform player;
+    ////rangos para perseguir al target
+    
+    private float timeHealCount = 0;
+    private bool canHeal = false;
 
     #endregion
     #region Events
@@ -35,10 +37,15 @@ public class HeartController : Minion
         if (UpdateMinion())
         {
 
+           
             //if exist a target then...
             if (target != null)
             {
 
+                
+
+                ////follow the target
+                //UpdateFollow();
 
                 // Target refresher
                 if (Timer(ref refreshTargetCount, 1))
@@ -51,6 +58,24 @@ public class HeartController : Minion
                 {
                     // rotates to that target
                     rotation.LookTo(target.position);
+
+                    //updates the follow 
+                    UpdateFollow();
+
+
+                    //if passes the time then you can heal again
+                    CanPassedTime(ref canHeal, ref timeHealCount, character.atkSpeed);
+
+                    //if (!canHeal && CanPassedTime(ref canHeal, ref timeHealCount, character.atkSpeed))
+                    //{
+                    //    movement.Move(transform.forward.normalized, character.speed);
+
+                    //}
+
+                }
+                else
+                {
+                    movement.StopMovement();
                 }
 
 
@@ -63,52 +88,106 @@ public class HeartController : Minion
     }
     private void OnDrawGizmos()
     {
-        if (target != null)
+        if (target != null && target != transform)
         {
             //range to see the distance line
             Gizmos.color = Color.magenta;
             Gizmos.DrawLine(transform.position, target.position);
 
-            //max range to move
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(target.position, character.range / minRangeSize);
-
-            //min range to back
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(target.position, character.range / maxRangeSize);
-            
+            Gizmos.DrawWireSphere(target.position, minRangeSize);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //if can heal and the collision it's same than target then you can heal it
+        if (canHeal && collision.transform == target)
+        {
+            canHeal = false;
+            part_heal.Play();
+            UpdateHeal();
         }
     }
     #endregion
     #region Methods
 
+    /// <summary>
+    /// Heal the target
+    /// </summary>
     private void UpdateHeal()
     {
 
+        float magnitude = character.damage;
+
+        //if is the player
+        if (target == player)
+        {
+            PlayerController playerC = player.GetComponent<PlayerController>();
+
+            //we heal with our "Damage"
+            playerC.character.timeLife += magnitude;
+        }
+        else{
+            //if is a minion
+            Minion ally = GetComponent<Minion>();
+            ally.character.timeLife += magnitude;
+        }
+
+        //Reduce the life of the ally
+        character.timeLife -= magnitude;
+
     }
 
-    //TODO
+
+    /// <summary>
+    /// Updates the target with the nearest transform
+    /// </summary>
     private void UpdateTarget()
     {
+        //refresh the ally target
         target = TargetManager.GetAlly(transform);
+        PlayerController playerC = player.GetComponent<PlayerController>();
 
-        PlayerController comp = target.GetComponent<PlayerController>();
 
-        if (target != null)
+        //if cannot found another ally then set the player as target
+        if (target == null || target == transform || playerC.character.timeLife < 10)
         {
-            //busca un aliado cercano
+            target = player;
         }
         else
         {
+            //check if this ally is more nearest than player
+            float distanceAlly = Vector3.Distance(transform.position, target.position);
+            float distancePlayer = Vector3.Distance(transform.position, player.position);
 
-            //por defecto al player
-            target = player;
+            //si el ally está mas lejos que el player entonces asignamos el player
+            if (distanceAlly > distancePlayer)
+            {
+                target = player;
+            }
         }
     }
 
+    /// <summary>
+    /// Updates the follow to the target position
+    /// </summary>
     private void UpdateFollow()
     {
 
+        float minRange = canHeal ? 0 : minRangeSize;
+
+        if (Vector3.Distance(target.position, transform.position ) > minRange)   
+        {
+
+            Vector3 direction = target.position - transform.position;
+            direction = Vector3.Normalize(direction);
+            movement.Move(direction, character.speed);
+        }
+        else
+        {
+            movement.StopMovement();
+        }
     }
 
     #endregion

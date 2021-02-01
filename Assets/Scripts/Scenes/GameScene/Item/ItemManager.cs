@@ -6,7 +6,8 @@ using Environment;
 [RequireComponent(typeof(Spawner))]
 public class ItemManager : MonoX
 {
-#region
+    #region
+    private static ItemManager _;
     [Header("Item Manager Settings")]
 
     public GameObject[] prefs_Item;
@@ -24,6 +25,10 @@ public class ItemManager : MonoX
 
     #endregion
     #region
+    private void Awake()
+    {
+        _ = this;
+    }
     private void Update()
     {
         //Revisa si ha pasado el tiempo, cuando llega a 0 entonces ejecuta
@@ -58,6 +63,16 @@ public class ItemManager : MonoX
         spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
         spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());
+    }
+
+
+    /// <summary>
+    /// Devuelve uno de los items
+    /// </summary>
+    /// <returns></returns>
+    public static GameObject GetRandomItemShape()
+    {
+        return _.prefs_Item[XavHelpTo.Get.ZeroMax(3)];
     }
     #endregion
 }

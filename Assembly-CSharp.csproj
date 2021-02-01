@@ -69,6 +69,7 @@
     <Compile Include="Assets/Scripts/Components/Controllers/ImageController.cs" />
     <Compile Include="Assets/Scripts/Components/Mono/MonoManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/es.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/HeartController.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Rotation.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/KeyData.cs" />
     <Compile Include="Assets/Scripts/Scenes/OptionsScene/OptionsItem.cs" />
@@ -115,7 +116,8 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/TargetManager.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/HeartController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/RombController.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/PolController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

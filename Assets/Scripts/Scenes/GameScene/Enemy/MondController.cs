@@ -57,11 +57,7 @@ public class MondController : Minion
             //if exist a target then...
             if (target != null)
             {
-                // Target refresher
-                if (Timer(ref refreshTargetCount, 1))
-                {
-                    UpdateTarget();
-                }
+              
 
                 //Rotation Refresh
                 if (target != transform)
@@ -81,6 +77,12 @@ public class MondController : Minion
 
                 // MOVEMENT
                 UpdateMovement();
+
+                // Target refresher
+                if (Timer(ref refreshTargetCount, 1))
+                {
+                    UpdateTarget();
+                }
             }
             else
             {

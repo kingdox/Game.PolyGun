@@ -41,11 +41,7 @@ public class TriShotController : Minion
             {
 
 
-                // Target refresher
-                if (Timer(ref refreshTargetCount, 1))
-                {
-                    UpdateTarget();
-                }
+               
 
                 //Rotation & attack Refresh
                 if (target != transform)
@@ -59,6 +55,14 @@ public class TriShotController : Minion
 
                 //Player following
                 UpdatePlayerFollow();
+
+
+
+                // Target refresher
+                if (Timer(ref refreshTargetCount, 1))
+                {
+                    UpdateTarget();
+                }
 
             }
             else

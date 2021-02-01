@@ -17,7 +17,7 @@ namespace XavLib
     {
         #region Get
         /// <summary>
-        /// Herramienta de obtención de valores basados en parametros otorgados
+        /// Herramienta de obtención de valores
         /// </summary>
         public struct Get{
 
