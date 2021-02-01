@@ -13,19 +13,20 @@ using UnityEngine;
 /// </summary>
 public class PolController : Minion
 {
+
     #region
     [Header("Pol Settings")]
     private Shot shot;
     private Transform _player;
-
-
+    private float refreshTargetCount;
     //cuando se vuelve true puede atacar cuando quiera, puesto que tiene el perseguir bala
     private bool canAttackInDistance = false;
     [Space]
     private float damageTimeCount;
     private bool canDamage;
     [Space]
-
+    //buffs
+    [Space]
     public Priority priority = Priority.ITEM;
     public enum Priority
     {
@@ -56,7 +57,21 @@ public class PolController : Minion
     {
         if (UpdateMinion())
         {
+            if (transform != null)
+            {
 
+
+
+                //Refresh the target
+                if (Timer(ref refreshTargetCount, 1)  )
+                {
+                    UpdateTarget();
+                }
+            }
+            else
+            {
+                UpdateTarget();
+            }
             //bool modoDeAtaque=false;
             //if (modoDeAtaque)
             //{
@@ -70,7 +85,7 @@ public class PolController : Minion
 
 
             //bool modoTarget = false;
-          
+
 
 
             /////Moverse a un item, moverse a un enemigo cercano
@@ -97,6 +112,18 @@ public class PolController : Minion
 
         }
     }
+    private void OnDrawGizmos()
+    {
+        if (target != null && target != transform)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, target.position);
+
+
+
+
+        }
+    }
     #endregion
     #region 
 
@@ -116,16 +143,62 @@ public class PolController : Minion
 
         Transform nearest_enemy = TargetManager.GetEnemy(transform);
         Transform nearest_item = TargetManager.GetItem(transform);
+        Vector3 direction = Vector3.zero;
 
+        Transform newtarget = null;
 
-        if (priority.Equals(Priority.ITEM))
+        //if exist all the "nearest"
+        if (nearest_item && nearest_enemy)   
         {
-            //Buscas un item (prioridad)
+            float distance_item = Vector3.Distance(transform.position, nearest_item.position);
+            float distance_enemy = Vector3.Distance(transform.position, nearest_enemy.position);
+
+            if (distance_enemy > distance_item)
+            {
+                //get item target
+                newtarget = nearest_item;
+
+            }
+            else
+            {
+                //get enemy target
+                newtarget = nearest_enemy;
+            }
+
         }
         else
         {
-            //Buscas un enemigo (estos deben de estar MUY cerca)
+            if (nearest_item)
+            {
+                //go to the item
+                newtarget = nearest_item;
+            }
+            else if (nearest_enemy)
+            {
+                newtarget = nearest_enemy;  
+
+            }
         }
+
+        target = newtarget;
+
+
+        //TODO SEPARAR EL MOVEMENT
+
+
+        //sets here the movement
+        //if (!direction.Equals(Vector3.zero))
+        //{
+        //    direction = Vector3.Normalize(direction);
+        //    movement.Move(direction, character.speed);
+        //    //move to the direction.
+        //}
+        //else
+        //{
+        //    movement.StopMovement();
+        //}
+
+
 
     }
 

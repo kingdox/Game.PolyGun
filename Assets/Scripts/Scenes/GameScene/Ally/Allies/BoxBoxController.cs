@@ -14,6 +14,7 @@ public class BoxBoxController : Minion
     private void Start()
     {
         LoadMinion();
+        //target = transform;
     }
     private void Update()
     {
