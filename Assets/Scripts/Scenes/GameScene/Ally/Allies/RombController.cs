@@ -15,6 +15,7 @@ public class RombController : Minion
     //private Vector3 lastPos;
     [Space]
     public ParticleSystem part_create;
+    public ParticleSystem par_explode;
     public float timerCreateCount = 0;
     [Space]
     public float minRangeSize = 2;
@@ -47,6 +48,11 @@ public class RombController : Minion
 
             }
         }
+    }
+    private void OnDisable()
+    {
+        par_explode.Play();
+        TargetManager.EffectInTime(par_explode, part_create);
     }
     //private void OnDrawGizmos()
     //{

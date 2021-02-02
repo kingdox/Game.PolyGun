@@ -97,9 +97,8 @@ public class MondController : Minion
 
     private void OnDisable()
     {
-        par_explode.transform.parent = TargetManager.GetLeftoverContainer();
-        par_explode.Play();
-        Destroy(par_explode.gameObject, par_explode.main.duration);
+        TargetManager.EffectInTime(par_explode);
+
     }
     //private void OnDrawGizmos()
     //{

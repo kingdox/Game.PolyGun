@@ -21,7 +21,8 @@ public class TriShotController : Minion
     public float maxRangeSize = 2;
     public float minRangeSize = 4;
     [Space]
-    public ParticleSystem part_Dead;
+    public ParticleSystem par_explode;
+    public ParticleSystem part_Attack;
     #endregion
     #region Events
     private void Start()
@@ -90,6 +91,10 @@ public class TriShotController : Minion
             //Gizmos.DrawWireSphere(_player.position, character.range / minRangeSize);
         }
     }
+    private void OnDisable()
+    {
+        TargetManager.EffectInTime(par_explode,part_Attack);
+    }
     #endregion
     #region Methods
 
@@ -100,7 +105,11 @@ public class TriShotController : Minion
     {
         if (IsInRange())
         {
-            shot.ShotBullet(character);
+            if (shot.ShotBullet(character))
+            {
+                part_Attack.Play();
+            }
+            
         }
     }
 

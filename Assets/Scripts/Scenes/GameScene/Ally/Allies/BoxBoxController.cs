@@ -7,9 +7,12 @@ public class BoxBoxController : Minion
 
 
     [Header("BoxBox Settings")]
-    public ParticleSystem part_attack;
     public bool canDamage;
     private float damageTimeCount;
+    [Space]
+    public ParticleSystem par_explode;
+    public ParticleSystem part_attack;
+
     #endregion
     #region Events
     private void Start()
@@ -43,13 +46,18 @@ public class BoxBoxController : Minion
             BoxBoxAttack(collision.transform);
         }
     }
-    private void OnDrawGizmos()
+    //private void OnDrawGizmos()
+    //{
+    //    if (target != null)
+    //    {
+    //        Gizmos.color = Color.blue;
+    //        Gizmos.DrawLine(transform.position, target.position);
+    //    }
+    //}
+    private void OnDisable()
     {
-        if (target != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, target.position);
-        }
+        par_explode.Play();
+        TargetManager.EffectInTime(par_explode,part_attack);
     }
     #endregion
     #region Methods

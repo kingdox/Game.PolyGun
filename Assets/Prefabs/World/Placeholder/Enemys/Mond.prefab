@@ -10090,6 +10090,7 @@ MonoBehaviour:
     isInmortal: 0
     canExtraShots: 0
   target: {fileID: 0}
+  isEnemyBoss: 0
   body: {fileID: 8865023186745710275}
   par_explode: {fileID: 3319004858239794178}
   radiusCenter: 40
@@ -10638,7 +10639,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -10691,7 +10692,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -10744,8 +10745,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2

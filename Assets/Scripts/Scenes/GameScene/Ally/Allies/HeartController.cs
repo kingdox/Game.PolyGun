@@ -1,6 +1,4 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 #endregion
 /// <summary>
@@ -16,6 +14,7 @@ public class HeartController : Minion
 
     public float refreshTargetCount;
     public ParticleSystem part_heal;
+    public ParticleSystem par_explode;
     public float minRangeSize;
     [Space]
     private Transform player;
@@ -86,18 +85,18 @@ public class HeartController : Minion
             }
         }
     }
-    private void OnDrawGizmos()
-    {
-        if (target != null && target != transform)
-        {
-            //range to see the distance line
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(transform.position, target.position);
+    //private void OnDrawGizmos()
+    //{
+    //    if (target != null && target != transform)
+    //    {
+    //        //range to see the distance line
+    //        Gizmos.color = Color.magenta;
+    //        Gizmos.DrawLine(transform.position, target.position);
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(target.position, minRangeSize);
-        }
-    }
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawWireSphere(target.position, minRangeSize);
+    //    }
+    //}
 
     private void OnCollisionStay(Collision collision)
     {
@@ -108,6 +107,11 @@ public class HeartController : Minion
             part_heal.Play();
             UpdateHeal();
         }
+    }
+    private void OnDisable()
+    {
+        par_explode.Play();
+        TargetManager.EffectInTime(par_explode, part_heal);
     }
     #endregion
     #region Methods

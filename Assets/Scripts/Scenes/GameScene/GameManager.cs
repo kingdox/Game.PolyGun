@@ -96,7 +96,7 @@ public class GameManager : MonoManager
     {
         PrintX($"GG !, setting GameEnd Screen with results...");
 
-        yield return new WaitForSeconds(1);// es 5,
+        yield return new WaitForSeconds(3);// es 5,
         _.gameStatus = GameStatus.ON_END;
         yield return new WaitForSeconds(.5f);// es 5,
 

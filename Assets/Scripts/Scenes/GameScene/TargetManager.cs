@@ -179,6 +179,28 @@ public class TargetManager : MonoX
 
 
     }
+
+    /// <summary>
+    /// Asign in leftover an efect who gonna be deleted after a time
+    /// </summary>
+    public static void EffectInTime(ParticleSystem par, float time=-1)
+    {
+        par.transform.parent = GetLeftoverContainer();
+        //par.Play();
+        if (time.Equals(-1))
+        {
+            time = par.main.duration;   
+        }
+        Destroy(par.gameObject, time);
+    }
+    public static void EffectInTime(params ParticleSystem[] pars)
+    {
+        foreach (ParticleSystem p in pars)
+        {
+            EffectInTime(p);
+        }
+    }
+        
     /// <summary>
     /// Destructure the cointainer of minions
     /// </summary>

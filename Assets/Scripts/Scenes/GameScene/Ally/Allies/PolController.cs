@@ -25,10 +25,11 @@ public class PolController : Minion
     ///Equipments
     public float minRangeSize = 2.5f;
     public Equipment equipment;
-    //[Space]
+    [Space]
+    public ParticleSystem par_explode;
     //ranged attack
     //private Shot shot;
-   
+
     #endregion
     #region
     private void Start()
@@ -78,14 +79,19 @@ public class PolController : Minion
 
         }
     }
-    private void OnDrawGizmos()
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, character.range / minRangeSize);
+    //    if (target != null && target != transform)
+    //    {
+    //        Gizmos.DrawLine(transform.position, target.position);
+    //    }
+    //}
+    private void OnDisable()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, character.range / minRangeSize);
-        if (target != null && target != transform)
-        {
-            Gizmos.DrawLine(transform.position, target.position);
-        }
+        par_explode.Play();
+        TargetManager.EffectInTime(par_explode);
     }
     #endregion
     #region 

@@ -22,7 +22,7 @@ namespace Environment
         public static Data data = new Data();
 
         public readonly string savedPath = "saved1.txt";
-        public readonly string version = "v0.8.2";
+        public readonly string version = "v0.9.1";
 
         //TODO poner parametros de character con enums y arreglos de valores si hay tiempo...
 
@@ -39,7 +39,7 @@ namespace Environment
 
         public readonly float bulletSpeed = 20f;
 
-        public readonly float timeToCraft = 5f;
+        public readonly float timeToCraft = 0.1f;
 
         public readonly float pctMinionDeathItem = .25f;
 
