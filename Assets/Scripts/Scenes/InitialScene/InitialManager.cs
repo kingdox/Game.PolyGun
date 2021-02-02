@@ -18,12 +18,24 @@ public class InitialManager : MonoManager, IInitManager
     public MsgController msg_history;
     public MsgController msg_pressAny;
 
+    private SavedData saved;
 
     #endregion
     #region  Events
     public override void Init()
     {
         StartCoroutine(LoadSplash());
+
+        //asignamos las cosas por defecto en caso de ser la priera vez
+        saved = DataPass.GetSavedData();
+        if (!saved.isIntroCompleted)
+        {
+            saved.textSpeed = 2;
+            saved.musicVolume = 2;
+            saved.sfxVolume = 1;
+            New(out saved.achievements, AchieveSystem.achievementLenght);
+            DataPass.SetData(saved);
+        }
 
     }
     private void Update()
@@ -89,7 +101,6 @@ public class InitialManager : MonoManager, IInitManager
     }
 
     public void CheckInit(){
-        SavedData saved = DataPass.GetSavedData();
 
         if (saved.isIntroCompleted)
         {
@@ -99,7 +110,7 @@ public class InitialManager : MonoManager, IInitManager
         else
         {
             XavHelpTo.Look.Print("Cargando Introducción");
-            GoToScene(Scenes.MenuScene);
+            GoToScene(Scenes.IntroductionScene);
         }
     }
 

@@ -111,13 +111,13 @@ public class DataPass : MonoBehaviour
     /// </summary>
     public static bool IsReady() => _.isReady;
 
-    #if DEBUG
+    //#if DEBUG
 
-        private void OnDisable()
-        {
-            SaveLoadFile(true);
-        }
-    #endif
+    //    private void OnDisable()
+    //    {
+    //        SaveLoadFile(true);
+    //    }
+    //#endif
 
 #endregion
 }

@@ -21,7 +21,7 @@ namespace Environment
         [HideInInspector]
         public static Data data = new Data();
 
-        public readonly string savedPath = "saved1.txt";
+        public readonly string savedPath = "saved100.txt";
         public readonly string version = "v0.9.1";
 
         //TODO poner parametros de character con enums y arreglos de valores si hay tiempo...
@@ -85,6 +85,7 @@ namespace Environment
         InitialScene,//Pantalla inicial del lore...
         MenuScene, //el menu principal apra acceder a los demás sitios
         AchievementsScene, // Donde están los logros
+        IntroductionScene, //donde sale el manual y eso
         GameScene, //Pantalla de juego
 
     }

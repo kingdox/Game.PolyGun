@@ -46,7 +46,7 @@ public class GameManager : MonoManager
     }
     public override void Init()
     {
-        //Tomamos el ultimo guardado
+        //Tomamos el ultimo guardado de inicio.
         lastSaved = DataPass.GetSavedData();
     }
     #endregion
@@ -75,7 +75,7 @@ public class GameManager : MonoManager
     {
         _.StartCoroutine(SetGameEnd());
 
-
+        
         //1. Calculamos la diferencia de los datos guardados
         //y los progresados
 
@@ -106,6 +106,23 @@ public class GameManager : MonoManager
         int[] ach_pct = AchieveSystem.GetBestAchievements(lastSaved.achievements);
         //se envia los achievements ordenados por lo mejor, ya el tomará los primeros que quiera....
         ScreenManager.SetEndItems(ach_pct);
+
+
+
+
+        SavedData saved = DataPass.GetSavedData();
+
+        if (saved.record_waves < EnemyManager.waveActual)
+        {
+            //Actualizamos los records
+            saved.record_waves = EnemyManager.waveActual;
+            DataPass.SetData(saved);
+        }
+
+
+
+        //Terminamos guardando los cambios
+        DataPass.SaveLoadFile(true);
     }
 
 
