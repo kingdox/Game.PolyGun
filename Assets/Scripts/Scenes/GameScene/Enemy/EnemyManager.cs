@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using XavLib;
+using Environment;
 #endregion
 
 public class EnemyManager : MonoX
@@ -11,6 +12,8 @@ public class EnemyManager : MonoX
     private static EnemyManager _;
     [Header("Enemy Manager Settings")]
     public GameObject[] prefs_Enemies;
+    public GameObject[] prefs_Boss;
+
     public Spawner spawner;
 
     [Space]
@@ -28,6 +31,7 @@ public class EnemyManager : MonoX
     public static int waveActual = 0;
     [Space]
     public int bossWaves = 5;
+    public int bossQty = -1;
 
     [Header("Debug")]
     public bool _Debug_CanNOTGenerate = false;
@@ -40,9 +44,6 @@ public class EnemyManager : MonoX
         waveActual = 0;
         enemiesLeft = 0;
 
-    }
-    private void Start(){
-        SetNewWave();
     }
     private void Update()
     {
@@ -84,7 +85,7 @@ public class EnemyManager : MonoX
         // creamos un valor aleatorio a partir del record actual
         int recordRandom = XavHelpTo.Get.ZeroMax(waveRecord) + 1;//+1 añadido, HARDCODED
         // Tenemos los enemigos por oleada
-        float enemyPerWave = 1.5f;// HARDCODED
+        float enemyPerWave = Data.ENEMY_PER_WAVE;
 
         float result;
 
@@ -99,7 +100,13 @@ public class EnemyManager : MonoX
 
         //cuenta la cantidad de enemigos faltantes
         enemiesLeft = (int)Math.Round(result, 0);
-        
+
+        if (waveActual % bossWaves == 0)
+        {
+            bossQty = 1;
+            PrintX("////BOSS/////");
+        }
+
     }
 
     /// <summary>
@@ -124,12 +131,28 @@ public class EnemyManager : MonoX
     {
         //(EnemyName)selected;
 
-        if (selected.Equals(-1))    
-        {
-            selected = XavHelpTo.Get.ZeroMax(prefs_Enemies.Length);
-        }
 
-        spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
+        //si no hay boss entonces genera un enemigo común
+        //if (false && bossQty <= 0)
+        if (bossQty <= 0)
+        {
+            if (selected.Equals(-1))
+            {
+                selected = XavHelpTo.Get.ZeroMax(prefs_Enemies.Length);
+            }
+            spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
+        }
+        else
+        {
+            if (selected.Equals(-1))
+            {
+                selected = XavHelpTo.Get.ZeroMax(prefs_Boss.Length);
+            }
+            //sino genera un jefe
+            //en caso de haber BOSS por descontar
+            bossQty--;
+            spawner.Generate(prefs_Boss[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
+        }
     }
 
     /// <summary>
@@ -179,8 +202,3 @@ public enum EnemyName
 ////TODO
 ////TODO revisar si es la oleada numero 5
 
-//// Cada 5 oleadas se añade un Enemigo Jefe, TODO ver como implementar leugo
-//if (waveActual % bossWaves == 0)
-//{
-//    PrintX("////BOSS/////");
-//}

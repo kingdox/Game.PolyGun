@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnlockedAchievementItem
       objectReference: {fileID: 0}
+    - target: {fileID: 1590168465505258314, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 1590168465728230043, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -206,11 +210,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2118990046838618981, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
       propertyPath: m_FontData.m_VerticalOverflow
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2118990046838618981, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
       propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118990046838618981, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_FontSize
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118990046838618981, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118990046838618981, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_Text
+      value: 30 / 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103863731425657897, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103863731425657897, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103863731425657897, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4583970362996753435, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
       propertyPath: isUnlockItem
@@ -223,6 +251,35 @@ PrefabInstance:
     - target: {fileID: 5404306415329228225, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
       propertyPath: wantInit
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287168798975223614, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_Text
+      value: Elimina en una partida muchos enemigos. por que para la hora de la verdad
+        lesa asldas askodnoaksdo asod asok
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287168798975223614, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287168798975223614, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287168798975223614, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287168798975223614, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287168798975223614, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8591852683657005777, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ec6d3a6ff4cc4b438b845531f93b9ec, type: 3}

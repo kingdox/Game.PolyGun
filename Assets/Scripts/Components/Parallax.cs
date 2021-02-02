@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#region
 using UnityEngine;
-
+using XGet = XavLib.XavHelpTo.Get;
+#endregion
 
 //Este paralax solo usa el eje X
-public class Parallax : MonoBehaviour
+public class Parallax : MonoX
 {
     #region Var
     //Atenuaciond el movimiento horizontal
@@ -13,45 +13,51 @@ public class Parallax : MonoBehaviour
     //Atenuacion del movimiento vertical
     public float attenY = 0;
 
+    public float speed;
+    [Space]
+    public float timeRangeMax;
     //Control de offset de la textura
     private Vector2 pos = Vector2.zero;
-
-
-    private Vector2 camOldPos;
-
+    private float count;
+    private float timer = 3f;
     //Referencia el renderer del BG
     private Renderer rend;
     #endregion
     #region Events
 
     private void Start() {
-        //camOldPos = GameManager.GetCamera().transform.position;
-
         rend = GetComponent<Renderer>();
 
+        RefreshParallax();
     }
     #endregion
     #region Methods
 
     private void Update() {
 
-        Vector2 camPos = Camera.main.transform.position; //XavLib.XavHelpTo.Get.pos;// = Camera.main().pos;
-
-        Vector2 camVar = new Vector2(camPos.x - camOldPos.x, camPos.y - camOldPos.y);
-
-        //Asignamos la posición a la que se aplicará a la textura del offset atenuando la distancia entre la camara y la anterior pos de esta e X y Y
-        pos.Set(pos.x + (camVar.x * attenX), pos.y + (camVar.y * attenY));
+        //cada vez que pasa ese tiempo...
+        if (Timer(ref count, timer)) RefreshParallax();
 
 
-        //Cambia la pos del offset del material (puedes verlo yendo al material y ver el selectShader)
-        rend.material.SetTextureOffset("_MainTex",pos);
-
-
-        //Actualizamos al camara
-        camOldPos = camPos;
-
-
+        pos += new Vector2(attenX, attenY) * Time.deltaTime * speed;
+        rend.material.SetTextureOffset("_MainTex", pos);
     }
+
+    /// <summary>
+    /// Updates the parallax with new things..
+    /// </summary>
+    private void RefreshParallax()
+    {
+        timer = XGet.ZeroMax(timeRangeMax);
+        ChangeMinusPlus(ref attenX);
+        ChangeMinusPlus(ref attenY);
+    }
+
+
+    /// <summary>
+    /// Change sometimes the value - or +
+    /// </summary>
+    private void ChangeMinusPlus(ref float val) => val = val * (XGet.RandomBool() ? 1 : -1);
     #endregion
 
 

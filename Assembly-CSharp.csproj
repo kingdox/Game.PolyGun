@@ -60,8 +60,8 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/BoxBoxController.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/TriShotController.cs" />
     <Compile Include="Assets/Scripts/Components/Navigator.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Equipment.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Movement.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Equipment.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Movement.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/Allies/PolController.cs" />
     <Compile Include="Assets/Scripts/Internal/System/ControlSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/TranslateData.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Assets/Scripts/Internal/System/OptionSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/System/AchieveSystem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/EnemyManager.cs" />
+    <Compile Include="Assets/Scripts/Components/Parallax.cs" />
     <Compile Include="Assets/Scripts/Components/Mono/MonoX.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/SaveVelocity.cs" />
     <Compile Include="Assets/Scripts/Internal/XavScripts/SfxItem.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/MondController.cs" />
     <Compile Include="Assets/Scripts/Components/MultiColor.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Ally/AllyManager.cs" />
-    <Compile Include="Assets/Scripts/Scenes/GameScene/Player/Shot.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Shot.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Spawner.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/PlurController.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/AchievementData.cs" />
@@ -118,7 +119,8 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/TargetManager.cs" />
-    <Compile Include="Assets/Scripts/Components/Parallax.cs" />
+    <Compile Include="Assets/Scripts/Components/ChildLimiter.cs" />
+    <Compile Include="Assets/Scripts/Scenes/GameScene/Common/DrainDamage.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/Fonts/Audiowide/OFL.txt" />

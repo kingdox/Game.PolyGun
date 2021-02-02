@@ -858,8 +858,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Model/Body part X
+    attribute: m_LocalEulerAngles.z
+    path: Model/Body part Z
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -869,7 +869,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body part X
+    path: Model/Body part Z
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -878,8 +878,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Model/Body part X
+    attribute: m_LocalEulerAngles.x
+    path: Model/Body part Z
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -919,7 +919,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Model/Body part Z
+    path: Model/Body part X
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -929,7 +929,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Model/Body part Z
+    path: Model/Body part X
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -939,7 +939,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Model/Body part Z
+    path: Model/Body part X
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

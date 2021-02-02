@@ -53,37 +53,41 @@ public class Destructure : MonoX
 
         foreach (Transform part in modelParts)
         {
-            part.parent = targetWorld;
-            Rigidbody rigid = part.gameObject.AddComponent<Rigidbody>();
-            BoxCollider collider = part.gameObject.AddComponent<BoxCollider>();
-            part.gameObject.AddComponent<SaveVelocity>();
-
-            
-            Transform child = part.childCount > 0 ? part.GetChild(0) : null;
-            rigid.mass = 0.01f;
-            // Reajusta la posición
-            if (child)
+            if (part.gameObject.activeInHierarchy)
             {
-                collider.size = child.localScale;
-                child.position = Vector3.zero;
-                child.localPosition = Vector3.zero;
+                part.parent = targetWorld;
+                Rigidbody rigid = part.gameObject.AddComponent<Rigidbody>();
+                BoxCollider collider = part.gameObject.AddComponent<BoxCollider>();
+                part.gameObject.AddComponent<SaveVelocity>();
+
+
+                Transform child = part.childCount > 0 ? part.GetChild(0) : null;
+                rigid.mass = 0.01f;
+                // Reajusta la posición
+                if (child)
+                {
+                    collider.size = child.localScale;
+                    child.position = Vector3.zero;
+                    child.localPosition = Vector3.zero;
+                }
+                else
+                {
+                    collider.size = Vector3.one;
+                }
+                collider.center = Vector3.zero;
+
+                part.tag = "leftover";
+
+                Vector3 force = Vector3.one * 10;
+
+                for (int x = 0; x < 3; x++)
+                {
+                    force[x] = Random.Range(0, force[x]);
+                }
+
+                rigid.velocity = force;
+                //Añadimos una fuerza aleatoria
             }
-            else
-            {
-                collider.size = Vector3.one;
-            }
-            collider.center = Vector3.zero;
-
-            part.tag = "leftover";
-
-            Vector3 force = Vector3.one * 10;
-
-            for (int x = 0; x < 3; x++) {
-                force[x] = Random.Range(0, force[x]);
-            }
-
-            rigid.velocity = force;
-            //Añadimos una fuerza aleatoria
         }
 
         //Limpiamos la base de la estructura en caso de poseer

@@ -14,7 +14,7 @@ public class Equipment : MonoX
     public PlayerDetector detector;
     [Space]
     private bool canCraft = false;
-    public float timer_craft = Data.data.timeToCraft;
+    private readonly float timer_craft = Data.data.timeToCraft;
 
     private float timeCount_craft = 0;
     private ItemContent[] slots;
@@ -22,6 +22,9 @@ public class Equipment : MonoX
     private int equipedQty = 0;
 
     public CraftType craftWaiting = CraftType.NO;
+    [Space]
+    public ParticleSystem part_eat;
+    public ParticleSystem part_craft;
 
     #endregion
     #region Events
@@ -31,8 +34,9 @@ public class Equipment : MonoX
         ClearSlots();
         //Get(out detector);
         craftWaiting = CraftType.NO;
+
     }
-    private void Update(){
+private void Update(){
 
         //cuidaremos que se actualice el flag para poder crear tras el tiempo...
         CanPassedTime(ref canCraft, ref timeCount_craft, timer_craft);
@@ -123,8 +127,12 @@ public class Equipment : MonoX
             bool isCreation = XavHelpTo.Know.IsEqualOf(craftWaiting, creations);
             if (isCreation)
             {
-                AchieveSystem.UpdateAchieve(Achieves.CREATIONS_GAME);   
+                AchieveSystem.UpdateAchieve(Achieves.CREATIONS_GAME);
 
+            }
+            else
+            {
+                part_craft.Play();
             }
 
         }
@@ -157,7 +165,7 @@ public class Equipment : MonoX
                 equipedQty++;
             }
         }else{
-
+            part_eat.Play();
             //si esta siendo usado lo consumimos
             equipedQty--;
             slots[i] = ItemContent.NO;

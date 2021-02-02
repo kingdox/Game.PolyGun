@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4490448654257868757}
   - component: {fileID: 448485141701364412}
   m_Layer: 0
-  m_Name: fakeItem_1
+  m_Name: Circle Item
   m_TagString: item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5026,7 +5026,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7a613219162e447eea4357a7803e8da6, type: 2}
+  - {fileID: 2100000, guid: 4bd7bb5c932a847eeb83aa2bd847d52f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

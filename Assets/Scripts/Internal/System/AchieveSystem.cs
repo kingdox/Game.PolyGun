@@ -92,12 +92,15 @@ public class AchieveSystem : MonoX
     /// </summary>
     public static void Setitem(int index, AchievementItem item)
     {
-        item.SetItem(new TextValBarItem(
-            _.achievements[index].key,
-            _.achievements[index].keyDesc,
-            _.achievements[index].limit,
-            DataPass.GetSavedData().achievements[index]
-        ));
+        if (index != -1)
+        {   
+            item.SetItem(new TextValBarItem(
+                _.achievements[index].key,
+                _.achievements[index].keyDesc,
+                _.achievements[index].limit,
+                DataPass.GetSavedData().achievements[index]
+            ));
+        }
     }
 
 
@@ -141,12 +144,14 @@ public class AchieveSystem : MonoX
                 //Se batió un record
                 PrintX($"Record batido, de {old_LimitIndex} a {actual_LimitIndex}");
                 unlockShow = true;
+                _.achieveShowCount = 0;
                 Setitem(index, _.achieveUnlockItem);
 
             }
 
     }
 
+    
 
     /// <summary>
     /// Retorna los mejores achievements con diferencia de los datos otorgados,

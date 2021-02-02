@@ -13,7 +13,10 @@ public class PlurController : Minion
     public bool canDamage = true;
     [Space]
     public ParticleSystem par_explode;
-
+    [Space]
+    [Header("Plur Extra")]
+    public SphereCollider boss_trigger;
+    public float radius_explode = 3;
     #endregion
     #region Events
     private void Start()
@@ -42,11 +45,17 @@ public class PlurController : Minion
     {
         TargetManager.EffectInTime(par_explode);
 
+        //si es un enemigo...
+        if (isEnemyBoss)
+        {
+            boss_trigger.radius *= radius_explode;
+        }
+
     }
     private void OnCollisionEnter(Collision collision)
     {
         //si es un enemigo le hará daño y reseteara el timer de daño
-        if (GameManager.IsOnGame() && canDamage) 
+        if (GameManager.IsOnGame() && (canDamage | isEnemyBoss)) 
         {
 
             switch (collision.transform.tag)
@@ -113,7 +122,7 @@ public class PlurController : Minion
             float playerDistance = Vector3.Distance(transform.position, player.position);
 
             //si es nulo la busqueda entonces por defecto agarra al player
-            if (target == null)
+            if (target == null || isEnemyBoss)
             {
                 //busca el player
                 target = player;

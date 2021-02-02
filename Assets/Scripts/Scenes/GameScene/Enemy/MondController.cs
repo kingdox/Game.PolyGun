@@ -48,6 +48,9 @@ public class MondController : Minion
         //al inicio se carga target con el transform de este obj
         _player = TargetManager.GetPlayer();
 
+
+        character.canExtraShots = isEnemyBoss;
+
     }
     private void Update()
     {
@@ -139,7 +142,7 @@ public class MondController : Minion
         Transform allyMinion = TargetManager.GetAlly(transform);
 
         //check if exist an ally minion
-        if (allyMinion != null) 
+        if (allyMinion != null && !isEnemyBoss) 
         {
             //gets the distance of the ally and the player
             float allyDistance = Vector3.Distance(transform.position, allyMinion.position);

@@ -27,7 +27,7 @@ public class GameManager : MonoManager
     {
         _ = this;
 
-
+        //PrintX($" { nameof(Start)} {nameof(@Start)}");
         gameStatus = GameStatus.ON_GAME;
         Time.timeScale = 1f;
         Cursor.visible = false;

@@ -47,6 +47,7 @@ public class PlayerController : MonoX
     [Space]
     private float deathLimitCount=0;
     private float movementsCount = 0;
+    [Space]
 
     [Header("Debug")]
     private static float entryLife = -1;

@@ -28,7 +28,7 @@ public class Shot : MonoX
     /// Creamos una bala y se le coloca los parametros basado en <see cref="Shot"/>
     /// <para>Devuelve true si ha completado el disparo</para>
     /// </summary>
-    public bool ShotBullet(Character character){
+    public bool ShotBullet(Character character, Transform tr = null){
 
         if (!canShot) return false;
         canShot = false;

@@ -143,23 +143,27 @@ public class UIManager : MonoX
             if (!equipItems[x].Equals(ItemContent.NO)){
 
                 int val = (int)equipItems[x];
-                //TODO provisional, falta asignar los colores
                 if (val >= 3)
                 {
                     img_slots[x].sprite = sprite_items[3];
+                    img_slots[x].color = buffHUDcolors[val - 3];
                     XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, 1);
                 }
                 else
                 {
                     //lo normal
+                    img_slots[x].color = Color.white;
                     img_slots[x].sprite = sprite_items[val];
                     XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, 1);
                 }
             }
             else{
                 img_slots[x].sprite = null;
+                img_slots[x].color = Color.white;
                 XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, disabledAlpha);
             }
+
+            //Invoke(nameof(@Refresh_playerBuff), 69);
 
         }
     }
