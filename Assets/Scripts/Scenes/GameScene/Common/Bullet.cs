@@ -1,4 +1,5 @@
 ﻿#region Imports
+using System;
 using UnityEngine;
 #endregion
 [RequireComponent(typeof(Movement))]
@@ -21,8 +22,18 @@ public class Bullet : MonoX
     [Space]
     public bool canFollow = false;
     [Header("Effects")]
-    public TrailRenderer part_trail;
+    //public TrailRenderer part_trail;
     public ParticleSystem part_contact;
+    [Space]
+    public Transform tr_owner;
+    public bool shotSucces = false;
+
+
+    public event Action ActionShotSucces;
+
+    [Space]
+    private Transform nearest;
+
     #endregion
     #region Events
     private void Awake(){
@@ -32,6 +43,8 @@ public class Bullet : MonoX
         GetAdd(ref saveVelocity);
 
         initPos = transform.position;
+        shotSucces = false;
+        tr_owner = null;
     }
 
     private void Start()
@@ -39,18 +52,9 @@ public class Bullet : MonoX
         //Si puede seguir busca a un enemigo y se ajusta
         if (canFollow)
         {
-            Transform tran_enemy = TargetManager.GetEnemy(transform);
+            nearest = TargetManager.GetEnemy(transform);
 
-            //si no consigue enemigo...
-            if (tran_enemy == null) 
-            {
-                canFollow = false;
-            }
-            else
-            {
-                direction = tran_enemy.position;
-                rotation.LookTo(direction);
-            }
+            CheckNearest();
         }
     }
     
@@ -64,8 +68,7 @@ public class Bullet : MonoX
 
             if (canFollow)
             {
-                //updates the rotation based on the actual direction
-                rotation.LookTo(direction);
+                CheckNearest();
                 //movement following the actual directiong
                 if (movement.Move(direction, bulletShot.speed, canFollow))
                 {
@@ -109,11 +112,13 @@ public class Bullet : MonoX
         bool destroyBullet = IsTag(entryTag, possibleTags);//Sleeping Games
 
         // If is true then destroy the bullet
-        if (destroyBullet)
+        if (destroyBullet && !shotSucces)
         {
             //PrintX($"[{bulletShot.owner}]-{name} is triggering with tag [{entryTag}] - {other.name}");
             if (!entryTag.Equals("obstacle"))
             {
+             
+
                 switch (bulletShot.owner)
                 {
                     case CharacterType.ALLY:
@@ -147,8 +152,8 @@ public class Bullet : MonoX
     }
     private void OnDisable()
     {
-        part_trail.transform.parent = TargetManager.GetLeftoverContainer();
-        Destroy(part_trail, part_trail.time);
+        //part_trail.transform.parent = TargetManager.GetLeftoverContainer();
+        //Destroy(part_trail, part_trail.time);
 
         part_contact.transform.parent = TargetManager.GetLeftoverContainer();
         part_contact.Play();
@@ -158,6 +163,19 @@ public class Bullet : MonoX
     #endregion
     #region Methods
 
+    private void CheckNearest()
+    {
+        //si no consigue enemigo...
+        if (nearest == null)
+        {
+            canFollow = false;
+        }
+        else
+        {
+            direction = nearest.position;
+            rotation.LookTo(direction);
+        }
+    }
 
     /// <summary>
     /// Inflict damage to a minion
@@ -166,8 +184,12 @@ public class Bullet : MonoX
     {
         Minion minion = tr_minion.GetComponent<Minion>();
 
+
         if (minion)
         {
+            shotSucces = true;
+            ActionShotSucces?.Invoke();
+
             minion.character.timeLife -= bulletShot.damage;
             minion.body.AddForce(transform.forward * 5, ForceMode.Impulse);
 
@@ -199,6 +221,8 @@ public class Bullet : MonoX
 
     private void ShotPlayer(Transform tr_player)
     {
+        shotSucces = true;
+        ActionShotSucces?.Invoke();
         PlayerController player = tr_player.GetComponent<PlayerController>();
         player.character.timeLife -= bulletShot.damage;
         player.body.AddForce(transform.forward * 5, ForceMode.Impulse);

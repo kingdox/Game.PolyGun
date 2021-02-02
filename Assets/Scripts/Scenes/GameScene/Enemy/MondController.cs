@@ -74,7 +74,7 @@ public class MondController : Minion
                 if (IsInRange() )
                 {
                     //if can attack then it shot
-                    shot.ShotBullet(character);
+                    shot.ShotBullet(character, isEnemyBoss);
 
                 }
 

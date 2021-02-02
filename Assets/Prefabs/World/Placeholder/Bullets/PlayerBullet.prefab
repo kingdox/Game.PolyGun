@@ -127,7 +127,7 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
 --- !u!1 &5517740704302214468
 GameObject:
@@ -10088,6 +10088,8 @@ MonoBehaviour:
   canFollow: 0
   part_trail: {fileID: 7353141404117442942}
   part_contact: {fileID: 397616907946351617}
+  tr_owner: {fileID: 0}
+  shotSucces: 0
 --- !u!114 &4839195275440673644
 MonoBehaviour:
   m_ObjectHideFlags: 0

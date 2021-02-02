@@ -13,6 +13,9 @@ public class Shot : MonoX
     public bool canShot;
     public float timer_bullet;
     public float timeCount_bullet;
+    //[Space]
+    //usado para manejar lod e BOSS Mond
+    //public Bullet bullets = null;
 
     #endregion
     #region Events
@@ -28,7 +31,7 @@ public class Shot : MonoX
     /// Creamos una bala y se le coloca los parametros basado en <see cref="Shot"/>
     /// <para>Devuelve true si ha completado el disparo</para>
     /// </summary>
-    public bool ShotBullet(Character character, Transform tr = null){
+    public bool ShotBullet(Character character, bool actions=false){
 
         if (!canShot) return false;
         canShot = false;
@@ -37,10 +40,10 @@ public class Shot : MonoX
         //estas solo aparecen si en el rango hay algún objetivo?
         if (character.canExtraShots)
         {
-            CreateBullet(character).canFollow = true;
+            CreateBullet(character, actions).canFollow = true;
         }
 
-        CreateBullet(character);
+        CreateBullet(character, actions);
 
         return true;
     }
@@ -48,20 +51,29 @@ public class Shot : MonoX
     /// <summary>
     /// Crea yba bala y le asigna los valores
     /// </summary>
-    private Bullet CreateBullet(Character character, Transform t = null)
+    private Bullet CreateBullet(Character character, bool actions)
     {
-        Default(ref t, transform);
+        //Default(ref t_owner, transform);
 
         //.LookRotation(t.position)
-        Bullet newBullet = Instantiate(pref_bullet, t.position, Quaternion.identity , TargetManager.GetBulletsContainer() );
+        Bullet newBullet = Instantiate(pref_bullet, transform.position, Quaternion.identity , TargetManager.GetBulletsContainer() );
 
         //asignation of rotation
-        newBullet.SetDirection(t);
+        newBullet.SetDirection(transform);
+
+        if (actions)
+        {
+            newBullet.tr_owner = transform;
+        }
 
         //Asignation of stats
         newBullet.bulletShot.GetShotOf(character);
         return newBullet;
     }
+
+
+
+
     #endregion
 }
 /// <summary>

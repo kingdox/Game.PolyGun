@@ -4997,7 +4997,7 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
 --- !u!1 &6080455039677767692
 GameObject:
@@ -10020,6 +10020,7 @@ GameObject:
   - component: {fileID: 4839195275440673644}
   - component: {fileID: -6016848508572664016}
   - component: {fileID: 7336980576006327223}
+  - component: {fileID: 5633299357127019451}
   m_Layer: 0
   m_Name: MondBullet
   m_TagString: bullet
@@ -10072,6 +10073,8 @@ MonoBehaviour:
   canFollow: 0
   part_trail: {fileID: 7353141404117442942}
   part_contact: {fileID: 2260181632996594183}
+  tr_owner: {fileID: 0}
+  shotSucces: 0
 --- !u!54 &1355580198314344189
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10130,6 +10133,18 @@ MonoBehaviour:
   targetModel: {fileID: 1000572413119013132}
   modelParts: []
   _Debug_Destructure: 0
+--- !u!114 &5633299357127019451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8168226219730605337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbe08ac8dd3f4774a711fd9c425e6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8270573577011307823
 GameObject:
   m_ObjectHideFlags: 0

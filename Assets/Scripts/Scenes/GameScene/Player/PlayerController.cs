@@ -78,11 +78,7 @@ public class PlayerController : MonoX
         }
 
 
-        //si estas largos periodos de tiempo (el deathlimit) y pasa ese tiempo
-        if (character.IsInDeathLimit() && Timer(ref deathLimitCount, 10))
-        {
-            AchieveSystem.UpdateAchieve(Achieves.TIME_DEATHLIMIT);
-        }
+       
 
 
     }
@@ -90,6 +86,7 @@ public class PlayerController : MonoX
     {
         if (!isDead && GameManager.IsOnGame())
         {
+            
             Movement(); // movement se maneja internamente
         }
         else
@@ -111,7 +108,11 @@ public class PlayerController : MonoX
                 BuffsUpdate();
                 Equipment();
                 Attack();
-
+                //si estas largos periodos de tiempo (el deathlimit) y pasa ese tiempo
+                if (character.IsInDeathLimit() && Timer(ref deathLimitCount, 10))
+                {
+                    AchieveSystem.UpdateAchieve(Achieves.TIME_DEATHLIMIT);
+                }
 
                 if (character.timeLifeMax < character.timeLife)
                 {

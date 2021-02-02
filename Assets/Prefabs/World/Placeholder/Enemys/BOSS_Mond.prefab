@@ -10063,7 +10063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b022394c944734a1787fd03088a55b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pref_bullet: {fileID: 2417267444875641687, guid: 25385511f41dd4b75874e581d6fe55de, type: 3}
+  pref_bullet: {fileID: 5113409957812322451, guid: 1cb2505a5fc134db3a6df4afd557015e, type: 3}
   canShot: 0
   timer_bullet: 2
   timeCount_bullet: 0
