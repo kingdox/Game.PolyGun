@@ -5,10 +5,11 @@ public class BoxBoxController : Minion
 {
     #region Variable
 
-   
+
     [Header("BoxBox Settings")]
-    private float damageTimeCount;
+    public ParticleSystem part_attack;
     public bool canDamage;
+    private float damageTimeCount;
     #endregion
     #region Events
     private void Start()
@@ -61,6 +62,7 @@ public class BoxBoxController : Minion
     private void BoxBoxAttack(Transform enemyInContact)
     {
         Minion minion = enemyInContact.GetComponent<Minion>();
+        part_attack.Play();
         MinionDamage(minion);
     }
 

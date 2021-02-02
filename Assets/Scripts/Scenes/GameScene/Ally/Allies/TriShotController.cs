@@ -20,6 +20,8 @@ public class TriShotController : Minion
     [Space]
     public float maxRangeSize = 2;
     public float minRangeSize = 4;
+    [Space]
+    public ParticleSystem part_Dead;
     #endregion
     #region Events
     private void Start()

@@ -156,18 +156,27 @@ public class AchieveSystem : MonoX
     public static int[] GetBestAchievements(float[] oldAchievements)
     {
         //int[] newAcheiveOrder = new int[oldAchievements.Length];
-        int[] newAcheiveOrder = { 0, 1, 9 };
+        int[] newAchieve = { 0, 1, 9 };
 
+        float[] pcts = new float[achievementLenght];
+
+        float[] savedAchieve = DataPass.GetSavedData().achievements;
 
         //Organizar por los que tuvieron mayores cambios
         //se resta 
+        for (int x = 0; x < oldAchievements.Length; x++)
+        {
+            pcts[x] = XavHelpTo.Get.PercentOf(savedAchieve[x], oldAchievements[x] );
+            pcts[x]--;
+            XavHelpTo.Set.Positive(-pcts[x]);
+            //ahora 0 es lo pero y 1 es el maximo
+        }
+        //TODO Metodo Burbuja
+        //savedAchieve.
 
 
 
-
-
-
-        return newAcheiveOrder;
+        return newAchieve;
     }
 
 
