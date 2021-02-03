@@ -27,6 +27,8 @@ public class PolController : Minion
     public Equipment equipment;
     [Space]
     public ParticleSystem par_explode;
+    public ParticleSystem part_attack;
+
     //ranged attack
     //private Shot shot;
 
@@ -46,7 +48,8 @@ public class PolController : Minion
 
             if (target != null)
             {
-                AttackUpdate();
+                AttackUpdate(ref canDamage, ref damageTimeCount);
+
 
                 if (target != transform)
                 {
@@ -88,26 +91,25 @@ public class PolController : Minion
     //        Gizmos.DrawLine(transform.position, target.position);
     //    }
     //}
+    private void OnCollisionStay(Collision collision)
+    {
+        if (CanAttack(collision.transform, canDamage, "enemy"))
+        {
+            canDamage = false;
+            part_attack.Play();
+            MinionAttackMinion(collision.transform);
+        }
+
+    }
     private void OnDisable()
     {
         par_explode.Play();
         TargetManager.EffectInTime(par_explode);
     }
     #endregion
-    #region 
+    #region  Method
 
-
-    /// <summary>
-    /// Updates the attack of BoxBox
-    /// </summary>
-    private void AttackUpdate()
-    {
-        if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
-        {
-            //can attack again
-            canDamage = true;
-        }
-    }
+   
 
 
 

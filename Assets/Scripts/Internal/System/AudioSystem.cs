@@ -81,7 +81,7 @@ public class AudioSystem : MonoInit
     public static void SetSounds()
     {
         _.mixer.SetFloat(SFX_VOLUME_NAME, OptionData.sfxVolume[DataPass.GetSavedData().sfxVolume]);
-        PrintX("Cambios");
+        //PrintX("Cambios");
     }
     #endregion
 }

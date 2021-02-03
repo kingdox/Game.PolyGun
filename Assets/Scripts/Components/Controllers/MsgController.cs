@@ -238,8 +238,9 @@ public class MsgController : MonoInit
                     //TODO por aquí hay un error de longitudes, revisar
                     //Debug.Log($"{actualText.Length}, {textParts[0].Length}, {XavHelpTo.Set.Join(tagParts).Length}");
                     int newIndex = endTagIndex ;//textParts[0].Length + XavHelpTo.Set.Join(tagParts).Length;
-
-                    Debug.Log($" textParts[0] {textParts[0]} | endTagIndex: {endTagIndex} | {actualText[endTagIndex]}");
+                    //FIXME por aqui tengo un problema FIXME
+                    //TODOseria bueno refactorizar el script entero
+                    //Debug.Log($" textParts[0] {textParts[0]} | endTagIndex: {endTagIndex} | {actualText[endTagIndex]}");
 
                     StartCoroutine(SetText(speed, number, newIndex, actualText));
                 }

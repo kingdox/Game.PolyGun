@@ -1,6 +1,4 @@
 ﻿#region
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Environment;
@@ -12,6 +10,7 @@ public class MenuInputController : MonoX
     [Header("MenuInputController")]
     // => Los botones que vamos a evaluar 
     public Button[] buttons;
+    [Space]
     public int lastIndex = 0;
 
     //private readonly float keyTimeCD = 0.25f;private float keyTimeCount = 0;

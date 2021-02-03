@@ -123,7 +123,9 @@ public enum TKey
     ATTACK,
     #endregion
     #region Etc 3
-    PAUSE
+    PAUSE,
+    TITLE_END
+
     #endregion
 
 }

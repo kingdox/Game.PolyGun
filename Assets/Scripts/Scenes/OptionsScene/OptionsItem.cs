@@ -1,6 +1,4 @@
 ﻿#region IMports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Options;
@@ -19,7 +17,11 @@ public class OptionsItem : MonoBehaviour{
     /// Enviamos a <see cref="OptionSystem"/>
     /// el comportamiento del botón
     /// </summary>
-    public void SendButtonAction(bool condition) => OptionSystem.Actions(opt,condition, true);
+    public void SendButtonAction(bool condition)
+    {
+        //al presionar no nos actualiza el indice,
+        OptionSystem.Actions(opt, condition, true);
+    }
     /// <summary>
     /// Refrescamos el <see cref="MsgController"/> hijo
     /// </summary>

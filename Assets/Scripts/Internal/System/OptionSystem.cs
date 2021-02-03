@@ -46,10 +46,19 @@ public class OptionSystem : MonoBehaviour
     {
         if (isOpened)
         {
+
+            //FIXME no permite seleccionar con el mouse
+            //Last index no se actualiza 
+
             //Si es distinto el indice debemos refrescar
             if (!menuInputs.lastIndex.Equals((int)lastOpt))   
             {
+
                 lastOpt = (Option)menuInputs.lastIndex;
+
+
+                //menuInputs.lastIndex = lastOpt;
+
                 LoadMsg();
             }
             if (Input.anyKeyDown) OptChecker();
@@ -95,12 +104,14 @@ public class OptionSystem : MonoBehaviour
         //XavHelpTo.Look.Print($"Entra a actions con el Buton clickeado {option}");
         //Actualizamos a el ultimo botón
         lastOpt = option;
+        _.menuInputs.lastIndex = (int)lastOpt;
+
         //UpdateLastOption();
 
         //enfocamos al escogido
 
 
-       // Debug.Log($"Option . =>  {option} : {condition}");
+        // Debug.Log($"Option . =>  {option} : {condition}");
         if (option.Equals(Option.BACK))
         {
             if (fromOpt) {

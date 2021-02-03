@@ -52,11 +52,15 @@ public class GameManager : MonoManager
     }
     public override void Init()
     {
-        //🩹parche para obtener los guardados sin ser referencia...
+        //🩹parche para obtener los guardados sin ser referencia... TODO entender por que la toma como igual
         lastSaved = new SavedData(DataPass.GetSavedData());
         //debugS = lastSaved;
         AudioSystem.SetThisMusic(clip);
 
+    }
+    private void OnDisable()
+    {
+        AchieveSystem.unlockShow = false;
     }
     #endregion
     #region Methods

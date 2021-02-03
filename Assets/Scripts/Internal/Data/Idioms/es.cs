@@ -114,7 +114,8 @@
                     "Espacio",
 #endregion
 #region Etc 3
-                    "Pausa"
+                    "Pausa",
+                    "Fin"
 #endregion
         };
     }

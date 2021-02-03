@@ -97,7 +97,7 @@
 #endregion
 #region 
                     "Play again",
-                    "Resume",
+                    "Summary",
                     //Titles
                     "Poly-Gun: Irregular adventure",
                     "Introductions",
@@ -114,7 +114,8 @@
                     "Space",
 #endregion
 #region Etc 3
-                    "Pause"
+                    "Pause",
+                    "End"
 #endregion
         };
     }

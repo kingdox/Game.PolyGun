@@ -119,6 +119,30 @@ public abstract class Minion : MonoX
 
     }
 
-   
+    /// <summary>
+    /// inflict damage to a minion
+    /// </summary>
+    public void MinionAttackMinion(Transform enemyInContact)
+    {
+        Minion minion = enemyInContact.GetComponent<Minion>();
+        MinionDamage(minion);
+    }
+
+    /// <summary>
+    /// Updates the flag attack when is  ready, depends of a timer and their char.atkspeed
+    /// </summary>
+    public void AttackUpdate(ref bool canDamage, ref float damageTimeCount)
+    {
+        if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
+        {
+            canDamage = true;
+        }
+    }
+
+    /// <summary>
+    /// Returns true if the minion can attack
+    /// </summary>
+    public bool CanAttack(Transform tr, bool canDamage, string tag) => GameManager.IsOnGame() && canDamage && tr.CompareTag(tag);
+
     #endregion
 }

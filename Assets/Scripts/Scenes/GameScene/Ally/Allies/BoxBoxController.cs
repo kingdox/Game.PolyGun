@@ -25,7 +25,8 @@ public class BoxBoxController : Minion
 
         if (UpdateMinion())
         {
-            AttackUpdate();
+            AttackUpdate(ref canDamage, ref damageTimeCount);
+
 
             //se mueve solo cuando puede volver a hacer daño
             if (canDamage)
@@ -38,12 +39,13 @@ public class BoxBoxController : Minion
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
-        if (CanAttack(collision.transform))
+        if (CanAttack(collision.transform, canDamage, "enemy"))
         {
             canDamage = false;
-            BoxBoxAttack(collision.transform);
+            part_attack.Play();
+            MinionAttackMinion(collision.transform);
         }
     }
     //private void OnDrawGizmos()
@@ -61,29 +63,8 @@ public class BoxBoxController : Minion
     }
     #endregion
     #region Methods
-    private bool CanAttack(Transform tr) => GameManager.IsOnGame() && canDamage && tr.CompareTag("enemy");
 
-    /// <summary>
-    /// action to damage a minion enemy
-    /// </summary>
-    /// <param name="enemyInContact"></param>
-    private void BoxBoxAttack(Transform enemyInContact)
-    {
-        Minion minion = enemyInContact.GetComponent<Minion>();
-        part_attack.Play();
-        MinionDamage(minion);
-    }
 
-    /// <summary>
-    /// Updates the attack of BoxBox
-    /// </summary>
-    private void AttackUpdate()
-    {
-        if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
-        {
-            canDamage = true;
-        }
-    }
     /// <summary>
     ///  Follow the nearest enemy, else it follow itself (does'nt move)
     ///  rotates if exist a enemy target

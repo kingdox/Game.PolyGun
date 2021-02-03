@@ -12,7 +12,7 @@ public class MondController : Minion
     [Header("Mond Settings")]
     //public float damageTimeCount = 0;
     //public bool canDamage = true;
-    private bool canInteract;
+    //private bool canInteract;
 
     private float refreshTargetCount;
     [Space]

@@ -29,7 +29,7 @@ public class PlurController : Minion
 
         if (UpdateMinion())
         {
-            AttackUpdate();
+            AttackUpdate(ref canDamage, ref damageTimeCount);
 
             if (canDamage)
             {
@@ -53,7 +53,7 @@ public class PlurController : Minion
         }
 
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         //si es un enemigo le hará daño y reseteara el timer de daño
         if (GameManager.IsOnGame() && (canDamage | isEnemyBoss)) 
@@ -62,12 +62,10 @@ public class PlurController : Minion
             switch (collision.transform.tag)
             {
                 case "ally":
-                    PlurAttack(collision.transform);
+                    MinionAttackMinion(collision.transform);
                     canDamage = false;
                     par_attack.Play();
-                    //Minion minion = collision.transform.GetComponent<Minion>();
-                    //MinionDamage(minion);
-                    //minion.character.timeLife -= character.damage;
+                    
                     break;
                 case "player":
                     //Exception
@@ -85,77 +83,50 @@ public class PlurController : Minion
     #endregion
     #region Methods
 
-    /// <summary>
-    /// action to damage a minion enemy
-    /// </summary>
-    /// <param name="enemyInContact"></param>
-    private void PlurAttack(Transform tr)
-    {
-        Minion minion = tr.GetComponent<Minion>();
-        MinionDamage(minion);
-    }
-
-    /// <summary>
-    /// Updates the attack of BoxBox
-    /// </summary>
-    private void AttackUpdate()
-    {
-        if (!canDamage && Timer(ref damageTimeCount, character.atkSpeed))
-        {
-            canDamage = true;
-        }
-    }
+   
 
     /// <summary>
     ///  Follow the nearest enemy, else it follow itself (does'nt move)
     /// </summary>
     private void PathUpdate()
     {
-        //TODO Tratar de buscar al más cercano,
-        //TODO aquí se queda pegado en player
-        //if can't find a target then try to look another
-        if (target == null || target == transform)
+
+        //Buscar el player o un ally
+        Transform player = TargetManager.GetPlayer();
+        //busca uno de los aliados
+        target = TargetManager.GetAlly(transform);
+
+        float playerDistance = Vector3.Distance(transform.position, player.position);
+
+        //si es nulo la busqueda entonces por defecto agarra al player
+        if (target == null || isEnemyBoss)
         {
-
-            //Buscar el player o un ally
-            Transform player = TargetManager.GetPlayer();
-            //busca uno de los aliados
-            target = TargetManager.GetAlly(transform);
-
-            float playerDistance = Vector3.Distance(transform.position, player.position);
-
-            //si es nulo la busqueda entonces por defecto agarra al player
-            if (target == null || isEnemyBoss)
-            {
-                //busca el player
-                target = player;
-            }
-            else
-            {
-                float targetDistance = Vector3.Distance(transform.position, target.position);
-                if (playerDistance > targetDistance)    
-                {
-                    target = player;
-                }
-
-            }
+            //busca el player
+            target = player;
         }
         else
         {
-            if (transform.position.y < 3)
+            float targetDistance = Vector3.Distance(transform.position, target.position);
+            if (playerDistance > targetDistance)    
             {
-                //moves it
-                if (!IsInRange())
-                {
-                    rotation.LookTo(target.position);
-                    movement.Move(transform.forward.normalized, character.speed);
-                }
-                else
-                {
-                    movement.StopMovement();
-                }
+                target = player;
             }
 
+        }
+
+      
+        if (transform.position.y < 3)
+        {
+            //moves it
+            if (!IsInRange())
+            {
+                rotation.LookTo(target.position);
+                movement.Move(transform.forward.normalized, character.speed);
+            }
+            else
+            {
+                movement.StopMovement();
+            }
         }
     }
     #endregion
