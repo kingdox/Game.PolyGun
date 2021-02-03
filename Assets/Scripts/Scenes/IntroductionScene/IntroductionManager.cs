@@ -33,6 +33,7 @@ public class IntroductionManager : MonoManager
         saved.isIntroCompleted = true;
         DataPass.SetData(saved);
         AchieveSystem.UpdateAchieve(Achieves.ESPECIAL_READ);
+        DataPass.SaveLoadFile(true);
 
     }
     private void Update()

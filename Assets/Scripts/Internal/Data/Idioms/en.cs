@@ -4,96 +4,116 @@
     {
         public static readonly string[] en =
             {
-            // IDIOM TODO
-            "English",
-               #region Buttons
+                // IDIOM
+                "English",
+
+#region Buttons
                     // BUTTONS
-                    "_0_PLAY",
-                    "_1_INTRODUCTION",
-                    "_2_ACHIEVEMENTS",
-                    "_3_OPTIONS",
-                    "_4_EXIT",
-                    "_5_BACK",
-                    "_6_LANGUAGE",
-                    "_7_TEXTSPEED",
-                    "_8_MUSIC",
-                    "_9_SOUND",
-                    "_10_CONTROLS",
-                    "_11_TUTORIAL",
-                    "_12_MANUAL",
-                    "_13_CREDITS",
+                    "Play",
+                    "Introduction",
+                    "Achievements",
+                    "Options",
+                    "Exit",
+                    "Back",
+                    "Language",
+                    "Read",
+                    "Music",
+                    "Sounds",
+                    "Controls",
+                    "Tutorial",
+                    "Manual",
+                    "Credits",
 #endregion
 #region AchievementsScene
 
-                     //Achievements
-                    // P1 TODO
-                    "ACHIEVE_KILLS_ROBOT",
-                    "ACHIEVE_KILLS_BOSS",
-                    "ACHIEVE_WAVES_ENEMIES",
-                    "ACHIEVE_OBJECTS_COLLECTED",
-                    "ACHIEVE_HEALS_GAME",
+                     //Achievements (y su descripción)
+                    // P1
+                    "Ace", "Destroy a lot of enemies.",
+                    "Big boi", "Destroy a lot of boss enemies.",
+                    "Survivor", "Stay alive the most waves possibles !",
+                    "Shapes on you", "Collect the objects of the floor",
+                    "Med", "Recover life eating figures",
                     // P2
-                    "ACHIEVE_TIME_DEATHLIMIT",
-                    "ACHIEVE_METTERS_GAME",
-                    "ACHIEVE_CREATIONS_GAME",
-                    "ACHIEVE_ROBOTS_ALIVE",
-                    "ACHIEVE_ESPECIAL_READ",
+                    "Unlimited", " Stay alive near of the death for a long periods of time...",
+                    "Speedrun", "Travel with Poly a lot of metters",
+                    "Godlike", "Make as helpers as you can",
+                    "Nerdy", "What a great read guy you are !",
+                    "Corrupted", "Don't you dare to....",
 #endregion
 #region Messages, del menúScene
 
-                    //Messages TODO
-                    "MSG_CYBORG_WHERE",
-                    "MSG_CYBORG_UNKNOW",
+                    //Messages
+                    "This game was med with a lot of love :)",
+                    "Are you still here?",
 #endregion
 #region Messages, de Opciones
 
                     //Messages Opt (Mensajes de las opciones
-                    "ESMSG_OPT_LANGUAGE",
-                    "MSG_OPT_TEXTSPEED",
-                    "MSG_OPT_MUSIC",
-                    "MSG_OPT_SOUND",
-                    "MSG_OPT_CONTROLS",
-                    "MSG_OPT_BACK",
+                    "The languages of the game",
+                    "Speed of the messages",
+                    "Music of the game",
+                    "Sound of the game, sound effects",
+                    "Change the controls of the game",
+                    "Go back",
 
                     // MSG_OPT_TEXTSPEED
-                    "MSG_OPT_TEXTSPEED_INSTANT",
-                    "MSG_OPT_TEXTSPEED_FAST",
-                    "MSG_OPT_TEXTSPEED_NORMAL",
-                    "MSG_OPT_TEXTSPEED_SLOW",
+                    "Instant",
+                    "Fast",
+                    "Normal",
+                    "Slow",
 
                     // MSG_OPT_MUSIC
-                    "MSG_OPT_MUSIC_NO",
-                    "MSG_OPT_MUSIC_LOW",
-                    "MSG_OPT_MUSIC_NORMAL",
-                    "MSG_OPT_MUSIC_HIGH",
+                    "Off",
+                    "Low",
+                    "Normal",
+                    "Max",
 
                     // MSG_OPT_SOUND
-                    "MSG_OPT_SOUND_NO",
-                    "MSG_OPT_SOUND_YES",
+                    "Sound Off",
+                    "Sound On",
 
                     // MSG_OPT_CONTROLS
-                    "MSG_OPT_CONTROLS_NORMAL",
-                    "MSG_OPT_CONTROLS_INVERT",
+                    "Controls by default (Arrows to move and C,V,B to manage the objects)",
+                    "Controls alternative (WASD to movements and arrows to manage the objects)",
 #endregion
 #region Messages, de InitScene
-                    "MSG_INIT_HISTORY",
-                    "MSG_INIT_PRESS_ANY",
+                    "In a strange world of figures, Poly was created, a being that never had to exist, it was a mistake due to the fusion of fragments, the evil figures have decided to eliminate Poly, but he will not be defeated...",
+                    "Press any key to start",
 #endregion
 #region IntroductionScene
                     // Tutorial PAGES
-                    "PAGE_TUTORIAL_1",
-                    "PAGE_TUTORIAL_2",
-                    "PAGE_TUTORIAL_3",
+                    "Poly-Gun: Irregular adventure it's a game where we will need to destroy waves of enemies the major time possible",
+                    "Poly can shot bullets to destroy the enemies and he can collect objects of the floor (you can select a object when it shine)",
+                    "The collected objects can be consumed to recover life, or get buffs, if you have 3 figures you may create an especial helper or a buff",
                     // Manual PAGES
-                    "PAGE_MANUAL_1",
-                    "PAGE_MANUAL_2",
-                    "PAGE_MANUAL_3",
+                    "You will move in the map with the keys of movements (Check the options to see the keys, by default is the arrows) \n\n You can Collect and consume the objects with the 3 key slots (see the options to know the keys, by default C,V y B ). \n(the nerarest object will be shownerd with a shiny bright area).",//323232
+                    "You will have a 'Time Life' that represent the Poly's life, it decreases each second, if it reach to 0 then you loss, recover your life eating figures !",
+                    "Remember that allies and helpers gets their own life time, it's recomendable to knows all the amounts of time of each one",
                     // Credits PAGES
-                    "PAGE_CREDITS_TITLE",
-                    "PAGE_CREDITS_1",
-                    "PAGE_CREDITS_2",
-                    "PAGE_CREDITS_YOU"
+                    "Credits",
+                    "Xavier Arpa L.",
+                    ".... :(",
+                    "Thx to play :,)",
+#endregion
+#region 
+                    "Play again",
+                    "Resume",
+                    //Titles
+                    "Poly-Gun: Irregular adventure",
+                    "Introductions",
+                    "Achievements",
+                    "Options",
+#endregion
+#region Etc 2
+                    "C",
+                    "V",
+                    "B",
+                    "Left",
+                    "Down",
+                    "Right",
+                    "Space",
 #endregion
         };
     }
+
 }

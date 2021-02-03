@@ -11,8 +11,7 @@ public class AchieveSystem : MonoX
     private static AchieveSystem _;
 
     [Header("Achieve Unlock Settings")]
-
-    public float achieveShowTimer = 5;
+    
     private float achieveShowCount = 0;
 
     public static int achievementLenght;
@@ -42,7 +41,7 @@ public class AchieveSystem : MonoX
 
 
             //si pasa ese tiempo mientras se está mostrando en pantalla el  modal lo cierra
-            if (unlockShow && Timer(ref achieveShowCount, achieveShowTimer))  
+            if (unlockShow && Timer(ref achieveShowCount, Data.RECORD_ACHIEVE_TIMER))  
             {
                 unlockShow = false;
 
@@ -148,7 +147,6 @@ public class AchieveSystem : MonoX
                 Setitem(index, _.achieveUnlockItem);
 
             }
-
     }
 
     
@@ -161,28 +159,76 @@ public class AchieveSystem : MonoX
     public static int[] GetBestAchievements(float[] oldAchievements)
     {
         //int[] newAcheiveOrder = new int[oldAchievements.Length];
-        int[] newAchieve = { 0, 1, 9 };
+        int[] newAchieve = { -1, -1, -1 };
 
         float[] pcts = new float[achievementLenght];
 
         float[] savedAchieve = DataPass.GetSavedData().achievements;
 
-        //Organizar por los que tuvieron mayores cambios
-        //se resta 
-        for (int x = 0; x < oldAchievements.Length; x++)
+
+
+        //calculo maximo
+        int maxValIndex = 0;
+        for (int x = 0; x < achievementLenght; x++)
         {
-            pcts[x] = XavHelpTo.Get.PercentOf(savedAchieve[x], oldAchievements[x] );
-            pcts[x]--;
-            XavHelpTo.Set.Positive(-pcts[x]);
-            //ahora 0 es lo pero y 1 es el maximo
+            float count = savedAchieve[x] - oldAchievements[x];
+            float max = _.achievements[x].limit.gold;
+            pcts[x] = XavHelpTo.Get.PercentOf(count, max);
+            //PrintX($"count - {count}, max -{max}, pct{pcts[x]}");
+
+            if (pcts[x] >  pcts[maxValIndex])
+            {
+                //actualizamos el indice
+                maxValIndex = x;
+            }
+
         }
-        //TODO Metodo Burbuja
-        //savedAchieve.
+
+
+        //bool isRepeated = false;
+
+        //recorreremos
+        for (int j = 0; j < newAchieve.Length; j++)
+        {
+            //asignamos el indice del mayor valor
+            newAchieve[j] = maxValIndex;
+
+            maxValIndex = KnowInferiorVal(maxValIndex, pcts);
+
+        }
+
+
+        //Cambiamos los valores que sean iguales con cualquier otro del arreglo
+        newAchieve = XavHelpTo.Set.DifferentIndexInEquals(newAchieve, achievementLenght);
+
 
 
 
         return newAchieve;
     }
+
+
+    /// <summary>
+    /// Knows the inferior val of an value but greater than the value of the index
+    /// </summary>
+    private static int KnowInferiorVal(int index, float[] arr)
+    {
+        //es el ultimo inferior detectado
+        int lastInfIndex = 0;
+
+        for (int x = 0; x < arr.Length; x++)
+        {   
+            //recorro y actualizo el index y reviso si alguno es mayor que el indice PERO menor que el valor
+            if (arr[x] > arr[lastInfIndex] &&  arr[x] < arr[index])
+            {
+                //actualizo el indice inferior
+                lastInfIndex = x;
+            }
+        }
+
+        return lastInfIndex;
+    }
+
 
 
 

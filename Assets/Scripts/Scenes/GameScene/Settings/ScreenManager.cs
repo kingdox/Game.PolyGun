@@ -31,7 +31,14 @@ public class ScreenManager : MonoX
     #region events
     private void Awake()
     {
-        _ = this;
+        if (_ == null)
+        {
+            _ = this;
+        }
+        else if (_ != this)
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start(){
         ActiveScreenOf();

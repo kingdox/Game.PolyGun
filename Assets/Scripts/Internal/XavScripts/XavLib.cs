@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 namespace XavLib
 {
     /// <summary>
-    /// Herramientas para facilitar codigo
+    /// Herramientas para facilitar a Xavier contra el codigo
     /// <para>Aquí se poseerán funciones unicamente "static"</para>
     /// <see cref="XavHelpTo"/> Ultima Actualización => 23 ene 2021
     /// </summary>
@@ -278,6 +278,42 @@ namespace XavLib
                 return ts;
             }
             public static T[] FillWith<T>(T tValue, int qty) => FillWith(tValue, new T[qty]);
+
+
+
+            /// <summary>
+            /// Cambiamos los valores que son iguales de su mismo arreglo, cambiandolos con alguno entre el maximo
+            /// <para> Devuelve un arreglo con los valores pero distintos en caso de encontrar repetidos</para>
+            /// </summary>
+            public static int[] DifferentIndexInEquals(int[] arr, int max)
+            {
+                //recorremos el arreglo que vamos a buscar distinciones
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    //almacenamos el indice a buscar
+                    int indexToFind = arr[i];
+                    //limpiamos el arreglo por buscar
+                    arr[i] = -1;
+
+                    if (indexToFind < max)
+                    {
+                        //revisamos si el indice a buscar está entre los demás achievements
+                        while (XavHelpTo.Know.IsEqualOf(indexToFind, arr))
+                        {
+                            indexToFind = XavHelpTo.Know.DifferentIndex(max, indexToFind);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("El Indice a buscar es superior al indice maximo permitido !");
+                    }
+
+                    arr[i] = indexToFind;
+                }
+
+                return arr;
+            }
+
         }
             #endregion
             #region Change
@@ -351,7 +387,7 @@ namespace XavLib
             /// <summary>
             /// Detecta si de un arreglo con valores, si uno de estos es igual al mostrado
             /// </summary>
-            public static bool IsEqualOf<T>(T value, params T[] strings) { foreach (T val in strings) if (value.Equals(val)) return true; return false; }
+            public static bool IsEqualOf<T>(T value, params T[] vals) { foreach (T val in vals) if (value.Equals(val)) return true; return false; }
             //public static bool IsEqualOf(int value ,params int[] ints) {foreach (int val in ints) if (value.Equals(val)) return true; return false;}
             //public static bool IsEqualOf(string value, params string[] strings) { foreach (string val in strings) if (value.Equals(val)) return true; return false; }
             //public static bool IsEqualOf(char value, params char[] chars) { foreach (char val in chars) if (value.Equals(val)) return true; return false; }

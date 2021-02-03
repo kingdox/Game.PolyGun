@@ -5170,6 +5170,9 @@ MonoBehaviour:
   damageTimeCount: 0
   canDamage: 0
   par_explode: {fileID: 5719629321712897874}
+  par_attack: {fileID: 551678105681728895}
+  boss_trigger: {fileID: 4930542333190782048}
+  radius_explode: 3
 --- !u!95 &6759984125134915957
 Animator:
   serializedVersion: 3

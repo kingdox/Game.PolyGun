@@ -29,7 +29,14 @@ public class ItemManager : MonoX
     #region
     private void Awake()
     {
-        _ = this;
+        if (_ == null)
+        {
+            _ = this;
+        }
+        else if (_ != this)
+        {
+            Destroy(gameObject);
+        }
     }
     private void Update()
     {

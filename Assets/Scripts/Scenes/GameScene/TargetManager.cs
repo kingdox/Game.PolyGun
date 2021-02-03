@@ -21,7 +21,14 @@ public class TargetManager : MonoX
     #endregion
     #region Events
     private void Awake(){
-        _ = this;
+        if (_ == null)
+        {
+            _ = this;
+        }
+        else if (_ != this)
+        {
+            Destroy(gameObject);
+        }
     }
     #endregion
     #region Methods

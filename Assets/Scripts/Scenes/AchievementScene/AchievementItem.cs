@@ -29,6 +29,8 @@ public class AchievementItem : MonoBehaviour
     [Space]
     [Header("Unlocker")]
     public bool isUnlockItem = false;
+    [Space]
+    public GameObject lockObj;
 
     #endregion
     #region Events
@@ -86,10 +88,13 @@ public class AchievementItem : MonoBehaviour
             if (item.value == 0){
                 img_bar_last.color = Color.white;
                 img_bar_actual.color = Color.black;
+                lockObj.SetActive(true);
             }
             else{
                 img_bar_last.color = Color.black;
                 img_bar_actual.color = AchievementData.colorSteps[_limitIndex];
+                lockObj.SetActive(false);
+
             }
         }
         else
@@ -98,6 +103,7 @@ public class AchievementItem : MonoBehaviour
             img_bar_last.color = Color.black; 
             img_bar_actual.color = Color.red; 
             toMax = 1;
+            lockObj.SetActive(false);
         }
 
     }

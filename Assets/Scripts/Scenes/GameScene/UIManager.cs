@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XavLib;
+using Environment; 
 #endregion
 /// <summary>
 /// Encargado del manejo de pintado con respecto al HUD de la GameScene
@@ -44,10 +45,22 @@ public class UIManager : MonoX
     [Header("Buff AREA")]
     public Color[] buffHUDcolors;
     private BuffHUD[] buffsHUD;
+    [Header("Showed Keys")]
+    public Text[] showedKeys = new Text[4];// C,V,B y ESPACIO
+    private TKey[] slotKeys = { TKey.SLOT_1_DEFAULT, TKey.SLOT_2_DEFAULT, TKey.SLOT_3_DEFAULT, TKey.SLOT_1_ALT, TKey.SLOT_2_ALT, TKey.SLOT_3_ALT };
+
+
     #endregion
     #region Events
     private void Awake(){
-        _ = this;
+        if (_ == null)
+        {
+            _ = this;
+        }
+        else if (_ != this)
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start()
     {
@@ -80,8 +93,43 @@ public class UIManager : MonoX
             Refresh_playerLife(life);
             Refresh_playerEquipment(equipment_player.GetSlots());
             Refresh_playerBuff(buffsHUD, buffHUDcolors);
+            Refresh_KeysShowed();
         }
     }
+
+    private void Refresh_KeysShowed()
+    {
+        SavedData saved = DataPass.GetSavedData();
+
+        //int length = saved.idiom.Equals(0) ? 3 : 6;
+        //int[] length = { 3, 6 };
+        //default
+        //for (int i = saved.idiom * 3; i < length[saved.idiom]; i++)
+        //{
+
+        //    showedKeys[i].text = Data.Translated(saved.idiom).Value(slotKeys[i]);
+        //}
+        if (saved.idiom.Equals(0))
+        {
+            for (int i = 0; i < 3; i++)
+            {
+             showedKeys[i].text = Data.Translated(saved.idiom).Value(slotKeys[i]);
+            }
+
+        }
+        else
+        {
+            for (int i = 3; i < 6; i++)
+            {   
+             showedKeys[i - 3].text = Data.Translated(saved.idiom).Value(slotKeys[i]);
+            }
+        }
+
+        showedKeys[3].text = Data.Translated(saved.idiom).Value(TKey.ATTACK);
+
+
+    }
+
     /// <summary>
     /// Actualiza toda la parte de Armas del HUD, permite hasta 2 redpmdeps
     /// </summary>
@@ -163,7 +211,6 @@ public class UIManager : MonoX
                 XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, disabledAlpha);
             }
 
-            //Invoke(nameof(@Refresh_playerBuff), 69);
 
         }
     }

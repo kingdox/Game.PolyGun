@@ -168,10 +168,33 @@ public struct SavedData
     // Arreglo ordenado de los valores de cada logro correspondiente
     public float[] achievements;
     [Space]
-    //TODO - Donde guardaremos el record de qué tan lejos ha llegado contra las oleadas
     public int record_waves;
 
 
+    /// <summary>
+    /// EXTRA, Leftover QTY
+    /// TODO
+    /// </summary>
+    //public int leftoverQty;
+
+
+
+    //usado para obtener una instancia nueva con los valores sin ser referenciados...
+    public SavedData(SavedData s)
+    {
+        this = s;
+
+        //hacemos por separado los valores que se quiere guardar por separado
+        this.achievements = new float[s.achievements.Length];
+        this.record_waves = s.record_waves;
+
+        for (int x = 0; x < s.achievements.Length; x++)
+        {
+            this.achievements[x] = s.achievements[x];
+        }
+
+
+    }
     //Extra Debug ?
     [Space(10)]
     [Header("Debug Area")]

@@ -1,6 +1,4 @@
 ﻿#region import
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Environment;
 #endregion
@@ -10,13 +8,13 @@ namespace Key
     public class KeyData
     {
         private static readonly Key[] keys;
-        public static readonly int codeLenght = 1;
+        public const int CODE_LENGTH = 2;
+        private const int KEYS_QTY = 9;
         //STARt
-        private delegate Key KeyPlayerRecipe(KeyPlayer kP);
-        private readonly static KeyPlayerRecipe key = (KeyPlayer kP) => new Key(kP, DefaultKeyCode(kP));
-
-        private delegate Key[] KeysRecipe(int qty);
-        private readonly static KeysRecipe keysQty = (int qty) => KeyTransformer(qty);
+        private delegate Key KeyPlayerRecipe(int kP);
+        private readonly static KeyPlayerRecipe key = (int kP) => new Key((KeyPlayer)kP, DefaultKeyCode(kP));
+        // END
+    
 
 
         /// <summary>
@@ -25,17 +23,19 @@ namespace Key
         /// </summary>
         static KeyData()
         {
-            keys = keysQty(9);
+            //añade todas las llaves con sus variaciones para cada diferente tipo de grupo de controles
+            keys = KeyTransformer();
         }
 
 
         /// <summary>
         /// Asignamos en ordern la cantidad de llaves que hay
         /// </summary>
-        public static Key[] KeyTransformer(int qty)
+        public static Key[] KeyTransformer()
         {
-            Key[] ks = new Key[qty];
-            for (int x = 0; x < qty; x++) ks[x] = key((KeyPlayer)x);
+            Key[] ks = new Key[KEYS_QTY];
+
+            for (int x = 0; x < KEYS_QTY; x++) ks[x] = key(x);
             return ks;
         }
 
@@ -43,47 +43,41 @@ namespace Key
         /// Dependiendo de la tecla tendrá
         /// la cantidad de opciones disponibles...
         /// </summary>
-        public static KeyCode[] DefaultKeyCode(KeyPlayer keyPlayer)
+        public static KeyCode[] DefaultKeyCode(int keyPlayer)
         {
 
             //de momento solo posee un solo nivel
-            KeyCode[] codes = new KeyCode[codeLenght];
+            KeyCode[] codes = new KeyCode[CODE_LENGTH];
 
-            switch (keyPlayer)
+
+            KeyCode[] defaultKeyCodes =
             {
-                //Accion opciones
-                case KeyPlayer.BACK:
-                    codes[0] = KeyCode.Escape;
-                    break;
-                case KeyPlayer.OK_FIRE:
-                    codes[0] = KeyCode.Space;
-                    break;
+                KeyCode.Escape,
+                KeyCode.Space,
+                KeyCode.LeftArrow,
+                KeyCode.RightArrow,
+                KeyCode.UpArrow,
+                KeyCode.DownArrow,
+                KeyCode.C,
+                KeyCode.V,
+                KeyCode.B
+            };
+            //esto podría estar mejor...
+            KeyCode[] alternativeKeyCodes =
+           {
+                KeyCode.Escape,
+                KeyCode.Space,
+                KeyCode.A,
+                KeyCode.D,
+                KeyCode.W,
+                KeyCode.S,
+                KeyCode.LeftArrow,
+                KeyCode.DownArrow,
+                KeyCode.RightArrow
+            };
 
-                // Movimiento / Navegación
-                case KeyPlayer.LEFT:
-                    codes[0] = KeyCode.LeftArrow;
-                    break;
-                case KeyPlayer.RIGHT:
-                    codes[0] = KeyCode.RightArrow;
-                    break;
-                case KeyPlayer.UP:
-                    codes[0] = KeyCode.UpArrow;
-                    break;
-                case KeyPlayer.DOWN:
-                    codes[0] = KeyCode.DownArrow;
-                    break;
-                // Inventario / almacenamiento
-                case KeyPlayer.C:
-                    codes[0] = KeyCode.C;
-                    break;
-                case KeyPlayer.V:
-                    codes[0] = KeyCode.V;
-                    break;
-                case KeyPlayer.B:
-                    codes[0] = KeyCode.B;
-                    break;
-            }
-
+            codes[0] = defaultKeyCodes[keyPlayer];
+            codes[1] = alternativeKeyCodes[keyPlayer];
 
             return codes;
         }

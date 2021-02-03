@@ -11,6 +11,8 @@ public class GameManager : MonoManager
     private static GameManager _;
     //SOLO para lectura y refresco, no guardado
     private static SavedData lastSaved;
+    //public float[] debug_achieves;
+    //public SavedData debugS;
 
     [Header("Game Settigns")]
     public GameStatus gameStatus;
@@ -25,7 +27,16 @@ public class GameManager : MonoManager
     #region Events
     private new void Awake()
     {
-        _ = this;
+
+        //Singleton(ref _, this);
+        if (_ == null)
+        {
+            _ = this;
+        }
+        else if (_ != this)
+        {
+            Destroy(gameObject);
+        }
 
         //PrintX($" { nameof(Start)} {nameof(@Start)}");
         gameStatus = GameStatus.ON_GAME;
@@ -35,19 +46,16 @@ public class GameManager : MonoManager
         Begin();
 
     }
-    private void Start()
-    {
-        //Mantiene unicamente HUD activa
-
-    }
     private void Update()
     {
         Cursor.visible = !IsOnGame() || _onDebug;
     }
     public override void Init()
     {
-        //Tomamos el ultimo guardado de inicio.
-        lastSaved = DataPass.GetSavedData();
+        //🩹parche para obtener los guardados sin ser referencia...
+        lastSaved = new SavedData(DataPass.GetSavedData());
+        //debugS = lastSaved;
+
     }
     #endregion
     #region Methods
@@ -98,7 +106,7 @@ public class GameManager : MonoManager
 
         yield return new WaitForSeconds(3);// es 5,
         _.gameStatus = GameStatus.ON_END;
-        yield return new WaitForSeconds(.5f);// es 5,
+        yield return new WaitForSeconds(.2f);// es 5,
 
 
         //nos devolvera organizadamente los indices de los achievements,

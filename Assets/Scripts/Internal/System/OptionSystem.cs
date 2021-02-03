@@ -140,6 +140,7 @@ public class OptionSystem : MonoBehaviour
                     break;
                 case Option.CONTROLS:
                     saved.control = XavHelpTo.Know.NextIndex(condition, OptionData.controls, saved.control);
+
                     break;
             }
 
@@ -148,7 +149,7 @@ public class OptionSystem : MonoBehaviour
             DataPass.SetData(saved);
 
             //si eres language cambiado refrescamos los textos en las pantallas
-            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED))
+            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED,Option.CONTROLS))
             {
                 //Seteamos los datos
                 _.RefreshAll();
@@ -174,6 +175,8 @@ public class OptionSystem : MonoBehaviour
         LoadMsg();
 
         msg_title.LoadKey(msg_title.key);
+
+        ControlSystem.LoadCodes(false);
     }
 
     //XavHelpTo.Set.ColorTag(extraValue)

@@ -14,6 +14,20 @@ public abstract class MonoManager : MonoInit, IManager
     #region Methods
     public void GoToScene(string name) => XavHelpTo.Change.SceneTo(name);
     public void GoToScene(Scenes scene) => XavHelpTo.Change.SceneTo(scene.ToString());
+
+
+    //public void Singleton<T>(ref T _, T t)
+    //{
+    //    if (_ == null)
+    //    {
+    //        _ = t;
+    //    }
+    //    else if (_ != t)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
     #endregion
 }
 /// <summary>

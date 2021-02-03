@@ -112,7 +112,14 @@ public enum TKey
     TITLE_INTRO,
     TITLE_ACHIEVE,
     TITLE_OPTIONS,
-
-
+    #endregion
+    #region Etc 2
+    SLOT_1_DEFAULT,
+    SLOT_2_DEFAULT,
+    SLOT_3_DEFAULT,
+    SLOT_1_ALT,
+    SLOT_2_ALT,
+    SLOT_3_ALT,
+    ATTACK,
     #endregion
 }

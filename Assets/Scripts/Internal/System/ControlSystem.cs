@@ -7,7 +7,7 @@ using Key;
 using Environment;
 using XavLib;
 #endregion
-public class ControlSystem : MonoX
+public class ControlSystem : MonoInit
 {
     #region var
     private static ControlSystem _;
@@ -15,8 +15,8 @@ public class ControlSystem : MonoX
     [Space]
     [Header("Settings")]
     public static bool canInput = true;
-    private Key.Key[] keys = Data.data.GetKeys();
-    private KeyCode[] codes;
+    [SerializeField]
+    public KeyCode[] codes;
 
     public readonly static KeyPlayer[] keysMovement = { KeyPlayer.UP, KeyPlayer.DOWN, KeyPlayer.RIGHT, KeyPlayer.LEFT, };
 
@@ -25,18 +25,23 @@ public class ControlSystem : MonoX
     public readonly static KeyPlayer[] keysForward = { KeyPlayer.UP, KeyPlayer.DOWN, };
 
     //Botones para recoger 
-    public readonly static KeyPlayer[] keysObjects = { KeyPlayer.C, KeyPlayer.V, KeyPlayer.B };
+    public readonly static KeyPlayer[] keysObjects = { KeyPlayer.SLOT_1, KeyPlayer.SLOT_2, KeyPlayer.SLOT_3 };
 
     //public
     #endregion
     #region Events
-    private void Awake(){
+    private new  void Awake(){
         //Singleton corroboration
         if (_ == null){ DontDestroyOnLoad(gameObject); _ = this;}
         else if (_ != this) Destroy(gameObject);
         canInput = true;
+        Begin();
     }
     private void Start() => LoadCodes();
+    public override void Init()
+    {
+        LoadCodes();
+    }
     #endregion
     #region Methods
 
@@ -113,16 +118,23 @@ public class ControlSystem : MonoX
     /// <summary>
     /// Cargamos los Codes basado en los datos que poseemos del keys
     /// </summary>
-    private void LoadCodes()
+    public static void LoadCodes(bool isDefault = true)
     {
+
+        int type = isDefault ? 0 : DataPass.GetSavedData().control;
+
+        Key.Key[] keys = Data.data.GetKeys();
+
         //Conocemos la dimención de los codigos basado en la longitud de los
         //codes y las teclas
-        New(out codes, KeyData.codeLenght * keys.Length);
+        _.New(out _.codes, keys.Length);
         int c = 0;
+
 
         //por cada key... vamos a recorrer sus codes y asignarlos a un arreglo
         for (int x = 0; x < keys.Length; x++){
-            foreach (KeyCode code in keys[x].keyCodes)codes[c++] = code; 
+            //PrintX($"{x} - {keys[x].keyPlayer} - {keys[x].keyCodes[type]}");
+            _.codes[c++] = keys[x].keyCodes[type];
         }
     }
     ///// <summary>

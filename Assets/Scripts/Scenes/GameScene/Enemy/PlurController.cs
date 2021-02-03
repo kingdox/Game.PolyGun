@@ -13,6 +13,7 @@ public class PlurController : Minion
     public bool canDamage = true;
     [Space]
     public ParticleSystem par_explode;
+    public ParticleSystem par_attack;
     [Space]
     [Header("Plur Extra")]
     public SphereCollider boss_trigger;
@@ -63,7 +64,7 @@ public class PlurController : Minion
                 case "ally":
                     PlurAttack(collision.transform);
                     canDamage = false;
-
+                    par_attack.Play();
                     //Minion minion = collision.transform.GetComponent<Minion>();
                     //MinionDamage(minion);
                     //minion.character.timeLife -= character.damage;
@@ -73,6 +74,8 @@ public class PlurController : Minion
                     canDamage = false;
                     PlayerController player = collision.transform.GetComponent<PlayerController>();
                     player.character.timeLife -= character.damage;
+                    par_attack.Play();
+
                     break;
                 default:
                     break;

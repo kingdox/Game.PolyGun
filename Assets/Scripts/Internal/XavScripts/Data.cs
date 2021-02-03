@@ -21,7 +21,7 @@ namespace Environment
         [HideInInspector]
         public static Data data = new Data();
 
-        public readonly string savedPath = "saved100.txt";
+        public readonly string savedPath = "saved103.txt";
         public readonly string version = "v0.9.1";
 
         //TODO poner parametros de character con enums y arreglos de valores si hay tiempo...
@@ -39,6 +39,8 @@ namespace Environment
         //qué es mejor? un readonly o una constante?
         public const float ENEMY_PER_WAVE = 1.5f;
         //public readonly float ENEMY_PER_WAVE = 1.5f;
+
+        public const float RECORD_ACHIEVE_TIMER = 5;
 
         public readonly float itemShapeRate = 0.80f; // %
 
@@ -109,7 +111,9 @@ namespace Environment
         UP,
         DOWN,
 
-        C, V, B
+        SLOT_1,
+        SLOT_2,
+        SLOT_3
     }
     #endregion
 }

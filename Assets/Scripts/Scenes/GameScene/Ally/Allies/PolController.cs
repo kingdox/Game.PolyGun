@@ -138,7 +138,7 @@ public class PolController : Minion
             {
                 //TODO
                 ActionType action = equipment.Action(index);
-                PrintX($"{action.item} {action.used}");
+                //PrintX($"{action.item} {action.used}");
 
             }
 

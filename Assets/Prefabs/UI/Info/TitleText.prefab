@@ -179,6 +179,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4684502552007628691, guid: df1991757fb924d538006023a1f1ff72, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684502552007628691, guid: df1991757fb924d538006023a1f1ff72, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6088584831682517708, guid: df1991757fb924d538006023a1f1ff72, type: 3}
       propertyPath: m_Name
       value: Text-100

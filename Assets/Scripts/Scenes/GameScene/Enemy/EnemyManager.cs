@@ -39,7 +39,14 @@ public class EnemyManager : MonoX
     #endregion
     #region Events
     private void Awake(){
-        _ = this;
+        if (_ == null)
+        {
+            _ = this;
+        }
+        else if (_ != this)
+        {
+            Destroy(gameObject);
+        }
 
         waveActual = 0;
         enemiesLeft = 0;
@@ -77,8 +84,11 @@ public class EnemyManager : MonoX
     private void SetNewWave(){
         waveActual++;
         PrintX($"////WAVE {waveActual}/////");
-        //updates the achievement of the amount of waves
-        AchieveSystem.UpdateAchieve(Achieves.WAVES_ENEMIES);
+        if (waveActual != 1)
+        {
+            //updates the achievement of the amount of waves
+            AchieveSystem.UpdateAchieve(Achieves.WAVES_ENEMIES);
+        }
 
         //Conocemos el record
         int waveRecord = DataPass.GetSavedData().record_waves;

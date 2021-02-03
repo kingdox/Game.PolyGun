@@ -37,13 +37,13 @@
                     "Al límite", "Está al borde de morir por unos largos periodos de tiempo",
                     "Velocista", "Recorre muchos metros moviendo a “Poly”",
                     "Creacionista", "Crea tantas figuras aliadas como puedas en una partida",
-                    "Estudioso", "Que buen lector :)",
-                    "Corrupto", "Sé tus intenciones, pero no lo encontrarás.",
+                    "Estudioso", "Que buen lector eres !",
+                    "Corrupto", "Muy mal, todo mal",
 #endregion
 #region Messages, del menúScene
 
                     //Messages
-                    "Bienvenido :) \n Usa las flechas y espacio o bien usa el mouse para navegar ",
+                    "Juego hecho con mucho amor :)",
                     "¿Cuanto tiempo estarás aquí?",
 #endregion
 #region Messages, de Opciones
@@ -73,8 +73,8 @@
                     "Sonido encendido",
 
                     // MSG_OPT_CONTROLS
-                    "Controles por defecto (Flechas y C,V,B)",
-                    "Controles invertidos (WASD y flechas)",//Show Img?
+                    "Controles por defecto (Flechas para moverte  y C,V,B para el manejo de objetos)",
+                    "Controles invertidos (WASD para moverte y flechas para el manejo de objetos)",
 #endregion
 #region Messages, de InitScene
                     "En un mundo extraño de figuras se creó a Poly, un ser que nunca tuvo que existir, fue un error a causa de la fusión de fragmentos, las figuras malvadas han decidido eliminar a Poly, pero este no se dejará vencer...",
@@ -86,7 +86,7 @@
                     "Poly podrá disparar a sus enemigos y tambien recoger los objetos del suelo. Dependiendo de los recogidos puedes crear cosas",
                     "Los objetos recogidos pueden ser consumidos para recuperar vida o tener ventajas, si reunes 3 puede que creas aliados o mejoras",
                     // Manual PAGES
-                    "Te moveras con las <color=red>teclas de flechas</color>. \n\nPodrás agarrar y consumir los objetos con C,V y B. \n(se mostrará brillando el objeto más cercano para agarrarlo).  ",
+                    "Te moveras con las <color=red>teclas de flechas</color>. \n\nPodrás agarrar y consumir los objetos con C,V y B. \n(se mostrará brillando el objeto más cercano para agarrarlo). ",
                     "Poseerás un contador de tiempo que será la vida de Poly, al igual como las demás personas, morirán si este llega a 0, recupera tiempo consumiendo fragmentos !",
                     "Recuerda que los enemigos y los aliados poseen tiempo de vida, es aconsejable conocerse los tiempos de todo...",
                     // Credits PAGES
@@ -103,6 +103,15 @@
                     "Introducción",
                     "Logros",
                     "Opciones",
+#endregion
+    #region Etc 2
+                    "C",
+                    "V",
+                    "B",
+                    "Izquierda",
+                    "Abajo",
+                    "Derecha",
+                    "Espacio",
 #endregion
         };
     }

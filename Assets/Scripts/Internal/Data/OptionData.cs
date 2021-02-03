@@ -16,9 +16,10 @@ namespace Options
          */
         //[OPTIONS]
         public static readonly float[] textSpeed = { 0, .005f, .015f, .025f };
-        public static readonly float[] musicVolume = { 0, 30, 50, 70 };
+        public static readonly float[] musicVolume = { 0, .3f, .5f, .7f }; // el audiosource lo maneja en unit
         public static readonly float[] sfxVolume = { 0, 70 };
-        public static readonly int controls = 1;// longitud de cantidad de controlesps4?
+        public static readonly int controls = Key.KeyData.CODE_LENGTH;// longitud de cantidad de controlesps4?
+        //public static readonly int[] LEFTOVER_QTY = {0,50,250, 500 };
                                                 //
         private static readonly TKey[] msgOpt = {
             TKey.MSG_OPT_LANGUAGE,
@@ -50,7 +51,8 @@ namespace Options
         };
         private static readonly TKey[] msg_controls = {
             TKey.MSG_OPT_CONTROLS_NORMAL,
-            //TKey.MSG_OPT_CONTROLS_INVERT,
+            TKey.MSG_OPT_CONTROLS_INVERT,
+            //TKey.MSG_OPT_CONTROLS_NORMAL
         };
         #endregion
             #region METHODS

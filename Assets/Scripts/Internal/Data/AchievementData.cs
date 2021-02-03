@@ -41,7 +41,6 @@ namespace Achievements
 
         /// <summary>
         /// Constructor, Crea los achievements
-        /// <para>este """HACK""" debe llamarse una sola vez</para>
         /// </summary>
         static AchievementData()
         {
@@ -49,18 +48,18 @@ namespace Achievements
             achievements = new Achievement[]
             {
                 //Pagina 1
-                achieve(TKey.ACHIEVE_KILLS_ENEMY,TKey.ACHIEVE_KILLS_ENEMY_DESC, 15,60,240),
-                achieve(TKey.ACHIEVE_KILLS_BOSS,TKey.ACHIEVE_KILLS_BOSS_DESC, 5,25,50),
-                achieve(TKey.ACHIEVE_WAVES_ENEMIES,TKey.ACHIEVE_WAVES_ENEMIES_DESC, 3,15,30),
-                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED,TKey.ACHIEVE_OBJECTS_COLLECTED_DESC, 50,100,300),
-                achieve(TKey.ACHIEVE_HEALS_GAME,TKey.ACHIEVE_HEALS_GAME_DESC, 30,120,300),
+                achieve(TKey.ACHIEVE_KILLS_ENEMY,TKey.ACHIEVE_KILLS_ENEMY_DESC, 5,50,250),
+                achieve(TKey.ACHIEVE_KILLS_BOSS,TKey.ACHIEVE_KILLS_BOSS_DESC, 1,5,25),
+                achieve(TKey.ACHIEVE_WAVES_ENEMIES,TKey.ACHIEVE_WAVES_ENEMIES_DESC, 7,25,100),
+                achieve(TKey.ACHIEVE_OBJECTS_COLLECTED,TKey.ACHIEVE_OBJECTS_COLLECTED_DESC, 50,250,1500),
+                achieve(TKey.ACHIEVE_HEALS_GAME,TKey.ACHIEVE_HEALS_GAME_DESC, 30,250,500),
 
                 //Pagina 2 
-                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT,TKey.ACHIEVE_TIME_DEATHLIMIT_DESC, 5,20,60),
-                achieve(TKey.ACHIEVE_METTERS_GAME,TKey.ACHIEVE_METTERS_GAME_DESC, 2,5,10),
-                achieve(TKey.ACHIEVE_CREATIONS_GAME,TKey.ACHIEVE_CREATIONS_GAME_DESC, 2,5,10),
-                achieve(TKey.ACHIEVE_ESPECIAL_READ,TKey.ACHIEVE_ESPECIAL_READ_DESC, 2,5,20),
-                achieve(TKey.ACHIEVE_ESPECIAL_CHEATS,TKey.ACHIEVE_ESPECIAL_CHEATS_DESC, 2,5,10),
+                achieve(TKey.ACHIEVE_TIME_DEATHLIMIT,TKey.ACHIEVE_TIME_DEATHLIMIT_DESC, 11,30,100),
+                achieve(TKey.ACHIEVE_METTERS_GAME,TKey.ACHIEVE_METTERS_GAME_DESC, 30,500,2000),
+                achieve(TKey.ACHIEVE_CREATIONS_GAME,TKey.ACHIEVE_CREATIONS_GAME_DESC, 1,20,100),
+                achieve(TKey.ACHIEVE_ESPECIAL_READ,TKey.ACHIEVE_ESPECIAL_READ_DESC, 5,50,250),
+                achieve(TKey.ACHIEVE_ESPECIAL_CHEATS,TKey.ACHIEVE_ESPECIAL_CHEATS_DESC, 1,10,20),
 
                 //Logro especial ideas
                 //tramposo => has usado ctrl + Q para abrirlo...
