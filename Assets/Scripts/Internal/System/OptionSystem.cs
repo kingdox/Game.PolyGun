@@ -47,9 +47,6 @@ public class OptionSystem : MonoBehaviour
         if (isOpened)
         {
 
-            //FIXME no permite seleccionar con el mouse
-            //Last index no se actualiza 
-
             //Si es distinto el indice debemos refrescar
             if (!menuInputs.lastIndex.Equals((int)lastOpt))   
             {

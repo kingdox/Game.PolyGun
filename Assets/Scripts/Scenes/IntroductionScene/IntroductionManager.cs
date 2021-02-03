@@ -1,9 +1,6 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Environment;
-using XavLib;
 #endregion
 public class IntroductionManager : MonoManager
 {
@@ -16,8 +13,10 @@ public class IntroductionManager : MonoManager
     [Space]
     [Header("Pages")]
     public IntroductionPages[] introPages;
-    private int[] indexPages = {};
-    private int lastIndex = 0;
+    [Space]
+    //Ultimos indices de las paginas 
+    public int[] indexPages = {};
+    public int lastIndex = 0;
     #endregion
     #region Events
     private void Start(){
@@ -38,7 +37,10 @@ public class IntroductionManager : MonoManager
     }
     private void Update()
     {
-        ControlCheck();
+        if (Input.anyKey)
+        {
+            ControlCheck();
+        }
     }
     #endregion
     #region Methods
@@ -55,9 +57,7 @@ public class IntroductionManager : MonoManager
 
         //si presionan derecha o izq cambiamos la pagina
         if (ControlSystem.IsKeyExist(keyPress)){
-            //Cargamos la pagina al movernos//TODO
-            introPages[lastIndex].InstantPage(indexPages[lastIndex]);
-            navigator._NavigateTo(keyPress.Equals(KeyPlayer.RIGHT));
+            NavButt(keyPress.Equals(KeyPlayer.RIGHT));
         }
 
         if (ControlSystem.IsKeyFrame(KeyPlayer.BACK)){
@@ -65,25 +65,52 @@ public class IntroductionManager : MonoManager
         }
     }
 
-        /// <summary>
-        /// Cambiamos de entre las paginas
-        /// Solo si este cambio es distinto
-        /// </summary>
-        public void ChangePagesTo(int i){
+    /// <summary>
+    /// Cambiamos de entre las paginas
+    /// Solo si este cambio es distinto
+    /// </summary>
+    public void ChangePagesTo(int i){
         if (!lastIndex.Equals(i)){
 
-            //Actualizamos el ultimo indice
+            //con esto podemos guardar los indices de las paginas
             indexPages[lastIndex] = navigator.GetIndexActual();
 
+            //actualizamos el ultimo indice, mostrando la pagina a la que estamos interactuando
+            //este dejara marcado el ultimo boton del menú
             menuInputC.lastIndex = i;
 
+            //actualizamos el ultimo indice aquí...
             lastIndex = i;
 
-            //Colocamos als nuevas paginas
+
+            //Colocamos als nuevas paginas y colocamos el indice guardado de esa pagina
             navigator.SetPages(introPages[i].GetObjectsRef(), indexPages[i]);
 
+            // actualizamos la pagina selecta para que posea sus textos cargados
             introPages[i].ReloadPage(indexPages[i]);
         }
     }
+
+
+
+    /// <summary>
+    /// Navegador hacia alguno de los lados de la pagina actual
+    /// </summary>
+    public void NavButt(bool goForward)
+    {
+        //1 - paramos el que esté cargando actualmente (así evito los problemas de mr coroutina)
+        introPages[lastIndex].InstantPage(indexPages[lastIndex]);
+
+        //2 - cambiamos a la pagina correspondiente
+        navigator._NavigateTo(goForward);
+
+        //3 - actualizamos a el nuevo indice
+        int i = navigator.indexActual;
+        indexPages[lastIndex] = i;
+
+        //4 - cargo el nuevo indice
+        introPages[lastIndex].ReloadPage(indexPages[lastIndex]);
+    }
+
     #endregion
 }

@@ -1,6 +1,4 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using XavLib;
 #endregion
@@ -39,7 +37,6 @@ public class IntroductionPages : MonoBehaviour
     /// Carga la pagina en el arreglo
     /// </summary>
     public void LoadPage(int x){
-        //pagesG[x] = transform.GetChild(x).gameObject;
         pages[x] = pagesG[x].GetComponent<IntroductionPage>();
         pagesG[x].SetActive(false);
     }

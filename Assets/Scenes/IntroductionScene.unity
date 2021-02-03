@@ -1292,6 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cb395c0936b74655996512c775c7330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indexActual: 0
   btn_L: {fileID: 1669852955}
   btn_R: {fileID: 1385027427}
   pages: []
@@ -3842,14 +3843,14 @@ PrefabInstance:
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 417111816}
+      objectReference: {fileID: 1028554465}
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Navigator, Assembly-CSharp
+      value: IntroductionManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: _NavigateTo
+      value: NavButt
       objectReference: {fileID: 0}
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -4438,14 +4439,14 @@ PrefabInstance:
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 417111816}
+      objectReference: {fileID: 1028554465}
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Navigator, Assembly-CSharp
+      value: IntroductionManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: _NavigateTo
+      value: NavButt
       objectReference: {fileID: 0}
     - target: {fileID: 4826756332884867037, guid: c4bbba371150b47bb807211362275c81, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

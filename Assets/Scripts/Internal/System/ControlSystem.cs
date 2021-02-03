@@ -9,16 +9,16 @@ public class ControlSystem : MonoInit
     #region var
     private static ControlSystem _;
 
-    [Space]
-    [Header("Settings")]
-    public static bool canInput = true;
+    //[Space]
+    //[Header("Settings")]
+    //public static bool canInput = true;
     [SerializeField]
     public KeyCode[] codes;
 
     public readonly static KeyPlayer[] keysMovement = { KeyPlayer.UP, KeyPlayer.DOWN, KeyPlayer.RIGHT, KeyPlayer.LEFT, };
 
     public readonly static KeyPlayer[] keysHorizontal = { KeyPlayer.RIGHT, KeyPlayer.LEFT, };
-    public readonly static KeyPlayer[] keysVertical = { };
+    //public readonly static KeyPlayer[] keysVertical = { };
     public readonly static KeyPlayer[] keysForward = { KeyPlayer.UP, KeyPlayer.DOWN, };
 
     //Botones para recoger 
@@ -31,7 +31,7 @@ public class ControlSystem : MonoInit
         //Singleton corroboration
         if (_ == null){ DontDestroyOnLoad(gameObject); _ = this;}
         else if (_ != this) Destroy(gameObject);
-        canInput = true;
+        //canInput = true;
         Begin();
     }
     private void Start() => LoadCodes();
@@ -70,7 +70,7 @@ public class ControlSystem : MonoInit
     public static KeyPlayer KnowKeyFrame(params KeyPlayer[] kps){foreach (KeyPlayer kp in kps) if (IsKeyFrame(kp)) return kp;return KeyPlayer.NO;}
 
     /// <summary>
-    /// Devuelve el indice que FUE presionada en el frame
+    /// Devuelve el indice que  SIGUE siendo presionada
     /// <para>-1 en caso de no encontrar</para>
     /// </summary>
     public static int KnowIndexKeyHold(params KeyPlayer[] kps) { for (int i = 0; i < kps.Length; i++) { if (IsKeyHold(kps[i])) return i; } return -1; }
