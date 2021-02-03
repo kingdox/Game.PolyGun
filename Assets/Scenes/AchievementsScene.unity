@@ -1999,6 +1999,7 @@ MonoBehaviour:
   btn_L: {fileID: 15423300}
   btn_R: {fileID: 1885700833}
   btn_BACK: {fileID: 28885533}
+  clip: {fileID: 8300000, guid: 75bf004b6d61e489cac5543e1e6daf5c, type: 3}
 --- !u!1001 &1622932860
 PrefabInstance:
   m_ObjectHideFlags: 0

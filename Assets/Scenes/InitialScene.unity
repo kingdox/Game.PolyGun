@@ -272,6 +272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a997292b83f34bb4a35dc368074e3b5, type: 3}
+--- !u!82 &441218759 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1659171161215848477, guid: a1148e414894147fe9130a49a83e768f, type: 3}
+  m_PrefabInstance: {fileID: 1998033455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &492202341
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +827,7 @@ MonoBehaviour:
   imgC_splash: {fileID: 1658431164}
   msg_history: {fileID: 1765946855}
   msg_pressAny: {fileID: 1105712017}
+  clip: {fileID: 8300000, guid: ee1c7ea39c9d84182a9084d2f6ab47ab, type: 3}
 --- !u!1 &1208072598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,6 +1402,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1659171161215848479, guid: a1148e414894147fe9130a49a83e768f, type: 3}
+      propertyPath: src_music
+      value: 
+      objectReference: {fileID: 441218759}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1148e414894147fe9130a49a83e768f, type: 3}
 --- !u!1001 &3568121324937598007

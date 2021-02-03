@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8357e9f9ff9743c4a06b4984d6833cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  src_music: {fileID: 1659171161215848477}
+  mixer: {fileID: 24100000, guid: 5da003a6d8fae42eca2945ee94b76a82, type: 2}
 --- !u!81 &1659171161215848478
 AudioListener:
   m_ObjectHideFlags: 0

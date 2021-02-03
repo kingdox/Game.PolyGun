@@ -23,7 +23,10 @@ public class ScreenManager : MonoX
     [Header("End Settings")]
     public AchievementItem[] endItems;
 
-
+    [Space]
+    [Header("Pause Settings")]
+    public MsgController[] pause_msgController;
+    public bool pauseNeedRefresh = false;
 
     [Header("Debug")]
     public bool _Debug_LoadEnd = false;
@@ -51,6 +54,13 @@ public class ScreenManager : MonoX
 
         StatusChange();
         _Debug();
+
+        if (!OptionSystem.isOpened && lastGameStatus.Equals(GameStatus.ON_PAUSE) && pauseNeedRefresh)
+        {
+            pauseNeedRefresh = false;
+            RefreshPause();
+        }
+
     }
     #endregion
     #region methods
@@ -68,6 +78,8 @@ public class ScreenManager : MonoX
             //Activamos la pantalla
             ActiveScreenOf(lastGameStatus);
 
+            //TODO si es pause actualizarlo
+
             //Actualizamos el estado, dependiendo del cambio
             //Time.timeScale = GameManager.IsOnGame() ? 1 : 0;
 
@@ -80,9 +92,21 @@ public class ScreenManager : MonoX
     /// </summary>
     public void OptionOpen()
     {
+        pauseNeedRefresh = true;
         OptionSystem.OpenClose(true);
     }
 
+    /// <summary>
+    /// Refresh the pause screen
+    /// </summary>
+    public static void RefreshPause()
+    {
+        foreach (MsgController msg in _.pause_msgController)
+        {   
+            msg.LoadKey(msg.key);
+            
+        }
+    } 
 
     /// <summary>
     /// Activamos la pantalla correspondiente al estado que se encuentran

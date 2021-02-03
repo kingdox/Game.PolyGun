@@ -1,6 +1,4 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI ;
 using XavLib;
@@ -24,7 +22,9 @@ public class AchievementManager : MonoManager
     public Button btn_R;
     public Button btn_BACK;
 
-
+    [Space]
+    [Header("Music Area")]
+    public AudioClip clip;
     #endregion
     #region Events
     private void Update(){
@@ -37,6 +37,7 @@ public class AchievementManager : MonoManager
         indexlimit = GetLimitIndex();
         CheckAchievementSaved();
         AssignAchievementItem();
+        AudioSystem.SetThisMusic(clip);
     }
     #endregion
     #region Methods

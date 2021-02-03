@@ -1,8 +1,5 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Translate;
 using Environment;
 using XavLib;
 using Options;
@@ -132,11 +129,9 @@ public class OptionSystem : MonoBehaviour
                     break;
                 case Option.MUSIC:
                     saved.musicVolume = XavHelpTo.Know.NextIndex(condition, OptionData.musicVolume.Length, saved.musicVolume);
-
                     break;
                 case Option.SOUND:
                     saved.sfxVolume = XavHelpTo.Know.NextIndex(condition, OptionData.sfxVolume.Length, saved.sfxVolume);
-
                     break;
                 case Option.CONTROLS:
                     saved.control = XavHelpTo.Know.NextIndex(condition, OptionData.controls, saved.control);
@@ -147,9 +142,13 @@ public class OptionSystem : MonoBehaviour
             //XavHelpTo.Look.Print("Entra a actions");
 
             DataPass.SetData(saved);
+            AudioSystem.SetMusicVolume();
+            AudioSystem.SetSounds();
+            ControlSystem.LoadCodes(false);
+
 
             //si eres language cambiado refrescamos los textos en las pantallas
-            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED,Option.CONTROLS))
+            if (OptionEqual(option, Option.LANGUAGE, Option.TEXTSPEED))
             {
                 //Seteamos los datos
                 _.RefreshAll();
@@ -176,7 +175,6 @@ public class OptionSystem : MonoBehaviour
 
         msg_title.LoadKey(msg_title.key);
 
-        ControlSystem.LoadCodes(false);
     }
 
     //XavHelpTo.Set.ColorTag(extraValue)

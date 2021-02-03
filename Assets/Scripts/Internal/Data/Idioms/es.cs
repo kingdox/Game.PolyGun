@@ -113,6 +113,9 @@
                     "Derecha",
                     "Espacio",
 #endregion
+#region Etc 3
+                    "Pausa"
+#endregion
         };
     }
 

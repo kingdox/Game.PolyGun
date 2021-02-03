@@ -1,11 +1,8 @@
 ﻿#region Imports
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XavLib;
-using Environment;
-using Translate;
 #endregion
 public class MenuManager : MonoManager
 {
@@ -32,6 +29,9 @@ public class MenuManager : MonoManager
     [Space]
     public ImageController transitorScreen;
     public MenuInputController menuInputs;
+    [Space]
+    public AudioClip clip;
+
     #endregion
     #region Events
     private void Start(){
@@ -59,6 +59,8 @@ public class MenuManager : MonoManager
     public override void Init(){
         SavedData saved = DataPass.GetSavedData();
         ButtonAdjust(!saved.isIntroCompleted);
+        AudioSystem.SetThisMusic(clip);
+
     }
     #endregion
     #region Methods

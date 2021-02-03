@@ -1,8 +1,6 @@
 ﻿#region 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Environment;
 using XavLib;
 #endregion
@@ -17,11 +15,14 @@ public class InitialManager : MonoManager, IInitManager
     public ImageController imgC_splash;
     public MsgController msg_history;
     public MsgController msg_pressAny;
+    [Space]
+    public AudioClip clip;
 
     private SavedData saved;
 
     #endregion
     #region  Events
+  
     public override void Init()
     {
         StartCoroutine(LoadSplash());
@@ -36,6 +37,8 @@ public class InitialManager : MonoManager, IInitManager
             New(out saved.achievements, AchieveSystem.achievementLenght);
             DataPass.SetData(saved);
         }
+
+        AudioSystem.SetThisMusic(clip);
 
     }
     private void Update()

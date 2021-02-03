@@ -1,9 +1,7 @@
 ﻿#region Imports
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using XavLib;
-using Environment;
+using Options;
 #endregion
 public class GameManager : MonoManager
 {
@@ -21,7 +19,9 @@ public class GameManager : MonoManager
     //[Header("Debug")]
     //public bool onDebug = false;
     public static bool _onDebug = false;
-
+    [Space]
+    [Header("Music Area")]
+    public AudioClip clip;
 
     #endregion
     #region Events
@@ -55,6 +55,7 @@ public class GameManager : MonoManager
         //🩹parche para obtener los guardados sin ser referencia...
         lastSaved = new SavedData(DataPass.GetSavedData());
         //debugS = lastSaved;
+        AudioSystem.SetThisMusic(clip);
 
     }
     #endregion
@@ -107,6 +108,13 @@ public class GameManager : MonoManager
         yield return new WaitForSeconds(3);// es 5,
         _.gameStatus = GameStatus.ON_END;
         yield return new WaitForSeconds(.2f);// es 5,
+        SavedData saved = DataPass.GetSavedData();
+
+        //si el valor de la musica es otra que la de silenciado entonces...
+        //if (saved.musicVolume > 0)
+        //{
+        //    AudioSystem.SetMusicVolume(OptionData.musicVolume[saved.musicVolume-1]);
+        //}
 
 
         //nos devolvera organizadamente los indices de los achievements,
@@ -118,7 +126,6 @@ public class GameManager : MonoManager
 
 
 
-        SavedData saved = DataPass.GetSavedData();
 
         if (saved.record_waves < EnemyManager.waveActual)
         {

@@ -1,11 +1,7 @@
 ﻿#region
 using System;
-using System.Security;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Environment;
-using XavLib;
 #endregion
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rotation))]
@@ -74,6 +70,7 @@ public class PlayerController : MonoX
         //hay cambios
         if (!entryLife.Equals(-1)){
             character.timeLife = entryLife;
+            character.timeLifeMax = entryLife;
             entryLife = -1;
         }
 
@@ -279,6 +276,7 @@ public class PlayerController : MonoX
     public static void __Debug_SetLife(float newLife)
     {
         entryLife = newLife;
+
 
     }
     #endregion

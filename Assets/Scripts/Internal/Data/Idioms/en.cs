@@ -113,6 +113,9 @@
                     "Right",
                     "Space",
 #endregion
+#region Etc 3
+                    "Pause"
+#endregion
         };
     }
 

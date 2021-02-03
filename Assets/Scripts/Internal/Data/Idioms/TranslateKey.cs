@@ -122,4 +122,8 @@ public enum TKey
     SLOT_3_ALT,
     ATTACK,
     #endregion
+    #region Etc 3
+    PAUSE
+    #endregion
+
 }

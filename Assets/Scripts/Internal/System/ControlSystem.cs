@@ -1,9 +1,6 @@
 ﻿#region imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Key;
 using Environment;
 using XavLib;
 #endregion
@@ -40,7 +37,7 @@ public class ControlSystem : MonoInit
     private void Start() => LoadCodes();
     public override void Init()
     {
-        LoadCodes();
+        LoadCodes(false);
     }
     #endregion
     #region Methods
