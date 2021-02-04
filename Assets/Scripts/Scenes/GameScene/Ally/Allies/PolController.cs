@@ -26,25 +26,30 @@ public class PolController : Minion
     public float minRangeSize = 2.5f;
     public Equipment equipment;
     [Space]
+    [Header("Buffs")]
+    public Transform buffList;
+    public ItemBuff[] buffs;
+    [Space]
     public ParticleSystem par_explode;
     public ParticleSystem part_attack;
 
-    //ranged attack
-    //private Shot shot;
 
     #endregion
     #region
     private void Start()
     {
-        //Get(out shot);
         Get(out equipment);
-
+        GetChilds(out buffs, buffList);
         LoadMinion();
     }
     private void Update()
     {
         if (UpdateMinion())
         {
+            BuffsUpdate();
+
+            //Check the craft
+            equipment.WaitedCraft(ref character, ref buffs);
 
             if (target != null)
             {
@@ -57,8 +62,12 @@ public class PolController : Minion
                     UpdateMovement();
                     //rotates
                     rotation.LookTo(target.position);
-                    //check for the item
-                    ItemChecker();
+
+                    if (target.CompareTag("item"))
+                    {
+                        //check for the item
+                        ItemChecker();
+                    }
                 }
 
                 //Refresh the target
@@ -109,8 +118,19 @@ public class PolController : Minion
     #endregion
     #region  Method
 
-   
 
+    /// <summary>
+    /// Recorre la lista de buffs existentes y aplica sus propiedades en caso
+    /// de que exista
+    /// </summary>
+    private void BuffsUpdate()
+    {
+        for (int x = 0; x < buffs.Length; x++)
+        {
+            //revisamos si NO ha podido aplicar el buff
+            buffs[x].CanApplyBuff(ref character);
+        }
+    }
 
 
     /// <summary>
@@ -118,37 +138,47 @@ public class PolController : Minion
     /// </summary>
     private void ItemChecker()
     {
-        bool isOnRange = Vector3.Distance(transform.position, target.position) > character.range / minRangeSize;
+        //if the distance between the item and pol is inferior of the 
+        bool isOnRange = Vector3.Distance(transform.position, target.position) < character.range / minRangeSize;
+        if (!isOnRange) return;
 
         //if the actual target is the item and if is on the range
-        if (target.CompareTag("item") && isOnRange)
+        //Debug.Log("Pol: Estoy en contacto Poly, buscaré recoger un item...");
+        //1 - Revisamos si tenemos espacio para incluirlo
+        //tomaremos los slots y veremos si, hay espacio vacío, en caso de estar lleno usaremos un buff para llenarlo con el item target
+        int index = equipment.GetVoidSlotIndex();
+
+        //TODO tambien hacer logica en caso de que nesecitemos comida para continuar....
+
+
+        // si están llenos los huecos de items
+        if (index.Equals(-1))
         {
+            // tomaremos el indice que contenga un buff para consumirlo
+            index = equipment.GetBuffSlotIndex();
+        }
 
-            //1 - Revisamos si tenemos espacio para incluirlo
-            //tomaremos los slots y veremos si, hay espacio vacío, en caso de estar lleno usaremos un buff para llenarlo con el item target
-            int index = equipment.GetVoidSlotIndex();
-
-            // si están llenos los huecos de items
-            if (index.Equals(-1))
-            {
-                // tomaremos el indice que contenga un buff para consumirlo
-                index = equipment.GetBuffSlotIndex();
-            }
-
-            //si hay un hueco o un buff entonces hace acciones ahí
-            if (!index.Equals(-1))
-            {
-                //TODO
-                ActionType action = equipment.Action(index);
-                //PrintX($"{action.item} {action.used}");
-
-            }
-
-
-            // 2 - Tomamos el objeto, y lo colocamos en un hueco vacío
-
+        //si hay un hueco o un buff entonces hace acciones ahí
+        if (!index.Equals(-1))
+        {
+            ActionType action = equipment.Action(index);
+            //PrintX($"{action.item} {action.used}");
 
         }
+        else
+        {
+            Debug.Log("Hola");
+        }
+
+        /*
+        //si hay algo por fabricar
+            equipment.WaitedCraft(ref character, ref buffs);
+        */
+
+
+
+        // 2 - Tomamos el objeto, y lo colocamos en un hueco vacío
+
     }
 
 
@@ -203,6 +233,7 @@ public class PolController : Minion
             float distance_item = Vector3.Distance(transform.position, nearest_item.position);
             float distance_enemy = Vector3.Distance(transform.position, nearest_enemy.position);
 
+            //mira cual está mas cerca
             if (distance_enemy > distance_item)
             {
                 //get item target

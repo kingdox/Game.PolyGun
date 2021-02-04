@@ -22274,6 +22274,14 @@ PrefabInstance:
       propertyPath: anim_player
       value: 
       objectReference: {fileID: 385533606}
+    - target: {fileID: 6661937860930040818, guid: f3e04bd8c72ab4ab094db9120a76528c, type: 3}
+      propertyPath: character.timeLife
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6661937860930040818, guid: f3e04bd8c72ab4ab094db9120a76528c, type: 3}
+      propertyPath: character.timeLifeMax
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6661937860930040822, guid: f3e04bd8c72ab4ab094db9120a76528c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.07

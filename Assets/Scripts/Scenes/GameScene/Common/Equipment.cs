@@ -77,7 +77,7 @@ private void Update(){
         {
             //3
             case CraftType.AAA:
-                buffs[(int)BuffType.STREGHT].StartBuff(3);
+                buffs[BuffType.STREGHT.ToInt()].StartBuff(3);
                 break;
             case CraftType.BBB:
                 buffs[(int)BuffType.ATK_SPEED].StartBuff(3);
@@ -121,22 +121,21 @@ private void Update(){
                 break;
         }
 
-        //Si el player es el que esta haciendo el crafteo
-        if (character.type.Equals(CharacterType.PLAYER))
-        {
-            CraftType[] creations = { CraftType.AAC, CraftType.BBA, CraftType.BBC , CraftType.CCB , CraftType.ABC };
+        CraftType[] creations = { CraftType.AAC, CraftType.BBA, CraftType.BBC , CraftType.CCB , CraftType.ABC };
+
             bool isCreation = craftWaiting.IsEqualOf(creations);
             if (isCreation)
             {
-                AchieveSystem.UpdateAchieve(Achieves.CREATIONS_GAME);
-
+                //Si el player es el que esta haciendo el crafteo
+                if (character.type.Equals(CharacterType.PLAYER))
+                {
+                    AchieveSystem.UpdateAchieve(Achieves.CREATIONS_GAME);
+                }
             }
             else
             {
                 part_craft.Play();
             }
-
-        }
 
 
         //y al final
@@ -206,7 +205,22 @@ private void Update(){
     {
         int index = -1;
 
+        for (int i = 0; i < slots.Length; i++)
+        {
+            //if is the first and is a buff
+            if (index.Equals(-1) && slots[i].IsEqualOf(
+                ItemContent.ATK_SPEED,
+                ItemContent.TARGET_SHOT,
+                ItemContent.FROST,
+                ItemContent.STREGHT,
+                ItemContent.SPEED
+            ))
+            {
+                PrintX($"Tengo un buff en {i}");
 
+                index = i;
+            }
+        }
 
 
         return index;

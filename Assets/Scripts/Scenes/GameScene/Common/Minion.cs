@@ -115,6 +115,7 @@ public abstract class Minion : MonoX
     public void Delete()
     {
         if (isDead) return;
+        isDead = true;
 
 
         //90% de que se cree un objeto
@@ -129,7 +130,6 @@ public abstract class Minion : MonoX
         }
         sfx_items[Sfx.Dead.ToInt()].PlaySound();
         sfx_items[Sfx.Dead.ToInt()].EndSoundIn(TargetManager.GetLeftoverContainer());
-        isDead = true;
         destructure.DestructureThis();
         Destroy(gameObject);
 

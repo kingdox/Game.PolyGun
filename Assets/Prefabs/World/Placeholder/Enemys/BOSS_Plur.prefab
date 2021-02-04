@@ -5190,8 +5190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character:
     type: 1
-    timeLife: 60
-    timeLifeMax: 60
+    timeLife: 100
+    timeLifeMax: 100
     speed: 15
     damage: 6
     range: 0

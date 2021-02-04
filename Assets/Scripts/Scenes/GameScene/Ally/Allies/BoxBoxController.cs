@@ -48,14 +48,7 @@ public class BoxBoxController : Minion
             MinionAttackMinion(collision.transform);
         }
     }
-    //private void OnDrawGizmos()
-    //{
-    //    if (target != null)
-    //    {
-    //        Gizmos.color = Color.blue;
-    //        Gizmos.DrawLine(transform.position, target.position);
-    //    }
-    //}
+   
     private void OnDisable()
     {
         par_explode.Play();
