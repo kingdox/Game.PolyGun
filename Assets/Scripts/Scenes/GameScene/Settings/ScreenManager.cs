@@ -1,6 +1,7 @@
 ﻿#region imports
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Build;
+using XavHelpTo.Change;
 #endregion
 /// <summary>
 /// Encargarse de las actualización de cada pantallas y HUD correspondientemente
@@ -111,7 +112,7 @@ public class ScreenManager : MonoX
     /// <summary>
     /// Activamos la pantalla correspondiente al estado que se encuentran
     /// </summary>
-    private void ActiveScreenOf(int v) => XavHelpTo.Change.ActiveObjectsExcept(v, HUDScreen, pauseScreen, endScreen);
+    private void ActiveScreenOf(int v) => Change.ActiveObjectsExcept(v, HUDScreen, pauseScreen, endScreen);
     private void ActiveScreenOf(GameStatus v = GameStatus.ON_GAME) => ActiveScreenOf((int)v);
 
 
@@ -139,7 +140,7 @@ public class ScreenManager : MonoX
 
         foreach (AchievementItem i in endItems)
         {
-            AchieveSystem.Setitem(XavHelpTo.Get.ZeroMax(10), i);
+            AchieveSystem.Setitem(10.ZeroMax(), i);
         }
     }
     #endregion

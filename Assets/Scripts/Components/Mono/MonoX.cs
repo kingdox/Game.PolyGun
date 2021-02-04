@@ -1,6 +1,7 @@
 ﻿#region Imports
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Look;
+using XavHelpTo.Set;
 #endregion
 /// <summary>
 /// MonoX poseerá todas las propiedades comunes para los objetos
@@ -90,7 +91,7 @@ public abstract class MonoX : MonoBehaviour
     /// <summary>
     /// Pinta con un color el texto
     /// </summary>
-    public static void PrintX(string txt) => print(XavHelpTo.Look.ColorPrint(txt, XavHelpTo.Look.RandomColor()));
+    public static void PrintX(string txt) => print(Look.ColorPrint(txt, Look.RandomColor()));
     public static void PrintX<T>(T txt) => PrintX(txt.ToString());
 
 
@@ -105,7 +106,7 @@ public abstract class MonoX : MonoBehaviour
     /// Hace el conteo y devuelve true cuando pasa una vuelta.
     /// <para>Se usa <see cref="XavHelpTo.Set.TimeCountOf(ref float, float) para aprovechar el codigo, y reducir texto"/></para>
     /// </summary>
-    public bool Timer(ref float count,float timer) => XavHelpTo.Set.TimeCountOf(ref count, timer);
+    public bool Timer(ref float count,float timer) => Set.TimeCountOf(ref count, timer);
 
 
     /// <summary>

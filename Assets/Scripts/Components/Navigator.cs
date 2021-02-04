@@ -1,7 +1,8 @@
 ﻿#region Imports
 using UnityEngine;
 using UnityEngine.UI;
-using XavLib;
+using XavHelpTo.Know;
+using XavHelpTo.Change;
 #endregion
 public class Navigator : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class Navigator : MonoBehaviour
     /// </summary>
     public void RefreshPages(int i = 0)
     {
-        XavHelpTo.Change.ActiveObjectsExcept(pages,i);
+        Change.ActiveObjectsExcept(pages,i);
         NavButtonsChecker();
     }
     /// <summary>
@@ -55,7 +56,7 @@ public class Navigator : MonoBehaviour
         //si vemos que hay uno entrante
         if (!newPages.Length.Equals(0))
         {
-            XavHelpTo.Change.ActiveObjectsExcept(pages, -1);
+            Change.ActiveObjectsExcept(pages, -1);
             //pages[indexActual].SetActive(false);
             pages = newPages;
             indexActual = i;
@@ -72,8 +73,8 @@ public class Navigator : MonoBehaviour
         if (!goForward && !btn_L.interactable) return;
 
 
-        indexActual = XavHelpTo.Know.NextIndex(goForward, pages.Length, indexActual);
-        XavHelpTo.Change.ActiveObjectsExcept(pages, indexActual);
+        indexActual = Know.NextIndex(goForward, pages.Length, indexActual);
+        Change.ActiveObjectsExcept(pages, indexActual);
         //Detectamos los limites
         NavButtonsChecker();
     }

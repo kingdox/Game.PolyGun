@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using Environment;
+using XavHelpTo.Build;
 #endregion
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Rotation))]
@@ -55,8 +56,7 @@ public class PlayerController : MonoX
         @Dead,
         @Attack,
         @Buffs,
-        @Damage
-
+        @Eat,
     }
     [Space]
     [Header("Debug")]
@@ -161,7 +161,7 @@ public class PlayerController : MonoX
         //detenemos los sonidos
         foreach (SfxItem i in sfx_items) i.PlayStop(false);
         //encendemos el de muerte
-        sfx_items[(int)Sfx.Dead].PlayStop(true);
+        sfx_items[Sfx.Dead.ToInt()].PlayStop(true);
         anim_player.SetTrigger("IsDead");
         destructure.DestructureThis();
 
@@ -222,12 +222,15 @@ public class PlayerController : MonoX
                 if (action.IsItem())
                 {
                     //PrintX("Curando");
+                    sfx_items[Sfx.Eat.ToInt()].PlaySound();
                     character.timeLife += Data.data.healShape[(int)action.item];
                     AchieveSystem.UpdateAchieve(Achieves.HEALS_GAME);
 
                 }
                 else
                 {
+                    sfx_items[Sfx.Buffs.ToInt()].PlaySound();
+
                     BuffType buffType = action.ToBuffType();
                     //Esta recorriendo para buscar el buff y asignarle
                     foreach (ItemBuff buff in buffs)
@@ -244,6 +247,8 @@ public class PlayerController : MonoX
             {
                 if (action.existSomething)
                 {
+                    sfx_items[Sfx.Eat.ToInt()].PlaySound();
+
                     //If the player collected somethign from the field
                     AchieveSystem.UpdateAchieve(Achieves.OBJECTS_COLLECTED);
                 }
@@ -260,7 +265,7 @@ public class PlayerController : MonoX
             //Dispara y ve si ha completado
             if (shot.ShotBullet(character))
             {
-                sfx_items[(int)Sfx.Attack].PlaySound();
+                sfx_items[Sfx.Attack.ToInt()].PlaySound();
 
                 body.AddForce(-transform.forward * 20, ForceMode.Impulse);
             }

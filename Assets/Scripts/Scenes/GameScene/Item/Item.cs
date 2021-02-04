@@ -1,6 +1,6 @@
 ﻿#region Imports
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Change;
 #endregion
 
 public class Item : MonoBehaviour
@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     #region Events
      private void Update()
     {
-        XavHelpTo.Change.ActiveParticle(part_selected, Isselected);
+        Change.ActiveParticle(part_selected, Isselected);
         if (!Isselected)
         {
             part_selected.Clear();

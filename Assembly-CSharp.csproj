@@ -118,9 +118,9 @@
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/Minion.cs" />
     <Compile Include="Assets/Scripts/Scenes/AchievementScene/AchievementItem.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/UIManager.cs" />
+    <Compile Include="Assets/Scripts/Internal/System/AudioSystem.cs" />
     <Compile Include="Assets/Scripts/Internal/Data/Idioms/en.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/TargetManager.cs" />
-    <Compile Include="Assets/Scripts/Internal/System/AudioSystem.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets/Fonts/Audiowide/OFL.txt" />

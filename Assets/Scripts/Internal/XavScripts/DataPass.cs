@@ -1,6 +1,4 @@
 ﻿#region ####################### IMPLEMENTATION
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -31,6 +29,8 @@ public class DataPass : MonoBehaviour
     #region ###### EVENTS
     private void Awake()
     {
+       //XavHelpTo.WordCount
+       //"".WordCount
         //Singleton corroboration
         if (_ == null)
         {
@@ -62,6 +62,7 @@ public class DataPass : MonoBehaviour
 
         SaveLoadFile(!File.Exists(path));
         isReady = true;
+        
     }
 
     /// <summary>
@@ -110,14 +111,6 @@ public class DataPass : MonoBehaviour
     /// Preguntamos si <seealso cref="DataPass"/> está listo
     /// </summary>
     public static bool IsReady() => _.isReady;
-
-    //#if DEBUG
-
-    //    private void OnDisable()
-    //    {
-    //        SaveLoadFile(true);
-    //    }
-    //#endif
 
 #endregion
 }

@@ -4,7 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using XavLib;
+using XavHelpTo.Set;
+using XavHelpTo.Look;
+using XavHelpTo.Know;
 using Environment; 
 #endregion
 /// <summary>
@@ -128,8 +130,8 @@ public class UIManager : MonoX
     private void Refresh_weaponArea(float time){
         bool c = time.Equals(0);
         text_weapon.text = c ? "": $"{Math.Round(time, 2)} s";
-        XavHelpTo.Set.ColorParam(ref img_weapon, ColorType.a, c ? 1 : disabledAlpha);
-        XavHelpTo.Set.ColorParam(ref img_weaponBG, ColorType.a, c ? .3f : disabledAlpha);
+        Set.ColorParam(ref img_weapon, ColorType.a, c ? 1 : disabledAlpha);
+        Set.ColorParam(ref img_weaponBG, ColorType.a, c ? .3f : disabledAlpha);
         
     }
 
@@ -141,9 +143,9 @@ public class UIManager : MonoX
         if (!lastWave.Equals(wave)){
             string[] colors = { "green", "red", "magenta", "white", "yellow","blue"};
             lastWave = wave;
-            lastColorIndex = XavHelpTo.Know.DifferentIndex(colors.Length, lastColorIndex);
+            lastColorIndex = Know.DifferentIndex(colors.Length, lastColorIndex);
             //Pinta el numero con el nuevo texto
-            text_waves.text = XavHelpTo.Look.ColorPrint(wave.ToString(),colors[lastColorIndex]);
+            text_waves.text = Look.ColorPrint(wave.ToString(),colors[lastColorIndex]);
         }
     }
 
@@ -162,7 +164,7 @@ public class UIManager : MonoX
             }
             else
             {
-                text_playerLife.text = XavHelpTo.Look.ColorPrint($"{timeLife} s");
+                text_playerLife.text = Look.ColorPrint($"{timeLife} s");
                 multicolor_playerLifeBG.isPlaying = true;
             }
 
@@ -187,20 +189,20 @@ public class UIManager : MonoX
                 {
                     img_slots[x].sprite = sprite_items[3];
                     img_slots[x].color = buffHUDcolors[val - 3];
-                    XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, 1);
+                    Set.ColorParam(ref img_slots[x], ColorType.a, 1);
                 }
                 else
                 {
                     //lo normal
                     img_slots[x].color = Color.white;
                     img_slots[x].sprite = sprite_items[val];
-                    XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, 1);
+                    Set.ColorParam(ref img_slots[x], ColorType.a, 1);
                 }
             }
             else{
                 img_slots[x].sprite = null;
                 img_slots[x].color = Color.white;
-                XavHelpTo.Set.ColorParam(ref img_slots[x], ColorType.a, disabledAlpha);
+                Set.ColorParam(ref img_slots[x], ColorType.a, disabledAlpha);
             }
 
 

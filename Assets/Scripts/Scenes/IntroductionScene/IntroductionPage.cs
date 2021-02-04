@@ -1,6 +1,6 @@
 ﻿#region Imports
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Build;
 #endregion
 public class IntroductionPage : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class IntroductionPage : MonoBehaviour
     /// </summary>
     private void SetMessageControllers()
     {
-        GameObject[] childs = XavHelpTo.Get.Childs(parent_msgC);
+        GameObject[] childs = parent_msgC.Childs();
         messagesC = new MsgController[childs.Length];
         for (int x = 0; x < childs.Length; x++)
         {
@@ -44,7 +44,7 @@ public class IntroductionPage : MonoBehaviour
     /// </summary>
     private void SetImageControllers()
     {
-        GameObject[] childs = XavHelpTo.Get.Childs(parent_imgC);
+        GameObject[] childs = parent_imgC.Childs();
         imagesC = new ImageController[childs.Length];
         for (int x = 0; x < childs.Length; x++)
         {

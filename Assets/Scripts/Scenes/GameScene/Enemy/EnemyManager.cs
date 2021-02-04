@@ -1,7 +1,8 @@
 ﻿#region Imports
 using System;
 using UnityEngine;
-using XavLib;
+using xGet = XavHelpTo.Get.Get;
+using XavHelpTo.Know;
 using Environment;
 #endregion
 
@@ -93,7 +94,7 @@ public class EnemyManager : MonoX
         //Conocemos el record
         int waveRecord = DataPass.GetSavedData().record_waves;
         // creamos un valor aleatorio a partir del record actual
-        int recordRandom = XavHelpTo.Get.ZeroMax(waveRecord) + 1;//+1 añadido, HARDCODED
+        int recordRandom = xGet.ZeroMax(waveRecord) + 1;//+1 añadido, HARDCODED
         // Tenemos los enemigos por oleada
         float enemyPerWave = Data.ENEMY_PER_WAVE;
 
@@ -127,7 +128,7 @@ public class EnemyManager : MonoX
         if (_Debug_CanNOTGenerate) return;  
         enemiesLeft--;
 
-        spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
+        spawnOrder = Know.NextIndex(true, spawnPatron.Length, spawnOrder);
 
         GenerateEnemy(-1);
         //spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
@@ -148,7 +149,7 @@ public class EnemyManager : MonoX
         {
             if (selected.Equals(-1))
             {
-                selected = XavHelpTo.Get.ZeroMax(prefs_Enemies.Length);
+                selected = xGet.ZeroMax(prefs_Enemies.Length);
             }
             spawner.Generate(prefs_Enemies[selected], spawnPatron[spawnOrder], TargetManager.GetEnemiesContainer());
         }
@@ -156,7 +157,7 @@ public class EnemyManager : MonoX
         {
             if (selected.Equals(-1))
             {
-                selected = XavHelpTo.Get.ZeroMax(prefs_Boss.Length);
+                selected = xGet.ZeroMax(prefs_Boss.Length);
             }
             //sino genera un jefe
             //en caso de haber BOSS por descontar
@@ -207,8 +208,3 @@ public enum EnemyName
     MOND,
     PLUR
 }
-
-
-////TODO
-////TODO revisar si es la oleada numero 5
-

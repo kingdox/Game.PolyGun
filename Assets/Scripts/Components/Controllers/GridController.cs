@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using XavLib;
+using XavHelpTo.Get;
 #endregion
 namespace Grid
 {
@@ -90,10 +90,10 @@ namespace Grid
             for (int x = 0; x < rect_containers.Length; x++)
             {
                 //Donde el primero inicia con los valores de _screenSize
-                _screenSize = XavHelpTo.Get.QtyOf(_screenSize, anchorSizeOf(rectAnchorOf(rect_containers[x])));
+                _screenSize = Get.QtyOf(_screenSize, anchorSizeOf(rectAnchorOf(rect_containers[x])));
             }
 
-            return XavHelpTo.Get.QtyOf(_screenSize, anchorSizeOf(rectAnchorOf(rect)));
+            return Get.QtyOf(_screenSize, anchorSizeOf(rectAnchorOf(rect)));
         }
 
         /// <summary>

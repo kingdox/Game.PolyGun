@@ -1,7 +1,9 @@
 ﻿#region Imports
 using UnityEngine;
 using Achievements;
-using XavLib;
+using xGet = XavHelpTo.Get.Get;
+using XavHelpTo.Set;
+using XavHelpTo.Know;
 using Environment;
 #endregion
 public class AchieveSystem : MonoX
@@ -81,7 +83,7 @@ public class AchieveSystem : MonoX
         Vector2 newMax = new Vector2(1, 1);
 
         //me las retorna en 0-1
-        newMin.y = XavHelpTo.Set.UnitInTime(rect_unlockItem.anchorMin.y, minY);
+        newMin.y = Set.UnitInTime(rect_unlockItem.anchorMin.y, minY);
 
         rect_unlockItem.anchorMin = newMin;
         rect_unlockItem.anchorMax = newMin + newMax;
@@ -135,8 +137,8 @@ public class AchieveSystem : MonoX
 
             //revisa ambos valores, el antiguo y el actual y revisa si poseen distinto limit, de ser así se batió un record...
         
-            int old_LimitIndex = XavHelpTo.Know.FirstMajor(oldValue, limitsActual);
-            int actual_LimitIndex = XavHelpTo.Know.FirstMajor(saved.achievements[index], limitsActual);
+            int old_LimitIndex = Know.FirstMajor(oldValue, limitsActual);
+            int actual_LimitIndex = Know.FirstMajor(saved.achievements[index], limitsActual);
 
             if (old_LimitIndex != actual_LimitIndex )
             {
@@ -173,7 +175,7 @@ public class AchieveSystem : MonoX
         {
             float count = savedAchieve[x] - oldAchievements[x];
             float max = _.achievements[x].limit.gold;
-            pcts[x] = XavHelpTo.Get.PercentOf(count, max);
+            pcts[x] = xGet.PercentOf(count, max);
             //PrintX($"count - {count}, max -{max}, pct{pcts[x]}");
 
             if (pcts[x] >  pcts[maxValIndex])
@@ -199,7 +201,7 @@ public class AchieveSystem : MonoX
 
 
         //Cambiamos los valores que sean iguales con cualquier otro del arreglo
-        newAchieve = XavHelpTo.Set.DifferentIndexInEquals(newAchieve, achievementLenght);
+        newAchieve = Set.DifferentIndexInEquals(newAchieve, achievementLenght);
 
 
 

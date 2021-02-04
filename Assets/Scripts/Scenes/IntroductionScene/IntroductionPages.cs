@@ -1,6 +1,7 @@
 ﻿#region Imports
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Get;
+using XavHelpTo.Look;
 #endregion
 public class IntroductionPages : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class IntroductionPages : MonoBehaviour
         int length = transform.childCount;
         //si hay diferencia de longitudes de pagina
         pages = new IntroductionPage[length];
-        pagesG = XavHelpTo.Get.Childs(transform);
+        pagesG = Get.Childs(transform);
+
+        "Hola amigo :)".Print();
 
         for (int x = 0; x < length; x++)
         {

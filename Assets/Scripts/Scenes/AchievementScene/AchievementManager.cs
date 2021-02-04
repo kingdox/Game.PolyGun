@@ -1,7 +1,9 @@
 ﻿#region Imports
 using UnityEngine;
 using UnityEngine.UI ;
-using XavLib;
+using XavHelpTo.Set;
+using XavHelpTo.Know;
+using XavHelpTo.Change;
 using Environment;
 #endregion
 #region class AchievementManager
@@ -69,7 +71,7 @@ public class AchievementManager : MonoManager
         {
             //Asignamos el cambio de dimensión y guardamos
             //Se recomienda limpiar los datos en caso de que haysa hecho muchos cambios...
-            _saved.achievements = XavHelpTo.Set.Length(_saved.achievements, AchieveSystem.achievementLenght);
+            _saved.achievements = Set.Length(_saved.achievements, AchieveSystem.achievementLenght);
             DataPass.SetData(_saved);
             DataPass.SaveLoadFile(true);
         }
@@ -87,10 +89,10 @@ public class AchievementManager : MonoManager
         for (int x = 0; x < items.Length; x++)
         {
             //si existe el item no sale de los limites de los achievements
-            bool condition = XavHelpTo.Know.IsOnBounds(count, AchieveSystem.achievementLenght);
+            bool condition = Know.IsOnBounds(count, AchieveSystem.achievementLenght);
 
             //muestra o esconde en caso de formar parte o no
-            XavHelpTo.Change.ActiveObject(items[x].gameObject, condition);
+            Change.ActiveObject(items[x].gameObject, condition);
 
             //Si está dentro de los limites entonces hace el pintado
             if (condition){
@@ -115,7 +117,7 @@ public class AchievementManager : MonoManager
         int _newIndex = index + distance;
 
         //si no se ha salido asignamos el nuevo index
-        if (XavHelpTo.Know.IsOnBounds(_newIndex, AchieveSystem.achievementLenght)) index = _newIndex;
+        if (Know.IsOnBounds(_newIndex, AchieveSystem.achievementLenght)) index = _newIndex;
         else index = _newIndex < 0 ? indexlimit : 0;
         AssignAchievementItem();
     }

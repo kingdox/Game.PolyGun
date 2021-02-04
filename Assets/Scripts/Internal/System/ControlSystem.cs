@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Environment;
-using XavLib;
+using XavHelpTo.Build;
 #endregion
 public class ControlSystem : MonoInit
 {
@@ -146,7 +146,7 @@ public class ControlSystem : MonoInit
         {
             if (ControlSystem.IsKeyHold(keys[x]))
             {
-                _val += XavHelpTo.Change.BoolToInt(x.Equals(0));
+                _val += x.Equals(0).ToInt();
             }
         }
         //sino...

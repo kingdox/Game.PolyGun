@@ -1,11 +1,10 @@
 ﻿#region Imports
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Translate;
 using Environment;
-using XavLib;
+using XavHelpTo.Set;
+using XavHelpTo.Know;
 using Options;
 #endregion
 public class MsgController : MonoInit
@@ -161,22 +160,22 @@ public class MsgController : MonoInit
 
         //Obtenemos los punteros que nos muestran la etiqueta
         //y, indirectamente el texto contenido
-        int[] tagIndex = XavHelpTo.Know.IndexsOfTag(text, index_Start);
+        int[] tagIndex = Know.IndexsOfTag(text, index_Start);
 
         // 2. extraemos las partes: tag1 | valor | tag2
         string[] tagParts = new string[] {
             //start
-            XavHelpTo.Set.Join(text, tagIndex[0], tagIndex[1]),
+            Set.Join(text, tagIndex[0], tagIndex[1]),
             //Val
-            XavHelpTo.Set.Join(text, tagIndex[1] + 1, tagIndex[2] - 1),
+            Set.Join(text, tagIndex[1] + 1, tagIndex[2] - 1),
             //end
-            XavHelpTo.Set.Join(text, tagIndex[2], tagIndex[3])
+            Set.Join(text, tagIndex[2], tagIndex[3])
         };
 
         // 3. extraemos 
         string[] textParts = new string[] {
-            XavHelpTo.Set.Join(text, 0, tagIndex[0] - 1),
-            XavHelpTo.Set.Join(text, tagIndex[3])
+            Set.Join(text, 0, tagIndex[0] - 1),
+            Set.Join(text, tagIndex[3])
         };
 
 
@@ -220,7 +219,7 @@ public class MsgController : MonoInit
                     else
                     {
                         //unimos poco a poco cada caracter del texto
-                        txt_msg.text = textParts[0] + (tagParts[0] + XavHelpTo.Set.Join(tagParts[1], 0, index) + tagParts[2]);
+                        txt_msg.text = textParts[0] + (tagParts[0] + Set.Join(tagParts[1], 0, index) + tagParts[2]);
                         StartCoroutine(SetTag(
                             speed,
                             number,

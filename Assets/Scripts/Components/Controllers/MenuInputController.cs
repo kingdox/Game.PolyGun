@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Environment;
-using XavLib;
+using XavHelpTo.Know;
 #endregion
 public class MenuInputController : MonoX
 {
@@ -60,7 +60,7 @@ public class MenuInputController : MonoX
     /// <summary>
     /// Actualizamos el ultimo indice en la dirección asignada
     /// </summary>
-    private void UpdateLastIndex(bool c) => lastIndex = XavHelpTo.Know.NextIndex(c, buttons.Length, lastIndex);
+    private void UpdateLastIndex(bool c) => lastIndex = Know.NextIndex(c, buttons.Length, lastIndex);
 
     /// <summary>
     /// Actualizamos al ultimo indice

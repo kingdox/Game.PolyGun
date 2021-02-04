@@ -1,6 +1,7 @@
 ﻿#region
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Build;
+using XavHelpTo.Know;
 using Environment;
 #endregion
 [RequireComponent(typeof(Spawner))]
@@ -67,10 +68,10 @@ public class ItemManager : MonoX
         //proabilidad de que salga item
         if (Random.Range(0,1f) < Data.data.itemShapeRate) {
             //busca solo items
-            selected = XavHelpTo.Get.ZeroMax(3);
+            selected = 3.ZeroMax();
         }
 
-        spawnOrder = XavHelpTo.Know.NextIndex(true, spawnPatron.Length, spawnOrder);
+        spawnOrder = Know.NextIndex(true, spawnPatron.Length, spawnOrder);
         GenerateItem(selected);
         //spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());
     }
@@ -84,7 +85,7 @@ public class ItemManager : MonoX
         if (selected.Equals((int)ItemContent.NO))    
         {
             //Random
-            selected = XavHelpTo.Get.ZeroMax(prefs_Item.Length);
+            selected = prefs_Item.ZeroMax();
         }
 
         spawner.Generate(prefs_Item[selected], spawnPatron[spawnOrder], TargetManager.GetItemsContainer());
@@ -98,7 +99,7 @@ public class ItemManager : MonoX
     /// <returns></returns>
     public static GameObject GetRandomItemShape()
     {
-        return _.prefs_Item[XavHelpTo.Get.ZeroMax(3)];
+        return _.prefs_Item[3.ZeroMax()];
     }
     /// <summary>
     /// Set if you can generate or not

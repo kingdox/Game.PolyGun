@@ -1,6 +1,7 @@
 ﻿#region Imports
 using UnityEngine;
 using Environment;
+using XavHelpTo.Build;
 #endregion
 //[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
@@ -28,6 +29,17 @@ public abstract class Minion : MonoX
     protected Movement movement;
     private SaveVelocity saveVelocity;
     protected Destructure destructure;
+    [Space]
+    [Header("Sfx Area")]
+    private SfxItem[] sfx_items;
+    public Transform tr_sfxParent;
+    //public AudioSource src_action;
+    private enum Sfx
+    {
+        @Creation,
+        @Action,//Atacar
+        @Dead,
+    }
 
     #endregion
     #region Methods
@@ -40,8 +52,10 @@ public abstract class Minion : MonoX
         GetAdd(ref destructure);
         //in case of not set
         GetAdd(ref saveVelocity);
+        GetChilds(out sfx_items, tr_sfxParent);
 
         target = transform;
+        sfx_items[Sfx.Creation.ToInt()].PlaySound();
     }
 
     /// <summary>
@@ -85,6 +99,7 @@ public abstract class Minion : MonoX
     protected void MinionDamage(Minion minionInContact)
     {
         minionInContact.character.timeLife -= character.damage;
+        sfx_items[Sfx.Action.ToInt()].PlaySound();
 
         //PrintX($"Minion Ataca! {tag}, {name}");
 
@@ -112,7 +127,8 @@ public abstract class Minion : MonoX
                 TargetManager.GetItemsContainer()
             );
         }
-
+        sfx_items[Sfx.Dead.ToInt()].PlaySound();
+        sfx_items[Sfx.Dead.ToInt()].EndSoundIn(TargetManager.GetLeftoverContainer());
         isDead = true;
         destructure.DestructureThis();
         Destroy(gameObject);

@@ -1,7 +1,8 @@
 ﻿#region Imports
 using UnityEngine;
 using Environment;
-using XavLib;
+using XavHelpTo.Build;
+using XavHelpTo.Set;
 using Crafts;
 
 #endregion
@@ -124,7 +125,7 @@ private void Update(){
         if (character.type.Equals(CharacterType.PLAYER))
         {
             CraftType[] creations = { CraftType.AAC, CraftType.BBA, CraftType.BBC , CraftType.CCB , CraftType.ABC };
-            bool isCreation = XavHelpTo.Know.IsEqualOf(craftWaiting, creations);
+            bool isCreation = craftWaiting.IsEqualOf(creations);
             if (isCreation)
             {
                 AchieveSystem.UpdateAchieve(Achieves.CREATIONS_GAME);
@@ -216,7 +217,7 @@ private void Update(){
     /// </summary>
     private void ClearSlots()
     {
-        slots = XavHelpTo.Set.FillWith(ItemContent.NO, slots);
+        slots = Set.FillWith(ItemContent.NO, slots);
         equipedQty = 0;
     }
     #endregion
@@ -238,7 +239,7 @@ public struct ActionType {
     /// </summary>
     public bool IsItem()
     {
-        return XavHelpTo.Know.IsEqualOf(item,
+        return item.IsEqualOf(
                     ItemContent.SQUARE,
                     ItemContent.CIRCLE,
                     ItemContent.TRIANGLE

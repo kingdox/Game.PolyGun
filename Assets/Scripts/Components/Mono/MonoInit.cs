@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿#region
+using System.Collections;
 using UnityEngine;
-
+#endregion
 /// <summary>
 /// Clase que nos permite detectar cuando esta listo
 /// <see cref="DataPass.IsReady"/>

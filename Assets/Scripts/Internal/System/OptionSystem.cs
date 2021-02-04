@@ -1,7 +1,8 @@
 ﻿#region Imports
 using UnityEngine;
 using Environment;
-using XavLib;
+using XavHelpTo.Know;
+using XavHelpTo.Set;
 using Options;
 #endregion
 
@@ -130,19 +131,19 @@ public class OptionSystem : MonoBehaviour
             switch (option)
             {
                 case Option.LANGUAGE:
-                    saved.idiom = XavHelpTo.Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
+                    saved.idiom = Know.NextIndex(condition, Data.GetLangLength(), saved.idiom);
                     break;
                 case Option.TEXTSPEED:
-                    saved.textSpeed = XavHelpTo.Know.NextIndex(condition, OptionData.textSpeed.Length, saved.textSpeed);
+                    saved.textSpeed = Know.NextIndex(condition, OptionData.textSpeed.Length, saved.textSpeed);
                     break;
                 case Option.MUSIC:
-                    saved.musicVolume = XavHelpTo.Know.NextIndex(condition, OptionData.musicVolume.Length, saved.musicVolume);
+                    saved.musicVolume = Know.NextIndex(condition, OptionData.musicVolume.Length, saved.musicVolume);
                     break;
                 case Option.SOUND:
-                    saved.sfxVolume = XavHelpTo.Know.NextIndex(condition, OptionData.sfxVolume.Length, saved.sfxVolume);
+                    saved.sfxVolume = Know.NextIndex(condition, OptionData.sfxVolume.Length, saved.sfxVolume);
                     break;
                 case Option.CONTROLS:
-                    saved.control = XavHelpTo.Know.NextIndex(condition, OptionData.controls, saved.control);
+                    saved.control = Know.NextIndex(condition, OptionData.controls, saved.control);
 
                     break;
             }
@@ -201,7 +202,7 @@ public class OptionSystem : MonoBehaviour
         string val = OptionData.GetValueMsg(lastOpt); ;
         //Debug.Log(val);
         //Ponemos aquí que cambie aleatoriamente de color...
-        val = XavHelpTo.Set.ColorTag(val);
+        val = Set.ColorTag(val);
 
         return val;
     }
@@ -224,7 +225,7 @@ public class OptionSystem : MonoBehaviour
 
         for (int x = 0; x < objs.Length; x++) objs[x] = _.opt_items[x].btn.gameObject;
             
-        int index = XavHelpTo.Know.FocusIndex(objs);
+        int index = Know.FocusIndex(objs);
         Debug.Log(index);
         //En caso de encontrar foco
         if (!index.Equals(-1)){

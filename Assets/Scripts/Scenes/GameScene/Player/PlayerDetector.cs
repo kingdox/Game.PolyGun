@@ -1,6 +1,7 @@
 ﻿#region 
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Build;
+using XavHelpTo.Look;
 #endregion
 [RequireComponent(typeof(SphereCollider))]
 public class PlayerDetector : MonoX
@@ -23,14 +24,14 @@ public class PlayerDetector : MonoX
     //    Get(out sphereCollider_detector);
     //}
     private void OnTriggerStay(Collider other){
-        if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
+        if (other.tag.IsEqualOf(triggerTags))
         {
             CheckDetection(other.transform);
         }
     }
 
     private void OnTriggerExit(Collider other){
-        if (XavHelpTo.Know.IsEqualOf(other.tag, triggerTags))
+        if (other.tag.IsEqualOf(triggerTags))
         {
             bool isItemNearNull = itemNear == null;
 
@@ -44,6 +45,7 @@ public class PlayerDetector : MonoX
 
                 itemNear = null;
             }
+            
         }
     }
     private void OnDrawGizmos(){

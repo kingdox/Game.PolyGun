@@ -1,9 +1,8 @@
 ﻿#region
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using XavLib;
+using XavHelpTo.Set;
 #endregion
 
 public class ImageController : MonoBehaviour , IImageController
@@ -43,11 +42,8 @@ public class ImageController : MonoBehaviour , IImageController
     private void UpdateColor()
     {
         Color _c = img.color;
-        for (int x = 0; x < 4; x++) _c[x] = XavHelpTo.Set.UnitInTime(_c[x], color_want[x], scaleSpeed);
+        for (int x = 0; x < 4; x++) _c[x] = Set.UnitInTime(_c[x], color_want[x], scaleSpeed);
         img.color = _c;
-
-        //Si se tiene que desactivar al terminar y ha terminado
-        //if (stopIfEnd && IsEnd()) keepUpdate = false;
     }
 
     /// <summary>
@@ -67,7 +63,6 @@ interface IImageController
 {
     /// <summary>
     ///  Revisa si ha terminado
-    ///  TODO no funciona 
     /// </summary>
     bool IsEnd();
 

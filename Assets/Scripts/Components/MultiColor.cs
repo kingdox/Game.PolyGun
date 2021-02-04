@@ -1,9 +1,6 @@
 ﻿#region imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using XavLib;
+using xGet = XavHelpTo.Get;
 #endregion
 /// <summary>
 /// Cambia el "Color deseado" de <see cref="ImageController"/>
@@ -52,7 +49,7 @@ public class MultiColor : MonoX
     /// Cambiamos a uno de los colores escogidos
     /// </summary>
     public void ChangeColor(){
-        imgController.color_want = colors[XavHelpTo.Get.ZeroMax(colors.Length)];
+        imgController.color_want = colors[xGet.Get.ZeroMax(colors.Length)];
     }
     #endregion
 }

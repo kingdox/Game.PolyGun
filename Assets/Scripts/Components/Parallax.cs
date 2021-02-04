@@ -1,6 +1,7 @@
 ﻿#region
 using UnityEngine;
-using XGet = XavLib.XavHelpTo.Get;
+using XGet = XavHelpTo.Get.Get;
+using XavHelpTo.Build;
 #endregion
 
 //Este paralax solo usa el eje X
@@ -48,7 +49,8 @@ public class Parallax : MonoX
     /// </summary>
     private void RefreshParallax()
     {
-        timer = XGet.ZeroMax(timeRangeMax);
+        timer = timeRangeMax.ZeroMax();
+
         ChangeMinusPlus(ref attenX);
         ChangeMinusPlus(ref attenY);
     }

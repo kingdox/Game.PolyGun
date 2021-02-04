@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Achievements;
-using XavLib;
+using XavHelpTo.Build;
+using XavHelpTo.Set;
 #endregion
 public class AchievementItem : MonoBehaviour
 {
@@ -83,7 +84,7 @@ public class AchievementItem : MonoBehaviour
         //ajustamos el progreso de la barra
         if (_limitIndex != -1){
 
-            toMax = XavHelpTo.Get.PercentOf(item.value, _limits[_limitIndex]) / 100;
+            toMax = item.value.PercentOf(_limits[_limitIndex]) / 100;
 
             if (item.value == 0){
                 img_bar_last.color = Color.white;
@@ -124,7 +125,7 @@ public class AchievementItem : MonoBehaviour
         float _scale = 2;//TODO HARDCODED
 
         rect_bar_actual.anchorMax = new Vector2(
-            XavHelpTo.Set.UnitInTime(_rectX, toMax,_scale)
+            Set.UnitInTime(_rectX, toMax,_scale)
             , rect_bar_actual.anchorMax.y);
 
     }

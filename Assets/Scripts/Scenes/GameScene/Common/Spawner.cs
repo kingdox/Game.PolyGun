@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XavLib;
+using xGet = XavHelpTo.Get.Get;
 #endregion
 public class Spawner : MonoX
 {
@@ -62,7 +62,7 @@ public class Spawner : MonoX
     public void Generate(GameObject pref, SpawnOpt opt, Transform parent){
         int i = GetIndexOfDistanceType(opt);
 
-        Vector3 pos = XavHelpTo.Get.MinusMax(childsPos[i], range, 1);
+        Vector3 pos = xGet.MinusMax(childsPos[i], range, 1);
 
         GameObject obj = Instantiate(pref, pos, Quaternion.identity, parent);
 
@@ -78,7 +78,7 @@ public class Spawner : MonoX
     private int GetIndexOfDistanceType(SpawnOpt opt){
 
         if (opt.Equals(SpawnOpt.RANDOM))   {
-            return XavHelpTo.Get.ZeroMax(childsPos.Length);
+            return xGet.ZeroMax(childsPos.Length);
         }
         else
         {
@@ -109,7 +109,7 @@ public class Spawner : MonoX
     public void __Debug_Spawn(){
         if (!DebugFlag(ref _Debug_Spawn)) return;
 
-        Generate(XavHelpTo.Get.Range(_Debug_prefs), _Debug_SpawnOpt, TargetManager.GetEnemiesContainer());
+        Generate(xGet.Range(_Debug_prefs), _Debug_SpawnOpt, TargetManager.GetEnemiesContainer());
     }
 #endif
     #endregion

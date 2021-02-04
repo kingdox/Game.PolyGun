@@ -1,8 +1,6 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Build;
 #endregion
 public class AllyManager : MonoX
 {
@@ -10,19 +8,11 @@ public class AllyManager : MonoX
     private static AllyManager _;
     public GameObject[] prefs_Allies;
 
-    //[Header("Debug")]
-    //public bool _Debug_Invoke = false;
-    //public Transform _Debug_player;
-
     #endregion
     #region Events
     private void Awake()
     {
         Get(out _);
-    }
-    private void Update()
-    {
-        //__Debug_Invoke();
     }
     #endregion
     #region Methods
@@ -34,8 +24,7 @@ public class AllyManager : MonoX
     public static void GenerateAlly(Transform target, AllyType type)
     {
 
-
-        int range = XavHelpTo.Get.RandomBool() ? 1 : -1;//distancia del creador y la cración
+        int range = _.RandomBool().ToInt();
 
         Vector3 distance = Vector3.one;
 
@@ -44,8 +33,8 @@ public class AllyManager : MonoX
         distance.z = range;
 
         int allyIndex = type.Equals(AllyType.NO)
-            ? XavHelpTo.Get.ZeroMax(_.prefs_Allies.Length)
-            : (int)type
+            ? _.prefs_Allies.Length.ZeroMax()
+            : type.ToInt()
         ;
 
         Instantiate(

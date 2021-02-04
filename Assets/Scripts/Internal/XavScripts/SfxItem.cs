@@ -1,6 +1,8 @@
 ﻿#region 
 using UnityEngine;
-using XavLib;
+using XavHelpTo.Know;
+using xGet = XavHelpTo.Get.Get;
+using XavHelpTo.Change;
 #endregion
 //[System.Serializable]
 [RequireComponent(typeof(AudioSource))]
@@ -11,6 +13,12 @@ public class SfxItem : MonoX
 
     public AudioClip[] clips;
     public int lastClipIndex;
+
+    /// <summary>
+    /// Esta si aumenta podrá ser variacion entre positivo y negativo
+    /// </summary>
+    public float pitchVariation = 0;
+
     #endregion
     #region Event
     private void Awake()
@@ -19,6 +27,7 @@ public class SfxItem : MonoX
         SetClip();
 
     }
+   
     #endregion
     #region Method
 
@@ -27,8 +36,10 @@ public class SfxItem : MonoX
     /// </summary>
     public void SetClip()
     {
-        lastClipIndex = XavHelpTo.Know.DifferentIndex(clips.Length, lastClipIndex);
+        lastClipIndex = Know.DifferentIndex(clips.Length, lastClipIndex);
         source.clip = clips[lastClipIndex];
+        pitchVariation = 1 + xGet.MinusMax(pitchVariation);
+
     }
 
     /// <summary>
@@ -36,7 +47,7 @@ public class SfxItem : MonoX
     /// </summary>
     public void PlayStop(bool c)
     {
-        XavHelpTo.Change.ActiveAudioSource(source, c);
+        Change.ActiveAudioSource(source, c);
     }
 
 
@@ -52,6 +63,15 @@ public class SfxItem : MonoX
             source.Play();
         }
     }
+
+
+    public void EndSoundIn(Transform tr)
+    {
+        transform.parent = tr;
+
+        Destroy(gameObject, source.clip.length);
+    }
+
     /// <summary>
     /// Returns the audio src like a ref to manage it
     /// </summary>

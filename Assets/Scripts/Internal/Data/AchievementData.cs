@@ -1,9 +1,6 @@
 ﻿#region imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Translate;
-using XavLib;
+using XavHelpTo.Know;
 #endregion
 namespace Achievements
 {
@@ -106,7 +103,7 @@ namespace Achievements
         /// <summary>
         /// Muestra el limite alcanzado basado en los valores proporcionados
         /// </summary>
-        public int LimitReached => XavHelpTo.Know.FirstMajor(value, limit.ToArray());
+        public int LimitReached => Know.FirstMajor(value, limit.ToArray());
 
         public string TextValue => $" {value} {ShowLimiters} ";
          //> limit.gold

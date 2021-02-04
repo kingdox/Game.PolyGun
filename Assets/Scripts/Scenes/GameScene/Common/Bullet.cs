@@ -1,6 +1,7 @@
 ﻿#region Imports
 using System;
 using UnityEngine;
+using XavHelpTo.Build;
 #endregion
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Destructure))]
@@ -33,6 +34,8 @@ public class Bullet : MonoX
 
     [Space]
     private Transform nearest;
+    [Space]
+    public SfxItem sfx_bulletDamage;
 
     #endregion
     #region Events
@@ -117,14 +120,12 @@ public class Bullet : MonoX
             //PrintX($"[{bulletShot.owner}]-{name} is triggering with tag [{entryTag}] - {other.name}");
             if (!entryTag.Equals("obstacle"))
             {
-             
 
                 switch (bulletShot.owner)
                 {
                     case CharacterType.ALLY:
                     case CharacterType.PLAYER:
                         if (!IsTag(entryTag, "enemy")) return;
-
                         ShotMinion(other.transform);
                         break;
                     case CharacterType.ENEMY:
@@ -183,7 +184,8 @@ public class Bullet : MonoX
     private void ShotMinion(Transform tr_minion)
     {
         Minion minion = tr_minion.GetComponent<Minion>();
-
+        sfx_bulletDamage.PlaySound();
+        sfx_bulletDamage.EndSoundIn(TargetManager.GetLeftoverContainer());
 
         if (minion)
         {
@@ -222,6 +224,8 @@ public class Bullet : MonoX
     private void ShotPlayer(Transform tr_player)
     {
         shotSucces = true;
+        sfx_bulletDamage.PlaySound();
+        sfx_bulletDamage.EndSoundIn(TargetManager.GetLeftoverContainer());
         ActionShotSucces?.Invoke();
         PlayerController player = tr_player.GetComponent<PlayerController>();
         player.character.timeLife -= bulletShot.damage;
@@ -256,6 +260,6 @@ public class Bullet : MonoX
     /// <summary>
     ///  Checks for on of the tags
     /// </summary>
-    private bool IsTag(string tag, params string[] tags) => XavLib.XavHelpTo.Know.IsEqualOf(tag, tags);
+    private bool IsTag(string tag, params string[] tags) => tag.IsEqualOf(tags);
     #endregion
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using XavLib;
+using XavHelpTo.Know;
 #endregion
 public class MenuManager : MonoManager
 {
@@ -122,7 +122,7 @@ public class MenuManager : MonoManager
     ///<para>si index es -1 entonces tomará aleatoriamente alguno</para>
     /// </summary>
     private void LoadMessage(int index=-1){
-        index = index != -1 ? index : XavHelpTo.Know.DifferentIndex(keys_Msg.Length, index);
+        index = index != -1 ? index : Know.DifferentIndex(keys_Msg.Length, index);
         msg_Message.LoadKey(keys_Msg[index], .075f);
     }
 

@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine;
 using Environment;
-using XavLib;
+using XavHelpTo.Look;
+using XavHelpTo.Set;
 #endregion
 
 public class InitialManager : MonoManager, IInitManager
@@ -81,7 +82,7 @@ public class InitialManager : MonoManager, IInitManager
                 break;
                 case 2:
                     //Usamos el splash para desaparecer la pantalla
-                    imgC_splash.color_want = XavHelpTo.Set.ColorParam(imgC_splash.color_want, (int)ColorType.a, 0);
+                    imgC_splash.color_want = Set.ColorParam(imgC_splash.color_want, (int)ColorType.a, 0);
                     msg_history.LoadKey(TKey.MSG_INIT_HISTORY);
                     StartCoroutine(ActivePressAny());
                     break;
@@ -107,12 +108,12 @@ public class InitialManager : MonoManager, IInitManager
 
         if (saved.isIntroCompleted)
         {
-            XavHelpTo.Look.Print("Cargando menu");
+            Look.Print("Cargando menu");
             GoToScene(Scenes.MenuScene);
         }
         else
         {
-            XavHelpTo.Look.Print("Cargando Introducción");
+            Look.Print("Cargando Introducción");
             GoToScene(Scenes.IntroductionScene);
         }
     }

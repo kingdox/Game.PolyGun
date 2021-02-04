@@ -1,9 +1,6 @@
 ﻿#region imports
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Environment;
-using XavLib;
+using XavHelpTo.Change;
 #endregion
 /// <summary>
 /// Abstract de los Manager para administrar cosas que dependen de inicialización
@@ -12,9 +9,8 @@ using XavLib;
 public abstract class MonoManager : MonoInit, IManager
 {
     #region Methods
-    public void GoToScene(string name) => XavHelpTo.Change.SceneTo(name);
-    public void GoToScene(Scenes scene) => XavHelpTo.Change.SceneTo(scene.ToString());
-
+    public void GoToScene(string name) => Change.SceneTo(name);
+    public void GoToScene(Scenes scene) => Change.SceneTo(scene.ToString());
 
     //public void Singleton<T>(ref T _, T t)
     //{
