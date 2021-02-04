@@ -166,9 +166,8 @@ public struct SavedData
 
     /// <summary>
     /// EXTRA, Leftover QTY
-    /// TODO
     /// </summary>
-    //public int leftoverQty;
+    public int leftoverQty;
 
 
 

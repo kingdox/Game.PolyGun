@@ -18,14 +18,15 @@ namespace Options
         public static readonly float[] musicVolume = { 0, .3f, .5f, .7f }; // el audiosource lo maneja en unit
         public static readonly float[] sfxVolume = { -80, -10 };
         public static readonly int controls = Key.KeyData.CODE_LENGTH;// longitud de cantidad de controlesps4?
-        //public static readonly int[] LEFTOVER_QTY = {0,50,250, 500 };
-                                                //
+        //public static readonly int[] leftoverQty = { 0,50 };//50, 250, 500 };
+        //
         private static readonly TKey[] msgOpt = {
             TKey.MSG_OPT_LANGUAGE,
             TKey.MSG_OPT_TEXTSPEED,
             TKey.MSG_OPT_MUSIC,
             TKey.MSG_OPT_SOUND,
             TKey.MSG_OPT_CONTROLS,
+            //TKey.MSG_OPT_LEFTOVER,
             TKey.MSG_OPT_BACK,
         };
         private static readonly TKey[] msg_Idiom = {
@@ -53,11 +54,16 @@ namespace Options
             TKey.MSG_OPT_CONTROLS_INVERT,
             //TKey.MSG_OPT_CONTROLS_NORMAL
         };
+        //private static readonly TKey[] msg_leftover = {//TODO
+        //    TKey.MSG_OPT_CONTROLS_NORMAL,
+        //    TKey.MSG_OPT_CONTROLS_INVERT,
+        //    //TKey.MSG_OPT_CONTROLS_NORMAL
+        //};
         #endregion
-            #region METHODS
-            /// <summary>
-            /// Dependiendo de la opcion, manejaremos busqueda en una o otra
-            /// </summary>
+        #region METHODS
+        /// <summary>
+        /// Dependiendo de la opcion, manejaremos busqueda en una o otra
+        /// </summary>
         public static string GetValueMsg(Option opt){
 
             SavedData saved = DataPass.GetSavedData();
@@ -67,14 +73,16 @@ namespace Options
                 msg_textSpeed,
                 msg_musicVolume,
                 msg_sfxVolume,
-                msg_controls
+                msg_controls,
+                //msg_leftover
             };
             int[] indexValue = {
                 saved.idiom,
                 saved.textSpeed,
                 saved.musicVolume,
                 saved.sfxVolume,
-                saved.control
+                saved.control,
+                //saved.leftoverQty
             };
 
             return opt.Equals(Option.BACK) ? ""
@@ -99,6 +107,7 @@ namespace Options
         MUSIC,
         SOUND,
         CONTROLS,
+        //LEFTOVER,
         BACK
     }
 }

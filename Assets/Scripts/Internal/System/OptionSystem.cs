@@ -144,8 +144,10 @@ public class OptionSystem : MonoBehaviour
                     break;
                 case Option.CONTROLS:
                     saved.control = Know.NextIndex(condition, OptionData.controls, saved.control);
-
                     break;
+                //case Option.LEFTOVER:
+                //    saved.leftoverQty = Know.NextIndex(condition, OptionData.leftoverQty.Length, saved.control);
+                //    break;
             }
 
             //XavHelpTo.Look.Print("Entra a actions");

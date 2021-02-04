@@ -124,8 +124,8 @@ public enum TKey
     #endregion
     #region Etc 3
     PAUSE,
-    TITLE_END
-
+    TITLE_END,
+    //MSG_OPT_LEFTOVER
     #endregion
 
 }

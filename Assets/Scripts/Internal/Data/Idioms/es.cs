@@ -115,7 +115,8 @@
 #endregion
 #region Etc 3
                     "Pausa",
-                    "Fin"
+                    "Fin",
+                    //"MSG_OPT_LEFTOVER"
 #endregion
         };
     }

@@ -625,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
-      value: ButtonOpt
+      value: TextSpeed ButtonOpt
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552361, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,7 +863,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
-      value: ButtonOpt
+      value: Idiom ButtonOpt
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552361, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_LocalPosition.x
@@ -988,7 +988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
-      value: ButtonOpt
+      value: Music ButtonOpt
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552361, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1259,7 +1259,7 @@ PrefabInstance:
     - target: {fileID: 1636049504308503908, guid: 74043dac375f0499e9c2b6b0672cc45c, type: 3}
       propertyPath: opt_items.Array.data[6]
       value: 
-      objectReference: {fileID: 8989355560785971044}
+      objectReference: {fileID: 6790721899917153324}
     - target: {fileID: 1636049504308503908, guid: 74043dac375f0499e9c2b6b0672cc45c, type: 3}
       propertyPath: opt_items.Array.data[7]
       value: 
@@ -1464,7 +1464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779515, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: Exit Button
       objectReference: {fileID: 0}
     - target: {fileID: 8719767904591779517, guid: 1f1ed0c0437a546e88147ce891de69a9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1577,7 +1577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
-      value: ButtonOpt
+      value: Controls ButtonOpt
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552361, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1702,7 +1702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552360, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_Name
-      value: ButtonOpt
+      value: Sounds ButtonOpt
       objectReference: {fileID: 0}
     - target: {fileID: 2551034596894552361, guid: 8dfb53d09b40b4f34bc3bf76f0375398, type: 3}
       propertyPath: m_LocalPosition.x

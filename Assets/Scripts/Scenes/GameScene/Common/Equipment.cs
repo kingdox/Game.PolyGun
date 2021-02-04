@@ -50,7 +50,7 @@ private void Update(){
 
             if (!type.Equals(CraftType.NO))
             {
-                PrintX($"Match : {type}");
+                //PrintX($"Match : {type}");
                 canCraft = false;
                 ClearSlots();
                 craftWaiting = type;
