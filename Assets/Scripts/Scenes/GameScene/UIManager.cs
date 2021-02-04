@@ -100,16 +100,8 @@ public class UIManager : MonoX
     private void Refresh_KeysShowed()
     {
         SavedData saved = DataPass.GetSavedData();
-
-        //int length = saved.idiom.Equals(0) ? 3 : 6;
-        //int[] length = { 3, 6 };
-        //default
-        //for (int i = saved.idiom * 3; i < length[saved.idiom]; i++)
-        //{
-
-        //    showedKeys[i].text = Data.Translated(saved.idiom).Value(slotKeys[i]);
-        //}
-        if (saved.idiom.Equals(0))
+       
+        if (saved.control.Equals(0))
         {
             for (int i = 0; i < 3; i++)
             {

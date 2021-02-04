@@ -9,6 +9,7 @@ using Environment;
 [RequireComponent(typeof(Shot))]
 [RequireComponent(typeof(SaveVelocity))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 ///<summary>
 /// Manejo de los controles de Player
 /// <para>
@@ -44,7 +45,20 @@ public class PlayerController : MonoX
     private float deathLimitCount=0;
     private float movementsCount = 0;
     [Space]
+    public Animator anim_player;
+    [Header("Audio")]
+    private SfxItem[] sfx_items;
+    public Transform tr_sfx;
+    //este orden es igual al de Sfx hijo
+    private enum Sfx{
+        @Clock,
+        @Dead,
+        @Attack,
+        @Buffs,
+        @Damage
 
+    }
+    [Space]
     [Header("Debug")]
     private static float entryLife = -1;
 
@@ -52,6 +66,7 @@ public class PlayerController : MonoX
     #region Events
     private void Awake()
     {
+        //Revisar: debería haber un metodo que puedieses llamar a todos las var y así hacerle un for con get.... 
         Get(out movement);
         Get(out rotation);
         Get(out equipment);
@@ -59,7 +74,9 @@ public class PlayerController : MonoX
         Get(out destructure);
         GetAdd(ref saveVelocity);
         Get(out body);
-
+        Get(out anim_player);
+        GetChilds(out sfx_items, tr_sfx);
+        
         GetChilds(out buffs, buffList);
         character.type = CharacterType.PLAYER;
     }
@@ -105,9 +122,14 @@ public class PlayerController : MonoX
                 BuffsUpdate();
                 Equipment();
                 Attack();
+
+                sfx_items[(int)Sfx.Clock].PlayStop(character.IsInDeathLimit());
+
+
                 //si estas largos periodos de tiempo (el deathlimit) y pasa ese tiempo
                 if (character.IsInDeathLimit() && Timer(ref deathLimitCount, 10))
                 {
+                    
                     AchieveSystem.UpdateAchieve(Achieves.TIME_DEATHLIMIT);
                 }
 
@@ -134,6 +156,13 @@ public class PlayerController : MonoX
     {
         if (isDead) return;
         isDead = true;
+
+        //sfx_items[(int)Sfx.Clock].PlayStop(false);
+        //detenemos los sonidos
+        foreach (SfxItem i in sfx_items) i.PlayStop(false);
+        //encendemos el de muerte
+        sfx_items[(int)Sfx.Dead].PlayStop(true);
+        anim_player.SetTrigger("IsDead");
         destructure.DestructureThis();
 
         GameManager.GameOver();
@@ -231,6 +260,8 @@ public class PlayerController : MonoX
             //Dispara y ve si ha completado
             if (shot.ShotBullet(character))
             {
+                sfx_items[(int)Sfx.Attack].PlaySound();
+
                 body.AddForce(-transform.forward * 20, ForceMode.Impulse);
             }
         }

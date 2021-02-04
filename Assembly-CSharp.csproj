@@ -99,6 +99,7 @@
     <Compile Include="Assets/Scripts/Components/Parallax.cs" />
     <Compile Include="Assets/Scripts/Components/Mono/MonoX.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Common/SaveVelocity.cs" />
+    <Compile Include="Assets/Scripts/Internal/XavScripts/SfxItem.cs" />
     <Compile Include="Assets/Scripts/Components/Destructure.cs" />
     <Compile Include="Assets/Scripts/Components/Controllers/MsgController.cs" />
     <Compile Include="Assets/Scripts/Scenes/GameScene/Enemy/MondController.cs" />

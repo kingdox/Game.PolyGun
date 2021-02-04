@@ -350,6 +350,15 @@ namespace XavLib
                 else if (!condition && particle.isPlaying) particle.Stop();
             }
 
+            public static void ActiveAudioSource(AudioSource audio,bool condition)
+            {
+                //si está sonando y se quiera desactivar
+                if (audio.isPlaying && !condition) audio.Stop();
+                //sino si NO esta sonando y se quiere encender...
+                else if (!audio.isPlaying && condition) audio.Play();
+
+            }
+
             /// <summary>
             /// Cambia de bool a int su valor
             /// </summary>

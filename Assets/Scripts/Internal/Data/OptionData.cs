@@ -16,7 +16,7 @@ namespace Options
         //[OPTIONS]
         public static readonly float[] textSpeed = { 0, .005f, .015f, .025f };
         public static readonly float[] musicVolume = { 0, .3f, .5f, .7f }; // el audiosource lo maneja en unit
-        public static readonly float[] sfxVolume = { -80, 0 };
+        public static readonly float[] sfxVolume = { -80, -10 };
         public static readonly int controls = Key.KeyData.CODE_LENGTH;// longitud de cantidad de controlesps4?
         //public static readonly int[] LEFTOVER_QTY = {0,50,250, 500 };
                                                 //
