@@ -31,10 +31,10 @@ public abstract class Minion : MonoX
     protected Destructure destructure;
     [Space]
     [Header("Sfx Area")]
-    private SfxItem[] sfx_items;
+    public SfxItem[] sfx_items;
     public Transform tr_sfxParent;
     //public AudioSource src_action;
-    private enum Sfx
+    protected enum Sfx
     {
         @Creation,
         @Action,//Atacar

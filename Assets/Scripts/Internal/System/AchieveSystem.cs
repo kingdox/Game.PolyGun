@@ -143,7 +143,7 @@ public class AchieveSystem : MonoX
             if (old_LimitIndex != actual_LimitIndex )
             {
                 //Se batió un record
-                PrintX($"Record batido, de {old_LimitIndex} a {actual_LimitIndex}");
+                //PrintX($"Record batido, de {old_LimitIndex} a {actual_LimitIndex}");
                 unlockShow = true;
                 _.achieveShowCount = 0;
                 Setitem(index, _.achieveUnlockItem);

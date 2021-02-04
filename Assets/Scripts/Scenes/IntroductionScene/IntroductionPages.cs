@@ -28,7 +28,7 @@ public class IntroductionPages : MonoBehaviour
         pages = new IntroductionPage[length];
         pagesG = Get.Childs(transform);
 
-        "Hola amigo :)".Print();
+        //"Hola amigo :)".Print();
 
         for (int x = 0; x < length; x++)
         {

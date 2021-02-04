@@ -156,13 +156,12 @@ public class PlayerController : MonoX
     {
         if (isDead) return;
         isDead = true;
+        anim_player.SetTrigger("IsDead");
 
-        //sfx_items[(int)Sfx.Clock].PlayStop(false);
         //detenemos los sonidos
         foreach (SfxItem i in sfx_items) i.PlayStop(false);
         //encendemos el de muerte
         sfx_items[Sfx.Dead.ToInt()].PlayStop(true);
-        anim_player.SetTrigger("IsDead");
         destructure.DestructureThis();
 
         GameManager.GameOver();

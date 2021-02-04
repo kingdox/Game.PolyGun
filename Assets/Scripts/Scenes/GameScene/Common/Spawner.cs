@@ -102,7 +102,6 @@ public class Spawner : MonoX
     }
 
 
-#if DEBUG
     /// <summary>
     /// Nos permite spawnaear cosas
     /// </summary>
@@ -111,7 +110,6 @@ public class Spawner : MonoX
 
         Generate(xGet.Range(_Debug_prefs), _Debug_SpawnOpt, TargetManager.GetEnemiesContainer());
     }
-#endif
     #endregion
 }
 /// <summary>

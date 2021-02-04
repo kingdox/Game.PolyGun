@@ -43,7 +43,7 @@
 #region Messages, del menúScene
 
                     //Messages
-                    "This game was med with a lot of love :)",
+                    "This game was made with a lot of love :)",
                     "Are you still here?",
 #endregion
 #region Messages, de Opciones
@@ -83,12 +83,12 @@
 #region IntroductionScene
                     // Tutorial PAGES
                     "Poly-Gun: Irregular adventure it's a game where we will need to destroy waves of enemies the major time possible",
-                    "Poly can shot bullets to destroy the enemies and he can collect objects of the floor (you can select a object when it shine)",
+                    "Poly can shot bullets to destroy the enemies and he can collect objects of the floor (you can select an object when it shine)",
                     "The collected objects can be consumed to recover life, or get buffs, if you have 3 figures you may create an especial helper or a buff",
                     // Manual PAGES
                     "You will move in the map with the keys of movements (Check the options to see the keys, by default is the arrows) \n\n You can Collect and consume the objects with the 3 key slots (see the options to know the keys, by default C,V y B ). \n(the nerarest object will be shownerd with a shiny bright area).",//323232
                     "You will have a 'Time Life' that represent the Poly's life, it decreases each second, if it reach to 0 then you loss, recover your life eating figures !",
-                    "Remember that allies and helpers gets their own life time, it's recomendable to knows all the amounts of time of each one",
+                    "You can shot pressing space bar, and you can go back o open the pause menu pressing escape",
                     // Credits PAGES
                     "Credits",
                     "Xavier Arpa L.",

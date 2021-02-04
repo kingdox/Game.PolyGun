@@ -17,8 +17,8 @@ namespace Environment
         [HideInInspector]
         public static Data data = new Data();
 
-        public readonly string savedPath = "saved103.txt";
-        public readonly string version = "v0.9.1";
+        public readonly string savedPath = "saved105.txt";
+        public readonly string version = "v1.0.0";
 
         //TODO poner parametros de character con enums y arreglos de valores si hay tiempo...
 

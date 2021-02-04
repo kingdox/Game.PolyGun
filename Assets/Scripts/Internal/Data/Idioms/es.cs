@@ -88,12 +88,12 @@
                     // Manual PAGES
                     "Te moveras con las <color=red>teclas de flechas</color>. \n\nPodrás agarrar y consumir los objetos con C,V y B. \n(se mostrará brillando el objeto más cercano para agarrarlo). ",
                     "Poseerás un contador de tiempo que será la vida de Poly, al igual como las demás personas, morirán si este llega a 0, recupera tiempo consumiendo fragmentos !",
-                    "Recuerda que los enemigos y los aliados poseen tiempo de vida, es aconsejable conocerse los tiempos de todo...",
+                    "Puedes disparar presionando barra espaciadora y retroceder o, abrir el menú de pausa con ESC",
                     // Credits PAGES
                     "Creditos",
                     "Xavier Arpa L.",
                     "Y...Nadie más... :(",
-                    "Y gracias a ti por jugar :)",
+                    "Y como siempre, gracias a ti por jugar :)",
 #endregion
 #region 
                     "Volver a jugar",
