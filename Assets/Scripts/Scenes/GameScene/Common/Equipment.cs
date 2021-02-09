@@ -44,10 +44,15 @@ private void Update(){
 
         //si tenemos equipado la misma cantidad del slot limite
         //checkearemos
-        if (canCraft && equipedQty.Equals(slots.Length) ){
+        if (canCraft && equipedQty.Equals(slots.Length))
+        {
+
+            //revisar primero si es tipo extra?
 
             CraftType type = Data.data.SlotsMatch(slots);
 
+
+            PrintX($"sacamos {type} {type.ToInt()} {(int)type}");
             if (!type.Equals(CraftType.NO))
             {
                 //PrintX($"Match : {type}");
@@ -72,6 +77,7 @@ private void Update(){
     {
         if (craftWaiting.Equals(CraftType.NO)) return;
 
+        PrintX($"{craftWaiting} {craftWaiting.ToInt()} {(int)craftWaiting} creandose...{(int)AllyType.HEARTH}, {AllyType.HEARTH.ToInt()}");
 
         switch (craftWaiting)
         {

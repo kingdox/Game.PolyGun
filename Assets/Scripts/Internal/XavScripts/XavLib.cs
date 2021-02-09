@@ -146,9 +146,9 @@ namespace XavHelpTo
                 /// <summary>
                 /// Añade un string a un arreglo de strings.
                 /// </summary>
-                public static string[] Push(string value, params string[] values)
+                public static T[] Push<T>(T value, params T[] values)
                 {
-                    string[] newArr = new string[values.Length + 1];
+                    T[] newArr = new T[values.Length + 1];
                     for (int x = 0; x < newArr.Length; x++) newArr[x] = (x == newArr.Length - 1) ? value : values[x];
                     return newArr;
                 }
@@ -420,14 +420,13 @@ namespace XavHelpTo
                 public static int IndexOf<T>( T[] ts, int startIndex, params T[] finder){for (int x = startIndex; x < ts.Length; x++) if (Know.IsEqualOf(ts[x], finder)) return x; return -1;}
                 public static int IndexOf(char[] chars, int startIndex, params char[] finder) { for (int x = startIndex; x < chars.Length; x++) if (Know.IsEqualOf(chars[x], finder)) return x; return -1; }
                 public static int IndexOf(string text, int startIndex, params char[] finder) { for (int x = startIndex; x < text.Length; x++) if (Know.IsEqualOf(text[x], finder)) return x; return -1; }
-                //public static int IndexOf<T>( T t, int startIndex, params T[] finder){for (int x = startIndex; x < t.Length; x++) if (Know.IsEqualOf(ts[x], finder)) return x; return -1;}
+                public static int IndexOf<T>(T t, int startIndex, params T[] finder) { for (int x = startIndex; x < finder.Length; x++) if (Know.IsEqualOf(t, finder)) return x; return -1; }
 
-                /// <summary>
-                /// Busca en un arreglo y si encuentra, muestra donde
-                /// <para> caso contrario devuelve -1 </para>
-                /// TODO no sirve...
-                /// </summary>
-                public static int FocusIndex(params GameObject[] objs)
+            /// <summary>
+            /// Busca en un arreglo y si encuentra, muestra donde
+            /// <para> caso contrario devuelve -1 </para>
+            /// </summary>
+            public static int FocusIndex(params GameObject[] objs)
                 {
                     for (int x = 0; x < objs.Length; x++) if (objs.Equals(EventSystem.current.currentSelectedGameObject)) return x;
                     return -1;
@@ -533,9 +532,9 @@ namespace XavHelpTo
             }
             #endregion
         }
-        
-        namespace Build
-        {
+
+    namespace Build
+    {
         #region Build
         /// <summary> añadido 4/feb/2021
         /// Esto está en desarrollo, patrón builder ? 🧱
@@ -568,6 +567,18 @@ namespace XavHelpTo
                 }
             }
 
+            public static int[] ToInt<T>(this T[] t)
+            {
+                int[] ints = new int[t.Length]; //Set.Set.FillWith(-1,t.Length)
+
+                for (int x = 0; x < t.Length; x++)
+                {
+                    ints[x] = t[x].ToInt();
+                }
+
+                return ints;
+            }
+
             /// <summary>
             /// Check if the value is an Enumerator
             /// </summary>
@@ -586,6 +597,8 @@ namespace XavHelpTo
             //public static float ZeroMax<T>(this T[] arr) => arr.Length.ZeroMax();
             public static float ZeroMax(this float max) => Random.Range(0, max);
 
+
+
             /// <summary>
             /// Revisamos si es igual
             /// </summary>
@@ -601,10 +614,100 @@ namespace XavHelpTo
             /// Retorna los hijos
             /// </summary>
             public static GameObject[] Childs(this Transform parent) => Get.Get.Childs(parent);
+
+
+            /// <summary>
+            /// Pushes the array with the news values in the last
+            /// </summary>
+            public static T[] PushIn<T>(this T t, params T[] ts) => Set.Set.Push(t, ts);
+            public static int[] PushIn<T>(this int t, params int[] ts) => Set.Set.Push(t, ts);
+
+            /// <summary>
+            /// Devuelve del arreglo de indices el indice en el arreglo del más repetido
+            /// <para>EX: [1,1,2,3,4,4,4], devuelve 4</para>
+            /// </summary>
+            public static int[] MaxIndexRepeated(this int[] arr)
+            {
+
+                int[] indexQty = Set.Set.FillWith(0, arr.Length); // limpiamos el arreglo con 0
+                int[] checkedArr = Set.Set.FillWith(-1, arr.Length); //  inicializamos en -1 los arreglos
+                int checkCount = 0;
+                int indexMajor = 1;
+
+                //map the array
+                for (int x = 0; x < arr.Length; x++)
+                {
+                    //int checkedIndex = Know.Know.IndexOf(arr, x, checkedArr[x]);
+
+                    // revisar si el valor revisado existe en los checkeados, sino añadirlo
+
+                    //index to know if the value is laready exist
+                    int indexRepeat = Know.Know.IndexOf(arr[x], 0, checkedArr);
+
+                    //if is repeated
+                    if (!indexRepeat.Equals(-1))
+                    {
+                        //ads a +1 in the  indexQty of the repeated index
+                        indexQty[indexRepeat]++;
+
+                        //preguntamos si fue sobrepasado el indice que se suponia que era el mayor
+                        if (indexQty[indexMajor] < indexQty[indexRepeat])
+                        {
+                            indexMajor = indexRepeat;
+                        }
+
+                    }
+                    else
+                    {
+                        //le otorga el valor en un campo que no había nada
+                        checkedArr[checkCount] = arr[x];
+                        indexQty[checkCount] = 1;//añadimos un valor
+                        checkCount++;//cambiamos el siguiente  acheckear
+                    }
+
+                }
+
+                int[] val ={
+                    checkedArr[indexMajor], // indice del mayor,
+                    indexQty[indexMajor] // cantidad del mayor
+                };
+
+                //devuelvo el indice mayor del arreglo de los checkeados Y la cantidad que posee
+                return val;
             }
+
+
+
+
+            /// <summary>
+            /// Returns the qty of the value in the arr
+            /// </summary>
+            public static int RepeatsIn<T>(this T val, T[] arr)
+            {
+                int repeateds = 0;
+
+                foreach (T i in arr)
+                {
+                    if (val.Equals(i))
+                    {
+                        repeateds++;
+                    }
+                }
+
+                return repeateds;
+            }
+
+
             #endregion
         }
     }
+
+    //TEST
+    public readonly struct Operate
+    {
+        public static Operate operator ~(Operate i) => new Operate();
+    }
+}
 //}
 #region Committed
 //public static int[] GetIntsOnArray(int qty)
@@ -613,4 +716,10 @@ namespace XavHelpTo
 //    for (int x = 0; x < qty; x++) ints[x] = x;
 //    return ints;
 //}
+/*
+ //public static T operator +<T>(T a) => a;
+        //public static float operator ^(float a) => aa;
+
+        public static bool operator (Craft a, ItemContent i) => a.Equals(i);
+ */
 #endregion

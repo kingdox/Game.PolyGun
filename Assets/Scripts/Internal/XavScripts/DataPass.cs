@@ -3,6 +3,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Environment;
+using System;
 #endregion
 #region ### DataPass
 /// <summary>
@@ -23,7 +24,7 @@ public class DataPass : MonoBehaviour
     [Header("Saved Data")]
     [SerializeField]
     private SavedData savedData = new SavedData();
-
+    //public event Action Ready;
 
     #endregion
     #region ###### EVENTS
@@ -51,8 +52,6 @@ public class DataPass : MonoBehaviour
 
     /// <summary>
     /// Revisamos si existen datos guardados, de no existir los crea
-    /// TODO colocar async await????
-    /// usar actions para el evento?
     /// </summary>
     private void DataInit()
     {
@@ -62,7 +61,7 @@ public class DataPass : MonoBehaviour
 
         SaveLoadFile(!File.Exists(path));
         isReady = true;
-        
+        //Ready.Invoke();
     }
 
     /// <summary>

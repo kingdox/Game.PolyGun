@@ -34,7 +34,7 @@ public class AllyManager : MonoX
 
         int allyIndex = type.Equals(AllyType.NO)
             ? _.prefs_Allies.Length.ZeroMax()
-            : type.ToInt()
+            : (int)type
         ;
 
         Instantiate(

@@ -1,7 +1,7 @@
 ﻿#region Imports
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using XavHelpTo.Build;
+using XavHelpTo.Know;
 #endregion
 namespace Crafts
 {
@@ -12,7 +12,8 @@ namespace Crafts
         private delegate Craft CraftRecipe(CraftType type, params ItemContent[] values);
         private readonly static CraftRecipe craft = (CraftType type, ItemContent[] values) => new Craft(type, values);
         //END
-
+        public static readonly ItemContent[] itemsShape = { ItemContent.SQUARE, ItemContent.CIRCLE, ItemContent.TRIANGLE };
+        public static readonly ItemContent[] itemsBuff = { ItemContent.ATK_SPEED, ItemContent.TARGET_SHOT, ItemContent.FROST, ItemContent.STREGHT, ItemContent.SPEED };
         private static readonly Craft[] crafts;
 
         static CraftData()
@@ -26,13 +27,13 @@ namespace Crafts
                 // 2 y 1
                 // A
                 craft(CraftType.AAB,    ItemContent.SQUARE,ItemContent.SQUARE,ItemContent.CIRCLE),
-                craft(CraftType.AAC,    ItemContent.SQUARE,ItemContent.SQUARE,ItemContent.TRIANGLE),
+                craft(CraftType.AAC,    ItemContent.TRIANGLE,ItemContent.SQUARE,ItemContent.SQUARE),
                 // B
-                craft(CraftType.BBA,    ItemContent.CIRCLE,ItemContent.CIRCLE,ItemContent.SQUARE),
-                craft(CraftType.BBC,    ItemContent.CIRCLE,ItemContent.CIRCLE,ItemContent.TRIANGLE),
+                craft(CraftType.BBA,    ItemContent.SQUARE, ItemContent.CIRCLE,ItemContent.CIRCLE),
+                craft(CraftType.BBC,    ItemContent.TRIANGLE,ItemContent.CIRCLE,ItemContent.CIRCLE),
                 // C        
-                craft(CraftType.CCA,    ItemContent.TRIANGLE,ItemContent.TRIANGLE,ItemContent.SQUARE),
-                craft(CraftType.CCB,    ItemContent.TRIANGLE,ItemContent.TRIANGLE,ItemContent.CIRCLE),
+                craft(CraftType.CCA,    ItemContent.SQUARE, ItemContent.TRIANGLE,ItemContent.TRIANGLE),
+                craft(CraftType.CCB,    ItemContent.CIRCLE, ItemContent.TRIANGLE,ItemContent.TRIANGLE),
 
                 // 1,1,1
                 craft(CraftType.ABC,    ItemContent.SQUARE,ItemContent.CIRCLE, ItemContent.TRIANGLE),
@@ -52,16 +53,21 @@ namespace Crafts
         {
             CraftType result = CraftType.NO;
 
+
+            //preguntar si no posee items, entonces es buff
+
+
             foreach (Craft c in crafts)
             {
-                if (result.Equals(CraftType.NO))
-                {   
-                    result = c.KnowSlotsCraft(slots);
+                if (result.Equals(CraftType.NO) && c^slots)
+                {
+                    Debug.Log($"{c.type} hizo match");
+                    result = c.type;
                 }
             }
-
             return result;
         }
+
         #endregion
     }
     /// <summary>
@@ -69,8 +75,8 @@ namespace Crafts
     /// </summary>
     public struct Craft
     {
-        private readonly CraftType type;
-        private readonly ItemContent[] values;//los requeridos
+        public readonly CraftType type;
+        public readonly ItemContent[] values;//los requeridos
 
         public Craft(CraftType type, ItemContent[] values)
         {
@@ -79,38 +85,40 @@ namespace Crafts
         }
 
         /// <summary>
-        /// Based on the slots, look if is this craft match with the slots
+        /// Revisa si ambos arreglos son iguales
         /// </summary>
-        public CraftType KnowSlotsCraft(ItemContent[] slots)
-        {
-
-            CraftType craftType = type;
-
-            for (int i = 0; i < slots.Length; i++)
+        public static bool operator ^(Craft a, ItemContent[] b) {
+            bool isSame = true;
+            for (int x = 0; x < b.Length; x++)
             {
-                //if find a repeated item then. no match
-                if (RepeatContains(slots[i]).Equals(0) )
-                {
-                    craftType = CraftType.NO;
-                }
-            }
-            return craftType;
-        }
 
-        /// <summary>
-        /// Looka item and return the qty repeated here
-        /// </summary>
-        private int RepeatContains(ItemContent item)
-        {
-            int repeated = 0;
-            foreach (ItemContent i in values){
-                if (item.Equals(i))
+
+                if (isSame)
                 {
-                    repeated++;
+
+                    //valor que estamos identificando la cantidad de cada sitio
+                    ItemContent value = b[x];
+
+                    //cantidad de veces repetidas del valor en los slots
+                    int _craft_repeats = value.RepeatsIn(a.values);
+                    //cantidad de veces repetidas del valor en el craft
+                    int _slot_repeats = value.RepeatsIn(b);
+
+
+                    ///si tanto en slots como en craft tienen la misma cantidad entonces continuen
+                    if (!_slot_repeats.Equals(_craft_repeats))
+                    {
+                        isSame = false;
+                    }
                 }
+
+
             }
-            return repeated;
+
+
+            return isSame;
         }
+        
     }
 
     /// <summary>
@@ -126,12 +134,5 @@ namespace Crafts
 
         EXTRA//when you get full with buffs
     }
-
-    //public enum Shapes
-    //{
-    //    SQUARE,
-    //    CIRCLE,
-    //    TRIANGLE,
-    //}
 
 }
