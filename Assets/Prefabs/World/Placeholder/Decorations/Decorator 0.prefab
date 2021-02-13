@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 366190b3bbf7b43c49fd7cd90ce7c877, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 079c8bd17b32a4a5bbfa2d978792de72, type: 2}
     - target: {fileID: 919132149155446097, guid: 366190b3bbf7b43c49fd7cd90ce7c877, type: 3}
       propertyPath: m_Name
       value: Decorator-0
